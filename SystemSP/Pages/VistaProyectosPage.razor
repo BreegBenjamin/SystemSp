@@ -1,0 +1,24 @@
+﻿@page "/VistaProyectos";
+    <section style="background-color: #f3f2f1">
+        <ListaCategorias></ListaCategorias>
+        <DatosProyecto></DatosProyecto>
+        <CardProyectos TipoMenu="PgVista" OcultarBoton="ocultarElement"></CardProyectos>
+        <section>
+            <div class="elementsVista">
+                <div class="tituloMs">
+                    <div class="colorDesc">
+                    </div>
+                    <div style="margin-left: 30px;">
+                        <p>Mira las solicitudes de las empresas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="divDataProject">
+                <CategoriasSolicitud></CategoriasSolicitud>
+                <VistaSolicitudes></VistaSolicitudes>
+            </div>
+        </section>
+    </section>
+@code {
+
+}

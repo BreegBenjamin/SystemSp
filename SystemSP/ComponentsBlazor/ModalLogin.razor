@@ -1,0 +1,55 @@
+﻿@inject IJSRuntime JsRun;
+@inject NavigationManager NavigationManager;
+<section class="fondo fondo2" id="ModalLogin">
+    <section class="popUp">
+        <CerrarModal Mensaje="Ingresé los datos para iniciar Sesión"></CerrarModal>
+        <article class="msError">
+            @if (_datosInvalidos)
+            {
+
+            }
+        </article>
+        <section class="Form_Login">
+            <input type="email" class="estyleText" maxlength="30" placeholder="Correo" @bind="@_email" @onblur="habilitarBoton">
+            <input type="password" class="estyleText" maxlength="16" placeholder="Contraseña" @bind="@_password" @onblur="habilitarBoton">
+            <button class="@_classBoton" disabled="@_btnDeshabilitado" @onclick="validaFormulario">Ingresar</button>
+        </section>
+        <div>
+            <hr class="styleHr" />
+            <div class="div_Password">
+                <a class="linkContact" href="#">¿Olvido su contraseña?</a>
+                <a class="linkContact" href="#">¿Crear una Cuenta?</a>
+            </div>
+        </div>
+    </section>
+</section>
+@code {
+    private string _email = string.Empty;
+    private string _password = string.Empty;
+    private bool _btnDeshabilitado = true;
+    private string _classBoton = "btRegistroForm-Unlock";
+    private bool _datosInvalidos = false;
+    //Metodos
+    private async Task habilitarBoton()
+    {
+        if (!string.IsNullOrEmpty(_email) && !string.IsNullOrEmpty(_password) && _password.Length > 6)
+        {
+            _classBoton = "btRegistroForm";
+            _btnDeshabilitado = false;
+        }
+        else
+        {
+            _classBoton = "btRegistroForm-Unlock";
+            _btnDeshabilitado = true;
+        }
+    }
+
+    private async Task validaFormulario()
+    {
+        if (_password == "12345678")
+            NavigationManager.NavigateTo("PublicarProyecto");
+        else
+            NavigationManager.NavigateTo("Administrador");
+        await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
+    }
+}

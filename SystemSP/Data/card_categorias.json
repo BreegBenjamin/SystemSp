@@ -1,0 +1,64 @@
+{
+  "CategoriasProyecto": [
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/bakery-shop.svg",
+      "TipoCategoria": "Supermercados y Tiendas"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/motorcycle.svg",
+      "TipoCategoria": "Vehiculos y Motocicletas"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/book.svg",
+      "TipoCategoria": "Educacion"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/fast-delivery.svg",
+      "TipoCategoria": "Transporte"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/camera.svg",
+      "TipoCategoria": "Medio Ambiente"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/hook.svg",
+      "TipoCategoria": "Industria y Comercio"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/veterinaria.svg",
+      "TipoCategoria": "Veterinarias"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/farm.svg",
+      "TipoCategoria": "Agricultura y Granjas"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/real-estate.svg",
+      "TipoCategoria": "Inmuebles y Hogar"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/book.svg",
+      "TipoCategoria": "Libros y Bibliotecas"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/real-estate.svg",
+      "TipoCategoria": "Veterinarias"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/gym.svg",
+      "TipoCategoria": "Salud y Bienestar"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/transportation.svg",
+      "TipoCategoria": "Viajes y Turismo"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/phone.svg",
+      "TipoCategoria": "Musica y Audio"
+    },
+    {
+      "ImgCategoria": "/images/IconosCategorias/IconosColor/time.svg",
+      "TipoCategoria": "Fotografia"
+    }
+  ]
+}

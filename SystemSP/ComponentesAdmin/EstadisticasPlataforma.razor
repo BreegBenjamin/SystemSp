@@ -1,0 +1,43 @@
+﻿@inject IJSRuntime JsRun;
+<section class="graficosContenedor">
+    <div class="flexContext">
+        <OpcionesEstadisticas Titulo="Visitas"
+                              Subtitulo="Estadisticas visitas"
+                              ColorTarjeta="#26D0D0"
+                              UrlImage="libroPack.svg">
+        </OpcionesEstadisticas>
+        <OpcionesEstadisticas Titulo="Visitas"
+                              Subtitulo="Estadisticas visitas"
+                              ColorTarjeta="#186CFF"
+                              UrlImage="libroPack.svg">
+        </OpcionesEstadisticas>
+        <OpcionesEstadisticas Titulo="Visitas"
+                              Subtitulo="Estadisticas visitas"
+                              ColorTarjeta="#FF0046"
+                              UrlImage="libroPack.svg">
+        </OpcionesEstadisticas>
+        <OpcionesEstadisticas Titulo="Visitas"
+                              Subtitulo="Estadisticas visitas"
+                              ColorTarjeta="#8AA336"
+                              UrlImage="libroPack.svg">
+        </OpcionesEstadisticas>
+    </div>
+    <section class="sobrasTarjetas cardBar">
+        <canvas id="chartBarra" class="canvasBarra"></canvas>
+    </section>
+    <section class="sobrasTarjetas cardPie">
+        <canvas id="chartTorta"></canvas>
+    </section>
+</section>
+
+@code {
+    private int IndicadorCheart = 0;
+    private void ClickHandler(int numeroParam)
+    {
+        IndicadorCheart = numeroParam;
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRun.CrearCanvas();
+    }
+}

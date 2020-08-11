@@ -1,0 +1,28 @@
+﻿@inject IJSRuntime JsRun;
+<div class="alertaModal hide" id="alertApp" >
+    <span>
+        <img src="images/img_proyect/@_imageAlerta" height="40" width="40" />
+    </span>
+    <span class="msg">@Mensaje</span>
+    <div class="close-btn" @onclick="cerraNotificaion">
+        <button class="cerrarModalBtn"></button>
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public bool TipoAlerta { get; set; }
+    [Parameter]
+    public string Mensaje { get; set; }
+
+    private string _imageAlerta = "alert.svg";
+
+    public async Task cerraNotificaion()
+    => await JsRun.InvokeVoidAsync(identifier: "alerta.OcultarAlerta");
+
+    protected override void OnInitialized()
+    {
+        if (TipoAlerta)
+            _imageAlerta = "success.svg";
+    }
+}

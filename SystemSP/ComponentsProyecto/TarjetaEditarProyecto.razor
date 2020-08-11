@@ -1,0 +1,33 @@
+﻿
+<div class="UpdateName">
+    <div>
+        <img src="images/IconosCategorias/@LeadingImage" width="30" height="30">
+    </div>
+    <div class="nombreTitulo">
+        <p class="NombreDetails">@TituloTarjeta</p>
+        <span class="nameProyect">@SubTituloTarjeta</span>
+    </div>
+    <div>
+        @if (TrailingImage)
+         {
+            <button class="botonOpcionProject"></button>
+         }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string TituloTarjeta { get; set; }
+    [Parameter]
+    public string SubTituloTarjeta { get; set; }
+    [Parameter]
+    public string LeadingImage { get; set; }
+    [Parameter]
+    public bool TrailingImage { get; set; }
+
+    protected override void OnInitialized()
+    {
+
+        base.OnInitialized();
+    }
+}

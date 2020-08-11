@@ -1,0 +1,9 @@
+<svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+<linearGradient id="ImageProyect" gradientUnits="userSpaceOnUse" x1="-59.6075" y1="558.4163" x2="11.7726" y2="629.7973" gradientTransform="matrix(8 0 0 -8 398.8871 4941.3848)">
+	<stop  offset="0" style="stop-color:#003F8A"/>
+	<stop  offset="0.518" style="stop-color:#00D7DF"/>
+	<stop  offset="1" style="stop-color:#006DF0"/>
+</linearGradient>
+<path style="fill:url(#ImageProyect);" d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0"/>
+<path fill="#FFF" xmlns="http://www.w3.org/2000/svg" d="M172.249,89.92h110.933v274.489h-58.311V142.542h-52.622L172.249,89.92L172.249,89.92z"/>
+</svg>

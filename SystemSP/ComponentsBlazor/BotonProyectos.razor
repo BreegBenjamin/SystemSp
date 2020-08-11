@@ -1,0 +1,22 @@
+﻿@inject NavigationManager NavigationManager;
+<button class="@className bt-ConsultaCrear" @onclick="ClickButton">@Texto</button>
+
+@code {
+    [Parameter]
+    public string Texto { get; set; }
+    [Parameter]
+    public bool Publicar { get; set; }
+    private string className = string.Empty;
+    private void setClass() => className = (Publicar) ? "btn-publicar" : "btn-consulta";
+    protected override void OnInitialized()
+    {
+        setClass();
+    }
+    private void ClickButton()
+    {
+        if (Publicar)
+            NavigationManager.NavigateTo("VistaProyectos");
+        else
+            NavigationManager.NavigateTo("VistaProyectos");
+    }
+}

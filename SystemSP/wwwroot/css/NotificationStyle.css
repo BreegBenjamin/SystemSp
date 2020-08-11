@@ -1,0 +1,96 @@
+.alertaModal {
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    justify-content: center;
+    align-items: center;
+    background: #FFF;
+    padding: 0 0 0 15px;
+    min-width: 420px;
+    position: fixed;
+    right: 0;
+    top: 10px;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px 0px rgba(202, 202, 202, 0.8);
+    border-left: 8px solid rgb(13, 147, 180);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    height: 65px;
+    z-index:200;
+}
+.alertaModal.showAlert{
+  opacity: 1;
+  pointer-events: auto;
+}
+.alertaModal.show{
+  animation: show_slide 1s ease forwards;
+}
+@keyframes show_slide {
+  0%{
+    transform: translateX(100%);
+  }
+  40%{
+    transform: translateX(-10%);
+  }
+  80%{
+    transform: translateX(0%);
+  }
+  100%{
+    transform: translateX(-10px);
+  }
+}
+.alertaModal.hide{
+  animation: hide_slide 1s ease forwards;
+}
+@keyframes hide_slide {
+  0%{
+    transform: translateX(-10px);
+  }
+  40%{
+    transform: translateX(0%);
+  }
+  80%{
+    transform: translateX(-10%);
+  }
+  100%{
+    transform: translateX(100%);
+  }
+}
+.alertaModal .fa-exclamation-circle{
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ce8500;
+  font-size: 30px;
+}
+.alertaModal .msg {
+    padding: 0 20px;
+    font-size: 18px;
+    color: rgb(13, 147, 180);
+}
+.alertaModal .close-btn {
+    background: #ffd080;
+    height: 100%;
+    width: 100%;
+}
+.alertaModal .close-btn:hover{
+  background: #ffc766;
+}
+.alertaModal .close-btn .fas{
+  color: #ce8500;
+  font-size: 22px;
+  line-height: 40px;
+}
+.cerrarModalBtn {
+    background-image: url(/images/img_proyect/close.svg);
+    background-position: center;
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-color: rgb(13, 147, 180);
+    border: none;
+    cursor: pointer;
+    outline: none;
+    height: 100%;
+    width: 50px;
+}

@@ -1,0 +1,57 @@
+﻿@page "/Administrador";
+<section class="adminPosition">
+    <div class="opcionesAdmin">
+        <div class="setEstilos">
+            <TarjetaOpcionesAdmin NombreTitulo="Opciones Administrador"
+                                  OnClick="ClickHandler"
+                                  NumeroEntrada="0">
+            </TarjetaOpcionesAdmin>
+
+            <TarjetaOpcionesAdmin NombreTitulo="Usuarios"
+                                  OnClick="ClickHandler"
+                                  NumeroEntrada="1">
+            </TarjetaOpcionesAdmin>
+
+            <TarjetaOpcionesAdmin NombreTitulo="Proyectos y Solicitudes"
+                                  OnClick="ClickHandler"
+                                  NumeroEntrada="2">
+            </TarjetaOpcionesAdmin>
+
+            <TarjetaOpcionesAdmin NombreTitulo="Estadisticas"
+                                  OnClick="ClickHandler"
+                                  NumeroEntrada="3">
+            </TarjetaOpcionesAdmin>
+        </div>
+        <section>
+            @switch (IndicadorPage)
+             {
+                case 0:
+                    <TarjetaUsuariosRegistrados></TarjetaUsuariosRegistrados>
+                    break;
+                case 1:
+                    <p>Primera pagina: @IndicadorPage</p>
+                    break;
+                case 2:
+                    <p>segunda pagina: @IndicadorPage</p>
+                    break;
+                case 3:
+                    <EstadisticasPlataforma></EstadisticasPlataforma>
+                    break;
+             }
+        </section>
+    </div>
+    <div class="UsuAdmin">
+        <InformacionUsuario></InformacionUsuario>
+    </div>
+    <div class="ayudaAdmin">
+        <InformacionAyuda></InformacionAyuda>
+    </div>
+</section>
+
+@code {
+    private int IndicadorPage = 0;
+    private void ClickHandler(Tuple<int, bool> paramSalida)
+    {
+        IndicadorPage = paramSalida.Item1;
+    }
+}

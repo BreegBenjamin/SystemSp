@@ -1,0 +1,31 @@
+﻿@inject IJSRuntime JsRun;
+<nav class="davCategorias">
+    <div style="margin-right:5px">
+        <button class="botonCategoriasMove backCategorias" @onclick="JsRun.MoverCategoriasIzquierda"></button>
+    </div>
+    <ol class="olElments" id="listaCategoriasApp">
+        @foreach (var item in categorias.CategoriasVista)
+        {
+            <li class="disFlex">
+                <div  class="categoriaSize">
+                    <span class="borderImage">
+                        <img src="@item.ImageCategoria" class="imagesize" />
+                    </span>
+                    <p>@item.NombreCategoria</p>
+                </div>
+            </li>
+        }
+    </ol>
+    <div style="margin-left:5px">
+        <button class="botonCategoriasMove NextCategorias" @onclick="JsRun.MoverCategoriaDerecha"></button>
+    </div>
+</nav>
+
+@code {
+    ListaCategoriaVista categorias = new ListaCategoriaVista();
+    protected override void OnInitialized()
+    {
+        var leer = new Lector();
+        categorias = leer.ObtenerListaCategorias();
+    }
+}

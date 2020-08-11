@@ -1,0 +1,26 @@
+﻿@inject Lector lectura;
+<section class="card-project">
+    <h3 class="h6Font">
+        Categorias populares en la plataforma
+    </h3>
+    <div class="carteraCategorias">
+        @if (_fullCard)
+        {
+            @foreach (var item in _tarjetas.TarjetasPopulares)
+             {
+                <CardPopulares Imagen="@item.Imagen"
+                               Titulo="@item.Titulo"></CardPopulares>
+             }
+        }
+    </div>
+</section>
+
+@code {
+    private ECardProjectPopular _tarjetas = new ECardProjectPopular();
+    private bool _fullCard = false;
+    protected override void OnInitialized()
+    {
+        _tarjetas = lectura.OtenerTajetas();
+        if (_tarjetas != null) _fullCard = true;
+    }
+}

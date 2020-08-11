@@ -1,0 +1,93 @@
+﻿@inject IJSRuntime JsRun;
+<section class="fondo" id="ModalRegistro">
+    <section class="popUp">
+        <CerrarModal Mensaje="Ingrese los datos para Registrarse"></CerrarModal>
+        <div>
+            <div class="formualario_Registro">
+                <div class="selects">
+                    <span>
+                        <label class="radio">
+                            <input type="radio" id="checkAprendiz" name="checkUser" value="1" checked>
+                            <span>Aprendiz</span>
+                        </label>
+                    </span>
+                    <span>
+                        <label class="radio">
+                            <input type="radio" id="checkEmpresa" name="checkUser" value="2">
+                            <span>Empresa</span>
+                        </label>
+                    </span>
+                </div>
+                <div class="formDiv1">
+                    <input type="text" maxlength="30" @bind="_nombre" placeholder="Nombre" @onblur="habilitarBoton" class="registro_form">
+                    <input type="password" @bind="_password" placeholder="Contraseña" @onblur="habilitarBoton" class="registro_form">
+                </div>
+                <div class="formDiv2">
+                    <input type="email" @bind="_email" placeholder="Correo" @onblur="habilitarBoton" class="registro_form">
+                    <input type="tel" @bind="_telefono" placeholder="Telefono" @onblur="habilitarBoton" class="registro_form">
+                    <input type="text" @bind="_apellido" placeholder="Apellido" @onblur="habilitarBoton" class="registro_form">
+                    <input type="password" @bind="_password2" placeholder="Repetir Contraseña" @onblur="habilitarBoton" class="registro_form">
+                </div>
+                <div class="formDiv3">
+
+                </div>
+                <div class="formDiv4">
+                    <button class="@_classBoton" disabled="@_btnDeshabilitado" @onclick="validaFormulario">Registrarsé</button>
+                    <p>¿Ya tienes una Cuenta? <a href="#">Iniciar Sesión</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+@code {
+    //variables formualario
+    private string _email = string.Empty;
+    private string _password = string.Empty;
+    private string _password2 = string.Empty;
+    private string _nombre = string.Empty;
+    private string _apellido = string.Empty;
+    private string _telefono = string.Empty;
+
+    //Variables UI
+    private bool _btnDeshabilitado = true;
+    private string _classBoton = "btRegistroForm-Unlock";
+    private string _msPassWord = string.Empty;
+    //Metodo
+    private async Task validaFormulario()
+    {
+        bool _passInvalido = false;
+        bool _mailInvalido = ValidarFormularios.ValidaEmail(_email);
+        if (_password.Length > 6)
+            _passInvalido = ValidarFormularios.ValidaPassWord(_password, _password2);
+        if (!_passInvalido || !_mailInvalido)
+        {
+            string _msPass = String.Empty;
+            string _msMail = String.Empty;
+            if (!_passInvalido)
+                _msPass = "La contraseña ingresa no coinciden";
+            if(!_mailInvalido)
+                _msMail = "El correo electrónico ingresado no es valido";
+            await JsRun.MensajesRegistro(_msPass, _msMail);
+        }
+    }
+    private async Task habilitarBoton()
+    {
+        if (isValid(_email) && isValid(_password) && isValid(_password2) && isValid(_nombre) &&
+            isValid(_apellido) && isValid(_telefono) && _password.Length > 6)
+        {
+            _classBoton = "btRegistroForm";
+            _btnDeshabilitado = false;
+        }
+        else
+        {
+            _classBoton = "btRegistroForm-Unlock";
+            _btnDeshabilitado = true;
+        }
+    }
+    private bool isValid(string ms)
+    {
+        if (string.IsNullOrEmpty(ms)) return false;
+        else return true;
+    }
+}

@@ -1,0 +1,15 @@
+﻿<section>
+    <div class="positionFooter">
+        <button class="btFooterOpt @ImgFooter"></button>
+        <a class="footerRedirect" href="#">@LinkTitulo</a>
+    </div>
+    <p class="footerDescripcion">@Descripcion</p>
+</section>
+@code {
+    [Parameter]
+    public string LinkTitulo { get; set; }
+    [Parameter]
+    public string Descripcion { get; set; }
+    [Parameter]
+    public string ImgFooter { get; set; }
+}

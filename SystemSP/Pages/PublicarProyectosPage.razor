@@ -1,0 +1,71 @@
+﻿@page "/PublicarProyecto";
+@inherits LayoutComponentBase
+    <section class="elements-body">
+        <div class="div-usuario">
+            <InformacionUsuario></InformacionUsuario>
+        </div>
+        <aside class="info-ayuda">
+            <InformacionAyuda></InformacionAyuda>
+        </aside>
+        <section class="bodyPage">
+            <div class="sec-opciones">
+                <OpcionesProyecto
+                                  OnClickOpcion="ClickHandler"></OpcionesProyecto>
+            </div>
+            <div class="setPage">
+                @switch (tipoOpcion)
+                {
+                    case 0:
+                        <InformacionContacto></InformacionContacto>
+                        <FormularioAprendiz></FormularioAprendiz>
+                        break;
+                    case 1:
+                        <p>Hola soy un </p>
+                        break;
+                    case 2:
+                        break;
+                }
+            </div>
+            <div class="setOptions">
+                <section class="borderInformacion">
+                    <div class="infUpdate">
+                        <h3 class="colorNoti">Actualizar Proyecto</h3>
+                        <div class="detallesProyecto">
+                            <span class="nameProyect">
+                                Sort By
+                            </span>
+                        </div>
+                    </div>
+                    <TarjetaEditarProyecto TituloTarjeta="Nombre del Proyecto"
+                                           SubTituloTarjeta="Jon Grey"
+                                           LeadingImage="price.svg">
+                    </TarjetaEditarProyecto>
+                    <TarjetaEditarProyecto TituloTarjeta="Integrantes"
+                                           SubTituloTarjeta="3 Aprendices"
+                                           LeadingImage="price.svg"
+                                           TrailingImage="true">
+                    </TarjetaEditarProyecto>
+                    <TarjetaEditarProyecto TituloTarjeta="Imagenes Interfaz"
+                                           SubTituloTarjeta="12 Imagenes"
+                                           LeadingImage="price.svg"
+                                           TrailingImage="true">
+                    </TarjetaEditarProyecto>
+                    <TarjetaEditarProyecto TituloTarjeta="Archivos proyecto"
+                                           SubTituloTarjeta="12 Archivos"
+                                           LeadingImage="price.svg"
+                                           TrailingImage="true">
+                    </TarjetaEditarProyecto>
+                    <div style="height:2px">
+                    </div>
+                </section>
+            </div>
+        </section>
+    </section>
+@code {
+    private int tipoOpcion = 0;
+    private void ClickHandler(int tipo)
+    {
+        tipoOpcion = tipo;
+    }
+}
+

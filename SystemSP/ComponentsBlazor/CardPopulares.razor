@@ -1,0 +1,13 @@
+﻿<div class="targetas-populares">
+    <span>
+        <img class="imgTarjeta" src="@Imagen" alt="tarjeta1">
+    </span>
+    <p>@Titulo</p>
+</div>
+
+@code {
+    [Parameter]
+    public string Imagen { get; set; }
+    [Parameter]
+    public string Titulo { get; set; }
+}

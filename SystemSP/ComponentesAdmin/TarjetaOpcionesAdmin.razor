@@ -1,0 +1,113 @@
+﻿<div class="CategoriaAdminBorder @NameClassCategoria">
+    <div>
+        <p class="contenedorTitulo">@NombreTitulo</p>
+    </div>
+    <div>
+        <span>
+            <img id="ImageAdmin" src="/images/IconosCategorias/AdminIcons/@UrlImage"
+                 style="opacity:@opacity" height="65" width="65" />
+        </span>
+    </div>
+    <div>
+        <p class="pDescirpcion">
+           @MensajeDescripcion
+        </p>
+    </div>
+    <div>
+        <button @onclick="HabilitarSeccion"class="botonInfoAdmin @ColorBoton">
+            Consultar
+        </button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string NombreTitulo { get; set; }
+    [Parameter]
+    public EventCallback<Tuple<int, bool>> OnClick { get; set; }
+    [Parameter]
+    public int NumeroEntrada { get; set; }
+    [Parameter]
+    public bool TarjetaHabilitada { get; set; }
+
+    private string UrlImage { get; set; }
+    private bool BotonHabilitado = false;
+    private string NameClassCategoria = "colorCategoriAdmin";
+    private string opacity = "0.7";
+    private string MensajeDescripcion = "";
+    private string ColorBoton = "ColorBotonNoHanddler";
+    private async Task HabilitarSeccion()
+    {
+        bool cambiar = false;
+        switch (NumeroEntrada)
+        {
+            case 0:
+                break;
+            case 1:
+                NameClassCategoria = "colorCategoriAdmin";
+                ColorBoton = "ColorBotonHanddler";
+                UrlImage = "team.svg";
+                break;
+            case 2:
+                NameClassCategoria = "colorCategoriAdmin";
+                ColorBoton = "ColorBotonHanddler";
+                UrlImage = "project.svg";
+                break;
+            case 3:
+                NameClassCategoria = "colorCategoriAdmin";
+                ColorBoton = "ColorBotonHanddler";
+                UrlImage = "work.svg";
+                break;
+        }
+        var salidaEvento = new Tuple<int, bool>(NumeroEntrada, cambiar);
+        await OnClick.InvokeAsync(salidaEvento);
+    }
+    protected override void OnInitialized()
+    {
+        switch (NumeroEntrada)
+        {
+            case 0:
+                if (TarjetaHabilitada)
+                {
+                    UrlImage = "work.svg";
+                    ColorBoton = "ColorBotonHanddler";
+                }
+                else
+                {
+                    ColorBoton = "ColorBotonNoHanddler";
+                    UrlImage = "work-No.svg";
+                }
+                MensajeDescripcion = "Opciones generales del administrador";
+                opacity = "1.0";
+                break;
+            case 1:
+                if (TarjetaHabilitada)
+                {
+                    NameClassCategoria = "colorCategoriAdmin";
+                    ColorBoton = "ColorBotonHanddler";
+                    UrlImage = "team.svg";
+                }
+                else
+                {
+                    NameClassCategoria = "colorCategoriaUnAdmin";
+                    UrlImage = "team-No.svg";
+                }
+                opacity = "1.0";
+                MensajeDescripcion = "Consultar los usuarios registrados en la plataforma";
+                break;
+            case 2:
+                NameClassCategoria = "colorCategoriaUnAdmin";
+                UrlImage = "project-No.svg";
+                opacity = "1.0";
+                MensajeDescripcion = "Consultar los proyectos y alojados en la plataforma";
+                break;
+            case 3:
+                NameClassCategoria = "colorCategoriaUnAdmin";
+                UrlImage = "work-No.svg";
+                opacity = "1.0";
+                MensajeDescripcion = "Estadisticas de los proyectos y usuarios de la aplicación";
+                break;
+        }
+        base.OnInitialized();
+    }
+}

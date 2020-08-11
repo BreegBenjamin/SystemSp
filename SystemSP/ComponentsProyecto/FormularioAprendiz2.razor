@@ -1,0 +1,62 @@
+﻿<section>
+    <EditForm Model="_formGaes">
+        <div>
+            <label for="nombreSena">Nombre de la Dirección Sena</label>
+            <InputText @bind-Value="_formGaes.NombreDireccionSena"
+                       MaxLength="40" class="inputFormAprendiz"></InputText>
+        </div>
+        <div>
+            <div>
+                <p>Datos Aprendices (Opcionales)</p>
+                <TooltipApp MensajeToolTip="Datos de los integrantes del grupo"></TooltipApp>
+            </div>
+            <div>
+                @foreach (var item in _integrantesGaes)
+                 {
+                    <ol>
+                        <li>@item.Nombre</li>
+                        <li>@item.Apellido</li>
+                        <li>@item.Telefono</li>
+                        <li>@item.Correo</li>
+                        <li>
+                            <button>X</button>
+                        </li>
+                    </ol>
+                 }
+            </div>
+            <div>
+                <div>
+                    <label>Nombre Aprendiz</label>
+                    <input type="text" @bind="_aprendiz.Nombre" />
+                </div>
+                <div>
+                    <label>Apellido Aprendiz</label>
+                    <input type="text" @bind="_aprendiz.Apellido" />
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label>Télefono</label>
+                    <input type="text" @bind="_aprendiz.Telefono" />
+                </div>
+                <div>
+                    <label>Correo Electronico</label>
+                    <input type="text" @bind="_aprendiz.Correo" />
+                </div>
+            </div>
+            <div>
+                <button @onclick="AddAprendiz">AgregarIntegrantes</button>
+            </div>
+        </div>
+    </EditForm>
+</section>
+
+@code {
+    private EFormularioAprendizGaes _formGaes = new EFormularioAprendizGaes();
+    private List<EIntegrantesGaes> _integrantesGaes = new List<EIntegrantesGaes>();
+    private EIntegrantesGaes _aprendiz = new EIntegrantesGaes();
+    private void AddAprendiz()
+    {
+        _integrantesGaes.Add(_aprendiz);
+    }
+}

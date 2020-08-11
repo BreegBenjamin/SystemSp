@@ -1,0 +1,47 @@
+﻿<section class="sectionCategoriasVista">
+    @foreach (var item in solicituds)
+     {
+        <TarjetaCategoriaSolicitud
+                                   IndexCategoria="@item.IdCategoria"
+                                   NombreTitulo="@item.Nombre"
+                                   UrlImage="@item.UrlImage">
+        </TarjetaCategoriaSolicitud>
+     }
+</section>
+
+@code {
+    List<CategoriaSolicitud> solicituds = new List<CategoriaSolicitud>();
+    protected override void OnInitialized()
+    {
+        var categoria = new CategoriaSolicitud()
+        {
+            Nombre = "Educación",
+            UrlImage = "/images/IconosCategorias/education.svg",
+            IdCategoria = 1
+        };
+        var categoria2 = new CategoriaSolicitud()
+        {
+            Nombre = "Industria y Comercio",
+            UrlImage = "/images/IconosCategorias/hook.svg",
+            IdCategoria = 2
+        };
+        var categoria3 = new CategoriaSolicitud()
+        {
+            Nombre = "Herramientas y Productividad",
+            UrlImage = "/images/IconosCategorias/work.svg",
+            IdCategoria = 3
+        };
+        var categoria4 = new CategoriaSolicitud()
+        {
+            Nombre = "Entretenimiento y Eventos",
+            UrlImage = "/images/IconosCategorias/stage.svg",
+            IdCategoria = 4
+        };
+        solicituds.Add(categoria);
+        solicituds.Add(categoria2);
+        solicituds.Add(categoria3);
+        solicituds.Add(categoria4);
+
+        base.OnInitialized();
+    }
+}

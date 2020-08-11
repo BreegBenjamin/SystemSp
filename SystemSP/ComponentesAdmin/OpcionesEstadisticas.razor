@@ -1,0 +1,22 @@
+﻿<div class="sobrasTarjetas opcionesDate">
+    <div class="margin0" style="padding-left:10px">
+        <p class="margin0 sizeProject">@Titulo</p>
+        <p class="margin0">@Subtitulo</p>
+    </div>
+    <div class="margin0 colorCircle" style="border:2px solid @ColorTarjeta">
+        <img src="/images/IconosCategorias/AdminIcons/@UrlImage" height="25" width="25" />
+    </div>
+    <div class="colorOpciones" style="background-color:@ColorTarjeta">
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Titulo { get; set; }
+    [Parameter]
+    public string Subtitulo { get; set; }
+    [Parameter]
+    public string UrlImage { get; set; }
+    [Parameter]
+    public string ColorTarjeta { get; set; }
+}

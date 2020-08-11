@@ -1,0 +1,8 @@
+﻿@inject IJSRuntime JsRun;    <section class="info-software estilosBordes">        <div class="indicadorMenu">            <div class="IndicadorPage @Indicado1"></div>            <div class="IndicadorPage @Indicado2"></div>            <div class="IndicadorPage @Indicador3"></div>        </div>        @switch (Paginador)         {             case 0:                <FormularioAprendiz1 FormValid="HabilitarContinuar"></FormularioAprendiz1>                break;                case 1:                <FormularioAprendiz2></FormularioAprendiz2>                break;                case 2:                     <p>DOS</p>                break;         }    </section>@code {    private int Paginador = 0;
+    private string Indicado1 = "colorIndicador";
+    private string Indicado2 = "FalseColorIndicador";
+    private string Indicador3 = "FalseColorIndicador";
+    //Funciones
+    protected override void OnInitialized()    {    }    private void HabilitarContinuar(int indicador)    {        switch (indicador)
+        {            case 1:
+                Indicado1 = "FalseColorIndicador";                Indicado2 = "colorIndicador";                break;        }        Paginador = indicador;    }    private async Task PublicarProyecto()=> await JsRun.MensajeProyecto();}

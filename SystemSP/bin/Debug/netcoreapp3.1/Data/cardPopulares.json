@@ -1,0 +1,20 @@
+{
+  "TarjetasPopulares": [
+    {
+      "Imagen": "/images/construccion.jpg",
+      "Titulo": "Construccion"
+    },
+    {
+      "Imagen": "/images/Libreria.jpg",
+      "Titulo": "Bibliotecas"
+    },
+    {
+      "Imagen": "/images/educacion.jpg",
+      "Titulo": "Educacion"
+    },
+    {
+      "Imagen": "/images/mercado.jpg",
+      "Titulo": "Tiendas"
+    }
+  ]
+}

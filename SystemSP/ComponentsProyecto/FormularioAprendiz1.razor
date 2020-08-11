@@ -1,0 +1,188 @@
+﻿@inject Lector lector;
+<section>
+    <EditForm Model="_aprendizIn" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <ol class="formAprendiz1">
+            <li class="liForm">
+                <div class="containerTexto">
+                    <p>NombrePojecto</p>
+                    <label class="lbColor">Nombre del projecto formativo</label>
+                    <InputText @bind-Value="_aprendizIn.NombreProyecto" class="inputFormAprendiz fontProject fontInput"
+                               @onfocusout="validaForm" MaxLength="30"></InputText>
+                </div>
+                <div class="containerTexto">
+                    <label class="lbColor">Categoria</label>
+                    @if (_listaCategoria != null)
+                    {
+                        <InputSelect @bind-Value="_aprendizIn.Categoria" class="selectType selectStile">
+                            @foreach (var item in _listaCategoria.CategoriasVista)
+                                {
+                                <option class="opcionItem">@item.NombreCategoria</option>
+                                }
+                        </InputSelect>
+                    }
+                </div>
+            </li>
+            <li class="liForm">
+                <!--Fecha de publicación proyecto-->
+                <div class="containerTexto">
+                    <div class="containerTexto">
+                        <label class="lbColor">Fecha Fin Projecto</label>
+                    </div>
+                    <div class="containerFecha">
+                        <InputSelect @bind-Value="_aprendizIn.Anio" class="selectType selectStile2">
+                            @foreach (var item in _listaAnio)
+                            {
+                                <option class="opcionItem">@item</option>
+                            }
+                        </InputSelect>
+                        <InputSelect @bind-Value="_aprendizIn.Mes" class="selectType selectStile2">
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <option class="opcionItem">@i</option>
+                            }
+                        </InputSelect>
+                        <InputSelect @bind-Value="_aprendizIn.Dia" class="selectType selectStile2">
+                            @foreach (var item in _listDias)
+                            {
+                                <option class="opcionItem">@item</option>
+                            }
+                        </InputSelect>
+                        <TooltipApp MensajeToolTip="Fecha de la finalización del projecto formativo"></TooltipApp>
+                    </div>
+                </div>
+                <div class="containerTexto">
+                    <label class="lbColor">Ciudad de formación</label>
+                    <InputText @bind-Value="_aprendizIn.Ciudad" class="inputFormAprendiz fontInput fontCity"
+                               @onfocusout="validaForm" MaxLength="40"></InputText>
+                </div>
+            </li>
+            <li class="liForm">
+                <!--Ciudad Formación-->
+                <div class="containerTexto">
+                    <label class="lbColor">Departamento</label>
+                    <InputSelect @bind-Value="_aprendizIn.Departamento" class="selectType selectStile">
+                        @foreach (var item in _listDepa)
+                        {
+                            <option>@item</option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="containerTexto">
+                    <label class="lbColor">Ciudad de formación</label>
+                    <InputText @bind-Value="_aprendizIn.Ciudad" class="inputFormAprendiz fontInput fontCity"
+                               @onfocusout="validaForm" MaxLength="40"></InputText>
+                </div>
+            </li>
+            <li>
+                <!--Descripcion del proyecto-->
+                <div class="containerTexto">
+                    <label class="lbColor">Descripción del proyecto formativo</label>
+                    <InputTextArea @bind-Value="_aprendizIn.DescripcionProjecto" class="textDescripcion"
+                                   placeholder="Ingresa Una Descripcion del proyecto, minimo 100 caracteres"
+                                   @onfocusout="validaForm" MaxLength="2000"></InputTextArea>
+                </div>
+            </li>
+            <li>
+                <!--Botones-->
+
+                <div class="disBotones">
+                    <button class="PublicarProyecto-Unlock" disabled>Regresar</button>
+                    <button class="@_classBotones" type="submit" disabled="@continuarDis">Continuar</button>
+                </div>
+            </li>
+        </ol>
+    </EditForm>
+</section>
+@code {
+    private EFormularioAprendizIn _aprendizIn = new EFormularioAprendizIn();
+    private ListaCategoriaVista _listaCategoria = new ListaCategoriaVista();
+    private bool _btnConrinuarDisabled = true;
+    private string _classBotones = "PublicarProyecto-Unlock";
+    private List<string> _listaAnio = new List<string>();
+    private List<string> _listDias = new List<string>();
+    private string[] _listDepa = {
+        "Amazonas",
+        "Antioquia",
+        "Arauca",
+        "Atlántico",
+        "Bogotá",
+        "Bolívar",
+        "Boyacá",
+        "Caldas",
+        "Caquetá",
+        "Casanare",
+        "Cauca",
+        "Cesar",
+        "Chocó",
+        "Córdoba",
+        "Cundinamarca",
+        "Guainía",
+        "Guaviare",
+        "Huila",
+        "La Guajira",
+        "Magdalena",
+        "Meta",
+        "Nariño",
+        "Norte de Santander",
+        "Putumayo",
+        "Quindío",
+        "Risaralda",
+        "San Andrés y Providencia",
+        "Santander",
+        "Sucre",
+        "Tolima",
+        "Valle del Cauca",
+        "Vaupés",
+        "Vichada"
+    };
+    private bool continuarDis = true;
+
+    [Parameter]
+    public EventCallback<int> FormValid { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _listaCategoria = lector.ObtenerListaCategorias();
+        _listaAnio = _getAnio();
+        _listDias = _getDias(DateTime.Now.Year, DateTime.Now.Month);
+        base.OnInitialized();
+    }
+
+    private async Task HandleValidSubmit() => await FormValid.InvokeAsync(1);
+    private List<string> _getAnio()
+    {
+        var years = new List<string>();
+        int anioActual = DateTime.Now.Year;
+        while ( anioActual > 2010)
+        {
+            years.Add($"{anioActual}");
+            anioActual--;
+        }
+        return years;
+    }
+    private List<string> _getDias(int anioActual, int mesActual)
+    {
+        var dias = new List<string>();
+        List<DateTime> meses = Enumerable.Range(1, DateTime.DaysInMonth(anioActual, mesActual))
+            .Select(day => new DateTime(anioActual, mesActual, day)).ToList();
+
+        meses.ForEach((ivalor) =>
+        {
+            dias.Add(ivalor.ToString("dd"));
+        });
+
+        return dias;
+    }
+    private void validaForm()
+    {
+        if (!string.IsNullOrWhiteSpace(_aprendizIn.Ciudad) &&
+            !string.IsNullOrWhiteSpace(_aprendizIn.NombreProyecto) &&
+            !string.IsNullOrWhiteSpace(_aprendizIn.DescripcionProjecto))
+        {
+            _classBotones = "BotonPublicarProyecto";
+            continuarDis = false;
+        }
+    }
+}

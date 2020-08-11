@@ -1,0 +1,24 @@
+<svg height="512" viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg">
+  <linearGradient id="imageColor" gradientUnits="userSpaceOnUse" x1="500" x2="500" y1="57" y2="25">
+    <stop offset="0" stop-color="#9f2fff"/>
+    <stop offset="1" stop-color="#11A6DE"/>
+  </linearGradient>
+  <g id="outline">
+    <path  fill="url(#imageColor)"  d="m61 40h-1v-3a1 1 0 0 0 -1-1h-1v-3a1 1 0 0 0 -1-1h-1v-2h3a1 1 0 0 0 1-1v-4a1 1 0 0 0 -1-1h-2.382l-1.718-3.447a1 1 0 0 0 -.9-.553h-3v-4h-2v4h-2v-2h-2v2h-2v-4h2v-2h-2v-2h-2v2h-2v2h2v4h-11a1 1 0 0 0 -.895.553l-1.723 3.447h-.638l-2.4-8h1.656v-2h-2v-2h-2v2h-2v-2h-2v2h-2v-2h-2v2h-2v2h2v8h-3a1 1 0 0 0 -.97.757l-1.81 7.243h-1.22a1 1 0 0 0 -.97.757l-1.81 7.243h-1.22a1 1 0 0 0 -.937 1.351l3 8q.019.05.042.1c.882 1.76 3.095 2.549 4.895 2.549h42c2.4 0 4.624-1.832 5.8-3.4a.884.884 0 0 0 .068-.1l4-7a1 1 0 0 0 .132-.5.987.987 0 0 0 -.135-.5 1 1 0 0 0 -.865-.5zm-3-2v2h-16v-2zm-27.382-16h22.764l1 2h-24.764zm-14.618-6h6.256l2.4 8h-1.936l-1.772-5.316a1 1 0 0 0 -.948-.684h-2v2h1.279l1.334 4h-4.613zm-4.219 10h46.219v2h-17a1 1 0 0 0 -1 1v3h-29.719zm42.219 4v2h-12v-2zm-46.219 4h48.219v2h-15a1 1 0 0 0 -1 1v3h-33.719zm48.383 13.448c-.946 1.239-2.638 2.552-4.164 2.552h-42a3.627 3.627 0 0 1 -3.084-1.406l-.973-2.594h5.057v2h2v-2h2v2h2v-2h2v2h2v-2h22v2h2v-2h2v2h2v-2h7.991zm1.97-3.448h-52.941l-.75-2h54.833z"/>
+    <path  fill="url(#imageColor)"  d="m8 36h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m12 36h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m16 36h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m20 36h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m24 36h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m28 36h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m32 36h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m20 28h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m16 28h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m12 28h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m24 28h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m28 28h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m32 28h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m36 28h2v2h-2z"/>
+    <path  fill="url(#imageColor)"  d="m36 36h2v2h-2z"/>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+﻿<div class="card-Proyectos" style="min-width:@Tamano">
+    <div>
+        <img class="imgStateproject" src="@ImageProyecto">
+    </div>
+    <div class="centerInfo">
+        <p>@ProjectTitle</p>
+        <div>
+            <div class="imgAuto">
+                <img src="@ImageUser" class="personImg" alt="img-logoPersom">
+                <span>@NameUser</span>
+            </div>
+            <div>
+                <img class="imgCategoria" src="@ImageCategoria" alt="tipoCategoria">
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string ImageUser { get; set; }
+    [Parameter]
+    public string NameUser { get; set; }
+    [Parameter]
+    public string ImageCategoria { get; set; }
+    [Parameter]
+    public string ProjectTitle { get; set; }
+    [Parameter]
+    public string ImageProyecto { get; set; }
+    [Parameter]
+    public string Tamano { get; set; }
+}

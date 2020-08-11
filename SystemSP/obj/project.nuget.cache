@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "LbVLNfuqjHUNpgaDnZf9nED0g2szn+Rsrt8Vy+ymvbcMLZm2Wr1XA/UKosCorsleP0dLRAG4ky13GSfAzxWqXw==",
+  "success": true,
+  "projectFilePath": "C:\\Desarrollo\\SystemSP\\SystemSP\\SystemSP\\SystemSP.csproj",
+  "expectedPackageFiles": [
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.typescript.msbuild\\3.9.5\\microsoft.typescript.msbuild.3.9.5.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

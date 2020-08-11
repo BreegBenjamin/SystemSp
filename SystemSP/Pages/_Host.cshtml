@@ -1,0 +1,32 @@
+﻿@page "/"
+@namespace SystemSP.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SystemSP</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/style-publicar-Proyecto.css" />
+    <link rel="stylesheet" href="css/style-vista-proyecto.css" />
+    <link rel="stylesheet" href="css/NotificationStyle.css" />
+    <link rel="stylesheet" href="sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="microtip/microtip.css" />
+    <script src="javascript/Chart.min.js"></script>
+    <script src="javascript/funcionesNavegador.js"></script>
+    <script src="sweetalert2/sweetalert2.all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>

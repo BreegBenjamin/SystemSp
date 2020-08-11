@@ -1,0 +1,35 @@
+﻿<section>
+    <ol class="optionsOL">
+        <li>
+            <button @onclick="()=>CambiarOpcion(0)" class="BotonInfoProdyecto @publicarClassName">Publicar proyecto</button>
+        </li>
+        <li>
+            <button @onclick="()=>CambiarOpcion(1)" class="BotonInfoProdyecto @novedadClassName">Novedades</button>
+        </li>
+    </ol>
+</section>
+
+@code {
+    private string novedadClassName = "btn-opcion-unluck";
+    private string publicarClassName = "btn-opcion-luck";
+    private int NumeroOpcion = 0;
+    [Parameter]
+    public EventCallback<int> OnClickOpcion { get; set; }
+
+    private async Task CambiarOpcion(int numeroAccion)
+    {
+        if (numeroAccion == 0)
+        {
+            novedadClassName = "btn-opcion-unluck";
+            publicarClassName = "btn-opcion-luck";
+            NumeroOpcion = 0;
+        }
+        else if (numeroAccion == 1)
+        {
+            novedadClassName = "btn-opcion-luck";
+            publicarClassName = "btn-opcion-unluck";
+            NumeroOpcion = 1;
+        }
+        await OnClickOpcion.InvokeAsync(NumeroOpcion);
+    }
+}

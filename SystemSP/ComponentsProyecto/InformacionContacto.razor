@@ -1,0 +1,72 @@
+﻿@inject IJSRuntime JsRun;
+<article class="informacion-contacto estilosBordes">
+    <ol>
+        <li class="centerContactoData">
+            <span class="circularBorder">
+                <img src="images/img_proyect/call.svg" class="imgInformacion" alt="imgPhone" />
+            </span>
+            <div style="margin-left:20px">
+                <input class="description-fake" type="text" @bind="@_numeroTelefono" placeholder="@_numeroTelefono"maxlength="10" @onfocusout="savePhone"/>
+            </div>
+        </li>
+        <li class="centerContactoData">
+            <span class="circularBorder"><img src="images/img_proyect/email_user.svg" alt="correo" class="imgInformacion" /></span>
+            <div style="margin-left:20px">
+                <input class="description-fake" type="text" @bind="@_direccionEmail" placeholder="@_direccionEmail" maxlength="30" @onfocusout="saveEmail" />
+            </div>
+        </li>
+        <li class="centerContactoData">
+            <span class="circularBorder"><img src="images/img_proyect/location.svg" class="imgInformacion" alt="direccion" /></span>
+            <div style="margin-left:20px">
+                <input class="description-fake" type="text" @bind="@_direccionFisica" placeholder="@_direccionFisica" maxlength="30" @onfocusout="saveAddress"/>
+            </div>
+        </li>
+    </ol>
+</article>
+<AlertaApp Mensaje="@_mensaje"></AlertaApp>
+
+@code {
+    private string _numeroTelefono = "3002309039";
+    private string _direccionEmail = "Ernestocajar@outlook.com";
+    private string _direccionFisica = "Calle 25 # 89 12";
+    private string _mensaje = string.Empty;
+    private async Task savePhone()
+    {
+        if (String.IsNullOrEmpty(_numeroTelefono))
+        {
+
+        }
+        else
+        {
+            _mensaje = "Se ha actualizado el número de teléfono";
+            await JsRun.InvokeVoidAsync(identifier: "alerta.MostrarAlerta");
+        }
+
+    }
+    private async Task saveAddress()
+    {
+        if (String.IsNullOrEmpty(_direccionFisica))
+        {
+
+        }
+        else
+        {
+            _mensaje = "Se ha actualizado su dirreccion";
+            await JsRun.InvokeVoidAsync(identifier: "alerta.MostrarAlerta");
+        }
+
+    }
+    private async Task saveEmail()
+    {
+        if (String.IsNullOrEmpty(_direccionEmail))
+        {
+
+        }
+        else
+        {
+            _mensaje = "Se ha actualizado el correo electronico";
+            await JsRun.InvokeVoidAsync(identifier: "alerta.MostrarAlerta");
+        }
+
+    }
+}

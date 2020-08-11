@@ -1,0 +1,56 @@
+﻿@inject IJSRuntime JSRun;
+@inject NavigationManager NavigationManager;
+<section>
+    <nav class="@classNavMenu">
+        <button class="bt-back botonesSlider" style="left:@movedPixel" @onclick="moverTarjetaIzquierda"></button>
+        <div id="plantillaProyecto" class="plantillaProyect">
+            @if (_proyectos)
+             {
+                @foreach (var items in _tajetasProyecto.CardElements)
+                 {
+                    <CardProject
+                                 Tamano="@tamano"
+                                 ImageCategoria="@items.ImageCategoria"
+                                 ImageProyecto="@items.ImageProyect"
+                                 ImageUser="@items.ImageUser"
+                                 NameUser="@items.NameUser"
+                                 ProjectTitle="@items.ProyectTitle">
+                    </CardProject>
+                 }
+             }
+        </div>
+        <button class="bt-next botonesSlider" style="right:@movedPixel" @onclick="moverTarjetasDerecha"></button>
+    </nav>
+</section>
+
+@code {
+    [Parameter]
+    public string TipoMenu { get; set; }
+    [Parameter]
+    public string OcultarBoton { get; set; }
+    private string tamano = "0";
+    private string movedPixel = "0";
+    private string classNavMenu { get; set; }
+    private ProyectosDestacados _tajetasProyecto = new ProyectosDestacados();
+    bool _proyectos = false;
+    protected override void OnInitialized()
+    {
+        var leer = new Lector();
+        _tajetasProyecto = leer.ObtenerProyectos();
+        if (_tajetasProyecto.CardElements != null) _proyectos = true;
+        if (TipoMenu == "PgPrincipal")
+        {
+            classNavMenu = "nav-menu-project";
+            tamano = "23.2%";
+            movedPixel = "85px";
+        }
+        else if (TipoMenu == "PgVista")
+        {
+            classNavMenu = "nav-menu-view";
+            tamano = "18.4%";
+            movedPixel = "5px";
+        }
+    }
+    private async Task moverTarjetasDerecha() => await JSRun.InvokeVoidAsync(identifier: "scroll.MovertarjetasDerecha");
+    private async Task moverTarjetaIzquierda() => await JSRun.InvokeVoidAsync(identifier: "scroll.MovertarjetasIzquierda");
+}

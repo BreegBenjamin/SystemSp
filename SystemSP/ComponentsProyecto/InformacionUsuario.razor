@@ -1,0 +1,100 @@
+﻿@inject IJSRuntime JsRun;
+<section class="info-usuario estilosBordes">
+    <div>
+        <div class="img-userProyect">
+            <span class="opacidadImage">@_letrasInciales</span>
+        </div>
+        <div class="centerName">
+            <label id="lbNombrePersona">@_nombreUser</label>
+        </div>
+    </div>
+    <div class="elementsNoty">
+        <ol class="centerOl">
+            <li>
+                <button class="botonConfiguracion botonUsuario" @onclick="clickBotonConfiguracion"></button>
+            </li>
+            <li>
+                <button class="botonNotificaciones botonUsuario" @onmouseover="botonNotificaciones"></button>
+            </li>
+        </ol>
+    </div>
+    <div style="display:@_displayType" class="modalConfiguracion">
+        <div class="modalConfiguracionInfo">
+            <p>Actualiza tu información</p>
+            <span>
+                <p class="pFont">Nombre</p>
+                <input type="text" class="txtEditName" placeholder="@_nombreUser" @bind="_nombreUser" />
+            </span>
+            <span>
+                <p class="pFont">Nueva Contraseñas</p>
+                <input type="password" class="txtEditName" @bind="_nuevoPass" />
+            </span>
+            <span>
+                <p class="pFont">Confirmar Contraseñas</p>
+                <input type="password" class="txtEditName" @bind="_confirmPass" />
+            </span>
+            <div>
+                <button class="btConfi btCancelar" @onclick='cancelarCambios'>Cancelar</button>
+                <button class="btConfi btGuardar" @onclick="guardarCambios">Guardar</button>
+            </div>
+        </div>
+    </div>
+    <div style="display:@_modalNotify" class="modalNotify" @onmouseout="mauseUpNoti">
+
+    </div>
+</section>
+<AlertaApp TipoAlerta="true" Mensaje="Se actualizo la contraseña correctamente"></AlertaApp>
+
+@code {
+    private String _nombreUser = string.Empty;
+    String nombre = "Marta";
+    String apellido = "Del Castillo";
+    private String _letrasInciales = string.Empty;
+    private String _displayType = "none";
+    private String _modalNotify = "none";
+    // passWord
+    private String _confirmPass { get; set; }
+    private String _nuevoPass { get; set; }
+    //metodos Eventos
+    protected override void OnInitialized()
+    {
+        _nombreUser = $"{nombre} {apellido}";
+        _letrasInciales = $"{nombre[0]} {apellido[0]}";
+        base.OnInitialized();
+    }
+    private async Task guardarCambios()
+    {
+        string[] letras = _nombreUser.Split(' ');
+        if (letras.Length > 0)
+            _letrasInciales = $"{letras[0][0]} {letras[1][0]}";
+        if (!String.IsNullOrEmpty(_confirmPass) && !String.IsNullOrEmpty(_nuevoPass))
+        {
+            bool pass = ValidarFormularios.ValidaPassWord(_nuevoPass, _confirmPass);
+            if (pass)
+            {
+                this._displayType = "none";
+                await JsRun.HabilitarScroll();
+                await JsRun.InvokeVoidAsync(identifier: "alerta.MostrarAlerta");
+            }
+            else
+                await JsRun.MensajesRegistro("La contraseña ingresada", "no coincide");
+        }
+        else
+        {
+            this._displayType = "none";
+            await JsRun.HabilitarScroll();
+        }
+    }
+    private async Task cancelarCambios()
+    {
+        this._displayType = "none";
+        await JsRun.HabilitarScroll();
+    }
+    private async Task clickBotonConfiguracion()
+    {
+        _displayType = "flex";
+        await JsRun.ScrollPageNotify();
+    }
+    private void botonNotificaciones() => _modalNotify = "flex";
+    private void mauseUpNoti() => _modalNotify = "none";
+}
