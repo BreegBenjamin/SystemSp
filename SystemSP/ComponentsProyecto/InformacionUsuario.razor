@@ -73,7 +73,7 @@
             if (pass)
             {
                 this._displayType = "none";
-                await JsRun.HabilitarScroll();
+                await JsRun.HabilitarScroll("salirMenu.HabilitarScroll");
                 await JsRun.InvokeVoidAsync(identifier: "alerta.MostrarAlerta");
             }
             else
@@ -82,18 +82,18 @@
         else
         {
             this._displayType = "none";
-            await JsRun.HabilitarScroll();
+            await JsRun.HabilitarScroll("salirMenu.HabilitarScroll");
         }
     }
     private async Task cancelarCambios()
     {
         this._displayType = "none";
-        await JsRun.HabilitarScroll();
+        await JsRun.HabilitarScroll("salirMenu.HabilitarScroll");
     }
     private async Task clickBotonConfiguracion()
     {
         _displayType = "flex";
-        await JsRun.ScrollPageNotify();
+        await JsRun.HabilitarScroll("salirMenu.DeshabilitarScrollPage");
     }
     private void botonNotificaciones() => _modalNotify = "flex";
     private void mauseUpNoti() => _modalNotify = "none";

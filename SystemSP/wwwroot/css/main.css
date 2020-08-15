@@ -19,8 +19,7 @@ body {
     padding: 0 50px 0 20px;
 }
 .userBotons {
-    display:grid;
-    grid-template-columns:1fr 1fr;
+    display:flex;
     grid-gap:10px;
 }
 .bt-styles {
@@ -632,6 +631,7 @@ body {
 }
 .cardAppInfo {
     box-shadow: var(--SombrasCaja);
+    border-radius:5px;
     display: flex;
     cursor: pointer;
     justify-content: center;
@@ -641,7 +641,7 @@ body {
     padding: 10px;
     margin: 0 20px;
     width: 27%;
-    height: 270px;
+    height: 300px;
 }
     .cardAppInfo:hover {
         box-shadow: 0 3px 10px 0px rgba(202, 202, 202, 0.8);
@@ -697,3 +697,55 @@ body {
     background-size: 15%;
     background-position-x: 90%;
 }
+.contenedorSelect {
+    align-items: center;
+    box-sizing: border-box;
+    box-shadow: var(--SombrasCaja);
+    border-radius: 5px;
+    background-color: #fff;
+    background-size: 10%;
+    background-position-y: center;
+    background-position-x: 90%;
+    background-repeat: no-repeat;
+    display: flex;
+    cursor: pointer;
+    justify-content: space-around;
+    padding: 0 40px 0 25px;
+    height: 45px;
+    width: 185px;
+    z-index: 20;
+}
+.imgSelect {
+    background-image: url(../images/PageImage/down-arrow.svg);
+}
+.postionSelect {
+    display: flex;
+    background-color: #fff;
+    align-items: flex-end;
+    position: absolute;
+    right: 1.8%;
+    top: 5.9%;
+    padding-bottom: 3px;
+    border-radius: 0 0 5px 5px;
+    height: 90px;
+    z-index: 10;
+}
+.contenedorPais {
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #fff;
+    background-size: 10%;
+    background-position-y: center;
+    background-position-x: 90%;
+    background-repeat: no-repeat;
+    display: flex;
+    cursor: pointer;
+    justify-content: space-around;
+    padding: 0 40px 0 25px;
+    height: 45px;
+    width: 185px;
+    z-index: 20;
+}
+    .contenedorPais:hover {
+        background-color: #E5E8E9;
+    }

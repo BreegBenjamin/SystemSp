@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G3nVEf9UdjDKqtnmG6L/JHtCHRxIsS9Eq0PyOlbAilpeqeE5Y1hj5vmnzYQ3r4F1lVVCw2lHTFmQchbT4Ymg1Q==",
+  "dgSpecHash": "ZPCaMHuFSrJFNCe6WaNJFpyjjJcI3LDi6nCw9WlzFu7b3UcsG+ym8H4UD9djF8mWP2zXXPjQ3C9IX7fI11C6qQ==",
   "success": true,
-  "projectFilePath": "C:\\Desarrollo\\SystemSP\\SystemSP\\DTOSystemSp\\DTOSystemSp.csproj",
+  "projectFilePath": "C:\\Desarrollo\\SenaSystemSP\\SystemSP\\DTOSystemSp\\DTOSystemSp.csproj",
   "expectedPackageFiles": [
     "D:\\Users\\ernesto.cajar\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],

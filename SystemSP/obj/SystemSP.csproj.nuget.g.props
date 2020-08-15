@@ -13,9 +13,11 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)toolbelt.blazor.i18ntext\9.2.0\buildTransitive\Toolbelt.Blazor.I18nText.props" Condition="Exists('$(NuGetPackageRoot)toolbelt.blazor.i18ntext\9.2.0\buildTransitive\Toolbelt.Blazor.I18nText.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.typescript.msbuild\3.9.5\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('$(NuGetPackageRoot)microsoft.typescript.msbuild\3.9.5\build\Microsoft.TypeScript.MSBuild.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgToolbelt_Blazor_I18nText Condition=" '$(PkgToolbelt_Blazor_I18nText)' == '' ">D:\Users\ernesto.cajar\.nuget\packages\toolbelt.blazor.i18ntext\9.2.0</PkgToolbelt_Blazor_I18nText>
     <PkgMicrosoft_TypeScript_MSBuild Condition=" '$(PkgMicrosoft_TypeScript_MSBuild)' == '' ">D:\Users\ernesto.cajar\.nuget\packages\microsoft.typescript.msbuild\3.9.5</PkgMicrosoft_TypeScript_MSBuild>
   </PropertyGroup>
 </Project>

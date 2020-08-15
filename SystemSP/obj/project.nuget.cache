@@ -1,11 +1,29 @@
 {
   "version": 2,
-  "dgSpecHash": "LbVLNfuqjHUNpgaDnZf9nED0g2szn+Rsrt8Vy+ymvbcMLZm2Wr1XA/UKosCorsleP0dLRAG4ky13GSfAzxWqXw==",
+  "dgSpecHash": "zAXk9Y5NcL6JE3VFRN5M+JF6BuW8oAx9DuWoAmpG3FomOM7ggD11WNKoQhRd/x+JtCStpNdyiqdcC3UospK1Aw==",
   "success": true,
-  "projectFilePath": "C:\\Desarrollo\\SystemSP\\SystemSP\\SystemSP\\SystemSP.csproj",
+  "projectFilePath": "C:\\Desarrollo\\SenaSystemSP\\SystemSP\\SystemSP\\SystemSP.csproj",
   "expectedPackageFiles": [
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.0.0\\microsoft.aspnetcore.authorization.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.aspnetcore.components\\3.0.0\\microsoft.aspnetcore.components.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\3.0.0\\microsoft.aspnetcore.components.analyzers.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\3.0.0\\microsoft.aspnetcore.components.forms.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.aspnetcore.components.web\\3.0.0\\microsoft.aspnetcore.components.web.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.aspnetcore.metadata\\3.0.0\\microsoft.aspnetcore.metadata.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.configuration\\3.0.0\\microsoft.extensions.configuration.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.0.0\\microsoft.extensions.configuration.abstractions.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.0.0\\microsoft.extensions.configuration.binder.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.0.0\\microsoft.extensions.dependencyinjection.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.0.0\\microsoft.extensions.dependencyinjection.abstractions.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.http\\3.0.0\\microsoft.extensions.http.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.logging\\3.0.0\\microsoft.extensions.logging.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.0.0\\microsoft.extensions.logging.abstractions.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.options\\3.0.0\\microsoft.extensions.options.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.extensions.primitives\\3.0.0\\microsoft.extensions.primitives.3.0.0.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.jsinterop\\3.0.0\\microsoft.jsinterop.3.0.0.nupkg.sha512",
     "D:\\Users\\ernesto.cajar\\.nuget\\packages\\microsoft.typescript.msbuild\\3.9.5\\microsoft.typescript.msbuild.3.9.5.nupkg.sha512",
-    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "D:\\Users\\ernesto.cajar\\.nuget\\packages\\toolbelt.blazor.i18ntext\\9.2.0\\toolbelt.blazor.i18ntext.9.2.0.nupkg.sha512"
   ],
   "logs": []
 }

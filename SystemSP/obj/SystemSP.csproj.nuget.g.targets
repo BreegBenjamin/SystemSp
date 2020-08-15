@@ -4,6 +4,7 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)toolbelt.blazor.i18ntext\9.2.0\build\Toolbelt.Blazor.I18nText.targets" Condition="Exists('$(NuGetPackageRoot)toolbelt.blazor.i18ntext\9.2.0\build\Toolbelt.Blazor.I18nText.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.typescript.msbuild\3.9.5\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.typescript.msbuild\3.9.5\build\Microsoft.TypeScript.MSBuild.targets')" />
   </ImportGroup>
 </Project>

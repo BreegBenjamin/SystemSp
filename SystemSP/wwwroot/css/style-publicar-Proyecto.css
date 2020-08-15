@@ -15,7 +15,6 @@ li{
 .headerPublciacion {
     display: flex;
     padding: 8px 25px;
-    /*box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);*/
     justify-content: space-between;
     align-items: center;
     margin-top:10px;
@@ -87,12 +86,12 @@ li{
     outline: none;
     width: 150px;
 }
-.estilosBordes{
+.estilosBordes {
     background-color: #FFF;
     box-shadow: 0 3px 10px 0px rgba(202, 202, 202, 0.8);
     box-sizing: border-box;
+    border-radius: 5px;
     padding: 20px;
-    width: 235px;
 }
 .info-usuario {
     display: grid;
@@ -195,7 +194,8 @@ li{
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px 0px #cccccc;
-    min-width: 350px;
+    min-width: 80%;
+    min-height: 80%;
     box-sizing: border-box;
     padding: 20px;
 }
@@ -386,14 +386,38 @@ select {
         display: flex;
         justify-content: space-between;
     }
+.modalTegnologias {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr max-content;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 0px #cccccc;
+    min-width: 80%;
+    min-height: 80%;
+    max-height:80%;
+    max-width:80%;
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 20px;
+}
 .btConfi {
-    border-radius:3px;
-    height:40px;
-    width:48%;
-    margin:0;
-    padding:0;
-    cursor:pointer;
-    outline:none;
+    border-radius: 3px;
+    height: 40px;
+    width: 48%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+.btEstadoModal {
+    border-radius: 3px;
+    height: 40px;
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
 }
 .btCancelar {
     background-color: #fff;
@@ -589,6 +613,18 @@ select {
     color: rgba(0, 0, 0,0.5);
     width: 100%;
 }
+.inpuNombreSena {
+    background-color: #fff;
+    border: 2px solid #DFDFDF;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 0.8em;
+    padding: 5px;
+    height: 45px;
+    outline: none;
+    color: rgba(0, 0, 0,0.5);
+    width: 40%;
+}
 .fontProject {
     background-image:url(../images/img_proyect/launch.svg);
 }
@@ -623,3 +659,112 @@ select {
     align-items: flex-end;
     justify-content: space-between;
 }
+.dataOpcional {
+    display: flex;
+    align-items: center;
+}
+.olAprendiz {
+    display: flex;
+    justify-content: space-between;
+}
+.liMarginApp {
+    display: grid;
+    grid-template-columns:repeat(5,1fr);
+    margin: 2.5px 0;
+}
+.borderDataUser {
+    background-color: #FFF;
+    box-shadow: 0 3px 10px 0px rgba(202, 202, 202, 0.8);
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 20px;
+}
+.description-fake {
+    background-color: #fff;
+    border: 2px solid #DFDFDF;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 0.8em;
+    padding: 5px;
+    height: 40px;
+    outline: none;
+    color: rgba(0, 0, 0,0.5);
+    width: 300px;
+}
+.BtPublicarAprendiz {
+    border-radius: 50px;
+    border: none;
+    background-color: rgb(70, 195, 226);
+    border-bottom: 2px solid #08AEC4;
+    color: #FFF;
+    outline: none;
+    height: 40px;
+    width: 175px;
+}
+    .BtPublicarAprendiz:hover {
+        background-color: #08AEC4;
+    }
+.divFlex {
+    display:flex;
+    flex-direction:column;
+}
+.opcionesTegnologia {
+    align-items: center;
+    box-shadow: 0 3px 10px 0px rgba(202, 202, 202, 0.8);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 150px;
+    width: 100%;
+}
+.pDescripcionTech {
+    font-size: 0.8em;
+    color: rgb(70, 195, 226);
+    text-align: center;
+    white-space: pre-line;
+}
+.pTituloTech {
+    font-size: 1.2em;
+    margin: 0;
+    color: rgb(70, 195, 226);
+}
+.olTechFlex {
+    display:flex;
+    justify-content:space-around;
+}
+.sectionTegnologias {
+    cursor:pointer;
+}
+.ContainerTech {
+    display: grid;
+    grid-gap:15px;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 20px 0;
+}
+.classTech {
+    align-items: center;
+    box-shadow: 0 0 10px 0px #ECF2F3;
+    border-radius: 5px;
+    display: grid;
+    padding: 0 15px;
+    grid-template-columns: max-content 1fr;
+    height: 145px;
+    width: 90%;
+}
+.ImgTech {
+    align-items: center;
+    height: 90px;
+    width: 90px;
+    background-color: #ECF2F3;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}
+.centerTXt {
+    text-align: center;
+    margin-left: 25px;
+}
+    .centerTXt > * {
+        margin:0;
+    }

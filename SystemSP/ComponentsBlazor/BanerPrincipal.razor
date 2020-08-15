@@ -1,4 +1,5 @@
-﻿<section class="menu-inicio">
+﻿@inject I18nText trasnlator;
+<section class="menu-inicio">
     <div>
         <HeaderPagina></HeaderPagina>
     </div>
@@ -13,12 +14,16 @@
             </p>
         </div>
         <div>
-            <BotonProyectos Texto="Consultar" Publicar="false"></BotonProyectos>
+            <BotonProyectos Texto="@_txtPage.Consult" Publicar="false"></BotonProyectos>
             <BotonProyectos Texto="Publicar" Publicar="true"></BotonProyectos>
         </div>
     </div>
 </section>
 
 @code {
-
+    TextIndexPage _txtPage = new TextIndexPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
+    }
 }

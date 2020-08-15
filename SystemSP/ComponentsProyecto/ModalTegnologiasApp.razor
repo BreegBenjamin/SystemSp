@@ -1,0 +1,39 @@
+﻿<section style="display:flex" class="modalConfiguracion">
+    <div class="modalTegnologias">
+        <p>Selecciona las tecnologías usadas en el projecto</p>
+        <div class="ContainerTech">
+            @foreach (var tech in TecnologiasApp)
+            {
+                <div class="classTech">
+                    <div class="ImgTech">
+                        <img src="/images/Tecnologias/Front/@tech.UrlImage" height="50" width="50"/>
+                    </div>
+                    <div class="centerTXt">
+                        <h2>@tech.Nombre</h2>
+                        <p>@tech.Descripcion</p>
+                    </div>
+                </div>
+             }
+        </div>
+        <div style="margin:20px 0">
+            <button class="btEstadoModal btCancelar" @onclick='@(() => CancelarCambio.InvokeAsync(false))'>Cancelar</button>
+            <button class="btEstadoModal btGuardar" @onclick="_cambiosGuradados">Guardar</button>
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> CancelarCambio { get; set; }
+    [Parameter]
+    public EventCallback<bool> GuardarCambios { get; set; }
+    [Parameter]
+    public List<ETecnologiasApp> TecnologiasApp { get; set; }
+
+    private async Task _cambiosGuradados()
+    {
+
+        await GuardarCambios.InvokeAsync(true);
+    }
+
+}

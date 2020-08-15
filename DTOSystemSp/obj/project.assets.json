@@ -58,11 +58,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Desarrollo\\SystemSP\\SystemSP\\DTOSystemSp\\DTOSystemSp.csproj",
+      "projectUniqueName": "C:\\Desarrollo\\SenaSystemSP\\SystemSP\\DTOSystemSp\\DTOSystemSp.csproj",
       "projectName": "DTOSystemSp",
-      "projectPath": "C:\\Desarrollo\\SystemSP\\SystemSP\\DTOSystemSp\\DTOSystemSp.csproj",
+      "projectPath": "C:\\Desarrollo\\SenaSystemSP\\SystemSP\\DTOSystemSp\\DTOSystemSp.csproj",
       "packagesPath": "D:\\Users\\ernesto.cajar\\.nuget\\packages\\",
-      "outputPath": "C:\\Desarrollo\\SystemSP\\SystemSP\\DTOSystemSp\\obj\\",
+      "outputPath": "C:\\Desarrollo\\SenaSystemSP\\SystemSP\\DTOSystemSp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

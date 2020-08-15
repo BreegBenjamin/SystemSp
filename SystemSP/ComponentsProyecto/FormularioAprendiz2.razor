@@ -1,62 +1,120 @@
 ﻿<section>
-    <EditForm Model="_formGaes">
-        <div>
+    <EditForm Model="_formGaes" OnValidSubmit="HandleValidSubmit">
+        <div class="divFlex">
             <label for="nombreSena">Nombre de la Dirección Sena</label>
             <InputText @bind-Value="_formGaes.NombreDireccionSena"
-                       MaxLength="40" class="inputFormAprendiz"></InputText>
+                      @onfocusout="validaCampo" MaxLength="40" class="inpuNombreSena"></InputText>
         </div>
         <div>
-            <div>
+            <div class="dataOpcional">
                 <p>Datos Aprendices (Opcionales)</p>
                 <TooltipApp MensajeToolTip="Datos de los integrantes del grupo"></TooltipApp>
             </div>
             <div>
-                @foreach (var item in _integrantesGaes)
-                 {
-                    <ol>
-                        <li>@item.Nombre</li>
-                        <li>@item.Apellido</li>
-                        <li>@item.Telefono</li>
-                        <li>@item.Correo</li>
+                @if (visible)
+                {
+                    <ol class="liMarginApp" style="padding: 2px 20px;">
                         <li>
-                            <button>X</button>
+                            <label>Nombre</label>
+                        </li>
+                        <li>
+                            <label>Apellido</label>
+                        </li>
+                        <li>
+                            <label>Teléfono</label>
+                        </li>
+                        <li>
+                            <label>Correo Electronico</label>
+                        </li>
+                        <li>
+                            <label>Opción</label>
                         </li>
                     </ol>
-                 }
+                    @foreach (var item in _integrantesGaes)
+                    {
+                        <ol class="liMarginApp borderDataUser">
+                            <li>@item.Nombre</li>
+                            <li>@item.Apellido</li>
+                            <li>@item.Telefono</li>
+                            <li>@item.Correo</li>
+                            <li>
+                                <button>X</button>
+                            </li>
+                        </ol>
+                    }
+                }
             </div>
-            <div>
-                <div>
-                    <label>Nombre Aprendiz</label>
-                    <input type="text" @bind="_aprendiz.Nombre" />
-                </div>
-                <div>
-                    <label>Apellido Aprendiz</label>
-                    <input type="text" @bind="_aprendiz.Apellido" />
-                </div>
-            </div>
-            <div>
-                <div>
-                    <label>Télefono</label>
-                    <input type="text" @bind="_aprendiz.Telefono" />
-                </div>
-                <div>
-                    <label>Correo Electronico</label>
-                    <input type="text" @bind="_aprendiz.Correo" />
-                </div>
-            </div>
-            <div>
-                <button @onclick="AddAprendiz">AgregarIntegrantes</button>
-            </div>
+            <ol>
+                <li class="liForm">
+                    <div>
+                        <label>Nombre Aprendiz</label>
+                        <input type="text" @bind="_aprendiz.Nombre" class="inputFormAprendiz" />
+                    </div>
+                    <div>
+                        <label>Apellido Aprendiz</label>
+                        <input type="text" @bind="_aprendiz.Apellido" class="inputFormAprendiz" />
+                    </div>
+                </li>
+                <li class="liForm">
+                    <div>
+                        <label>Télefono</label>
+                        <input type="text" @bind="_aprendiz.Telefono" class="inputFormAprendiz" />
+                    </div>
+                    <div>
+                        <label>Correo Electronico</label>
+                        <input type="text" @bind="_aprendiz.Correo" class="inputFormAprendiz" />
+                    </div>
+                </li>
+                <li style="padding:20px 0">
+                    <button type="button" class="@BotonPublicar" @onclick="AddAprendiz">Agregar Integrantes</button>
+                </li>
+                <li>
+                    <!--Botones aciones-->
+                    <div class="disBotones">
+                        <button type="button" class="BotonPublicarProyecto">Regresar</button>
+                        <button class="@_classBotones" type="submit" 
+                                disabled="@continuarDis">Continuar</button>
+                    </div>
+                </li>
+            </ol>
         </div>
     </EditForm>
 </section>
 
 @code {
+
+    [Parameter]
+    public EventCallback<int> FormValid { get; set; }
+
     private EFormularioAprendizGaes _formGaes = new EFormularioAprendizGaes();
     private List<EIntegrantesGaes> _integrantesGaes = new List<EIntegrantesGaes>();
     private EIntegrantesGaes _aprendiz = new EIntegrantesGaes();
+    private string _classBotones = "PublicarProyecto-Unlock";
+    private bool visible = false;
+    private bool continuarDis = true;
+    private string BotonPublicar = "BtPublicarAprendiz";
+
+    private void validaCampo()
+    {
+        if (!string.IsNullOrEmpty(_formGaes.NombreDireccionSena))
+        {
+            _classBotones = "BotonPublicarProyecto";
+            continuarDis = false;
+        }
+    }
     private void AddAprendiz()
     {
-        _integrantesGaes.Add(_aprendiz);
+        if (_integrantesGaes.Count < 3)
+        {
+            _integrantesGaes.Add(_aprendiz);
+            visible = true;
+        }
+        else
+        {
+            BotonPublicar = "PublicarProyecto-Unlock";
+        }
     }
+
+    private async Task HandleValidSubmit() => await FormValid.InvokeAsync(2);
+
 }

@@ -1,8 +1,8 @@
 ﻿@inject Lector lector;
 <section>
     <EditForm Model="_aprendizIn" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+        @*<DataAnnotationsValidator />
+        <ValidationSummary />*@
         <ol class="formAprendiz1">
             <li class="liForm">
                 <div class="containerTexto">
@@ -86,7 +86,6 @@
             </li>
             <li>
                 <!--Botones-->
-
                 <div class="disBotones">
                     <button class="PublicarProyecto-Unlock" disabled>Regresar</button>
                     <button class="@_classBotones" type="submit" disabled="@continuarDis">Continuar</button>
@@ -96,6 +95,10 @@
     </EditForm>
 </section>
 @code {
+    [Parameter]
+    public EventCallback<int> FormValid { get; set; }
+
+
     private EFormularioAprendizIn _aprendizIn = new EFormularioAprendizIn();
     private ListaCategoriaVista _listaCategoria = new ListaCategoriaVista();
     private bool _btnConrinuarDisabled = true;
@@ -138,9 +141,6 @@
         "Vichada"
     };
     private bool continuarDis = true;
-
-    [Parameter]
-    public EventCallback<int> FormValid { get; set; }
 
     protected override void OnInitialized()
     {
