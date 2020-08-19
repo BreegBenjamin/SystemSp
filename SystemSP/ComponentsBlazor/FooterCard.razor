@@ -1,7 +1,8 @@
-﻿<section>
+﻿@inject NavigationManager NavigationManager;
+<section>
     <div class="positionFooter">
-        <button class="btFooterOpt @ImgFooter"></button>
-        <a class="footerRedirect" href="#">@LinkTitulo</a>
+        <button @onclick="_redirectPage" class="btFooterOpt @ImgFooter"></button>
+        <a class="footerRedirect" @onclick="_redirectPage">@LinkTitulo</a>
     </div>
     <p class="footerDescripcion">@Descripcion</p>
 </section>
@@ -12,4 +13,5 @@
     public string Descripcion { get; set; }
     [Parameter]
     public string ImgFooter { get; set; }
+    private void _redirectPage()=> NavigationManager.NavigateTo("Nosotros");
 }

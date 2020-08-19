@@ -194,8 +194,7 @@ li{
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px 0px #cccccc;
-    min-width: 80%;
-    min-height: 80%;
+    min-width: 25%;
     box-sizing: border-box;
     padding: 20px;
 }

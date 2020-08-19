@@ -7,7 +7,67 @@ namespace SystemSP.I18nText
 
         public string this[string key] => global::Toolbelt.Blazor.I18nText.I18nTextExtensions.GetFieldValue(this, key);
 
-        /// <summary>"Consult"</summary>
+        /// <summary>"Consultar"</summary>
         public string Consult;
+
+        /// <summary>"Inciar Sesi�n"</summary>
+        public string Login;
+
+        /// <summary>"Publica tu proyecto de formaci�n y permite que aprendices Sena y Empresas puedan visualizar t� idea. Vinculat� con una empresa y accede al monitoreo de la implemenatci�n del proyecto."</summary>
+        public string MensajeCard1;
+
+        /// <summary>"Contribuye a la formaci�n de futuros aprendices sena permitiendo que otros usuarios puedan acceder a la documentaci�n y el codigo de tu proyecto."</summary>
+        public string MensajeCard2;
+
+        /// <summary>"Descarga la documentaci�n y el c�digo fuente de los proyectos formativos. Y utilizalo de acuerdo a las liscencias otorgadas por los aprendices"</summary>
+        public string MensajeCard3;
+
+        /// <summary>"�M�s informaci�n?"</summary>
+        public string MoreInformation1;
+
+        /// <summary>"�M�s informaci�n sobre los derecho del software?"</summary>
+        public string MoreInformation2;
+
+        /// <summary>"�M�s informaci�n sobre los derecho del software?"</summary>
+        public string MoreInformation3;
+
+        /// <summary>"Encunetra los proyectos de formaci�n creados por los aprendices Sena. Tanto si es un estudiante, una empresa o un particular, puedes acceder a la documentaci�n del software desarrollado por los aprendices Sena."</summary>
+        public string MsDescription;
+
+        /// <summary>"Le damos la Bienvenida al repositorio de proyectos"</summary>
+        public string MsWelcon;
+
+        /// <summary>"Proyectos destacados y populares"</summary>
+        public string PopularProyect;
+
+        /// <summary>"Publicar"</summary>
+        public string Post;
+
+        /// <summary>"Categorias populares en la plataforma"</summary>
+        public string PupularCategory;
+
+        /// <summary>"Categorias recomendadas para explorar"</summary>
+        public string RecommendedCategory;
+
+        /// <summary>"Registrarse"</summary>
+        public string Registry;
+
+        /// <summary>"Ver sugerencias"</summary>
+        public string SubTittle1;
+
+        /// <summary>"Detalle sobre el Software Libre"</summary>
+        public string SubTittle2;
+
+        /// <summary>"Detalle sobre el Software Libre"</summary>
+        public string SubTittle3;
+
+        /// <summary>"Muestra tu idea"</summary>
+        public string TittleCard1;
+
+        /// <summary>"Contribuye publicando tu proyecto"</summary>
+        public string TittleCard2;
+
+        /// <summary>"Descarga la documentaci�n y el c�digo"</summary>
+        public string TittleCard3;
     }
 }

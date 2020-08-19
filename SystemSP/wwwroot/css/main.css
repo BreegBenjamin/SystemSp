@@ -1,4 +1,5 @@
 ﻿@import "EstilosAdmin.css";
+@import "EstilosAboutUs.css";
 :root {
     --SombrasCaja: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
@@ -59,12 +60,13 @@ body {
     display:none;
 }
 .menu-inicio {
-    display:flex;
-    flex-direction:column;
-    background-image:url(../images/PageImage/SystemSPColors.svg);
+    display: flex;
+    flex-direction: column;
+    background-image: url(../images/PageImage/SystemSPColors.svg);
+    background-color: #0e81df;
     background-repeat:no-repeat;
-    background-position:center;
-    background-size:cover;
+    background-position: center;
+    background-size: cover;
     height: 500px;
     width: auto;
 }
@@ -561,8 +563,8 @@ body {
         transform: scale(0.4);
     }
 .footer-project {
-    background-color:#000;
-    box-sizing:border-box;
+    background-image: linear-gradient(to right top, #ffffff, #fafafa, #f6f6f6, #f1f1f1, #ededed);
+    box-sizing: border-box;
     color: #fff;
     display: grid;
     padding: 25px;
@@ -572,8 +574,10 @@ body {
     color: #CC19C4;
 }
 .footerDescripcion {
-    white-space:pre-line;
-    text-align:center;
+    color: #CC19C4;
+    font-size: 0.7em;
+    text-align: center;
+    white-space: pre-line;
 }
 .positionFooter {
     display: flex;
@@ -583,12 +587,12 @@ body {
 }
 .btFooterOpt {
     border: none;
-    background-color: #000;
+    background-color: transparent;
     background-size: 100%;
     background-position: center;
-    cursor:pointer;
+    cursor: pointer;
     height: 50px;
-    outline:none;
+    outline: none;
     width: 50px;
 }
 .displeyFoot {

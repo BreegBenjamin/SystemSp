@@ -278,3 +278,5 @@ C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\obj\Debug\netcoreapp3.1\staticwebas
 C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\obj\Debug\netcoreapp3.1\SystemSP.dll
 C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\obj\Debug\netcoreapp3.1\SystemSP.pdb
 C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\obj\Debug\netcoreapp3.1\SystemSP.genruntimeconfig.cache
+C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\obj\Debug\netcoreapp3.1\RazorDeclaration\ComponentesNosotros\TarjetaIntegrantes.razor.g.cs
+C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\obj\Debug\netcoreapp3.1\Razor\ComponentesNosotros\TarjetaIntegrantes.razor.g.cs

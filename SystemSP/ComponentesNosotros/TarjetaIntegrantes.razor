@@ -1,0 +1,31 @@
+﻿<section>
+    <div class="imgIntegranteDiv">
+        <img src="/images/PageImage/user.svg" class="imgIntegrante"/>
+    </div>
+    <div style="text-align:center">
+        <p>@NombrePersona</p>
+        <p>@Descripcion</p>
+    </div>
+    <div class="socialNetwork">
+        <span>
+            <button class="socialLinkedin social"></button>
+        </span>
+        <span>
+            <button class="socialTwitter social"></button>
+        </span>
+        <span>
+            <button class="socialFacebook social"></button>
+        </span>
+        <span>
+            <button class="socialGitup social"></button>
+        </span>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public string NombrePersona { get; set; }
+    [Parameter]
+    public string Descripcion { get; set; }
+
+}

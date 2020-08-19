@@ -1,9 +1,10 @@
 ﻿@inject IJSRuntime JsRun;
     <section class="info-software estilosBordes">
+        <p>@_tituloFormulario</p>
         <div class="indicadorMenu">
-            <div class="IndicadorPage @Indicado1"></div>
-            <div class="IndicadorPage @Indicado2"></div>
-            <div class="IndicadorPage @Indicador3"></div>
+            <div class="IndicadorPage @_indicado1"></div>
+            <div class="IndicadorPage @_indicado2"></div>
+            <div class="IndicadorPage @_indicador3"></div>
         </div>
         @switch (Paginador)
          {
@@ -20,9 +21,10 @@
     </section>
 @code {
     private int Paginador = 0;
-    private string Indicado1 = "colorIndicador";
-    private string Indicado2 = "FalseColorIndicador";
-    private string Indicador3 = "FalseColorIndicador";
+    private string _indicado1 = "colorIndicador";
+    private string _indicado2 = "FalseColorIndicador";
+    private string _indicador3 = "FalseColorIndicador";
+    private string _tituloFormulario = string.Empty;
     //Funciones
     protected override void OnInitialized()
     {
@@ -33,14 +35,15 @@
         switch (indicador)
         {
             case 1:
-                Indicado1 = "FalseColorIndicador";
-                Indicado2 = "colorIndicador";
-                Indicador3 = "FalseColorIndicador";
+                _indicado1 = "FalseColorIndicador";
+                _indicado2 = "colorIndicador";
+                _indicador3 = "FalseColorIndicador";
+                _tituloFormulario = "Datos del proyecto de formación";
                 break;
             case 2:
-                Indicado1 = "FalseColorIndicador";
-                Indicado2 = "FalseColorIndicador";
-                Indicador3 = "colorIndicador";
+                _indicado1 = "FalseColorIndicador";
+                _indicado2 = "FalseColorIndicador";
+                _indicador3 = "colorIndicador";
                 break;
         }
         Paginador = indicador;

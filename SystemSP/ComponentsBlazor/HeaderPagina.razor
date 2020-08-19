@@ -1,14 +1,19 @@
-﻿<section class="info-Head headerPublciacion">
+﻿@inject I18nText trasnlator;
+<section class="info-Head headerPublciacion">
     <div>
         <img src="/images/PageImage/SystemLogo.svg" height="150" width="150" alt="logo" />
-        <img src="/images/PageImage/SystemSPTxt.svg" height="200" width="200" alt="txtLogo"/>
+        <img src="/images/PageImage/SystemSPTxt.svg" height="200" width="200" alt="txtLogo" />
     </div>
     <div class="userBotons">
-        <BotonUsuario Texto="Login" Login="true"></BotonUsuario>
-        <BotonUsuario Texto="Registro" Login="false"></BotonUsuario>
+        <BotonUsuario Texto="@_txtPage.Login" Login="true"></BotonUsuario>
+        <BotonUsuario Texto="@_txtPage.Registry" Login="false"></BotonUsuario>
         <SelectorIdioma></SelectorIdioma>
     </div>
 </section>
 @code {
-
+    TextIndexPage _txtPage = new TextIndexPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
+    }
 }

@@ -1,3 +1,23 @@
 {
-  "Consult": "Consultar"
+  "Login": "Login",
+  "Registry": "Sign–up",
+  "MsWelcon": "We welcome you to the software projects repository",
+  "MsDescription": "Find the training projects created by the apprentices of the Seine. If you are a student, a company or a private individual, can access the software documentation developed by Sena apprentices.",
+  "Consult": "Consultar",
+  "Post": "to post",
+  "TittleCard1": "Show your idea",
+  "MensajeCard1": "Publish your training project and allow Sena and companies apprentices to visualize your idea. Link with a company and access the monitoring of the implementation of the project.",
+  "SubTittle1": "See suggestions",
+  "MoreInformation1": "More information?",
+  "TittleCard2": "Contribute by publishing your project",
+  "MensajeCard2": "Contribute to the training of future sena apprentices by allowing other users to access the documentation and code of your project.",
+  "SubTittle2": "Detail on Free Software",
+  "MoreInformation2": "More information on software rights?",
+  "TittleCard3": "Download the documentation and code",
+  "MensajeCard3": "Download the documentation and source code of the training projects. And use it according to the licenses granted by the apprentices.",
+  "SubTittle3": "Detail on Free Software",
+  "MoreInformation3": "More information on software rights?",
+  "PupularCategory": "Popular categories on the platform",
+  "PopularProyect": "Featured and popular projects",
+  "RecommendedCategory": "Recommended categories to explore"
 }

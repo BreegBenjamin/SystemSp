@@ -1,34 +1,26 @@
 ﻿@page "/"
+@inject I18nText trasnlator;
 <section>
     <BanerPrincipal></BanerPrincipal>
 </section>
 <section class="tarjetaAydua">
-    <TarjetasInformacionAyuda TituloInformacion="Muestra tu idea"
-                              DescripcionCard="Publica tu proyecto de formación y permite que aprendices
-                             Sena y Empresas puedan visualizar tú idea.
-                             Vinculaté con una empresa y accede al monitoreo de la
-                             implemenatción del proyecto."
+    <TarjetasInformacionAyuda TituloInformacion="@_txtPage.TittleCard1"
+                              DescripcionCard="@_txtPage.MensajeCard1"
                               ImagePage="innovation.svg"
-                              SubTitulo="Ver sugerencias"
-                              TextoLink="¿Más información?">
+                              SubTitulo="@_txtPage.TittleCard1"
+                              TextoLink="@_txtPage.MoreInformation1">
     </TarjetasInformacionAyuda>
-    <TarjetasInformacionAyuda TituloInformacion="Contribuye publicando tu proyecto"
+    <TarjetasInformacionAyuda TituloInformacion="@_txtPage.TittleCard2"
                               ImagePage="framework.svg"
-                              DescripcionCard="
-                               Contribuye a la formación de futuros aprendices sena
-                               permitiendo que otros usuarios puedan acceder a
-                               la documentación y el codigo de tu proyecto."
-                              SubTitulo="Detalle sobre el Software Libre"
-                              TextoLink="¿Más información sobre los derecho del software?">
+                              DescripcionCard="@_txtPage.MensajeCard2"
+                              SubTitulo="@_txtPage.TittleCard2"
+                              TextoLink="@_txtPage.MoreInformation2">
     </TarjetasInformacionAyuda>
-    <TarjetasInformacionAyuda TituloInformacion="Contribuye publicando tu proyecto"
-                              ImagePage="framework.svg"
-                              DescripcionCard="
-                               Contribuye a la formación de futuros aprendices sena
-                               permitiendo que otros usuarios puedan acceder a
-                               la documentación y el codigo de tu proyecto."
-                              SubTitulo="Detalle sobre el Software Libre"
-                              TextoLink="¿Más información sobre los derecho del software?">
+    <TarjetasInformacionAyuda TituloInformacion="@_txtPage.TittleCard3"
+                              ImagePage="download.svg"
+                              DescripcionCard="@_txtPage.MensajeCard3"
+                              SubTitulo="@_txtPage.TittleCard3"
+                              TextoLink="@_txtPage.MoreInformation3">
     </TarjetasInformacionAyuda>
 </section>
 <section>
@@ -36,9 +28,7 @@
 </section>
 <section>
     <div class="infoProject">
-        <h3 class="h6Font">
-            Proyectos destacados y populares
-        </h3>
+        <h3 class="h6Font">@_txtPage.PopularProyect</h3>
     </div>
     <CardProyectos TipoMenu="PgPrincipal"></CardProyectos>
 </section>
@@ -50,5 +40,9 @@
 </section>
 @code
 {
-
+    TextIndexPage _txtPage = new TextIndexPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
+    }
 }

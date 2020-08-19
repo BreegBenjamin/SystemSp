@@ -148,20 +148,27 @@ using SystemSP.ComponentesAdmin;
 #nullable disable
 #nullable restore
 #line 21 "C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\_Imports.razor"
+using SystemSP.ComponentesNosotros;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 22 "C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\_Imports.razor"
 using SystemSP.I18nText;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 23 "C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\_Imports.razor"
+#line 24 "C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\_Imports.razor"
 using DTOSystemSp.EntitysInicioApp;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 24 "C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\_Imports.razor"
+#line 25 "C:\Desarrollo\SenaSystemSP\SystemSP\SystemSP\_Imports.razor"
 using DTOSystemSp.EntitysFormProject;
 
 #line default
