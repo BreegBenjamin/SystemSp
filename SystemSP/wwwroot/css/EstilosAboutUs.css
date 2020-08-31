@@ -1,0 +1,67 @@
+﻿:root {
+    --SombrasCaja: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+.cardAbout {
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr max-content;
+    margin: 30px;
+    padding: 15px;
+    width: 100%;
+}
+.imgAyuda {
+    border-radius: 2px;
+    box-shadow: var(--SombrasCaja);
+    height: 100%;
+    object-fit: fill;
+    width: 35em;
+}
+.containerPageAbout {
+    margin:5em;
+}
+.imgIntegranteDiv {
+    background: url(../images/PageImage/BackUser.svg) no-repeat center;
+    display: flex;
+    background-size: 100%;
+    justify-content: center;
+    height: 150px;
+    margin-left: 31.5px;
+    width: 150px;
+}
+.imgIntegrante {
+    height: 100px;
+    width: 100px;
+}
+.socialNetwork {
+    display: flex;
+    justify-content: space-between;
+}
+.social {
+    border: none;
+    background-color: #FFF;
+    cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 15px;
+    outline:none;
+    width: 15px;
+}
+.socialTwitter {
+    background-image: url(../images/PageImage/twitter.svg);
+}
+.socialFacebook {
+    background-image: url(../images/PageImage/facebook.svg);
+}
+.socialLinkedin {
+    background-image: url(../images/PageImage/linkedin.svg);
+}
+.socialGitup {
+    background-image: url(../images/PageImage/github.svg);
+}
+.persons {
+    display:flex;
+    justify-content:space-between;
+}

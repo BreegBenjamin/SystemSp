@@ -1,7 +1,7 @@
 {
   "CategoriasProyecto": [
     {
-      "ImgCategoria": "/images/IconosCategorias/IconosColor/bakery-shop.svg",
+      "ImgCategoria": "bakery-shop.svg",
       "TipoCategoria": "Supermercados y Tiendas"
     },
     {

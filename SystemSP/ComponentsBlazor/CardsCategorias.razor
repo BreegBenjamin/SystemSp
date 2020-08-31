@@ -1,41 +1,67 @@
 ﻿@inject NavigationManager NavigationManager;
+@inject I18nText trasnlator;
+@inject Lector lector;
 <section class="informacionCategoria">
-    <h3 class="h6Font">
-        Categorias recomendadas para explorar
-    </h3>
+    <h3 class="h6Font"></h3>
     <div class="centerCategorias">
         <section class="categoria-image">
         </section>
         <article class="category-project">
-            @if (_llenar)
-            {
-                @foreach (var item in _categoria.CategoriasProyecto)
-                {
-                    <div class="background-categorias">
-                        <div class="divCotegoria">
-                            <div class="tajeta_categoria">
-                                <span class="centerSpan">
-                                    <img src="@item.ImgCategoria" class="IMG_CategoriaInferior" alt="categoria">
-                                </span>
-                                <div>
-                                    <p class="estiloText">@item.TipoCategoria</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 }
-             }
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Shop"
+                              Image="bakery-shop.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Motorcycle"
+                              Image="motorcycle.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Education"
+                              Image="education.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Transport"
+                              Image="fast-delivery.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Environment"
+                              Image="earth.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Photography"
+                              Image="camera.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Commerce"
+                              Image="hook.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Veterinary"
+                              Image="veterinaria.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Farms"
+                              Image="farm.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Health"
+                              Image="gym.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Music"
+                              Image="drum-set.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Home"
+                              Image="real-estate.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Libraries"
+                              Image="book.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Event"
+                              Image="stage.svg">
+            </TarjetaCategoria>
+            <TarjetaCategoria TituloCategoria="@_txtCategoria.Travel"
+                              Image="transportation.svg">
+            </TarjetaCategoria>
         </article>
     </div>
 </section>
 
 @code {
-    private bool _llenar = false;
-    private InformacionProyecto _categoria = new InformacionProyecto();
-    protected override void OnInitialized()
+    TextIndexPage _txtPage = new TextIndexPage();
+    TextCategoriasIndex _txtCategoria = new TextCategoriasIndex();
+    protected override async Task OnInitializedAsync()
     {
-        _categoria = new Lector().ObtenerCategorias();
-        if (_categoria.CategoriasProyecto != null)
-            _llenar = true;
+        _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
+        _txtCategoria = await trasnlator.GetTextTableAsync<TextCategoriasIndex>(this);
     }
 }

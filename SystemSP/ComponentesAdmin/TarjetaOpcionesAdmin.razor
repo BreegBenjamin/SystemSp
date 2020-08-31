@@ -1,10 +1,11 @@
-﻿<div class="CategoriaAdminBorder @NameClassCategoria">
+﻿@inject IJSRuntime JSRun;
+<div class="CategoriaAdminBorder @NameClassCategoria" id="divCard_@NumeroEntrada">
     <div>
         <p class="contenedorTitulo">@NombreTitulo</p>
     </div>
     <div>
         <span>
-            <img id="ImageAdmin" src="/images/IconosCategorias/AdminIcons/@UrlImage"
+            <img id="ImageAdmin_@NumeroEntrada" src="/images/IconosCategorias/AdminIcons/@UrlImage"
                  style="opacity:@opacity" height="65" width="65" />
         </span>
     </div>
@@ -14,7 +15,7 @@
         </p>
     </div>
     <div>
-        <button @onclick="HabilitarSeccion"class="botonInfoAdmin @ColorBoton">
+        <button id="botonAdmin_@NumeroEntrada" @onclick="HabilitarSeccion"class="botonInfoAdmin @ColorBoton">
             Consultar
         </button>
     </div>
@@ -24,11 +25,9 @@
     [Parameter]
     public string NombreTitulo { get; set; }
     [Parameter]
-    public EventCallback<Tuple<int, bool>> OnClick { get; set; }
+    public EventCallback<int> OnClick { get; set; }
     [Parameter]
     public int NumeroEntrada { get; set; }
-    [Parameter]
-    public bool TarjetaHabilitada { get; set; }
 
     private string UrlImage { get; set; }
     private bool BotonHabilitado = false;
@@ -38,60 +37,38 @@
     private string ColorBoton = "ColorBotonNoHanddler";
     private async Task HabilitarSeccion()
     {
-        bool cambiar = false;
         switch (NumeroEntrada)
         {
             case 0:
+                UrlImage = "work.svg";
                 break;
             case 1:
-                NameClassCategoria = "colorCategoriAdmin";
-                ColorBoton = "ColorBotonHanddler";
                 UrlImage = "team.svg";
                 break;
             case 2:
-                NameClassCategoria = "colorCategoriAdmin";
-                ColorBoton = "ColorBotonHanddler";
                 UrlImage = "project.svg";
                 break;
             case 3:
-                NameClassCategoria = "colorCategoriAdmin";
-                ColorBoton = "ColorBotonHanddler";
                 UrlImage = "work.svg";
                 break;
         }
-        var salidaEvento = new Tuple<int, bool>(NumeroEntrada, cambiar);
-        await OnClick.InvokeAsync(salidaEvento);
+        await JSRun.EjecutarJavaScriptFunc("tarjetasApp.CambiarBotones",
+            NumeroEntrada.ToString());
+        await OnClick.InvokeAsync(NumeroEntrada);
     }
     protected override void OnInitialized()
     {
         switch (NumeroEntrada)
         {
             case 0:
-                if (TarjetaHabilitada)
-                {
-                    UrlImage = "work.svg";
-                    ColorBoton = "ColorBotonHanddler";
-                }
-                else
-                {
-                    ColorBoton = "ColorBotonNoHanddler";
-                    UrlImage = "work-No.svg";
-                }
+                UrlImage = "work.svg";
+                ColorBoton = "ColorBotonHanddler";
                 MensajeDescripcion = "Opciones generales del administrador";
                 opacity = "1.0";
                 break;
             case 1:
-                if (TarjetaHabilitada)
-                {
-                    NameClassCategoria = "colorCategoriAdmin";
-                    ColorBoton = "ColorBotonHanddler";
-                    UrlImage = "team.svg";
-                }
-                else
-                {
-                    NameClassCategoria = "colorCategoriaUnAdmin";
-                    UrlImage = "team-No.svg";
-                }
+                NameClassCategoria = "colorCategoriaUnAdmin";
+                UrlImage = "team-No.svg";
                 opacity = "1.0";
                 MensajeDescripcion = "Consultar los usuarios registrados en la plataforma";
                 break;

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SystemSP.Intelligence;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace SystemSP
 {
@@ -29,6 +30,8 @@ namespace SystemSP
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<Lector>();
+            services.AddI18nText(opt=> opt.PersistanceLevel 
+                                = Toolbelt.Blazor.I18nText.PersistanceLevel.SessionAndLocal );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

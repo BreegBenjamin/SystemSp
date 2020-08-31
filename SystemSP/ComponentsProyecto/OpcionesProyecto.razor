@@ -1,10 +1,11 @@
-﻿<section>
+﻿@inject I18nText ServiceTranslator;
+<section>
     <ol class="optionsOL">
         <li>
-            <button @onclick="()=>CambiarOpcion(0)" class="BotonInfoProdyecto @publicarClassName">Publicar proyecto</button>
+            <button @onclick="()=>CambiarOpcion(0)" class="BotonInfoProdyecto @publicarClassName">@_textPublicar.PublishProject</button>
         </li>
         <li>
-            <button @onclick="()=>CambiarOpcion(1)" class="BotonInfoProdyecto @novedadClassName">Novedades</button>
+            <button @onclick="()=>CambiarOpcion(1)" class="BotonInfoProdyecto @novedadClassName">@_textPublicar.News</button>
         </li>
     </ol>
 </section>
@@ -16,6 +17,7 @@
     [Parameter]
     public EventCallback<int> OnClickOpcion { get; set; }
 
+    TextPublicarPage _textPublicar = new TextPublicarPage();
     private async Task CambiarOpcion(int numeroAccion)
     {
         if (numeroAccion == 0)
@@ -31,5 +33,10 @@
             NumeroOpcion = 1;
         }
         await OnClickOpcion.InvokeAsync(NumeroOpcion);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _textPublicar = await ServiceTranslator.GetTextTableAsync<TextPublicarPage>(this);
+        base.OnInitializedAsync();
     }
 }

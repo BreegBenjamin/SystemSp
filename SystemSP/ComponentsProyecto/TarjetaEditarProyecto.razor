@@ -1,11 +1,11 @@
-﻿
-<div class="UpdateName">
+﻿@inject IJSRuntime JsRun;
+<div class="UpdateName" @onclick="_mostrarInformacion">
     <div>
         <img src="images/IconosCategorias/@LeadingImage" width="30" height="30">
     </div>
     <div class="nombreTitulo">
         <p class="NombreDetails">@TituloTarjeta</p>
-        <span class="nameProyect">@SubTituloTarjeta</span>
+        <span class="nameProyect">@ImagesFiles.NumeroImagenes @_subTituloTarjeta</span>
     </div>
     <div>
         @if (TrailingImage)
@@ -14,20 +14,83 @@
          }
     </div>
 </div>
+@if (_datosCargados)
+{
+    @switch (TipoTarjeta)
+    {
+        case "Images":
+            <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
+                <div>
+                    @if (ImagesFiles.Archivos.Count > 0)
+                    {
+                        foreach (var item in ImagesFiles.Archivos)
+                        {
+                            <div>
+                                <img src="@item.ImageSrc" height="120" width="130" alt="imgSave" />
+                            </div>
+                        }
+                    }
+                </div>
+            </ModalArchivosProjecto>
+            break;
+        case "Team":
+            <ModalArchivosProjecto>
+                <ol>
+                    @foreach (var item in Aprendices)
+                    {
+                        <li>
+                            @item.Nombre
+                        </li>
+                        <li>
+                            @item.Apellido
+                        </li>
+                        <li>
+                            @item.Telefono
+                        </li>
+                        <li>
+                            @item.Correo
+                        </li>
+                     }
+                </ol>
+            </ModalArchivosProjecto>
+            break;
+    }
+}
+
 
 @code {
+    //Parametros en cascada
+    [CascadingParameter]
+    protected EInformacionArchivos ImagesFiles { get; set; }
+    [CascadingParameter]
+    protected List<EIntegrantesGaes> Aprendices { get; set; }
+
+    //Parametros del componente
     [Parameter]
     public string TituloTarjeta { get; set; }
-    [Parameter]
-    public string SubTituloTarjeta { get; set; }
     [Parameter]
     public string LeadingImage { get; set; }
     [Parameter]
     public bool TrailingImage { get; set; }
+    [Parameter]
+    public string TipoTarjeta { get; set; }
 
-    protected override void OnInitialized()
+    //Funciones y propiedades locales
+    private bool _datosCargados = false;
+    private string _subTituloTarjeta = string.Empty;
+
+    private void _mostrarInformacion()
     {
-
-        base.OnInitialized();
+        _datosCargados = true;
+    }
+    private async Task _deshabilitarModal(bool salida)
+    {
+        _datosCargados = false;
+        await JsRun.HabilitarScroll();
+    }
+    protected override Task OnInitializedAsync()
+    {
+        _subTituloTarjeta =  $"Images";
+        return base.OnInitializedAsync();
     }
 }

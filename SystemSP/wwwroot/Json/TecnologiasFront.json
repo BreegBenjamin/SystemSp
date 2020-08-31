@@ -1,0 +1,62 @@
+[
+  {
+    "Nombre": "HTLM 5",
+    "Descripcion": "Lenguaje de marcado para la web",
+    "UrlImage": "html5.svg"
+  },
+  {
+    "Nombre": "CSS 3",
+    "Descripcion": "Lenguaje de disenio web",
+    "UrlImage": "css.svg"
+  },
+  {
+    "Nombre": "Javascript",
+    "Descripcion": "Lenguaje de script",
+    "UrlImage": "javascript.svg"
+  },
+  {
+    "Nombre": "Jquery",
+    "Descripcion": "Libreria de JavaScript",
+    "UrlImage": "jquery.svg"
+  },
+  {
+    "Nombre": "Bootstrap",
+    "Descripcion": "Libreria de Css",
+    "UrlImage": "bootstrap.svg"
+  },
+  {
+    "Nombre": "React",
+    "Descripcion": "Libreria de Front-End",
+    "UrlImage": "react.svg"
+  },
+  {
+    "Nombre": "Angular",
+    "Descripcion": "Framework Javascript paara el fron-end",
+    "UrlImage": "angular.svg"
+  },
+  {
+    "Nombre": "Vue",
+    "Descripcion": "Framework para el front-end",
+    "UrlImage": "vue.svg"
+  },
+  {
+    "Nombre": "Laravel",
+    "Descripcion": "Framework PHP para el desarrollo web",
+    "UrlImage": "laravel.svg"
+  },
+  {
+    "Nombre": "Spring Framework",
+    "Descripcion": "Framework de Java para el desarrollo web",
+    "UrlImage": "spring.svg"
+  },
+  {
+    "Nombre": "Ruby on Rails",
+    "Descripcion": "Framework de Ruby para el desarrollo web",
+    "UrlImage": "rails.svg"
+  },
+  {
+    "Nombre": "Reactive extensions",
+    "Descripcion": "Librerias para la programacion reactiva",
+    "UrlImage": "rxjs.svg"
+  }
+]

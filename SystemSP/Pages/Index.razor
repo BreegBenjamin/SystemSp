@@ -1,18 +1,34 @@
 ﻿@page "/"
+@inject I18nText trasnlator;
 <section>
     <BanerPrincipal></BanerPrincipal>
 </section>
-<section>
-   <TarjetasInformacionAyuda></TarjetasInformacionAyuda>
+<section class="tarjetaAydua">
+    <TarjetasInformacionAyuda TituloInformacion="@_txtPage.TittleCard1"
+                              DescripcionCard="@_txtPage.MensajeCard1"
+                              ImagePage="innovation.svg"
+                              SubTitulo="@_txtPage.TittleCard1"
+                              TextoLink="@_txtPage.MoreInformation1">
+    </TarjetasInformacionAyuda>
+    <TarjetasInformacionAyuda TituloInformacion="@_txtPage.TittleCard2"
+                              ImagePage="framework.svg"
+                              DescripcionCard="@_txtPage.MensajeCard2"
+                              SubTitulo="@_txtPage.TittleCard2"
+                              TextoLink="@_txtPage.MoreInformation2">
+    </TarjetasInformacionAyuda>
+    <TarjetasInformacionAyuda TituloInformacion="@_txtPage.TittleCard3"
+                              ImagePage="download.svg"
+                              DescripcionCard="@_txtPage.MensajeCard3"
+                              SubTitulo="@_txtPage.TittleCard3"
+                              TextoLink="@_txtPage.MoreInformation3">
+    </TarjetasInformacionAyuda>
 </section>
 <section>
     <TarjetasPopulares></TarjetasPopulares>
 </section>
 <section>
     <div class="infoProject">
-        <h3 class="h6Font">
-            Proyectos destacados y populares
-        </h3>
+        <h3 class="h6Font">@_txtPage.PopularProyect</h3>
     </div>
     <CardProyectos TipoMenu="PgPrincipal"></CardProyectos>
 </section>
@@ -24,5 +40,9 @@
 </section>
 @code
 {
-
+    TextIndexPage _txtPage = new TextIndexPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
+    }
 }

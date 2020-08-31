@@ -1,39 +1,40 @@
 ﻿@inject IJSRuntime JsRun;
+@inject I18nText ServiceTranslator;
 <section class="fondo" id="ModalRegistro">
     <section class="popUp">
-        <CerrarModal Mensaje="Ingrese los datos para Registrarse"></CerrarModal>
+        <CerrarModal Mensaje="@_textIndex.MessageRegister"></CerrarModal>
         <div>
             <div class="formualario_Registro">
                 <div class="selects">
                     <span>
                         <label class="radio">
                             <input type="radio" id="checkAprendiz" name="checkUser" value="1" checked>
-                            <span>Aprendiz</span>
+                            <span>@_textIndex.Apprentice</span>
                         </label>
                     </span>
                     <span>
                         <label class="radio">
                             <input type="radio" id="checkEmpresa" name="checkUser" value="2">
-                            <span>Empresa</span>
+                            <span>@_textIndex.Company</span>
                         </label>
                     </span>
                 </div>
                 <div class="formDiv1">
                     <input type="text" maxlength="30" @bind="_nombre" placeholder="Nombre" @onblur="habilitarBoton" class="registro_form">
-                    <input type="password" @bind="_password" placeholder="Contraseña" @onblur="habilitarBoton" class="registro_form">
+                    <input type="password" @bind="_password" placeholder="@_textIndex.Password" @onblur="habilitarBoton" class="registro_form">
                 </div>
                 <div class="formDiv2">
-                    <input type="email" @bind="_email" placeholder="Correo" @onblur="habilitarBoton" class="registro_form">
-                    <input type="tel" @bind="_telefono" placeholder="Telefono" @onblur="habilitarBoton" class="registro_form">
-                    <input type="text" @bind="_apellido" placeholder="Apellido" @onblur="habilitarBoton" class="registro_form">
-                    <input type="password" @bind="_password2" placeholder="Repetir Contraseña" @onblur="habilitarBoton" class="registro_form">
+                    <input type="email" @bind="_email" placeholder="@_textIndex.Mail" @onblur="habilitarBoton" class="registro_form">
+                    <input type="tel" @bind="_telefono" placeholder="@_textIndex.Telephone" @onblur="habilitarBoton" class="registro_form">
+                    <input type="text" @bind="_apellido" placeholder="@_textIndex.LastName" @onblur="habilitarBoton" class="registro_form">
+                    <input type="password" @bind="_password2" placeholder="@_textIndex.RepeatPassword" @onblur="habilitarBoton" class="registro_form">
                 </div>
                 <div class="formDiv3">
 
                 </div>
                 <div class="formDiv4">
-                    <button class="@_classBoton" disabled="@_btnDeshabilitado" @onclick="validaFormulario">Registrarsé</button>
-                    <p>¿Ya tienes una Cuenta? <a href="#">Iniciar Sesión</a></p>
+                    <button class="@_classBoton" disabled="@_btnDeshabilitado" @onclick="validaFormulario">@_textIndex.Registry</button>
+                    <p>@_textIndex.MessageAccount <a href="#">@_textIndex.Login</a></p>
                 </div>
             </div>
         </div>
@@ -49,6 +50,7 @@
     private string _apellido = string.Empty;
     private string _telefono = string.Empty;
 
+    private TextIndexPage _textIndex = new TextIndexPage();
     //Variables UI
     private bool _btnDeshabilitado = true;
     private string _classBoton = "btRegistroForm-Unlock";
@@ -89,5 +91,9 @@
     {
         if (string.IsNullOrEmpty(ms)) return false;
         else return true;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _textIndex = await ServiceTranslator.GetTextTableAsync<TextIndexPage>(this);
     }
 }

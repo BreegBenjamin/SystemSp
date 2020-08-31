@@ -1,0 +1,90 @@
+﻿@inject I18nText serviceTranslate;
+<section class="@_classContenedor">
+    <div class="contenedorSelect imgSelect" @onclick="_habilitarIdiomas">
+        <div style="margin:6.5px 0 0 0">
+            <img src="/images/PageImage/@_imgLanguage1" height="25" width="25">
+        </div>
+        <p>@_language1</p>
+    </div>
+    @if (_habilitarCambio)
+    {
+        <div class="postionSelect">
+            <div class="contenedorPais" @onclick="_changedLanguage">
+                <div>
+                    <img src="/images/PageImage/@_imgLanguage2" height="25" width="25">
+                </div>
+                <p>@_language2</p>
+            </div>
+        </div>
+    }
+</section>
+
+@code {
+    private string _classContenedor = "";
+    private string idioma = "es";
+    private bool _habilitarCambio = false;
+    private string _imgLanguage1 = "spain.svg";
+    private string _language1 = "Español";
+    private string _language2 = "English";
+    private string _imgLanguage2 = "uk.svg";
+
+    private async Task _changedLanguage()
+    {
+        if (_language2 == "Español")
+        {
+            _imgLanguage1 = "spain.svg";
+            _language1 = "Español";
+            _language2 = "English";
+            _imgLanguage2 = "uk.svg";
+            idioma = "es";
+        }
+        else
+        {
+            _imgLanguage1 = "uk.svg";
+            _language1 = "English";
+            _language2 = "Español";
+            _imgLanguage2 = "spain.svg";
+            idioma = "en";
+        }
+        _habilitarCambio = false;
+        _classContenedor = string.Empty;
+        await _changeCurrentLang(idioma);
+    }
+    private void _habilitarIdiomas()
+    {
+        if (!_habilitarCambio)
+        {
+            _habilitarCambio = true;
+            _classContenedor = "containerLand";
+        }
+        else
+        {
+            _habilitarCambio = false;
+            _classContenedor = string.Empty;
+        }
+    }
+
+    private async Task _changeCurrentLang(string lang)
+        => await serviceTranslate.SetCurrentLanguageAsync(lang);
+
+    protected override async Task OnInitializedAsync()
+    {
+        string lang = await serviceTranslate.GetCurrentLanguageAsync();
+        if (lang == "en")
+        {
+            _imgLanguage1 = "uk.svg";
+            _language1 = "English";
+            _language2 = "Español";
+            _imgLanguage2 = "spain.svg";
+            idioma = "en";
+        }
+        else if (lang.Contains("es"))
+        {
+            _imgLanguage1 = "spain.svg";
+            _language1 = "Español";
+            _language2 = "English";
+            _imgLanguage2 = "uk.svg";
+            idioma = "en";
+        }
+    }
+}

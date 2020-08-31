@@ -50,8 +50,8 @@
 
 @code {
     private int IndicadorPage = 0;
-    private void ClickHandler(Tuple<int, bool> paramSalida)
+    private void ClickHandler(int paramSalida)
     {
-        IndicadorPage = paramSalida.Item1;
+        IndicadorPage = paramSalida;
     }
 }
