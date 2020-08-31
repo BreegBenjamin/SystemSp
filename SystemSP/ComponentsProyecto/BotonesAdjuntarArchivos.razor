@@ -1,0 +1,82 @@
+﻿@inject IJSRuntime JsRun;
+@inject I18nText serviceTranslator;
+<section>
+    <div class="elementsButton">
+        <div class="CenterdivFlex">
+            <label for="archivoDocumentos" class="custom-file-upload" style="margin-right:10px">
+                <img src="images/img_proyect/folder.svg" class="imgFile" /> @_textPublicar.SelectFile
+            </label>
+            <span class="spanOculto" id="spanOcultoDocumento">
+                <InputFile OnChange="GetFileProject" />
+            </span>
+            <TooltipApp MensajeToolTip="@_textPublicar.AddDocuments"></TooltipApp>
+        </div>
+        <div class="CenterdivFlex">
+            <label for="archivoImage" class="custom-file-upload" style="margin-right:10px">
+                <img src="images/img_proyect/image.svg" class="imgFile" />@_textPublicar.SelectImages
+            </label>
+            <span class="spanOculto" id="spanOcultoImages">
+                <InputFile OnChange="GetImagesProject" />
+            </span>
+            <TooltipApp MensajeToolTip=@_textPublicar.AddImages></TooltipApp>
+        </div>
+    </div>
+</section>
+
+@code {
+    [CascadingParameter]
+    protected EInformacionArchivos ImagesFiles { get; set; }
+
+    private TextPublicarPage _textPublicar = new TextPublicarPage();
+
+    private async Task GetFileProject(IFileListEntry[] archivos)
+    {
+        IFileListEntry file = archivos.FirstOrDefault();
+        if (file != null && file.Type.Contains("application/"))
+        {
+            var service = new SaveIFiles();
+            var archivo = new EArchivosProjecto();
+            string resultFile = await service.SaveFiles(file);
+            if (ImagesFiles != null && resultFile != "NoK")
+            {
+                archivo.FileName = file.Name;
+                ImagesFiles.ListaArchivos.Add(resultFile);
+                ImagesFiles.NumeroArchivos = ImagesFiles.ListaArchivos.Count();
+            }
+        }
+        else
+        {
+            //MostarMensaje
+        }
+    }
+    private async Task GetImagesProject(IFileListEntry[] archivos)
+    {
+        IFileListEntry file = archivos.FirstOrDefault();
+        if (file != null && file.Type.Contains("image/"))
+        {
+            var service = new SaveIFiles();
+            var archivo = new EArchivosProjecto();
+            string image = await service.GetImages(file);
+            if (ImagesFiles != null && image != "NoK")
+            {
+                archivo.ImageSrc = image;
+                archivo.FileName = file.Name;
+                ImagesFiles.Archivos.Add(archivo);
+                ImagesFiles.NumeroImagenes = ImagesFiles.Archivos.Count;
+            }
+        }
+        else
+        {
+            //MostarMensaje
+        }
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _textPublicar = await serviceTranslator.GetTextTableAsync<TextPublicarPage>(this);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        await JsRun.EjecutarJavaScriptFunc("CambiarIdInput");
+    }
+}

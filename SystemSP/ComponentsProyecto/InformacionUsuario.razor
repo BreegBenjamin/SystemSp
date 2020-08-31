@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime JsRun;
+@inject I18nText ServiceTraslator;
 <section class="info-usuario estilosBordes">
     <div>
         <div class="img-userProyect">
@@ -20,22 +21,26 @@
     </div>
     <div style="display:@_displayType" class="modalConfiguracion">
         <div class="modalConfiguracionInfo">
-            <p>Actualiza tu información</p>
+            <p>@_textPublicar.UpdateInformacion</p>
             <span>
-                <p class="pFont">Nombre</p>
+                <p class="pFont">@_textPublicar.Name</p>
                 <input type="text" class="txtEditName" placeholder="@_nombreUser" @bind="_nombreUser" />
             </span>
             <span>
-                <p class="pFont">Nueva Contraseñas</p>
+                <p class="pFont">@_textPublicar.NewPassword</p>
                 <input type="password" class="txtEditName" @bind="_nuevoPass" />
             </span>
             <span>
-                <p class="pFont">Confirmar Contraseñas</p>
+                <p class="pFont">@_textPublicar.ConfirmPassword</p>
                 <input type="password" class="txtEditName" @bind="_confirmPass" />
             </span>
+            <section style="height:100px">
+                <p class="pFont">@_textPublicar.ChangedLang</p>
+                <SelectorIdioma></SelectorIdioma>
+            </section>
             <div>
-                <button class="btConfi btCancelar" @onclick='cancelarCambios'>Cancelar</button>
-                <button class="btConfi btGuardar" @onclick="guardarCambios">Guardar</button>
+                <button class="btConfi btCancelar" @onclick='cancelarCambios'>@_textPublicar.Cancel</button>
+                <button class="btConfi btGuardar" @onclick="guardarCambios">@_textPublicar.Save</button>
             </div>
         </div>
     </div>
@@ -43,7 +48,7 @@
 
     </div>
 </section>
-<AlertaApp TipoAlerta="true" Mensaje="Se actualizo la contraseña correctamente"></AlertaApp>
+<AlertaApp TipoAlerta="true" Mensaje="@_textPublicar.MessagePassword"></AlertaApp>
 
 @code {
     private String _nombreUser = string.Empty;
@@ -56,10 +61,13 @@
     private String _confirmPass { get; set; }
     private String _nuevoPass { get; set; }
     //metodos Eventos
-    protected override void OnInitialized()
+    TextPublicarPage _textPublicar = new TextPublicarPage();
+
+    protected override async Task OnInitializedAsync()
     {
         _nombreUser = $"{nombre} {apellido}";
         _letrasInciales = $"{nombre[0]} {apellido[0]}";
+        _textPublicar = await ServiceTraslator.GetTextTableAsync<TextPublicarPage>(this);
         base.OnInitialized();
     }
     private async Task guardarCambios()
@@ -73,27 +81,27 @@
             if (pass)
             {
                 this._displayType = "none";
-                await JsRun.HabilitarScroll("salirMenu.HabilitarScroll");
+                await JsRun.HabilitarScroll();
                 await JsRun.InvokeVoidAsync(identifier: "alerta.MostrarAlerta");
             }
             else
-                await JsRun.MensajesRegistro("La contraseña ingresada", "no coincide");
+                await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensaje", _textPublicar.MensajeAlertaPass);
         }
         else
         {
             this._displayType = "none";
-            await JsRun.HabilitarScroll("salirMenu.HabilitarScroll");
+            await JsRun.HabilitarScroll();
         }
     }
     private async Task cancelarCambios()
     {
         this._displayType = "none";
-        await JsRun.HabilitarScroll("salirMenu.HabilitarScroll");
+        await JsRun.HabilitarScroll();
     }
     private async Task clickBotonConfiguracion()
     {
         _displayType = "flex";
-        await JsRun.HabilitarScroll("salirMenu.DeshabilitarScrollPage");
+        await JsRun.EjecutarJavaScriptFunc("salirMenu.DeshabilitarScrollPage");
     }
     private void botonNotificaciones() => _modalNotify = "flex";
     private void mauseUpNoti() => _modalNotify = "none";

@@ -5,11 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="i18ntext\TextCategoriasIndex.en.json" />
+    <Content Include="i18ntext\TextCategoriasIndex.es.json" />
     <Content Include="i18ntext\TextIndexPage.en.json" />
     <Content Include="i18ntext\TextIndexPage.es.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DataJuggler.Blazor.FileUpload" Version="1.3.5" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

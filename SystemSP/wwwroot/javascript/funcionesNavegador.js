@@ -213,6 +213,12 @@ class CanvasEstadisticas
         });
     }
 }
+function CambiarIdInput() {
+    let spam = document.getElementById("spanOcultoDocumento");
+    let spam2 = document.getElementById("spanOcultoImages");
+    spam.firstElementChild.id = "archivoDocumentos";
+    spam2.firstElementChild.id = "archivoImage";
+}
 var scroll = new ScrollTarjetas();
 var salirMenu = new ScrollBody();
 var alerta = new AlertasApp();

@@ -1,13 +1,14 @@
 ﻿@inject IJSRuntime JsRun;
+@inject Lector lector;
 <nav class="davCategorias">
     <div style="margin-right:5px">
         <button class="botonCategoriasMove backCategorias" @onclick="JsRun.MoverCategoriasIzquierda"></button>
     </div>
     <ol class="olElments" id="listaCategoriasApp">
-        @foreach (var item in categorias.CategoriasVista)
+        @foreach (var item in _categorias.CategoriasVista)
         {
             <li class="disFlex">
-                <div  class="categoriaSize">
+                <div class="categoriaSize">
                     <span class="borderImage">
                         <img src="@item.ImageCategoria" class="imagesize" />
                     </span>
@@ -22,10 +23,9 @@
 </nav>
 
 @code {
-    ListaCategoriaVista categorias = new ListaCategoriaVista();
+    ListaCategoriaVista _categorias = new ListaCategoriaVista();
     protected override void OnInitialized()
     {
-        var leer = new Lector();
-        categorias = leer.ObtenerListaCategorias();
+        _categorias = lector.ObtenerListaCategorias();
     }
 }

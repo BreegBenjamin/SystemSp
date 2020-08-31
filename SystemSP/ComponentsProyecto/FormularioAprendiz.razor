@@ -1,24 +1,24 @@
 ﻿@inject IJSRuntime JsRun;
-    <section class="info-software estilosBordes">
-        <p>@_tituloFormulario</p>
-        <div class="indicadorMenu">
-            <div class="IndicadorPage @_indicado1"></div>
-            <div class="IndicadorPage @_indicado2"></div>
-            <div class="IndicadorPage @_indicador3"></div>
-        </div>
-        @switch (Paginador)
-         {
-             case 0:
-                <FormularioAprendiz1 FormValid="HabilitarContinuar"></FormularioAprendiz1>
-                break;
-                case 1:
-                <FormularioAprendiz2 FormValid="HabilitarContinuar"></FormularioAprendiz2>
-                break;
-                case 2:
-                <FormularioAprendiz3></FormularioAprendiz3>
-                break;
-         }
-    </section>
+<section class="info-software estilosBordes">
+    <p>@_tituloFormulario</p>
+    <div class="indicadorMenu">
+        <div class="IndicadorPage @_indicado1"></div>
+        <div class="IndicadorPage @_indicado2"></div>
+        <div class="IndicadorPage @_indicador3"></div>
+    </div>
+    @switch (Paginador)
+    {
+        case 0:
+            <FormularioAprendiz1 FormValid="HabilitarContinuar"></FormularioAprendiz1>
+            break;
+        case 1:
+            <FormularioAprendiz2 FormValid="HabilitarContinuar"></FormularioAprendiz2>
+            break;
+        case 2:
+            <FormularioAprendiz3></FormularioAprendiz3>
+            break;
+    }
+</section>
 @code {
     private int Paginador = 0;
     private string _indicado1 = "colorIndicador";
@@ -48,5 +48,5 @@
         }
         Paginador = indicador;
     }
-    private async Task PublicarProyecto()=> await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz");
+    private async Task PublicarProyecto() => await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz");
 }

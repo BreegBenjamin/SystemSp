@@ -1,0 +1,36 @@
+﻿@inject IJSRuntime JsRun;
+@inject I18nText serviceText;
+<section style="display:flex" class="modalConfiguracion">
+    <div class="modalContenedor">
+        <div>
+            @ChildContent
+        </div>
+        <div style="margin:20px 0">
+            <button class="btEstadoModal btCancelar" @onclick='@(() => CancelarCambio.InvokeAsync(false))'>
+                @_textPublicar.Cancel
+            </button>
+            <button class="btEstadoModal btGuardar" @onclick="@(()=> GuardarCambios.InvokeAsync(true))">
+                @_textPublicar.Save
+            </button>
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> CancelarCambio { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> GuardarCambios { get; set; }
+
+    TextPublicarPage _textPublicar = new TextPublicarPage();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _textPublicar = await serviceText.GetTextTableAsync<TextPublicarPage>(this);
+        await JsRun.DeshabilitarScroll();
+    }
+}

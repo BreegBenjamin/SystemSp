@@ -1,24 +1,19 @@
 ﻿@inject IJSRuntime JsRun;
 @inject NavigationManager NavigationManager;
+@inject I18nText ServiceTranslator;
 <section class="fondo fondo2" id="ModalLogin">
     <section class="popUp">
-        <CerrarModal Mensaje="Ingrese los datos para iniciar Sesión"></CerrarModal>
-        <article class="msError">
-            @if (_datosInvalidos)
-            {
-
-            }
-        </article>
+        <CerrarModal Mensaje="@_textIndex.MessageDataLogin"></CerrarModal>
         <section class="Form_Login">
-            <input type="email" class="estyleText" maxlength="30" placeholder="Correo" @bind="@_email" @onblur="habilitarBoton">
-            <input type="password" class="estyleText" maxlength="16" placeholder="Contraseña" @bind="@_password" @onblur="habilitarBoton">
-            <button class="@_classBoton" disabled="@_btnDeshabilitado" @onclick="validaFormulario">Ingresar</button>
+            <input type="email" class="estyleText" maxlength="30" placeholder="@_textIndex.Mail" @bind="@_email" @onblur="habilitarBoton">
+            <input type="password" class="estyleText" maxlength="16" placeholder="@_textIndex.Password" @bind="@_password" @onblur="habilitarBoton">
+            <button class="@_classBoton" disabled="@_btnDeshabilitado" @onclick="validaFormulario">@_textIndex.Login</button>
         </section>
         <div>
             <hr class="styleHr" />
             <div class="div_Password">
-                <a class="linkContact" href="#">¿Olvido su contraseña?</a>
-                <a class="linkContact" href="#">¿Crear una Cuenta?</a>
+                <a class="linkContact" href="#">@_textIndex.ForgotPass</a>
+                <a class="linkContact" href="#">@_textIndex.CreateAccount</a>
             </div>
         </div>
     </section>
@@ -29,6 +24,7 @@
     private bool _btnDeshabilitado = true;
     private string _classBoton = "btRegistroForm-Unlock";
     private bool _datosInvalidos = false;
+    private TextIndexPage _textIndex = new TextIndexPage();
     //Metodos
     private async Task habilitarBoton()
     {
@@ -51,5 +47,9 @@
         else
             NavigationManager.NavigateTo("Administrador");
         await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _textIndex = await ServiceTranslator.GetTextTableAsync<TextIndexPage>(this);
     }
 }

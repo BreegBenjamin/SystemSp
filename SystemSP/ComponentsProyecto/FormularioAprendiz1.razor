@@ -1,17 +1,18 @@
 ﻿@inject Lector lector;
+@inject I18nText TraductorService;
 <section>
     <EditForm Model="_aprendizIn" OnValidSubmit="HandleValidSubmit">
         @*<DataAnnotationsValidator />
-        <ValidationSummary />*@
+            <ValidationSummary />*@
         <ol class="formAprendiz1">
             <li class="liForm">
                 <div class="containerTexto">
-                    <label class="lbColor">Nombre del projecto formativo</label>
+                    <label class="lbColor">@_txtPubicar.ProjectName</label>
                     <InputText @bind-Value="_aprendizIn.NombreProyecto" class="inputFormAprendiz fontProject fontInput"
                                @onfocusout="validaForm" MaxLength="30"></InputText>
                 </div>
                 <div class="containerTexto">
-                    <label class="lbColor">Categoria</label>
+                    <label class="lbColor">@_txtPubicar.CategoryForm</label>
                     @if (_listaCategoria != null)
                     {
                         <InputSelect @bind-Value="_aprendizIn.Categoria" class="selectType selectStile">
@@ -24,10 +25,52 @@
                 </div>
             </li>
             <li class="liForm">
+                <!--Ciudad Formación-->
+                <div class="containerTexto">
+                    <label class="lbColor">Departamento</label>
+                    <InputSelect @bind-Value="_aprendizIn.Departamento" class="selectType selectStile">
+                        @foreach (var item in _listDepa)
+                        {
+                            <option>@item</option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="containerTexto">
+                    <label class="lbColor">Ciudad de formación</label>
+                    <InputText @bind-Value="_aprendizIn.Ciudad" class="inputFormAprendiz fontInput fontCity"
+                               @onfocusout="validaForm" MaxLength="40"></InputText>
+                </div>
+            </li>
+            <li class="liForm">
                 <!--Fecha de publicación proyecto-->
                 <div class="containerTexto">
+                    <div class="selects">
+                        <div class="containerTexto">
+                            <label class="lbColor">Tipo Formación</label>
+                        </div>
+                        <span>
+                            <label class="radio">
+                                <input type="radio" id="checkTecnico" name="checkTech" value="1" checked>
+                                <span>Tecnico</span>
+                            </label>
+                        </span>
+                        <span>
+                            <label class="radio">
+                                <input type="radio" id="checkTecnologo" name="checkTech" value="2">
+                                <span>Tecnologo</span>
+                            </label>
+                        </span>
+                        <span>
+                            <label class="radio">
+                                <input type="radio" id="checkOtro" name="checkTech" value="3">
+                                <span>Otro</span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+                <div class="containerTexto">
                     <div class="containerTexto">
-                        <label class="lbColor">Fecha Fin Projecto</label>
+                        <label class="lbColor">@_txtPubicar.ProjectDate</label>
                     </div>
                     <div class="containerFecha">
                         <InputSelect @bind-Value="_aprendizIn.Anio" class="selectType selectStile2">
@@ -48,36 +91,14 @@
                                 <option class="opcionItem">@item</option>
                             }
                         </InputSelect>
-                        <TooltipApp MensajeToolTip="Fecha de la finalización del projecto formativo"></TooltipApp>
+                        <TooltipApp MensajeToolTip="@_txtPubicar.TooltipData"></TooltipApp>
                     </div>
-                </div>
-                <div class="containerTexto">
-                    <label class="lbColor">Ciudad de formación</label>
-                    <InputText @bind-Value="_aprendizIn.Ciudad" class="inputFormAprendiz fontInput fontCity"
-                               @onfocusout="validaForm" MaxLength="40"></InputText>
-                </div>
-            </li>
-            <li class="liForm">
-                <!--Ciudad Formación-->
-                <div class="containerTexto">
-                    <label class="lbColor">Departamento</label>
-                    <InputSelect @bind-Value="_aprendizIn.Departamento" class="selectType selectStile">
-                        @foreach (var item in _listDepa)
-                        {
-                            <option>@item</option>
-                        }
-                    </InputSelect>
-                </div>
-                <div class="containerTexto">
-                    <label class="lbColor">Ciudad de formación</label>
-                    <InputText @bind-Value="_aprendizIn.Ciudad" class="inputFormAprendiz fontInput fontCity"
-                               @onfocusout="validaForm" MaxLength="40"></InputText>
                 </div>
             </li>
             <li>
                 <!--Descripcion del proyecto-->
                 <div class="containerTexto">
-                    <label class="lbColor">Descripción del proyecto formativo</label>
+                    <label class="lbColor">@_txtPubicar.ProjectDescription</label>
                     <InputTextArea @bind-Value="_aprendizIn.DescripcionProjecto" class="textDescripcion"
                                    placeholder="Ingresa Una Descripcion del proyecto, minimo 100 caracteres"
                                    @onfocusout="validaForm" MaxLength="2000"></InputTextArea>
@@ -86,8 +107,8 @@
             <li>
                 <!--Botones-->
                 <div class="disBotones">
-                    <button class="PublicarProyecto-Unlock" disabled>Regresar</button>
-                    <button class="@_classBotones" type="submit" disabled="@continuarDis">Continuar</button>
+                    <button class="PublicarProyecto-Unlock" disabled>@_txtPubicar.BottonBack</button>
+                    <button class="@_classBotones" type="submit" disabled="@continuarDis">@_txtPubicar.BottonContinue</button>
                 </div>
             </li>
         </ol>
@@ -97,7 +118,7 @@
     [Parameter]
     public EventCallback<int> FormValid { get; set; }
 
-
+    private TextPublicarPage _txtPubicar = new TextPublicarPage();
     private EFormularioAprendizIn _aprendizIn = new EFormularioAprendizIn();
     private ListaCategoriaVista _listaCategoria = new ListaCategoriaVista();
     private bool _btnConrinuarDisabled = true;
@@ -141,11 +162,12 @@
     };
     private bool continuarDis = true;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         _listaCategoria = lector.ObtenerListaCategorias();
         _listaAnio = _getAnio();
         _listDias = _getDias(DateTime.Now.Year, DateTime.Now.Month);
+        _txtPubicar = await TraductorService.GetTextTableAsync<TextPublicarPage>(this);
         base.OnInitialized();
     }
 
@@ -154,7 +176,7 @@
     {
         var years = new List<string>();
         int anioActual = DateTime.Now.Year;
-        while ( anioActual > 2010)
+        while (anioActual > 2010)
         {
             years.Add($"{anioActual}");
             anioActual--;

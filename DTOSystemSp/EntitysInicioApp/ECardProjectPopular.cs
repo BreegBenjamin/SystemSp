@@ -3,10 +3,6 @@ using System.Collections.Generic;
 
 namespace DTOSystemSp.EntitysInicioApp
 {
-    public class ECardProjectPopular
-    {
-        public List<TarjetasPopulares> TarjetasPopulares { get; set; }
-    }
     public class TarjetasPopulares
     {
         [JsonProperty("Imagen")]

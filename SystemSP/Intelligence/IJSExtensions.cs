@@ -7,8 +7,8 @@ namespace SystemSP.Intelligence
     {
         public static async Task DeshabilitarScroll(this IJSRuntime JsRun, bool Login = false)
             => await JsRun.InvokeVoidAsync(identifier: "salirMenu.DeshabilitarScroll", Login);
-        public static async Task HabilitarScroll(this IJSRuntime JsRun, string functionJS)
-            => await JsRun.InvokeVoidAsync(identifier: functionJS);
+        public static async Task HabilitarScroll(this IJSRuntime JsRun)
+            => await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
         public static async Task MensajesRegistro(this IJSRuntime JsRun, string msPass, string msMail)
             => await JsRun.InvokeVoidAsync(identifier: "seetAlert.SweetMensaje", msPass, msMail);
         public static async Task MoverCategoriaDerecha(this IJSRuntime JsRun)

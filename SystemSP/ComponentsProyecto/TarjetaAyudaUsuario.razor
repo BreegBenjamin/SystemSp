@@ -1,0 +1,18 @@
+﻿<section class="cardAppInfo publishUser">
+    <div>
+        <img src="/images/PageImage/@Imagen" height="50" width="50" />
+    </div>
+    <div>
+        <p class="centerMessage">@MensajeCard</p>
+    </div>
+    <p class="sugerencias">@SubTitulo</p>
+</section>
+
+@code {
+    [Parameter]
+    public string Imagen { get; set; }
+    [Parameter]
+    public string MensajeCard { get; set; }
+    [Parameter]
+    public string SubTitulo { get; set; }
+}

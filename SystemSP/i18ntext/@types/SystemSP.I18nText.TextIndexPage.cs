@@ -7,67 +7,106 @@ namespace SystemSP.I18nText
 
         public string this[string key] => global::Toolbelt.Blazor.I18nText.I18nTextExtensions.GetFieldValue(this, key);
 
-        /// <summary>"Consultar"</summary>
+        /// <summary>"Apprentice"</summary>
+        public string Apprentice;
+
+        /// <summary>"Company"</summary>
+        public string Company;
+
+        /// <summary>"Consult"</summary>
         public string Consult;
 
-        /// <summary>"Inciar Sesi�n"</summary>
+        /// <summary>"Create account?"</summary>
+        public string CreateAccount;
+
+        /// <summary>"Forgot your password?"</summary>
+        public string ForgotPass;
+
+        /// <summary>"Last name"</summary>
+        public string LastName;
+
+        /// <summary>"Login"</summary>
         public string Login;
 
-        /// <summary>"Publica tu proyecto de formaci�n y permite que aprendices Sena y Empresas puedan visualizar t� idea. Vinculat� con una empresa y accede al monitoreo de la implemenatci�n del proyecto."</summary>
+        /// <summary>"Mail"</summary>
+        public string Mail;
+
+        /// <summary>"Publish your training project and allow Sena, companies and apprentices to visualize your idea. Link with a company and access the monitoring of the implementation of the project."</summary>
         public string MensajeCard1;
 
-        /// <summary>"Contribuye a la formaci�n de futuros aprendices sena permitiendo que otros usuarios puedan acceder a la documentaci�n y el codigo de tu proyecto."</summary>
+        /// <summary>"Contribute to the training of future sena apprentices by allowing other users to access the documentation and code of your project."</summary>
         public string MensajeCard2;
 
-        /// <summary>"Descarga la documentaci�n y el c�digo fuente de los proyectos formativos. Y utilizalo de acuerdo a las liscencias otorgadas por los aprendices"</summary>
+        /// <summary>"Download the documentation and source code of the training projects. And use it according to the licenses granted by the apprentices."</summary>
         public string MensajeCard3;
 
-        /// <summary>"�M�s informaci�n?"</summary>
+        /// <summary>"Do you already have an account?"</summary>
+        public string MessageAccount;
+
+        /// <summary>"Enter the data to login"</summary>
+        public string MessageDataLogin;
+
+        /// <summary>"Enter the data to Register"</summary>
+        public string MessageRegister;
+
+        /// <summary>"More information?"</summary>
         public string MoreInformation1;
 
-        /// <summary>"�M�s informaci�n sobre los derecho del software?"</summary>
+        /// <summary>"More information on software rights?"</summary>
         public string MoreInformation2;
 
-        /// <summary>"�M�s informaci�n sobre los derecho del software?"</summary>
+        /// <summary>"More information on software rights?"</summary>
         public string MoreInformation3;
 
-        /// <summary>"Encunetra los proyectos de formaci�n creados por los aprendices Sena. Tanto si es un estudiante, una empresa o un particular, puedes acceder a la documentaci�n del software desarrollado por los aprendices Sena."</summary>
+        /// <summary>"Find the training projects created by the apprentices of Sena. If you are a student, a company or a private individual, can access the software documentation developed by Sena apprentices."</summary>
         public string MsDescription;
 
-        /// <summary>"Le damos la Bienvenida al repositorio de proyectos"</summary>
+        /// <summary>"Welcome to the proyect repository sofware"</summary>
         public string MsWelcon;
 
-        /// <summary>"Proyectos destacados y populares"</summary>
+        /// <summary>"Name"</summary>
+        public string Name;
+
+        /// <summary>"Password"</summary>
+        public string Password;
+
+        /// <summary>"Featured and popular projects"</summary>
         public string PopularProyect;
 
-        /// <summary>"Publicar"</summary>
+        /// <summary>"Post"</summary>
         public string Post;
 
-        /// <summary>"Categorias populares en la plataforma"</summary>
+        /// <summary>"Popular categories on the platform"</summary>
         public string PupularCategory;
 
-        /// <summary>"Categorias recomendadas para explorar"</summary>
+        /// <summary>"Recommended categories to explore"</summary>
         public string RecommendedCategory;
 
-        /// <summary>"Registrarse"</summary>
+        /// <summary>"Sign-up"</summary>
         public string Registry;
 
-        /// <summary>"Ver sugerencias"</summary>
+        /// <summary>"Repeat password"</summary>
+        public string RepeatPassword;
+
+        /// <summary>"See suggestions"</summary>
         public string SubTittle1;
 
-        /// <summary>"Detalle sobre el Software Libre"</summary>
+        /// <summary>"Detail on Free Software"</summary>
         public string SubTittle2;
 
-        /// <summary>"Detalle sobre el Software Libre"</summary>
+        /// <summary>"Detail on Free Software"</summary>
         public string SubTittle3;
 
-        /// <summary>"Muestra tu idea"</summary>
+        /// <summary>"Telephone"</summary>
+        public string Telephone;
+
+        /// <summary>"Show your idea"</summary>
         public string TittleCard1;
 
-        /// <summary>"Contribuye publicando tu proyecto"</summary>
+        /// <summary>"Contribute by publishing your project"</summary>
         public string TittleCard2;
 
-        /// <summary>"Descarga la documentaci�n y el c�digo"</summary>
+        /// <summary>"Download the documentation and code"</summary>
         public string TittleCard3;
     }
 }

@@ -6,23 +6,12 @@ using System.Reflection;
 using SystemSP.Data;
 using SystemSP.Entitys;
 using DTOSystemSp.EntitysInicioApp;
+using SystemSP.I18nText;
 
 namespace SystemSP.Intelligence
 {
     public class Lector
     {
-        public ECardProjectPopular OtenerTajetas()
-        {
-            var tarjetas = new ECardProjectPopular();
-            try
-            {
-                string jsonResult = _jsonFile(@"Data\cardPopulares.json");
-                tarjetas = (ECardProjectPopular)JsonConvert.DeserializeObject(
-                    jsonResult, typeof(ECardProjectPopular));
-            }
-            catch (Exception ex){}
-            return tarjetas;
-        }
         public ProyectosDestacados ObtenerProyectos() 
         {
             var proyecto = new ProyectosDestacados();
@@ -35,18 +24,6 @@ namespace SystemSP.Intelligence
             catch (Exception ex) { }
             return proyecto;
         }
-        public InformacionProyecto ObtenerCategorias() 
-        {
-            var categoria = new InformacionProyecto();
-            try
-            {
-                string jsonResult = _jsonFile(@"Data\card_categorias.json");
-                categoria = (InformacionProyecto)JsonConvert.DeserializeObject(
-                    jsonResult, typeof(InformacionProyecto));
-            }
-            catch (Exception ex) { }
-            return categoria;
-        }
         public ListaCategoriaVista ObtenerListaCategorias() 
         {
             var categorias = new ListaCategoriaVista();
@@ -55,6 +32,7 @@ namespace SystemSP.Intelligence
                 string jsonResult = _jsonFile(@"Data\vistaCategorias.json");
                 categorias = (ListaCategoriaVista)JsonConvert.DeserializeObject(
                     jsonResult, typeof(ListaCategoriaVista));
+
             }
             catch (Exception ex) { }
             return categorias;

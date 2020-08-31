@@ -1,9 +1,10 @@
-﻿<section style="display:flex" class="modalConfiguracion">
-    <div class="modalTegnologias">
-        <p>Selecciona las tecnologías usadas en el projecto</p>
+﻿@inject I18nText serviceTranslator;
+<section style="display:flex" class="modalConfiguracion">
+    <div class="modalTegnologias modalContenedor">
+        <p>@_textPublicar.SelecTechnology</p>
         <div class="ContainerTech">
             @foreach (var tech in TecnologiasApp)
-            {
+             {
                 <div class="classTech">
                     <div class="ImgTech">
                         <img src="/images/Tecnologias/Front/@tech.UrlImage" height="50" width="50"/>
@@ -30,10 +31,14 @@
     [Parameter]
     public List<ETecnologiasApp> TecnologiasApp { get; set; }
 
+    TextPublicarPage _textPublicar = new TextPublicarPage();
     private async Task _cambiosGuradados()
     {
-
         await GuardarCambios.InvokeAsync(true);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _textPublicar = await serviceTranslator.GetTextTableAsync<TextPublicarPage>(this);
     }
 
 }

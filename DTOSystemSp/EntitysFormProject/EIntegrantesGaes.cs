@@ -6,7 +6,7 @@ namespace DTOSystemSp.EntitysFormProject
 {
     public class EIntegrantesGaes
     {
-        private int IdAprendiz { get; set; }
+        public int IdAprendiz { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }

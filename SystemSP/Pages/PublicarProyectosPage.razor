@@ -1,67 +1,99 @@
 ﻿@page "/PublicarProyecto";
 @inherits LayoutComponentBase
-    <section class="elements-body">
-        <div class="div-usuario">
-            <InformacionUsuario></InformacionUsuario>
+<header>
+    <HeaderApp></HeaderApp>
+</header>
+
+<section class="elements-body">
+    <div class="div-usuario">
+        <InformacionUsuario></InformacionUsuario>
+    </div>
+    <aside class="info-ayuda">
+        <InformacionAyuda></InformacionAyuda>
+    </aside>
+    <section class="bodyPage">
+        <div class="sec-opciones">
+            <OpcionesProyecto OnClickOpcion="ClickHandler"></OpcionesProyecto>
         </div>
-        <aside class="info-ayuda">
-            <InformacionAyuda></InformacionAyuda>
-        </aside>
-        <section class="bodyPage">
-            <div class="sec-opciones">
-                <OpcionesProyecto
-                                  OnClickOpcion="ClickHandler"></OpcionesProyecto>
-            </div>
-            <div class="setPage">
-                @switch (tipoOpcion)
-                {
-                    case 0:
-                        <InformacionContacto></InformacionContacto>
-                        <FormularioAprendiz></FormularioAprendiz>
-                        break;
-                    case 1:
-                        <p>Hola soy un </p>
-                        break;
-                    case 2:
-                        break;
-                }
-            </div>
-            <div class="setOptions">
-                <section class="borderInformacion">
-                    <div class="infUpdate">
-                        <h3 class="colorNoti">Actualizar Proyecto</h3>
-                        <div class="detallesProyecto">
-                            <span class="nameProyect">
-                                Sort By
-                            </span>
-                        </div>
-                    </div>
-                    <TarjetaEditarProyecto TituloTarjeta="Nombre del Proyecto"
-                                           SubTituloTarjeta="Jon Grey"
-                                           LeadingImage="price.svg">
-                    </TarjetaEditarProyecto>
-                    <TarjetaEditarProyecto TituloTarjeta="Integrantes"
-                                           SubTituloTarjeta="3 Aprendices"
-                                           LeadingImage="price.svg"
-                                           TrailingImage="true">
-                    </TarjetaEditarProyecto>
-                    <TarjetaEditarProyecto TituloTarjeta="Imagenes Interfaz"
-                                           SubTituloTarjeta="12 Imagenes"
-                                           LeadingImage="price.svg"
-                                           TrailingImage="true">
-                    </TarjetaEditarProyecto>
-                    <TarjetaEditarProyecto TituloTarjeta="Archivos proyecto"
-                                           SubTituloTarjeta="12 Archivos"
-                                           LeadingImage="price.svg"
-                                           TrailingImage="true">
-                    </TarjetaEditarProyecto>
-                    <div style="height:2px">
-                    </div>
-                </section>
-            </div>
-        </section>
+        <CascadingValue Value="ImagesFiles">
+            <CascadingValue Value="Aprendices">
+                <div class="setPage">
+                    @switch (tipoOpcion)
+                     {
+                        case 0:
+                            <div>
+                                <InformacionContacto></InformacionContacto>
+                                <FormularioAprendiz></FormularioAprendiz>
+                            </div>
+                            <div class="setOptions">
+                                <div>
+
+                                    <TarjetaAyudaUsuario Imagen="ToolSoftware.svg"
+                                                         MensajeCard="Ayuda sobre como Publicar 
+                                                         el proyecto"
+                                                         SubTitulo="Click Aquí">
+                                    </TarjetaAyudaUsuario>
+                                    <TarjetaAyudaUsuario Imagen="project.svg"
+                                                         MensajeCard="Implemente y escale
+                                                                      aplicaciones e instancias
+                                                                      de Windows Virtual
+                                                                      Desktop"
+                                                         SubTitulo="Windows Virtual Desktop">
+                                    </TarjetaAyudaUsuario>
+                                </div>
+                                <section class="borderInformacion">
+                                    <div class="infUpdate">
+                                        <h3 class="colorNoti">Actualizar Proyecto</h3>
+                                        <div class="detallesProyecto">
+                                            <span class="nameProyect">
+                                                Sort By
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <TarjetaEditarProyecto TituloTarjeta="Nombre del Proyecto"
+                                                           LeadingImage="price.svg">
+                                    </TarjetaEditarProyecto>
+                                    <TarjetaEditarProyecto TituloTarjeta="Integrantes"
+                                                           LeadingImage="price.svg"
+                                                           TrailingImage="true"
+                                                           TipoTarjeta="Team">
+                                    </TarjetaEditarProyecto>
+                                    <TarjetaEditarProyecto TituloTarjeta="Imagenes Interfaz"
+                                                           LeadingImage="price.svg"
+                                                           TrailingImage="true"
+                                                           TipoTarjeta="Images">
+                                    </TarjetaEditarProyecto>
+                                    <TarjetaEditarProyecto TituloTarjeta="Archivos proyecto"
+                                                           LeadingImage="price.svg"
+                                                           TrailingImage="true">
+                                    </TarjetaEditarProyecto>
+                                    <div style="height:2px">
+
+                                    </div>
+                                </section>
+                            </div>
+                            break;
+                        case 1:
+                            <p>Hola soy un </p>
+                            break;
+                     }
+                </div>
+            </CascadingValue>
+        </CascadingValue>
     </section>
+</section>
 @code {
+    [CascadingParameter]
+    protected EInformacionArchivos ImagesFiles { get; set; } =
+    new EInformacionArchivos()
+    {
+        Archivos = new List<EArchivosProjecto>(),
+        ListaArchivos = new List<string>()
+    };
+    [CascadingParameter]
+    protected List<EIntegrantesGaes> Aprendices { get; set; } =
+        new List<EIntegrantesGaes>();
+
     private int tipoOpcion = 0;
     private void ClickHandler(int tipo)
     {

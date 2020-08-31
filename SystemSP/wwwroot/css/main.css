@@ -22,12 +22,13 @@ body {
 .userBotons {
     display:flex;
     grid-gap:10px;
+    height:100%;
 }
 .bt-styles {
     border-radius: 50px;
     background-color: #fff;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1em;
     height: 50px;
     outline-style: none;
     width: 135px;
@@ -87,8 +88,10 @@ body {
     padding:0;
 }
 .descripcionSystem {
-    white-space: pre-line;
+    box-sizing: border-box;
+    padding: 0 35%;
     text-align: center;
+    white-space: pre-line;
 }
 .bt-ConsultaCrear {
     border: none;
@@ -101,16 +104,16 @@ body {
 }
 .btn-consulta {
     background-color: #fff;
-    border: 1px solid #9da0a1;
-    border-bottom: 3px solid #9da0a1;
+    border: 1px solid #E4E4E4;
+    border-bottom: 3px solid #E4E4E4;
 }
     .btn-consulta:hover {
         color: #0e81df;
         transform: translateY(-2px);
     }
 .btn-publicar {
-    background-image: linear-gradient(to right top, #5997f4, #5c83f5, #6d6bef, #854ce3, #9d0ecf);
-    border-bottom: 3px solid #0e81df;
+    background-image: linear-gradient(to right top, #61edf9, #55e2fd, #54d6ff, #5dc9fe, #6cbcf9);
+    border-bottom: 3px solid #61edf9;
     color: #fff;
     margin-left: 10px;
 }
@@ -125,7 +128,7 @@ body {
     border-radius: 10px;
     cursor: pointer;
     height: auto;
-    width: 250px;
+    width: 22%;
     margin: 10px;
 }
 .targetas-populares:hover {
@@ -141,7 +144,7 @@ body {
 .imgTarjeta {
     border-radius: 10px 0 0 10px;
     height: 82px;
-    width: 100px;
+    width: 110px;
 }
 .card-project {
     margin: 15px;
@@ -223,6 +226,10 @@ body {
 .imgAuto > span {
     margin-left: 10px;
     font-size: 0.7em;
+}
+.centerMessage {
+    text-align:center;
+    white-space:pre-line;
 }
 .personImg {
     border-radius: 100%;
@@ -644,8 +651,8 @@ body {
     box-sizing: border-box;
     padding: 10px;
     margin: 0 20px;
-    width: 27%;
     height: 300px;
+    width:27%;
 }
     .cardAppInfo:hover {
         box-shadow: 0 3px 10px 0px rgba(202, 202, 202, 0.8);
@@ -711,45 +718,64 @@ body {
     background-position-y: center;
     background-position-x: 90%;
     background-repeat: no-repeat;
-    display: flex;
     cursor: pointer;
+    display: flex;
+    grid-column:1/2;
+    grid-row:1/2;
     justify-content: space-around;
     padding: 0 40px 0 25px;
     height: 45px;
     width: 185px;
     z-index: 20;
 }
-.imgSelect {
-    background-image: url(../images/PageImage/down-arrow.svg);
-}
+    .contenedorSelect:after {
+        content:"";
+    }
+    .imgSelect {
+        background-image: url(../images/PageImage/down-arrow.svg);
+    }
 .postionSelect {
-    display: flex;
-    background-color: #fff;
     align-items: flex-end;
-    position: absolute;
-    right: 1.8%;
-    top: 5.9%;
-    padding-bottom: 3px;
+    background-color: #fff;
     border-radius: 0 0 5px 5px;
-    height: 90px;
-    z-index: 10;
+    display: flex;
+    grid-column:1/2;
+    grid-row:2/3;
+    z-index: 20;
 }
 .contenedorPais {
-    align-items: center;
-    box-sizing: border-box;
-    background-color: #fff;
-    background-size: 10%;
-    background-position-y: center;
-    background-position-x: 90%;
-    background-repeat: no-repeat;
-    display: flex;
-    cursor: pointer;
-    justify-content: space-around;
-    padding: 0 40px 0 25px;
-    height: 45px;
-    width: 185px;
-    z-index: 20;
+        align-items: center;
+        box-sizing: border-box;
+        background-color: #fff;
+        background-size: 10%;
+        background-position-y: center;
+        background-position-x: 90%;
+        background-repeat: no-repeat;
+        display: flex;
+        cursor: pointer;
+        justify-content: space-around;
+        padding: 0 40px 0 25px;
+        height: 45px;
+        width: 185px;
+        z-index: 20;
 }
-    .contenedorPais:hover {
-        background-color: #E5E8E9;
+.contenedorPais:hover {
+    background-color: #E5E8E9;
+}
+.containerLand {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 5px;
+    width: fit-content;
+}
+    .containerLand:before {
+        background-color: #FFF;
+        border-radius: 5px;
+        box-shadow: var(--SombrasCaja);
+        content: "";
+        height: 98px;
+        grid-column: 1/2;
+        grid-row: 1/3;
+        z-index: 10;
     }

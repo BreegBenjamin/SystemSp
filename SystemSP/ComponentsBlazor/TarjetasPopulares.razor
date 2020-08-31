@@ -1,26 +1,26 @@
 ﻿@inject Lector lectura;
+@inject I18nText trasnlator;
 <section class="card-project">
-    <h3 class="h6Font">
-        Categorias populares en la plataforma
-    </h3>
+    <h3 class="h6Font">@_txtPage.PupularCategory</h3>
     <div class="carteraCategorias">
-        @if (_fullCard)
-        {
-            @foreach (var item in _tarjetas.TarjetasPopulares)
-             {
-                <CardPopulares Imagen="@item.Imagen"
-                               Titulo="@item.Titulo"></CardPopulares>
-             }
-        }
+        <CardPopulares Imagen="construccion.jpg"
+                       Titulo="@_txtCategorias.Commerce"></CardPopulares>
+        <CardPopulares Imagen="Libreria.jpg"
+                       Titulo="@_txtCategorias.Libraries"></CardPopulares>
+        <CardPopulares Imagen="educacion.jpg"
+                       Titulo="@_txtCategorias.Education"></CardPopulares>
+        <CardPopulares Imagen="Tiendas.jpg"
+                       Titulo="@_txtCategorias.Shop"></CardPopulares>
     </div>
 </section>
 
 @code {
-    private ECardProjectPopular _tarjetas = new ECardProjectPopular();
-    private bool _fullCard = false;
-    protected override void OnInitialized()
+    TextIndexPage _txtPage = new TextIndexPage();
+    TextCategoriasIndex _txtCategorias = new TextCategoriasIndex();
+    protected override async Task OnInitializedAsync()
     {
-        _tarjetas = lectura.OtenerTajetas();
-        if (_tarjetas != null) _fullCard = true;
+
+        _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
+        _txtCategorias = await trasnlator.GetTextTableAsync<TextCategoriasIndex>(this);
     }
 }
