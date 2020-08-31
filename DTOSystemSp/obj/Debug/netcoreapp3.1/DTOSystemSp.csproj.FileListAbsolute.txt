@@ -1,9 +1,0 @@
-C:\Desarrollo\SystemSP\SystemSP\DTOSystemSp\bin\Debug\netcoreapp3.1\DTOSystemSp.deps.json
-C:\Desarrollo\SystemSP\SystemSP\DTOSystemSp\bin\Debug\netcoreapp3.1\DTOSystemSp.dll
-C:\Desarrollo\SystemSP\SystemSP\DTOSystemSp\obj\Debug\netcoreapp3.1\DTOSystemSp.csprojAssemblyReference.cache
-C:\Desarrollo\SystemSP\SystemSP\DTOSystemSp\obj\Debug\netcoreapp3.1\DTOSystemSp.AssemblyInfoInputs.cache
-C:\Desarrollo\SystemSP\SystemSP\DTOSystemSp\obj\Debug\netcoreapp3.1\DTOSystemSp.AssemblyInfo.cs
-C:\Desarrollo\SystemSP\SystemSP\DTOSystemSp\bin\Debug\netcoreapp3.1\DTOSystemSp.pdb
-C:\Desarrollo\SystemSP\SystemSP\DTOSystemSp\obj\Debug\netcoreapp3.1\DTOSystemSp.csproj.CoreCompileInputs.cache
-C:\Desarrollo\SystemSP\SystemSP\DTOSystemSp\obj\Debug\netcoreapp3.1\DTOSystemSp.dll
-C:\Desarrollo\SystemSP\SystemSP\DTOSystemSp\obj\Debug\netcoreapp3.1\DTOSystemSp.pdb
