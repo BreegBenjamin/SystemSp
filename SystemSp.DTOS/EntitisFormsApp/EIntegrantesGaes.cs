@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTOSystemSp.EntitysFormProject
+namespace SystemSp.DTOS.EntitisFormsApp
 {
     public class EIntegrantesGaes
     {

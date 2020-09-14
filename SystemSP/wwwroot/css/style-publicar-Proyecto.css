@@ -751,6 +751,7 @@ select {
 .olTechFlex {
     display:flex;
     justify-content:space-around;
+    grid-gap:10px;
 }
 .sectionTegnologias {
     cursor:pointer;
@@ -784,7 +785,7 @@ select {
     text-align: center;
     margin-left: 25px;
 }
-    .centerTXt > * {{}
+    .centerTXt > * {
         margin:0;
     }
 
@@ -792,4 +793,13 @@ select {
     margin-bottom: 15px;
     height: 270px;
     width: auto;
+}
+.ImagenPosition {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+}
+.ImageProject {
+    height:100%;
+    width:100%;
 }

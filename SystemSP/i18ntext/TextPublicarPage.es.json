@@ -1,7 +1,7 @@
 ﻿{
   "PublishProject": "Publicar Proyeco",
   "News": "Novedades",
-  "UpdateInformation": "Actualiza tu información",
+  "UpdateInformacion": "Actualiza tu información",
   "Name": "Nombre",
   "NewPassword": "Nueva Contraseña",
   "ConfirmPassword": "Confirmar contraseña",
@@ -30,8 +30,12 @@
   "FormFinanceJobs": "Finanzas y empleos",
   "FormOthers": "Otros",
   "ProjectDate": "Fecha del proyecto",
-  "FormationCity": "Ciudad de formación",
+  "TrainingCity": "Ciudad de formación",
   "Department": "Departamento",
+  "TrainingType": "Tipo Formación",
+  "Technical": "Technical",
+  "Technologist": "Technologist",
+  "OtherType": "Other",
   "ProjectDescription": "Descripción del proyecto",
   "CampDescription": "Ingrese una descripción del proyecto, mínimo 100 caracteres",
   "TooltipData": "Fecha de publicación del proyecto",
@@ -63,5 +67,13 @@
   "SelectImages": "Adjuntar Imagenes",
   "AddImages": "Adjunta las imagenes de la interfaz del proyecto",
   "MensajeAlertaPass": "La contraseña ingresada </br> no coincide",
-  "ChangedLang": "Cambiar Idioma"
+  "ChangedLang": "Cambiar Idioma",
+  "SenaHeadquartes": "Nombre de la sede Sena",
+  "ApprenticesData": "Datos de los aprendices (Opcional)",
+  "TeamMS": "Datos de los integrantes del grupo",
+  "ApprenticeName": "Nombre Aprendiz",
+  "ApprenticeLastName": "Apellido Aprendiz",
+  "Telephone": "Télefono",
+  "AprendiceEmail": "Correo Electronico",
+  "BottonAddMembers": "Agregar Integrante"
 }

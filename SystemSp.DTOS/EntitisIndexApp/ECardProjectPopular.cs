@@ -1,13 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 
-namespace DTOSystemSp.EntitysInicioApp
+namespace SystemSp.DTOS.EntitisIndexApp
 {
     public class TarjetasPopulares
     {
-        [JsonProperty("Imagen")]
+        [JsonProperty]
         public string Imagen { get; set; }
-        [JsonProperty("Titulo")]
+        [JsonProperty]
         public string Titulo { get; set; }
     }
 }

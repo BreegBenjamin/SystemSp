@@ -13,6 +13,21 @@ namespace SystemSP.I18nText
         /// <summary>"Attach the images of the project interface"</summary>
         public string AddImages;
 
+        /// <summary>"Apprentice Last Name"</summary>
+        public string ApprenticeLastName;
+
+        /// <summary>"Apprentice Name"</summary>
+        public string ApprenticeName;
+
+        /// <summary>"Apprentices information data (Optional)"</summary>
+        public string ApprenticesData;
+
+        /// <summary>"Email"</summary>
+        public string AprendiceEmail;
+
+        /// <summary>"Add Members"</summary>
+        public string BottonAddMembers;
+
         /// <summary>"Back"</summary>
         public string BottonBack;
 
@@ -57,9 +72,6 @@ namespace SystemSP.I18nText
 
         /// <summary>"Art and Design"</summary>
         public string FormArtDesign;
-
-        /// <summary>"Formation city"</summary>
-        public string FormationCity;
 
         /// <summary>"Books and libraries"</summary>
         public string FormBookLibrary;
@@ -151,10 +163,13 @@ namespace SystemSP.I18nText
         /// <summary>"Option"</summary>
         public string OptionTable;
 
+        /// <summary>"Other"</summary>
+        public string OtherType;
+
         /// <summary>"Cell phone number"</summary>
         public string PhoneNumber;
 
-        /// <summary>"Fecha del proyecto"</summary>
+        /// <summary>"Project date"</summary>
         public string ProjectDate;
 
         /// <summary>"Project description"</summary>
@@ -184,6 +199,9 @@ namespace SystemSP.I18nText
         /// <summary>"Attach Images"</summary>
         public string SelectImages;
 
+        /// <summary>"Nombre de la sede Sena"</summary>
+        public string SenaHeadquartes;
+
         /// <summary>"Technologies used for the Back-End of the application"</summary>
         public string SubTextBack;
 
@@ -196,22 +214,37 @@ namespace SystemSP.I18nText
         /// <summary>"Apprentice Surname"</summary>
         public string SurNameApprentice;
 
+        /// <summary>"Team member data"</summary>
+        public string TeamMS;
+
+        /// <summary>"Technical"</summary>
+        public string Technical;
+
+        /// <summary>"Technologist"</summary>
+        public string Technologist;
+
         /// <summary>"Technology Used"</summary>
         public string TechnologyUsed;
+
+        /// <summary>"Telephone"</summary>
+        public string Telephone;
 
         /// <summary>"Terms of use"</summary>
         public string TermsUse;
 
-        /// <summary>"Fecha de publicación del proyecto"</summary>
+        /// <summary>"Project publication date"</summary>
         public string TooltipData;
+
+        /// <summary>"Training city"</summary>
+        public string TrainingCity;
 
         /// <summary>"Training project data"</summary>
         public string TrainingData;
 
+        /// <summary>"Training Type"</summary>
+        public string TrainingType;
+
         /// <summary>"Update your information"</summary>
         public string UpdateInformacion;
-
-        /// <summary>"Actualiza tu información"</summary>
-        public string UpdateInformation;
     }
 }

@@ -1,38 +1,39 @@
-﻿<section>
+﻿@inject I18nText TraductorService;
+<section>
     <EditForm Model="_formGaes" OnValidSubmit="HandleValidSubmit">
         <div class="divFlex">
             <label for="nombreSena">Nombre de la Dirección Sena</label>
             <InputText @bind-Value="_formGaes.NombreDireccionSena"
-                      @onfocusout="validaCampo" MaxLength="40" class="inpuNombreSena"></InputText>
+                       @onfocusout="validaCampo" MaxLength="40" class="inpuNombreSena"></InputText>
         </div>
         <div>
             <div class="dataOpcional">
-                <p>Datos Aprendices (Opcionales)</p>
-                <TooltipApp MensajeToolTip="Datos de los integrantes del grupo"></TooltipApp>
+                <p>@_txtPublicar.ApprenticesData</p>
+                <TooltipApp MensajeToolTip="@_txtPublicar.TeamMS"></TooltipApp>
             </div>
             <ol>
                 <li>
                     <div>
-                        <label>Nombre Aprendiz</label>
+                        <label>@_txtPublicar.ApprenticeName</label>
                         <input type="text" @bind="_aprendiz.Nombre" class="inputFormAprendiz" />
                     </div>
                     <div>
-                        <label>Apellido Aprendiz</label>
+                        <label>@_txtPublicar.ApprenticeLastName</label>
                         <input type="text" @bind="_aprendiz.Apellido" class="inputFormAprendiz" />
                     </div>
                 </li>
                 <li>
                     <div>
-                        <label>Télefono</label>
+                        <label>@_txtPublicar.Telephone</label>
                         <input type="text" @bind="_aprendiz.Telefono" class="inputFormAprendiz" />
                     </div>
                     <div>
-                        <label>Correo Electronico</label>
+                        <label>@_txtPublicar.AprendiceEmail</label>
                         <input type="text" @bind="_aprendiz.Correo" class="inputFormAprendiz" />
                     </div>
                 </li>
                 <li style="padding:20px 0">
-                    <button type="button" class="@BotonPublicar" @onclick="AddAprendiz">Agregar Integrantes</button>
+                    <button type="button" class="@BotonPublicar" @onclick="AddAprendiz">@_txtPublicar.BottonAddMembers</button>
                 </li>
                 <li>
                     <BotonesAdjuntarArchivos></BotonesAdjuntarArchivos>
@@ -40,9 +41,11 @@
                 <li>
                     <!--Botones aciones-->
                     <div class="disBotones">
-                        <button type="button" class="BotonPublicarProyecto">Regresar</button>
-                        <button class="@_classBotones" type="submit" 
-                                disabled="@continuarDis">Continuar</button>
+                        <button type="button" class="BotonPublicarProyecto">@_txtPublicar.BottonBack</button>
+                        <button class="@_classBotones" type="submit"
+                                disabled="@continuarDis">
+                            @_txtPublicar.BottonContinue
+                        </button>
                     </div>
                 </li>
             </ol>
@@ -57,6 +60,7 @@
     [Parameter]
     public EventCallback<int> FormValid { get; set; }
 
+    private TextPublicarPage _txtPublicar = new TextPublicarPage();
     private EFormularioAprendizGaes _formGaes = new EFormularioAprendizGaes();
     private EIntegrantesGaes _aprendiz = new EIntegrantesGaes();
     private string _classBotones = "PublicarProyecto-Unlock";
@@ -85,4 +89,9 @@
 
     private async Task HandleValidSubmit() => await FormValid.InvokeAsync(2);
 
+    protected override async Task OnInitializedAsync()
+    {
+        _txtPublicar = await TraductorService.GetTextTableAsync<TextPublicarPage>(this);
+        base.OnInitialized();
+    }
 }

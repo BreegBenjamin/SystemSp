@@ -3,27 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using SystemSP.Data;
 using SystemSP.Entitys;
-using DTOSystemSp.EntitysInicioApp;
 using SystemSP.I18nText;
 
 namespace SystemSP.Intelligence
 {
     public class Lector
     {
-        public ProyectosDestacados ObtenerProyectos() 
-        {
-            var proyecto = new ProyectosDestacados();
-            try
-            {
-                string jsonResult = _jsonFile(@"Data\carproyectos.json");
-                proyecto = (ProyectosDestacados)JsonConvert.DeserializeObject(
-                    jsonResult, typeof(ProyectosDestacados));
-            }
-            catch (Exception ex) { }
-            return proyecto;
-        }
         public ListaCategoriaVista ObtenerListaCategorias() 
         {
             var categorias = new ListaCategoriaVista();

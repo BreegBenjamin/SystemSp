@@ -7,12 +7,12 @@
         <ol class="formAprendiz1">
             <li class="liForm">
                 <div class="containerTexto">
-                    <label class="lbColor">@_txtPubicar.ProjectName</label>
+                    <label class="lbColor">@_txtPublicar.ProjectName</label>
                     <InputText @bind-Value="_aprendizIn.NombreProyecto" class="inputFormAprendiz fontProject fontInput"
                                @onfocusout="validaForm" MaxLength="30"></InputText>
                 </div>
                 <div class="containerTexto">
-                    <label class="lbColor">@_txtPubicar.CategoryForm</label>
+                    <label class="lbColor">@_txtPublicar.CategoryForm</label>
                     @if (_listaCategoria != null)
                     {
                         <InputSelect @bind-Value="_aprendizIn.Categoria" class="selectType selectStile">
@@ -27,7 +27,7 @@
             <li class="liForm">
                 <!--Ciudad Formación-->
                 <div class="containerTexto">
-                    <label class="lbColor">Departamento</label>
+                    <label class="lbColor">@_txtPublicar.Department</label>
                     <InputSelect @bind-Value="_aprendizIn.Departamento" class="selectType selectStile">
                         @foreach (var item in _listDepa)
                         {
@@ -36,7 +36,7 @@
                     </InputSelect>
                 </div>
                 <div class="containerTexto">
-                    <label class="lbColor">Ciudad de formación</label>
+                    <label class="lbColor">@_txtPublicar.TrainingCity</label>
                     <InputText @bind-Value="_aprendizIn.Ciudad" class="inputFormAprendiz fontInput fontCity"
                                @onfocusout="validaForm" MaxLength="40"></InputText>
                 </div>
@@ -46,31 +46,31 @@
                 <div class="containerTexto">
                     <div class="selects">
                         <div class="containerTexto">
-                            <label class="lbColor">Tipo Formación</label>
+                            <label class="lbColor">@_txtPublicar.TrainingType</label>
                         </div>
                         <span>
                             <label class="radio">
                                 <input type="radio" id="checkTecnico" name="checkTech" value="1" checked>
-                                <span>Tecnico</span>
+                                <span>@_txtPublicar.Technical</span>
                             </label>
                         </span>
                         <span>
                             <label class="radio">
                                 <input type="radio" id="checkTecnologo" name="checkTech" value="2">
-                                <span>Tecnologo</span>
+                                <span>@_txtPublicar.Technologist</span>
                             </label>
                         </span>
                         <span>
                             <label class="radio">
                                 <input type="radio" id="checkOtro" name="checkTech" value="3">
-                                <span>Otro</span>
+                                <span>@_txtPublicar.OtherType</span>
                             </label>
                         </span>
                     </div>
                 </div>
                 <div class="containerTexto">
                     <div class="containerTexto">
-                        <label class="lbColor">@_txtPubicar.ProjectDate</label>
+                        <label class="lbColor">@_txtPublicar.ProjectDate</label>
                     </div>
                     <div class="containerFecha">
                         <InputSelect @bind-Value="_aprendizIn.Anio" class="selectType selectStile2">
@@ -91,24 +91,24 @@
                                 <option class="opcionItem">@item</option>
                             }
                         </InputSelect>
-                        <TooltipApp MensajeToolTip="@_txtPubicar.TooltipData"></TooltipApp>
+                        <TooltipApp MensajeToolTip="@_txtPublicar.TooltipData"></TooltipApp>
                     </div>
                 </div>
             </li>
             <li>
                 <!--Descripcion del proyecto-->
                 <div class="containerTexto">
-                    <label class="lbColor">@_txtPubicar.ProjectDescription</label>
+                    <label class="lbColor">@_txtPublicar.ProjectDescription</label>
                     <InputTextArea @bind-Value="_aprendizIn.DescripcionProjecto" class="textDescripcion"
-                                   placeholder="Ingresa Una Descripcion del proyecto, minimo 100 caracteres"
+                                   placeholder="@_txtPublicar.CampDescription"
                                    @onfocusout="validaForm" MaxLength="2000"></InputTextArea>
                 </div>
             </li>
             <li>
                 <!--Botones-->
                 <div class="disBotones">
-                    <button class="PublicarProyecto-Unlock" disabled>@_txtPubicar.BottonBack</button>
-                    <button class="@_classBotones" type="submit" disabled="@continuarDis">@_txtPubicar.BottonContinue</button>
+                    <button class="PublicarProyecto-Unlock" disabled>@_txtPublicar.BottonBack</button>
+                    <button class="@_classBotones" type="submit" disabled="@continuarDis">@_txtPublicar.BottonContinue</button>
                 </div>
             </li>
         </ol>
@@ -118,7 +118,7 @@
     [Parameter]
     public EventCallback<int> FormValid { get; set; }
 
-    private TextPublicarPage _txtPubicar = new TextPublicarPage();
+    private TextPublicarPage _txtPublicar = new TextPublicarPage();
     private EFormularioAprendizIn _aprendizIn = new EFormularioAprendizIn();
     private ListaCategoriaVista _listaCategoria = new ListaCategoriaVista();
     private bool _btnConrinuarDisabled = true;
@@ -167,7 +167,7 @@
         _listaCategoria = lector.ObtenerListaCategorias();
         _listaAnio = _getAnio();
         _listDias = _getDias(DateTime.Now.Year, DateTime.Now.Month);
-        _txtPubicar = await TraductorService.GetTextTableAsync<TextPublicarPage>(this);
+        _txtPublicar = await TraductorService.GetTextTableAsync<TextPublicarPage>(this);
         base.OnInitialized();
     }
 

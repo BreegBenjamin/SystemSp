@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace DTOSystemSp.EntitysFormProject
+namespace SystemSp.DTOS.EntitisFormsApp
 {
     public class EFormularioAprendizGaes
     {

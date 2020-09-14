@@ -38,6 +38,7 @@ namespace SystemSP.Intelligence
                 }
                 catch(Exception ex)
                 {
+                    string ms = ex.Message;
                     archivo = "NoK";
                 }
                 finally 

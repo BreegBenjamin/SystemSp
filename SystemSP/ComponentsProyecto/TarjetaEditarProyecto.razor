@@ -9,9 +9,9 @@
     </div>
     <div>
         @if (TrailingImage)
-         {
+        {
             <button class="botonOpcionProject"></button>
-         }
+        }
     </div>
 </div>
 @if (_datosCargados)
@@ -20,13 +20,13 @@
     {
         case "Images":
             <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
-                <div>
+                <div class="ImagenPosition">
                     @if (ImagesFiles.Archivos.Count > 0)
                     {
                         foreach (var item in ImagesFiles.Archivos)
                         {
                             <div>
-                                <img src="@item.ImageSrc" height="120" width="130" alt="imgSave" />
+                                <img src="@item.ImageSrc" class="ImageProject" alt="imgSave" />
                             </div>
                         }
                     }
@@ -34,7 +34,7 @@
             </ModalArchivosProjecto>
             break;
         case "Team":
-            <ModalArchivosProjecto>
+            <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
                 <ol>
                     @foreach (var item in Aprendices)
                     {
@@ -50,8 +50,22 @@
                         <li>
                             @item.Correo
                         </li>
-                     }
+                    }
                 </ol>
+            </ModalArchivosProjecto>
+            break;
+        case "file":
+            <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
+                <div>
+                    <p>Aqui archivos</p>
+                </div>
+            </ModalArchivosProjecto>
+            break;
+        case "Info":
+            <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
+                <div>
+                    <p>Aqui informacion</p>
+                </div>
             </ModalArchivosProjecto>
             break;
     }
@@ -90,7 +104,7 @@
     }
     protected override Task OnInitializedAsync()
     {
-        _subTituloTarjeta =  $"Images";
+        _subTituloTarjeta = $"Images";
         return base.OnInitializedAsync();
     }
 }

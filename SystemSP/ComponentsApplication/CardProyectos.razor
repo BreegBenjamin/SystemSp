@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime JSRun;
+@inject ProjectsApplication project;
 @inject NavigationManager NavigationManager;
 <section>
     <nav class="@classNavMenu">
@@ -6,15 +7,15 @@
         <div id="plantillaProyecto" class="plantillaProyect">
             @if (_proyectos)
              {
-                @foreach (var items in _tajetasProyecto.CardElements)
+                @foreach (var items in _tajetasProyecto.ProjectCardList)
                  {
                     <CardProject
                                  Tamano="@tamano"
-                                 ImageCategoria="@items.ImageCategoria"
-                                 ImageProyecto="@items.ImageProyect"
-                                 ImageUser="@items.ImageUser"
-                                 NameUser="@items.NameUser"
-                                 ProjectTitle="@items.ProyectTitle">
+                                 ImageCategoria="@items.Categoria"
+                                 ImageProyecto="@items.ImageProyecto"
+                                 ImageUser="@items.ImagenUsuario"
+                                 NameUser="@items.NombreUsuario"
+                                 ProjectTitle="@items.TituloProyecto">
                     </CardProject>
                  }
              }
@@ -31,13 +32,12 @@
     private string tamano = "0";
     private string movedPixel = "0";
     private string classNavMenu { get; set; }
-    private ProyectosDestacados _tajetasProyecto = new ProyectosDestacados();
+    private FeaturedProjects _tajetasProyecto = new FeaturedProjects();
     bool _proyectos = false;
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        var leer = new Lector();
-        _tajetasProyecto = leer.ObtenerProyectos();
-        if (_tajetasProyecto.CardElements != null) _proyectos = true;
+        _tajetasProyecto = await project.GetFeaturedProjects();
+        if (_tajetasProyecto.ProjectCardList != null) _proyectos = true;
         if (TipoMenu == "PgPrincipal")
         {
             classNavMenu = "nav-menu-project";
