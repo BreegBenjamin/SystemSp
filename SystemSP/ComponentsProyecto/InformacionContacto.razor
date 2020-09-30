@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime JsRun;
+
 <article class="informacion-contacto estilosBordes">
     <ol>
         <li class="centerContactoData">
@@ -6,19 +7,19 @@
                 <img src="images/img_proyect/call.svg" class="imgInformacion" alt="imgPhone" />
             </span>
             <div style="margin-left:20px">
-                <input class="description-fake" type="text" @bind="@_numeroTelefono" placeholder="@_numeroTelefono"maxlength="10" @onfocusout="savePhone"/>
+                <input class="description-fake" type="text" @bind="@_numeroTelefono" placeholder="@UserTelephone" maxlength="10" @onfocusout="savePhone" />
             </div>
         </li>
         <li class="centerContactoData">
             <span class="circularBorder"><img src="images/img_proyect/email_user.svg" alt="correo" class="imgInformacion" /></span>
             <div style="margin-left:20px">
-                <input class="description-fake" type="text" @bind="@_direccionEmail" placeholder="@_direccionEmail" maxlength="30" @onfocusout="saveEmail" />
+                <input class="description-fake" type="text" @bind="@_direccionEmail" placeholder="@UserEmail" maxlength="30" @onfocusout="saveEmail" />
             </div>
         </li>
         <li class="centerContactoData">
             <span class="circularBorder"><img src="images/img_proyect/location.svg" class="imgInformacion" alt="direccion" /></span>
             <div style="margin-left:20px">
-                <input class="description-fake" type="text" @bind="@_direccionFisica" placeholder="@_direccionFisica" maxlength="30" @onfocusout="saveAddress"/>
+                <input class="description-fake" type="text" @bind="@_direccionFisica" placeholder="@_direccionFisica" maxlength="30" @onfocusout="saveAddress" />
             </div>
         </li>
     </ol>
@@ -26,8 +27,13 @@
 <AlertaApp Mensaje="@_mensaje"></AlertaApp>
 
 @code {
-    private string _numeroTelefono = "3002309039";
-    private string _direccionEmail = "Ernestocajar@outlook.com";
+    [Parameter]
+    public string UserTelephone { get; set; }
+    [Parameter]
+    public string UserEmail { get; set; }
+
+    private string _numeroTelefono = "";
+    private string _direccionEmail = "";
     private string _direccionFisica = "Calle 25 # 89 12";
     private string _mensaje = string.Empty;
     private async Task savePhone()

@@ -3,7 +3,7 @@
         <img src="/images/PageImage/@Imagen" height="50" width="50" />
     </div>
     <div>
-        <p class="centerMessage">@MensajeCard</p>
+        <p class="centerMessage">@MensajeCard1 <br> @MensajeCard2</p>
     </div>
     <p class="sugerencias">@SubTitulo</p>
 </section>
@@ -12,7 +12,9 @@
     [Parameter]
     public string Imagen { get; set; }
     [Parameter]
-    public string MensajeCard { get; set; }
+    public string MensajeCard1 { get; set; }
+    [Parameter]
+    public string MensajeCard2 { get; set; }
     [Parameter]
     public string SubTitulo { get; set; }
 }

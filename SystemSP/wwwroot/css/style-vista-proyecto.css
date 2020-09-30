@@ -108,6 +108,8 @@ li {
 }
 
 .containerSlider {
+    border: 2px solid #CDCDCD;
+    border-radius: 10px;
     height: 275px;
     width: 450px;
 }
@@ -171,6 +173,8 @@ li {
 .namePerson {
     color: rgb(18, 129, 202);
     font-size: 1.4em;
+    height:100%;
+    width:100%;
 }
 
 /*Detalles de la descripción de la empresa*/

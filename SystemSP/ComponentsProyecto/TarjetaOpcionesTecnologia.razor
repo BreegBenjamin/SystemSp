@@ -1,8 +1,8 @@
 ﻿@inject Lector lectura;
-<section @onclick="_mostrarModal" class="sectionTegnologias">
+<section @onclick="@(()=>_habilitarModal = true)" class="sectionTegnologias">
     <div class="opcionesTegnologia">
         <div>
-            <img src="@ImageCard" alt="imgaOpcion" width="50" height="50" />
+            <img src="/images/PageImage/@ImageCard" alt="imgaOpcion" width="50" height="50" />
         </div>
         <div>
             <p class="pTituloTech">@NombreOpcion</p>
@@ -12,11 +12,11 @@
         <p class="pDescripcionTech">@DescripcionOpcion</p>
     </div>
 </section>
-@if (_habilitarModal) 
+@if (_habilitarModal)
  {
-    <ModalTegnologiasApp 
-                         CancelarCambio="Cancelar"
-                         TecnologiasApp="_tecnologiasApp"></ModalTegnologiasApp>
+    <ModalTegnologiasApp CancelarCambio="_cancel"
+                         GuardarCambios="_save"
+                     TecnologiasApp="_tecnologiasApp"></ModalTegnologiasApp>
  }
 
 @code {
@@ -28,17 +28,33 @@
     public string DescripcionOpcion { get; set; }
     [Parameter]
     public string Accion { get; set; }
+    [CascadingParameter]
+    public FormProjectApp ProjectApp { get; set; }
 
     private List<ETecnologiasApp> _tecnologiasApp = new List<ETecnologiasApp>();
     private bool _habilitarModal = false;
-    private void _mostrarModal()
+    private void _cancel(bool _canceled) => _habilitarModal = false;
+    private void _save(string tecnology)
     {
-        _habilitarModal = true;
+        if(tecnology != "none")
+            switch (Accion)
+            {
+                case "Front":
+                    ProjectApp.TechFrontEnd = tecnology;
+                    break;
+                case "Back":
+                    ProjectApp.TechBackEnd = tecnology;
+                    break;
+                case "DataBase":
+                    ProjectApp.TechDataBase = tecnology;
+                    break;
+            }
+        _habilitarModal = false;
     }
-    private void Cancelar(bool _canceled) => _habilitarModal = false;
+
     protected override void OnInitialized()
     {
-        _tecnologiasApp = lectura.GetTecnologiasApp("Front");
+        _tecnologiasApp = lectura.GetTecnologiasApp(Accion);
         base.OnInitialized();
     }
 }

@@ -1,12 +1,13 @@
 ﻿@inject IJSRuntime JsRun;
 @inject I18nText ServiceTraslator;
+
 <section class="info-usuario estilosBordes">
     <div>
         <div class="img-userProyect">
             <span class="opacidadImage">@_letrasInciales</span>
         </div>
         <div class="centerName">
-            <label id="lbNombrePersona">@_nombreUser</label>
+            <label id="lbNombrePersona">@UserName</label>
         </div>
     </div>
     <div class="elementsNoty">
@@ -24,7 +25,7 @@
             <p>@_textPublicar.UpdateInformacion</p>
             <span>
                 <p class="pFont">@_textPublicar.Name</p>
-                <input type="text" class="txtEditName" placeholder="@_nombreUser" @bind="_nombreUser" />
+                <input type="text" class="txtEditName" placeholder="@UserName" @bind="_nombreUser" />
             </span>
             <span>
                 <p class="pFont">@_textPublicar.NewPassword</p>
@@ -51,33 +52,35 @@
 <AlertaApp TipoAlerta="true" Mensaje="@_textPublicar.MessagePassword"></AlertaApp>
 
 @code {
-    private String _nombreUser = string.Empty;
-    String nombre = "Marta";
-    String apellido = "Del Castillo";
-    private String _letrasInciales = string.Empty;
-    private String _displayType = "none";
-    private String _modalNotify = "none";
+    //Parametros
+    [Parameter]
+    public string UserName { get; set; }
+
+    private string _letrasInciales = string.Empty;
+    private string _nombreUser = string.Empty;
+    private string _displayType = "none";
+    private string _modalNotify = "none";
     // passWord
-    private String _confirmPass { get; set; }
-    private String _nuevoPass { get; set; }
+    private string _confirmPass { get; set; }
+    private string _nuevoPass { get; set; }
     //metodos Eventos
     TextPublicarPage _textPublicar = new TextPublicarPage();
 
     protected override async Task OnInitializedAsync()
     {
-        _nombreUser = $"{nombre} {apellido}";
-        _letrasInciales = $"{nombre[0]} {apellido[0]}";
+        string[] letras = UserName.Split(' ');
+        _letrasInciales = $"{letras[0][0]} {letras[1][0]}";
         _textPublicar = await ServiceTraslator.GetTextTableAsync<TextPublicarPage>(this);
         base.OnInitialized();
     }
     private async Task guardarCambios()
     {
-        string[] letras = _nombreUser.Split(' ');
+        string[] letras = UserName.Split(' ');
         if (letras.Length > 0)
             _letrasInciales = $"{letras[0][0]} {letras[1][0]}";
         if (!String.IsNullOrEmpty(_confirmPass) && !String.IsNullOrEmpty(_nuevoPass))
         {
-            bool pass = ValidarFormularios.ValidaPassWord(_nuevoPass, _confirmPass);
+            bool pass = ValidarFormularios.ValidaPassEmail(_nuevoPass, _confirmPass);
             if (pass)
             {
                 this._displayType = "none";

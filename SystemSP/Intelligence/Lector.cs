@@ -27,11 +27,21 @@ namespace SystemSP.Intelligence
         {
             var listTech = new List<ETecnologiasApp>();
             string path = string.Empty;
-
-            if (tipo == "Front")
-                path = @"wwwroot\Json\TecnologiasFront.json";
             try
             {
+                switch (tipo) 
+                {
+                    case "Front":
+                        path = @"wwwroot\Json\TecnologiasFront.json";
+                        break;
+                    case "Back":
+                        path = @"wwwroot\Json\TecnologiasBack.json";
+                        break;
+                    case "DataBase":
+                        path = @"wwwroot\Json\TecnologiasDB.json";
+                        break;
+                    
+                }
                 string fileResult = _jsonFile(path);
 
                 listTech = (List<ETecnologiasApp>)JsonConvert.DeserializeObject(

@@ -13,5 +13,10 @@
   "Travel": "Viajes y Turismo",
   "Music": "Musica y Audio",
   "Photography": "Fotografia",
-  "Event": "Entretenimiento y Eventos"
+  "Art": "Arte y Diseño",
+  "Tool": "Herramientas y Productividad",
+  "Office": "Complementos Ofimatica",
+  "Event": "Entretenimiento y Eventos",
+  "Finance": "Finanzas y Empleos",
+  "Other": "Otro"
 }

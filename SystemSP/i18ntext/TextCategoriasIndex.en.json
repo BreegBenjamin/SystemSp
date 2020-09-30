@@ -13,5 +13,10 @@
   "Travel": "Travels and tourism",
   "Music": "Music and Audio",
   "Photography": "Photography",
-  "Event": "Entertainment and Events"
+  "Art": "Art and Design",
+  "Tool": "Tools and Productivity",
+  "Office": "Office Complement",
+  "Event": "Entertainment and Events",
+  "Finance": "Finance and Jobs",
+  "Other": "Other"
 }

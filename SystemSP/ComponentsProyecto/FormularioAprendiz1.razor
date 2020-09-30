@@ -1,126 +1,165 @@
-﻿@inject Lector lector;
-@inject I18nText TraductorService;
+﻿@inject I18nText TraductorService;
 <section>
-    <EditForm Model="_aprendizIn" OnValidSubmit="HandleValidSubmit">
-        @*<DataAnnotationsValidator />
-            <ValidationSummary />*@
+    <EditForm Model="ProjectApp">
         <ol class="formAprendiz1">
             <li class="liForm">
                 <div class="containerTexto">
-                    <label class="lbColor">@_txtPublicar.ProjectName</label>
-                    <InputText @bind-Value="_aprendizIn.NombreProyecto" class="inputFormAprendiz fontProject fontInput"
-                               @onfocusout="validaForm" MaxLength="30"></InputText>
+                    <label class="lbColor">@_txtPublicar.ProjectName
+                        <span style="color:#ED0000">*</span>
+                    </label>
+                    <InputText @bind-Value="ProjectApp.NameProject" class="inputFormAprendiz fontProject fontInput"
+                               @onfocusout="validaForm" MaxLength="30">
+                    </InputText>
                 </div>
                 <div class="containerTexto">
-                    <label class="lbColor">@_txtPublicar.CategoryForm</label>
-                    @if (_listaCategoria != null)
-                    {
-                        <InputSelect @bind-Value="_aprendizIn.Categoria" class="selectType selectStile">
-                            @foreach (var item in _listaCategoria.CategoriasVista)
-                                {
-                                <option class="opcionItem">@item.NombreCategoria</option>
-                                }
-                        </InputSelect>
-                    }
+                    <label class="lbColor">@_txtPublicar.CategoryForm
+                        <span style="color:#ED0000">*</span>
+                    </label>
+                    <InputSelect @bind-Value="ProjectApp.Category" class="selectType selectStile">
+                        @foreach (var item in _Category)
+                         {
+                            <option value="@item">@item</option>
+                         }
+                    </InputSelect>
                 </div>
             </li>
             <li class="liForm">
                 <!--Ciudad Formación-->
                 <div class="containerTexto">
-                    <label class="lbColor">@_txtPublicar.Department</label>
-                    <InputSelect @bind-Value="_aprendizIn.Departamento" class="selectType selectStile">
+                    <label class="lbColor">@_txtPublicar.Department
+                        <span style="color:#ED0000">*</span>
+                    </label>
+                    <InputSelect @bind-Value="ProjectApp.Departament" class="selectType selectStile">
                         @foreach (var item in _listDepa)
-                        {
-                            <option>@item</option>
-                        }
+                         {
+                            <option value="@item">@item</option>
+                         }
                     </InputSelect>
                 </div>
                 <div class="containerTexto">
-                    <label class="lbColor">@_txtPublicar.TrainingCity</label>
-                    <InputText @bind-Value="_aprendizIn.Ciudad" class="inputFormAprendiz fontInput fontCity"
-                               @onfocusout="validaForm" MaxLength="40"></InputText>
-                </div>
-            </li>
+                <label class="lbColor">
+                    @_txtPublicar.TrainingCity
+                <span style="color:#ED0000">*</span>
+            </label>
+            <InputText @bind-Value="ProjectApp.TrainingCity" class="inputFormAprendiz fontInput fontCity"
+                       @onfocusout="validaForm" MaxLength="40"></InputText>
+        </div>
+                </li>
             <li class="liForm">
-                <!--Fecha de publicación proyecto-->
-                <div class="containerTexto">
-                    <div class="selects">
-                        <div class="containerTexto">
-                            <label class="lbColor">@_txtPublicar.TrainingType</label>
-                        </div>
-                        <span>
-                            <label class="radio">
-                                <input type="radio" id="checkTecnico" name="checkTech" value="1" checked>
-                                <span>@_txtPublicar.Technical</span>
-                            </label>
-                        </span>
-                        <span>
-                            <label class="radio">
-                                <input type="radio" id="checkTecnologo" name="checkTech" value="2">
-                                <span>@_txtPublicar.Technologist</span>
-                            </label>
-                        </span>
-                        <span>
-                            <label class="radio">
-                                <input type="radio" id="checkOtro" name="checkTech" value="3">
-                                <span>@_txtPublicar.OtherType</span>
-                            </label>
-                        </span>
-                    </div>
-                </div>
-                <div class="containerTexto">
+            <!--Fecha de publicación proyecto-->
+            <div class="containerTexto">
+                <div class="selects">
                     <div class="containerTexto">
-                        <label class="lbColor">@_txtPublicar.ProjectDate</label>
-                    </div>
-                    <div class="containerFecha">
-                        <InputSelect @bind-Value="_aprendizIn.Anio" class="selectType selectStile2">
-                            @foreach (var item in _listaAnio)
-                            {
-                                <option class="opcionItem">@item</option>
-                            }
-                        </InputSelect>
-                        <InputSelect @bind-Value="_aprendizIn.Mes" class="selectType selectStile2">
-                            @for (int i = 1; i <= 12; i++)
-                            {
-                                <option class="opcionItem">@i</option>
-                            }
-                        </InputSelect>
-                        <InputSelect @bind-Value="_aprendizIn.Dia" class="selectType selectStile2">
-                            @foreach (var item in _listDias)
-                            {
-                                <option class="opcionItem">@item</option>
-                            }
-                        </InputSelect>
-                        <TooltipApp MensajeToolTip="@_txtPublicar.TooltipData"></TooltipApp>
-                    </div>
+                        <label class="lbColor">
+                            @_txtPublicar.TrainingType
+                        <span style="color:#ED0000">*</span>
+                    </label>
                 </div>
-            </li>
-            <li>
-                <!--Descripcion del proyecto-->
-                <div class="containerTexto">
-                    <label class="lbColor">@_txtPublicar.ProjectDescription</label>
-                    <InputTextArea @bind-Value="_aprendizIn.DescripcionProjecto" class="textDescripcion"
-                                   placeholder="@_txtPublicar.CampDescription"
-                                   @onfocusout="validaForm" MaxLength="2000"></InputTextArea>
-                </div>
-            </li>
-            <li>
-                <!--Botones-->
-                <div class="disBotones">
-                    <button class="PublicarProyecto-Unlock" disabled>@_txtPublicar.BottonBack</button>
-                    <button class="@_classBotones" type="submit" disabled="@continuarDis">@_txtPublicar.BottonContinue</button>
-                </div>
-            </li>
+                <span>
+                    <label class="radio">
+                        <input type="radio" id="checkTecnico" name="checkTech" @bind="ProjectApp.TrainingType" checked>
+                        <span>@_txtPublicar.Technical</span>
+                    </label>
+                </span>
+                <span>
+                    <label class="radio">
+                        <input type="radio" id="checkTecnologo" name="checkTech" @bind="ProjectApp.TrainingType">
+                        <span>@_txtPublicar.Technologist</span>
+                    </label>
+                </span>
+                <span>
+                    <label class="radio">
+                        <input type="radio" id="checkOtro" name="checkTech" @bind="ProjectApp.TrainingType">
+                        <span>@_txtPublicar.OtherType</span>
+                    </label>
+                </span>
+            </div>
+        </div>
+        <div class="containerTexto">
+            <div class="containerTexto">
+                <label class="lbColor">
+                    @_txtPublicar.ProjectDate
+                <span style="color:#ED0000">*</span>
+            </label>
+        </div>
+        <div class="containerFecha">
+            <InputSelect @bind-Value="_anio" class="selectType selectStile2">
+                @foreach (var item in _listaAnio)
+                {
+                    <option class="opcionItem">@item</option>
+                }
+            </InputSelect>
+            <InputSelect @bind-Value="_mes" class="selectType selectStile2">
+                @for (int i = 1; i <= 12; i++)
+                {
+                    <option class="opcionItem">@i</option>
+                }
+            </InputSelect>
+            <InputSelect @bind-Value="_dia" class="selectType selectStile2">
+                @foreach (var item in _listDias)
+                {
+                    <option class="opcionItem">@item</option>
+                }
+            </InputSelect>
+            <TooltipApp MensajeToolTip="@_txtPublicar.TooltipData"></TooltipApp>
+        </div>
+        </div>
+        </li>
+        <li>
+            <!--Descripcion del proyecto-->
+            <div class="containerTexto">
+                <label class="lbColor">
+                    @_txtPublicar.ProjectDescription
+                <span style="color:#ED0000">*</span>
+            </label>
+            <InputTextArea @bind-Value="ProjectApp.ProjectDescription" class="textDescripcion"
+                           placeholder="@_txtPublicar.CampDescription"
+                           @onfocusout="validaForm" MaxLength="2000">
+            </InputTextArea>
+        </div>
+        </li>
+        <li>
+            <!--Botones-->
+            <div class="disBotones">
+                <button class="PublicarProyecto-Unlock" disabled>@_txtPublicar.BottonBack</button>
+                <button class="@_classBotones" disabled="@continuarDis" @onclick="_validaContinuar">
+                    @_txtPublicar.BottonContinue
+                </button>
+            </div>
+        </li>
         </ol>
-    </EditForm>
+</EditForm>
 </section>
 @code {
     [Parameter]
     public EventCallback<int> FormValid { get; set; }
+    [CascadingParameter]
+    public FormProjectApp ProjectApp { get; set; }
 
     private TextPublicarPage _txtPublicar = new TextPublicarPage();
-    private EFormularioAprendizIn _aprendizIn = new EFormularioAprendizIn();
-    private ListaCategoriaVista _listaCategoria = new ListaCategoriaVista();
+    private string[] _Category =
+    {
+        "Supermarkets and Stores",
+        "Vehicles and Motorcycles",
+        "Education",
+        "Transport",
+        "Environment",
+        "Industry and Commerce",
+        "Veterinary",
+        "Agriculture and Farms",
+        "Estate and Home",
+        "Books and Libraries",
+        "Health and Wellness",
+        "Travels and tourism",
+        "Music and Audio",
+        "Photography",
+        "Art and Design",
+        "Tools and Productivity",
+        "Office Complement",
+        "Entertainment and Events",
+        "Finance and Jobs",
+        "Other"
+    };
     private bool _btnConrinuarDisabled = true;
     private string _classBotones = "PublicarProyecto-Unlock";
     private List<string> _listaAnio = new List<string>();
@@ -161,17 +200,27 @@
         "Vichada"
     };
     private bool continuarDis = true;
+    private string _dia = DateTime.Now.Day.ToString();
+    private string _mes = DateTime.Now.Month.ToString();
+    private string _anio = DateTime.Now.Year.ToString();
+    private bool _habilitarCambio = false;
+    private string _classContenedor = "";
 
     protected override async Task OnInitializedAsync()
     {
-        _listaCategoria = lector.ObtenerListaCategorias();
         _listaAnio = _getAnio();
         _listDias = _getDias(DateTime.Now.Year, DateTime.Now.Month);
         _txtPublicar = await TraductorService.GetTextTableAsync<TextPublicarPage>(this);
+        ProjectApp.Category = _Category[0];
+        ProjectApp.Departament = _listDepa[0];
         base.OnInitialized();
     }
 
-    private async Task HandleValidSubmit() => await FormValid.InvokeAsync(1);
+    private async Task _validaContinuar()
+    {
+        ProjectApp.ProjectDate = $"{_anio}-{_mes}-{_dia}";
+        await FormValid.InvokeAsync(1);
+    }
     private List<string> _getAnio()
     {
         var years = new List<string>();
@@ -198,12 +247,30 @@
     }
     private void validaForm()
     {
-        if (!string.IsNullOrWhiteSpace(_aprendizIn.Ciudad) &&
-            !string.IsNullOrWhiteSpace(_aprendizIn.NombreProyecto) &&
-            !string.IsNullOrWhiteSpace(_aprendizIn.DescripcionProjecto))
+        if (!string.IsNullOrWhiteSpace(ProjectApp.TrainingCity) &&
+            !string.IsNullOrWhiteSpace(ProjectApp.NameProject) &&
+            !string.IsNullOrWhiteSpace(ProjectApp.ProjectDescription))
         {
             _classBotones = "BotonPublicarProyecto";
             continuarDis = false;
         }
+    }
+    private void _habilitarOpciones()
+    {
+        if (!_habilitarCambio)
+        {
+            _habilitarCambio = true;
+            _classContenedor = "containerLand";
+        }
+        else
+        {
+            _habilitarCambio = false;
+            _classContenedor = string.Empty;
+        }
+    }
+    private void _DesabilitarOpciones()
+    {
+        _habilitarCambio = false;
+        _classContenedor = string.Empty;
     }
 }

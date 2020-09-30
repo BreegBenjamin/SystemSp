@@ -1,0 +1,25 @@
+﻿<section class="ModalOpcionesPage">
+    <div class="ModalOpcionesConfiguraciones">
+        <div class="centerFlex" style="flex-direction:column">
+            <span>
+                <img src="/images/img_proyect/alert.svg" width="50" height="50" />
+            </span>
+            <p>Mensaje</p>
+        </div>
+        <div class="centerFlex">
+            <button class="btGuardarOptciones btEstadoModalOptciones" 
+                    @onclick="@(()=>ActionResult.InvokeAsync(true))">@SaveMessage</button>
+            <button class="btCancelarOptciones btEstadoModalOptciones"
+                    @onclick="@(()=>ActionResult.InvokeAsync(false))">@CancelMessage</button>
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public string SaveMessage { get; set; }
+    [Parameter]
+    public string CancelMessage { get; set; }
+    [Parameter]
+    public EventCallback<bool> ActionResult { get; set; }
+}

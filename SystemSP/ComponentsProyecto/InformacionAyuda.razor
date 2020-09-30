@@ -1,16 +1,30 @@
-﻿<section class="estilosBordes" style="height:100%">
-    <ol style="margin: 0; padding: 0;">
+﻿@inject I18nText ServiceTranslator;
+<section class="estilosBordes" style="height:100%">
+    <ol class="olOptions">
         <li class="liFlex">
-            <button class="btn-ayuda botonUsuario " id="btn-ayuda"></button>
-            <p>Ayuda!</p>
+            <button class="btn-ayuda botonOpciones"></button>
+            <label>@_textPublicar.Help</label>
         </li>
         <li class="liFlex">
-            <button class="btn-copy botonUsuario" id="btn-copy"></button>
-            <p>Condiciones de Uso</p>
+            <button class="btn-law botonOpciones"></button>
+            <label>@_textPublicar.TermsUse</label>
+        </li>
+        <li class="liFlex">
+            <button class="btn-open botonOpciones"></button>
+            <label>@_textPublicar.OpenSource</label>
+        </li>
+        <li class="liFlex">
+            <button class="btn-copy botonOpciones"></button>
+            <label>Copyright</label>
         </li>
     </ol>
 </section>
 
 @code {
+    private TextPublicarPage _textPublicar = new TextPublicarPage();
 
+    protected override async Task OnInitializedAsync()
+    {
+        _textPublicar = await ServiceTranslator.GetTextTableAsync<TextPublicarPage>(this);
+    }
 }

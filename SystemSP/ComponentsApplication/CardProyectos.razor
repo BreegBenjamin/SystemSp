@@ -9,14 +9,15 @@
              {
                 @foreach (var items in _tajetasProyecto.ProjectCardList)
                  {
-                    <CardProject
+                    <TarjetaProyectoPopular
                                  Tamano="@tamano"
-                                 ImageCategoria="@items.Categoria"
-                                 ImageProyecto="@items.ImageProyecto"
+                                 Categoria="@items.Categoria"
                                  ImageUser="@items.ImagenUsuario"
                                  NameUser="@items.NombreUsuario"
-                                 ProjectTitle="@items.TituloProyecto">
-                    </CardProject>
+                                 ProjectTitle="@items.TituloProyecto"
+                                 IdProject="items.IdProyecto"
+                                 GetIdProject="GetIdProject">
+                    </TarjetaProyectoPopular>
                  }
              }
         </div>
@@ -28,7 +29,8 @@
     [Parameter]
     public string TipoMenu { get; set; }
     [Parameter]
-    public string OcultarBoton { get; set; }
+    public EventCallback<int> GetIdProject { get; set; }
+
     private string tamano = "0";
     private string movedPixel = "0";
     private string classNavMenu { get; set; }

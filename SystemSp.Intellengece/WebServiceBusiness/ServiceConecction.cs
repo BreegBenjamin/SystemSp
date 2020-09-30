@@ -1,17 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-using SystemSp.Intellengece.Entities;
-using SystemSp.Intellengece.Interfaces;
 
 namespace SystemSp.Intellengece.WebServiceBusiness
 {
-    public enum Controllers
-    {
-        Project,
-        Users
-    }
     public abstract class ServiceConecction
     {
         private readonly HttpClient _httpClient;
@@ -19,35 +13,78 @@ namespace SystemSp.Intellengece.WebServiceBusiness
         {
             _httpClient = client;
         }
-        private async Task<string> JsonResultService(Controllers baseUri) 
+        private async Task<string> _jsonResultService(string uri) 
         {
-            using (_httpClient) 
+            string jsonResult = string.Empty;
+            try
+            {
+                HttpResponseMessage result = await _httpClient.GetAsync($"api/{uri}");
+                jsonResult = (result.IsSuccessStatusCode) ? result.Content.ReadAsStringAsync().Result
+                    : result.StatusCode.ToString();
+            }
+            catch (Exception ex)
+            {
+                jsonResult = ex.Message;
+            }
+            return jsonResult;
+        }
+        private async Task<string> _jsonResultService<T>(string uri, T entity)
+        {
+            using (_httpClient)
             {
                 string jsonResult = string.Empty;
                 try
                 {
-                    HttpResponseMessage result = await _httpClient.GetAsync($"api/{baseUri}");
+                    var stringContent = new StringContent(JsonConvert.SerializeObject(entity), 
+                        Encoding.UTF8, "application/json");
+                    HttpResponseMessage result = await _httpClient.PostAsync($"api/{uri}", stringContent);
                     jsonResult = (result.IsSuccessStatusCode) ? result.Content.ReadAsStringAsync().Result
                         : result.StatusCode.ToString();
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     jsonResult = ex.Message;
                 }
                 return jsonResult;
             }
         }
-        public async Task<T> GetDataFromService<T>(T entity,Controllers baseUri)
+        public async Task<T> GetDataFromService<T>(T entity, string baseUri)
         {
             try
             {
-                string json = await JsonResultService(baseUri);
+                string json = await _jsonResultService(baseUri);
                 T result = (T)JsonConvert.DeserializeObject(json, typeof(T));
                 return result;
             }
             catch
             {
                 return (T)(object)Convert.ChangeType(entity, typeof(T));
+            }
+        }
+        public async Task<bool> SendDataToService<T>(T entity, string baseUri)
+        {
+            try
+            {
+                string json = await _jsonResultService<T>(baseUri, entity);
+                bool result = (bool)JsonConvert.DeserializeObject(json);
+                return result;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public async Task<L> SendDataToServiceParam<T,L>(T entity, string baseUri)
+        {
+            try
+            {
+                string json = await _jsonResultService<T>(baseUri, entity);
+                L result = (L)JsonConvert.DeserializeObject(json, typeof(L));
+                return result;
+            }
+            catch
+            {
+                return (L)(object)Convert.ChangeType(entity, typeof(L));
             }
         }
     }

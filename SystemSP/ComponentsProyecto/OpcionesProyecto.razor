@@ -2,41 +2,43 @@
 <section>
     <ol class="optionsOL">
         <li>
-            <button @onclick="()=>CambiarOpcion(0)" class="BotonInfoProdyecto @publicarClassName">@_textPublicar.PublishProject</button>
+            <button @onclick="@(()=>cambiarOpcion(0))" class="BotonInfoProdyecto @PublicarClassName">@_textPublicar.PublishProject</button>
         </li>
         <li>
-            <button @onclick="()=>CambiarOpcion(1)" class="BotonInfoProdyecto @novedadClassName">@_textPublicar.News</button>
+            <button @onclick="@(()=>cambiarOpcion(1))" class="BotonInfoProdyecto @NovedadClassName">@_textPublicar.News</button>
         </li>
     </ol>
 </section>
 
 @code {
-    private string novedadClassName = "btn-opcion-unluck";
-    private string publicarClassName = "btn-opcion-luck";
-    private int NumeroOpcion = 0;
+    [Parameter]
+    public int NumeroOpcion { get; set; }
     [Parameter]
     public EventCallback<int> OnClickOpcion { get; set; }
+    [Parameter]
+    public string NovedadClassName { get;set; }
+    [Parameter]
+    public string PublicarClassName { get; set; }
 
     TextPublicarPage _textPublicar = new TextPublicarPage();
-    private async Task CambiarOpcion(int numeroAccion)
+    private async Task cambiarOpcion(int page)
     {
-        if (numeroAccion == 0)
+        if (page == 0)
         {
-            novedadClassName = "btn-opcion-unluck";
-            publicarClassName = "btn-opcion-luck";
-            NumeroOpcion = 0;
+            NovedadClassName = "btn-opcion-unluck";
+            PublicarClassName = "btn-opcion-luck";
         }
-        else if (numeroAccion == 1)
+        else if (page == 1)
         {
-            novedadClassName = "btn-opcion-luck";
-            publicarClassName = "btn-opcion-unluck";
-            NumeroOpcion = 1;
+            NovedadClassName = "btn-opcion-luck";
+            PublicarClassName = "btn-opcion-unluck";
         }
-        await OnClickOpcion.InvokeAsync(NumeroOpcion);
+        await OnClickOpcion.InvokeAsync(page);
     }
     protected override async Task OnInitializedAsync()
     {
+        NovedadClassName = "btn-opcion-unluck";
+        PublicarClassName = "btn-opcion-luck";
         _textPublicar = await ServiceTranslator.GetTextTableAsync<TextPublicarPage>(this);
-        base.OnInitializedAsync();
     }
 }

@@ -8,7 +8,8 @@ namespace SystemSP.Entitys
     public class ETecnologiasApp
     {
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
         public string UrlImage { get; set; }
+        public string DetalleTecnologia { get; set; }
+        public bool CheckTecnologia { get; set; }
     }
 }

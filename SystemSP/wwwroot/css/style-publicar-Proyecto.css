@@ -1,3 +1,4 @@
+@import "NovedadStyle.css";
 body {
     margin: 0;
     padding: 0;
@@ -232,9 +233,19 @@ li{
     background-color: #fff;
     background-image: url("/images/img_proyect/information.svg");
 }
-.btn-copy {
+.btn-law {
     background-color: #cdcdcd;
     background-image: url("/images/img_proyect/law.svg");
+    background-size: 80% !important;
+}
+.btn-open {
+    background-color: #cdcdcd;
+    background-image: url("/images/img_proyect/open-source.svg");
+    background-size: 80% !important;
+}
+.btn-copy {
+    background-color: #cdcdcd;
+    background-image: url("/images/img_proyect/copyright.svg");
     background-size: 80% !important;
 }
 .liFlex{
@@ -717,6 +728,7 @@ select {
     border-bottom: 2px solid #08AEC4;
     color: #FFF;
     outline: none;
+    cursor:pointer;
     height: 40px;
     width: 175px;
 }
@@ -735,7 +747,7 @@ select {
     flex-direction: column;
     justify-content: center;
     height: 150px;
-    width: 100%;
+    width: 165px;
 }
 .pDescripcionTech {
     font-size: 0.8em;
@@ -763,27 +775,32 @@ select {
     margin: 20px 0;
 }
 .classTech {
-    align-items: center;
     box-shadow: 0 0 10px 0px #ECF2F3;
     border-radius: 5px;
     display: grid;
-    padding: 0 15px;
-    grid-template-columns: max-content 1fr;
-    height: 145px;
+    align-content: center;
+    box-sizing: border-box;
+    grid-template-columns: 1fr 10px;
+    justify-items: flex-start;
+    height: 110px;
+    padding: 5px 10px;
+    cursor: pointer;
     width: 90%;
 }
 .ImgTech {
     align-items: center;
-    height: 90px;
-    width: 90px;
+    height: 75px;
+    width: 75px;
     background-color: #ECF2F3;
     border-radius: 50%;
     display: flex;
     justify-content: center;
 }
 .centerTXt {
-    text-align: center;
+    align-items: center;
+    display: flex;
     margin-left: 25px;
+    text-align: center;
 }
     .centerTXt > * {
         margin:0;
@@ -803,3 +820,67 @@ select {
     height:100%;
     width:100%;
 }
+.BotonPostProject {
+    border-radius: 50px;
+    border: none;
+    background-color: rgb(70, 195, 226);
+    border-bottom: 2px solid #08AEC4;
+    color: #FFF;
+    outline: none;
+    cursor: pointer;
+    height: 50px;
+    width: 80%;
+}
+    .BotonPostProject:hover {
+        background-color: #08AEC4;
+    }
+.botonOpciones {
+    border-radius: 50%;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    background-color: #fff;
+    border: 2px solid rgb(13, 147, 180);
+    height: 50px;
+    outline: none;
+    width: 50px;
+}
+
+    .botonOpciones:hover {
+        cursor: pointer;
+        box-shadow: 0 0 3px 0px rgb(70, 195, 226);
+    }
+.olOptions {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 15px;
+}
+.imgHelp {
+    width:100%;
+    height:100%;
+}
+.centerImageHelp {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+}
+.containerMsHelp {
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 15px 25px -5px;
+    border-radius: 6px;
+    height: 265px;
+    padding: 0 15px;
+}
+.divMsHelp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.4em;
+}
+

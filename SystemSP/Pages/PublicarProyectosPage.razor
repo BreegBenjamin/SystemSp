@@ -1,44 +1,49 @@
 ﻿@page "/PublicarProyecto";
+@inject IJSRuntime JsRun;
 @inherits LayoutComponentBase
+@inject I18nText serviceTranslator;
+@inject UserInformationResult UserInfoResult;
 <header>
     <HeaderApp></HeaderApp>
 </header>
-
 <section class="elements-body">
     <div class="div-usuario">
-        <InformacionUsuario></InformacionUsuario>
+        <InformacionUsuario UserName="@UserInfoResult.UserName"></InformacionUsuario>
     </div>
     <aside class="info-ayuda">
         <InformacionAyuda></InformacionAyuda>
     </aside>
     <section class="bodyPage">
         <div class="sec-opciones">
-            <OpcionesProyecto OnClickOpcion="ClickHandler"></OpcionesProyecto>
+            <OpcionesProyecto OnClickOpcion="getProcess"
+                              NumeroOpcion="tipoOpcion"
+                              NovedadClassName="@_novedadClassName"
+                              PublicarClassName="@_publicarClassName"></OpcionesProyecto>
         </div>
-        <CascadingValue Value="ImagesFiles">
-            <CascadingValue Value="Aprendices">
+        <CascadingValue Value="ProjectApp">
+            <CascadingValue Value="IdUsuarioAplicacion">
                 <div class="setPage">
                     @switch (tipoOpcion)
                      {
                         case 0:
                             <div>
-                                <InformacionContacto></InformacionContacto>
-                                <FormularioAprendiz></FormularioAprendiz>
+                                <InformacionContacto UserEmail="@UserInfoResult.UserEmail"
+                                                     UserTelephone="@UserInfoResult.UserTelephone">
+                                </InformacionContacto>
+                                <FormularioAprendiz ProcessSuccess="getProcess"></FormularioAprendiz>
                             </div>
                             <div class="setOptions">
                                 <div>
 
                                     <TarjetaAyudaUsuario Imagen="ToolSoftware.svg"
-                                                         MensajeCard="Ayuda sobre como Publicar 
-                                                         el proyecto"
-                                                         SubTitulo="Click Aquí">
+                                                         MensajeCard1="@_textPublicar.Guide1"
+                                                         MensajeCard2="@_textPublicar.Guide2"
+                                                         SubTitulo="@_textPublicar.ClickHere">
                                     </TarjetaAyudaUsuario>
                                     <TarjetaAyudaUsuario Imagen="project.svg"
-                                                         MensajeCard="Implemente y escale
-                                                                      aplicaciones e instancias
-                                                                      de Windows Virtual
-                                                                      Desktop"
-                                                         SubTitulo="Windows Virtual Desktop">
+                                                         MensajeCard1="@_textPublicar.SeeFeatured1"
+                                                         MensajeCard2="@_textPublicar.SeeFeatured2"
+                                                         SubTitulo="@_textPublicar.SeeMore">
                                     </TarjetaAyudaUsuario>
                                 </div>
                                 <section class="borderInformacion">
@@ -50,33 +55,30 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <TarjetaEditarProyecto TituloTarjeta="Información del proyecto"
+                                    <TarjetaEditarProyecto TituloTarjeta="@_textPublicar.InfoProject"
                                                            LeadingImage="project.svg"
                                                            TipoTarjeta="info">
                                     </TarjetaEditarProyecto>
-                                    <TarjetaEditarProyecto TituloTarjeta="Integrantes"
+                                    <TarjetaEditarProyecto TituloTarjeta="@_textPublicar.Team"
                                                            LeadingImage="team.svg"
                                                            TrailingImage="true"
                                                            TipoTarjeta="Team">
                                     </TarjetaEditarProyecto>
-                                    <TarjetaEditarProyecto TituloTarjeta="Imagenes Interfaz"
+                                    <TarjetaEditarProyecto TituloTarjeta="@_textPublicar.InterfaceImage"
                                                            LeadingImage="image.svg"
                                                            TrailingImage="true"
                                                            TipoTarjeta="Images">
                                     </TarjetaEditarProyecto>
-                                    <TarjetaEditarProyecto TituloTarjeta="Archivos proyecto"
+                                    <TarjetaEditarProyecto TituloTarjeta="@_textPublicar.ProjectFile"
                                                            LeadingImage="folder.svg"
                                                            TrailingImage="true"
                                                            TipoTarjeta="file">
                                     </TarjetaEditarProyecto>
-                                    <div style="height:2px">
-
-                                    </div>
                                 </section>
                             </div>
                             break;
                         case 1:
-                            <p>Hola soy un </p>
+                            <NovedadesProyecto></NovedadesProyecto>
                             break;
                      }
                 </div>
@@ -86,20 +88,40 @@
 </section>
 @code {
     [CascadingParameter]
-    protected EInformacionArchivos ImagesFiles { get; set; } =
-    new EInformacionArchivos()
-    {
-        Archivos = new List<EArchivosProjecto>(),
-        ListaArchivos = new List<string>()
-    };
-    [CascadingParameter]
-    protected List<EIntegrantesGaes> Aprendices { get; set; } =
-        new List<EIntegrantesGaes>();
+    public int IdUsuarioAplicacion { get; set; }
 
+    [CascadingParameter]
+    public FormProjectApp ProjectApp { get; set; }
+    = new FormProjectApp()
+    {
+        ApprenticesData = new List<ApprenticeData>(),
+        ImagesProject = new List<string>()
+    };
+
+    private string _novedadClassName = "btn-opcion-unluck";
+    private string _publicarClassName = "btn-opcion-luck";
+    private TextPublicarPage _textPublicar = new TextPublicarPage();
     private int tipoOpcion = 0;
-    private void ClickHandler(int tipo)
+    private void getProcess(int tipo)
     {
         tipoOpcion = tipo;
+        if (tipo == 0)
+        {
+            _novedadClassName = "btn-opcion-unluck";
+            _publicarClassName = "btn-opcion-luck";
+        }
+        else if (tipo == 1)
+        {
+            _novedadClassName = "btn-opcion-luck";
+            _publicarClassName = "btn-opcion-unluck";
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        UserInfoResult.OnChange += StateHasChanged;
+        IdUsuarioAplicacion = UserInfoResult.UserId;
+        _textPublicar = await serviceTranslator.GetTextTableAsync<TextPublicarPage>(this);
     }
 }
 

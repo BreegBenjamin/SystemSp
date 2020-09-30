@@ -1,0 +1,44 @@
+﻿@inject NavigationManager _nav;
+<div class="card-Proyectos" style="min-width:@Tamano; max-width:@Tamano" 
+     @onclick="_SendDataProject">
+    <div>
+        <img class="imgStateproject"
+             src="@($"/images/proyectosPortadas/{Categoria}.jpg")">
+    </div>
+    <div class="centerInfo">
+        <p>@ProjectTitle</p>
+        <div>
+            <div class="imgAuto">
+                <img src="@ImageUser" class="personImg" alt="img-logoPersom">
+                <span>@NameUser</span>
+            </div>
+            <div>
+                <img class="imgCategoria"
+                     src="@($"/images/IconosCategorias/IconosColor/{Categoria}.svg")" alt="tipoCategoria">
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string ImageUser { get; set; }
+    [Parameter]
+    public string NameUser { get; set; }
+    [Parameter]
+    public string Categoria { get; set; }
+    [Parameter]
+    public string ProjectTitle { get; set; }
+    [Parameter]
+    public string Tamano { get; set; }
+    [Parameter]
+    public int IdProject { get; set; }
+    [Parameter]
+    public EventCallback<int> GetIdProject { get; set; }
+
+    private async Task _SendDataProject()
+    {
+        await GetIdProject.InvokeAsync(IdProject);
+        _nav.NavigateTo("/VistaProyectos/"+IdProject, false);
+    }
+}

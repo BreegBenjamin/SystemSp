@@ -5,7 +5,7 @@
     </div>
     <div class="nombreTitulo">
         <p class="NombreDetails">@TituloTarjeta</p>
-        <span class="nameProyect">@ImagesFiles.NumeroImagenes @_subTituloTarjeta</span>
+        <span class="nameProyect">@ProjectApp.ImagesProject.Count @_subTituloTarjeta</span>
     </div>
     <div>
         @if (TrailingImage)
@@ -21,12 +21,12 @@
         case "Images":
             <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
                 <div class="ImagenPosition">
-                    @if (ImagesFiles.Archivos.Count > 0)
+                    @if (ProjectApp.ImagesProject.Count > 0)
                     {
-                        foreach (var item in ImagesFiles.Archivos)
+                        foreach (var item in ProjectApp.ImagesProject)
                         {
                             <div>
-                                <img src="@item.ImageSrc" class="ImageProject" alt="imgSave" />
+                                <img src="@item" class="ImageProject" alt="imgSave" />
                             </div>
                         }
                     }
@@ -36,19 +36,19 @@
         case "Team":
             <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
                 <ol>
-                    @foreach (var item in Aprendices)
+                    @foreach (var item in ProjectApp.ApprenticesData)
                     {
                         <li>
-                            @item.Nombre
+                            @item.FirstName
                         </li>
                         <li>
-                            @item.Apellido
+                            @item.LastName
                         </li>
                         <li>
-                            @item.Telefono
+                            @item.Telephone
                         </li>
                         <li>
-                            @item.Correo
+                            @item.Email
                         </li>
                     }
                 </ol>
@@ -75,9 +75,7 @@
 @code {
     //Parametros en cascada
     [CascadingParameter]
-    protected EInformacionArchivos ImagesFiles { get; set; }
-    [CascadingParameter]
-    protected List<EIntegrantesGaes> Aprendices { get; set; }
+    public FormProjectApp ProjectApp { get; set; }
 
     //Parametros del componente
     [Parameter]

@@ -7,6 +7,9 @@ namespace SystemSP.I18nText
 
         public string this[string key] => global::Toolbelt.Blazor.I18nText.I18nTextExtensions.GetFieldValue(this, key);
 
+        /// <summary>"Art and Design"</summary>
+        public string Art;
+
         /// <summary>"Industry and Commerce"</summary>
         public string Commerce;
 
@@ -21,6 +24,9 @@ namespace SystemSP.I18nText
 
         /// <summary>"Agriculture and Farms"</summary>
         public string Farms;
+
+        /// <summary>"Finance and Jobs"</summary>
+        public string Finance;
 
         /// <summary>"Health and Wellness"</summary>
         public string Health;
@@ -37,11 +43,20 @@ namespace SystemSP.I18nText
         /// <summary>"Music and Audio"</summary>
         public string Music;
 
+        /// <summary>"Office Complement"</summary>
+        public string Office;
+
+        /// <summary>"Other"</summary>
+        public string Other;
+
         /// <summary>"Photography"</summary>
         public string Photography;
 
         /// <summary>"Supermarkets and Stores"</summary>
         public string Shop;
+
+        /// <summary>"Tools and Productivity"</summary>
+        public string Tool;
 
         /// <summary>"Transport"</summary>
         public string Transport;

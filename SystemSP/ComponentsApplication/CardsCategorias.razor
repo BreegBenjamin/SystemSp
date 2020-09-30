@@ -8,60 +8,58 @@
         </section>
         <article class="category-project">
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Shop"
-                              Image="bakery-shop.svg">
+                              Image="SupermarketsAndStores.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Motorcycle"
-                              Image="motorcycle.svg">
+                              Image="VehiclesAndMotorcycles.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Education"
                               Image="education.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Transport"
-                              Image="fast-delivery.svg">
+                              Image="Transport.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Environment"
-                              Image="earth.svg">
+                              Image="Environment.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Photography"
-                              Image="camera.svg">
+                              Image="Photography.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Commerce"
-                              Image="hook.svg">
+                              Image="IndustryAndCommerce.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Veterinary"
-                              Image="veterinaria.svg">
+                              Image="Veterinary.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Farms"
-                              Image="farm.svg">
+                              Image="AgricultureAndFarms.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Health"
-                              Image="gym.svg">
+                              Image="HealthAndWellness.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Music"
-                              Image="drum-set.svg">
+                              Image="MusicAndAudio.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Home"
-                              Image="real-estate.svg">
+                              Image="RealEstateAndHome.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Libraries"
-                              Image="book.svg">
+                              Image="BooksAndLibraries.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Event"
-                              Image="stage.svg">
+                              Image="EntertainmentAndEvents.svg">
             </TarjetaCategoria>
             <TarjetaCategoria TituloCategoria="@_txtCategoria.Travel"
-                              Image="transportation.svg">
+                              Image="TravelsAndTourism.svg">
             </TarjetaCategoria>
         </article>
     </div>
 </section>
 
 @code {
-    TextIndexPage _txtPage = new TextIndexPage();
     TextCategoriasIndex _txtCategoria = new TextCategoriasIndex();
     protected override async Task OnInitializedAsync()
     {
-        _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
         _txtCategoria = await trasnlator.GetTextTableAsync<TextCategoriasIndex>(this);
     }
 }

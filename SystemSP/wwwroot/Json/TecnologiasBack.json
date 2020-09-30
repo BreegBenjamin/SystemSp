@@ -1,0 +1,17 @@
+[
+  {
+    "Nombre": "Laravel",
+    "UrlImage": "laravel.svg",
+    "DetalleTecnologia": "laravel"
+  },
+  {
+    "Nombre": "Spring Framework",
+    "UrlImage": "spring.svg",
+    "DetalleTecnologia": "spring"
+  },
+  {
+    "Nombre": "Ruby on Rails",
+    "UrlImage": "rails.svg",
+    "DetalleTecnologia": "rails"
+  }
+]

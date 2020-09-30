@@ -1,0 +1,98 @@
+﻿@inject ProjectsApplication ProjectService;
+<section>
+    @if (_proyectosPublicados)
+     {
+        <div class="novedadPosition">
+            @if (_proyectos != null)
+            {
+                foreach (var project in _proyectos)
+                {
+                    <TarjetaProyectosPublicados NombreProyecto="@project.NombreProyecto"
+                                                NumeroDescargas="@project.NumeroDescargas"
+                                                NumeroVistas="@project.NumeroVistas"
+                                                Categoria="@project.Categoria"
+                                                OnClick="ClickHandler"
+                                                DetalleProyecto="@project">
+                    </TarjetaProyectosPublicados>
+                }
+            }
+        </div>
+     }
+    else 
+    {
+        <TarjetaMensajePublicar></TarjetaMensajePublicar>
+    }
+
+    @if (_habilitar)
+    {
+        <section class="sectionBodyNows">
+            <div class="divAprendices">
+                @for (int i = 0; i < 3; i++)
+                {
+                    if (_apprentices.Count > i)
+                    {
+                        <TarjetaAprendices ApprenticeName="@($"{_apprentices[i].FirstName}")"
+                                           ApprenticeLastName="@_apprentices[i].LastName"
+                                           Email="@_apprentices[i].Email"
+                                           Telephone="@_apprentices[i].Telephone"
+                                           IdApprendice="@_apprentices[i].IdApprentice"
+                                           IdProject="@_idProject"
+                                           ClassName="colorCategoriAdmin"
+                                           DesabilitarBoton="false">
+                        </TarjetaAprendices>
+                    }
+                    else 
+                    {
+                        <TarjetaAprendices ApprenticeName="Añadir Nombre"
+                                           ApprenticeLastName="Añadir Apellido"
+                                           Email="Añadir Email"
+                                           Telephone="Añadir Teléfono"
+                                           IdApprendice="0"
+                                           IdProject="@_idProject"
+                                           ClassName="sobrasTarjetas"
+                                           DesabilitarBoton="true">
+                        </TarjetaAprendices>
+                    }
+                }
+            </div>
+            <div class="divAprendices">
+                <SliderImage Images="@_images"></SliderImage>
+                <div class="sobrasTarjetas margin-text">
+                    <textarea @bind="_description" class="textDescripcion"
+                              placeholder="@_description" MaxLength="2000"></textarea>
+                </div>
+            </div>
+        </section>
+    }
+</section>
+
+@code {
+    [CascadingParameter]
+    public int IdUsuarioAplicacion { get; set; }
+
+    private List<ProjectDetails> _proyectos { get; set; }
+    private List<ApprenticeData> _apprentices = new List<ApprenticeData>();
+    private List<string> _images = new List<string>();
+    private bool _habilitar = false;
+    private bool _proyectosPublicados = false;
+    private string _description = string.Empty;
+    private int _idProject = 0;
+
+    private void ClickHandler(ProjectDetails paramSalida)
+    {
+        _habilitar = true;
+        _idProject = paramSalida.IdProyecto;
+        _apprentices = paramSalida.Aprendices;
+        _images = paramSalida.ImagenesProyecto;
+        _description = paramSalida.Descripcion;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        if (IdUsuarioAplicacion != 0)
+        {
+            _proyectos = await ProjectService.GetProjectsUser(IdUsuarioAplicacion);
+            if (_proyectos.Count > 0)
+                _proyectosPublicados = true;
+        }
+    }
+}

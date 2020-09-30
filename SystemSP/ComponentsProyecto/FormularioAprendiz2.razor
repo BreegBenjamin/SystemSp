@@ -1,11 +1,15 @@
 ﻿@inject I18nText TraductorService;
+@inject IJSRuntime JsRun;
 <section>
-    <EditForm Model="_formGaes" OnValidSubmit="HandleValidSubmit">
+    <EditForm Model="ProjectApp">
         <div class="divFlex">
-            <label for="nombreSena">Nombre de la Dirección Sena</label>
-            <InputText @bind-Value="_formGaes.NombreDireccionSena"
-                       @onfocusout="validaCampo" MaxLength="40" class="inpuNombreSena"></InputText>
-        </div>
+            <label for="nombreSena">
+                @_txtPublicar.SenaHeadquartes
+            <span style="color:#ED0000">*</span>
+        </label>
+        <InputText @bind-Value="ProjectApp.SenaName"
+                   @onfocusout="validaCampo" MaxLength="40" class="inpuNombreSena"></InputText>
+    </div>
         <div>
             <div class="dataOpcional">
                 <p>@_txtPublicar.ApprenticesData</p>
@@ -15,25 +19,28 @@
                 <li>
                     <div>
                         <label>@_txtPublicar.ApprenticeName</label>
-                        <input type="text" @bind="_aprendiz.Nombre" class="inputFormAprendiz" />
+                        <input type="text" @bind="_apprentice.FirstName" class="inputFormAprendiz" />
                     </div>
                     <div>
                         <label>@_txtPublicar.ApprenticeLastName</label>
-                        <input type="text" @bind="_aprendiz.Apellido" class="inputFormAprendiz" />
+                        <input type="text" @bind="_apprentice.LastName" class="inputFormAprendiz" />
                     </div>
                 </li>
                 <li>
                     <div>
                         <label>@_txtPublicar.Telephone</label>
-                        <input type="text" @bind="_aprendiz.Telefono" class="inputFormAprendiz" />
+                        <input type="text" @bind="_apprentice.Telephone" class="inputFormAprendiz" />
                     </div>
                     <div>
                         <label>@_txtPublicar.AprendiceEmail</label>
-                        <input type="text" @bind="_aprendiz.Correo" class="inputFormAprendiz" />
+                        <input type="text" @bind="_apprentice.Email" class="inputFormAprendiz" />
                     </div>
                 </li>
                 <li style="padding:20px 0">
-                    <button type="button" class="@BotonPublicar" @onclick="AddAprendiz">@_txtPublicar.BottonAddMembers</button>
+                    <button type="button" class="@BotonPublicar"
+                            @onclick="_addApprentice">
+                        @_txtPublicar.BottonAddMembers
+                    </button>
                 </li>
                 <li>
                     <BotonesAdjuntarArchivos></BotonesAdjuntarArchivos>
@@ -43,7 +50,7 @@
                     <div class="disBotones">
                         <button type="button" class="BotonPublicarProyecto">@_txtPublicar.BottonBack</button>
                         <button class="@_classBotones" type="submit"
-                                disabled="@continuarDis">
+                                disabled="@continuarDis" @onclick="_handlerValidSubmit">
                             @_txtPublicar.BottonContinue
                         </button>
                     </div>
@@ -55,40 +62,41 @@
 
 @code {
     [CascadingParameter]
-    protected List<EIntegrantesGaes> _integrantesGaes { get; set; }
-
+    public FormProjectApp ProjectApp { get; set; }
     [Parameter]
     public EventCallback<int> FormValid { get; set; }
 
     private TextPublicarPage _txtPublicar = new TextPublicarPage();
-    private EFormularioAprendizGaes _formGaes = new EFormularioAprendizGaes();
-    private EIntegrantesGaes _aprendiz = new EIntegrantesGaes();
+    private ApprenticeData _apprentice = new ApprenticeData();
     private string _classBotones = "PublicarProyecto-Unlock";
     private bool continuarDis = true;
     private string BotonPublicar = "BtPublicarAprendiz";
 
     private void validaCampo()
     {
-        if (!string.IsNullOrEmpty(_formGaes.NombreDireccionSena))
+        if (!string.IsNullOrEmpty(ProjectApp.SenaName))
         {
             _classBotones = "BotonPublicarProyecto";
             continuarDis = false;
         }
     }
-    private void AddAprendiz()
+    private async Task _addApprentice()
     {
-        if (_integrantesGaes.Count < 3)
+        if (ProjectApp.ApprenticesData.Count < 3)
         {
-            _integrantesGaes.Add(_aprendiz);
+            ProjectApp.ApprenticesData.Add(_apprentice);
         }
         else
         {
             BotonPublicar = "PublicarProyecto-Unlock";
         }
+        await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", _txtPublicar.MessageAddAprendice);
     }
 
-    private async Task HandleValidSubmit() => await FormValid.InvokeAsync(2);
-
+    private async Task _handlerValidSubmit()
+    {
+        await FormValid.InvokeAsync(2);
+    }
     protected override async Task OnInitializedAsync()
     {
         _txtPublicar = await TraductorService.GetTextTableAsync<TextPublicarPage>(this);

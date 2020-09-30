@@ -1,34 +1,73 @@
-﻿<section>
+﻿@inject I18nText ServiceTranslator;
+@inject ProjectsApplication ServiceConecction;
+@inject IJSRuntime JsRun;
+<section>
     <div>
-        <h4>Tecnologías Utilizadas</h4>
-        <p>Selecciona las tecnologías utilizadas en el desarrollo 
-            del Projecto projecto formativo</p>
+        <h4>@_textPublicar.TechnologyUsed</h4>
+        <p>@_textPublicar.SelecTechnology</p>
     </div>
     <ol class="olTechFlex">
         <li>
             <TarjetaOpcionesTecnologia NombreOpcion="Front-End"
-                                       DescripcionOpcion="Tecnologías utilizadas en el Front-end 
-                                       de la aplicación"
-                                       ImageCard="/images/PageImage/coding.svg">
+                                       DescripcionOpcion="@_textPublicar.SubTextFront"
+                                       ImageCard="coding.svg"
+                                       Accion="Front">
             </TarjetaOpcionesTecnologia>
         </li>
         <li>
             <TarjetaOpcionesTecnologia NombreOpcion="Back-End"
-                                       DescripcionOpcion="Tecnologías utilizadas en el Back-end 
-                                       de la aplicación"
-                                       ImageCard="/images/PageImage/api.svg">
+                                       DescripcionOpcion="@_textPublicar.SubTextBack"
+                                       ImageCard="api.svg"
+                                       Accion="Back">
             </TarjetaOpcionesTecnologia>
         </li>
         <li>
-            <TarjetaOpcionesTecnologia NombreOpcion="Base De Datos"
-                                       DescripcionOpcion="Tecnologías utilizadas en la capa de datos
-                                       de la aplicación"
-                                       ImageCard="/images/PageImage/data-processing.svg">
+            <TarjetaOpcionesTecnologia NombreOpcion="@_textPublicar.DivDatabase"
+                                       DescripcionOpcion="@_textPublicar.SubTextDatabase"
+                                       ImageCard="data-processing.svg"
+                                       Accion="DataBase">
             </TarjetaOpcionesTecnologia>
         </li>
     </ol>
+    <div style="display:flex; justify-content:center">
+        <button class="BotonPostProject" disabled="@_BottonDishable"
+                @onclick="_confirmarPublicacion">@_textPublicar.PostProject</button>
+    </div>
 </section>
 
 @code {
+    [CascadingParameter]
+    public FormProjectApp ProjectApp { get; set; }
+    [CascadingParameter]
+    public int IdUsuarioAplicacion { get; set; }
 
+    [Parameter]
+    public EventCallback<int> ProcessSuccess { get; set; }
+
+    private bool _BottonDishable = false;
+    private TextPublicarPage _textPublicar = new TextPublicarPage();
+    private  async Task _confirmarPublicacion()
+    {
+        bool result = false;
+        if (ProjectApp != null)
+        {
+            ProjectApp.UserId = IdUsuarioAplicacion;
+            result = await ServiceConecction.PostProject(ProjectApp);
+            if (result)
+            {
+                await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeProyecto",
+                    _textPublicar.MessageSuccess, "success");
+                await ProcessSuccess.InvokeAsync(1);
+            }
+            else
+            {
+                await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeProyecto",
+                    _textPublicar.MessageError, "error");
+            }
+        }
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _textPublicar = await  ServiceTranslator.GetTextTableAsync<TextPublicarPage>(this);
+    }
 }

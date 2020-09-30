@@ -15,7 +15,7 @@ namespace SystemSP.Intelligence
             => await JsRun.InvokeVoidAsync(identifier : "scroll.MoverCategoriasDerecha");
         public static async Task MoverCategoriasIzquierda(this IJSRuntime JsRun)
             => await JsRun.InvokeVoidAsync(identifier: "scroll.MoverCategoriasIzquierda");
-        public static async Task EjecutarJavaScriptFunc(this IJSRuntime JsRun, string funcionJS, string paramters = "")
+        public static async Task EjecutarJavaScriptFunc(this IJSRuntime JsRun, string funcionJS, params string[] paramters)
             => await JsRun.InvokeVoidAsync(identifier: funcionJS, paramters);
     }
 }

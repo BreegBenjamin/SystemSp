@@ -5,6 +5,6 @@ namespace SystemSp.Intellengece.Interfaces
 {
     public interface IControllerService
     {
-        Task<T> GetDataFromService<T>(Controllers baseUri);
+        Task<T> GetDataFromService<T>();
     }
 }

@@ -1,62 +1,67 @@
 [
   {
     "Nombre": "HTLM 5",
-    "Descripcion": "Lenguaje de marcado para la web",
-    "UrlImage": "html5.svg"
+    "UrlImage": "html5.svg",
+    "DetalleTecnologia": "html5"
   },
   {
     "Nombre": "CSS 3",
-    "Descripcion": "Lenguaje de disenio web",
-    "UrlImage": "css.svg"
+    "UrlImage": "css.svg",
+    "DetalleTecnologia": "css"
   },
   {
     "Nombre": "Javascript",
-    "Descripcion": "Lenguaje de script",
-    "UrlImage": "javascript.svg"
+    "UrlImage": "javascript.svg",
+    "DetalleTecnologia": "javascript"
   },
   {
     "Nombre": "Jquery",
-    "Descripcion": "Libreria de JavaScript",
-    "UrlImage": "jquery.svg"
+    "UrlImage": "jquery.svg",
+    "DetalleTecnologia": "jquery"
   },
   {
     "Nombre": "Bootstrap",
-    "Descripcion": "Libreria de Css",
-    "UrlImage": "bootstrap.svg"
+    "UrlImage": "bootstrap.svg",
+    "DetalleTecnologia": "bootstrap"
   },
   {
     "Nombre": "React",
-    "Descripcion": "Libreria de Front-End",
-    "UrlImage": "react.svg"
+    "UrlImage": "react.svg",
+    "DetalleTecnologia": "react"
   },
   {
     "Nombre": "Angular",
-    "Descripcion": "Framework Javascript paara el fron-end",
-    "UrlImage": "angular.svg"
+    "UrlImage": "angular.svg",
+    "DetalleTecnologia": "angular"
   },
   {
     "Nombre": "Vue",
-    "Descripcion": "Framework para el front-end",
-    "UrlImage": "vue.svg"
-  },
-  {
-    "Nombre": "Laravel",
-    "Descripcion": "Framework PHP para el desarrollo web",
-    "UrlImage": "laravel.svg"
-  },
-  {
-    "Nombre": "Spring Framework",
-    "Descripcion": "Framework de Java para el desarrollo web",
-    "UrlImage": "spring.svg"
-  },
-  {
-    "Nombre": "Ruby on Rails",
-    "Descripcion": "Framework de Ruby para el desarrollo web",
-    "UrlImage": "rails.svg"
+    "UrlImage": "vue.svg",
+    "DetalleTecnologia": "vue"
   },
   {
     "Nombre": "Reactive extensions",
-    "Descripcion": "Librerias para la programacion reactiva",
-    "UrlImage": "rxjs.svg"
+    "UrlImage": "rxjs.svg",
+    "DetalleTecnologia": "rxjs"
+  },
+  {
+    "Nombre": "Svelte",
+    "UrlImage": "svelte.svg",
+    "DetalleTecnologia": "svelte"
+  },
+  {
+    "Nombre": "Backbone",
+    "UrlImage": "sackbone.svg",
+    "DetalleTecnologia": "sackbone"
+  },
+  {
+    "Nombre": "Babel",
+    "UrlImage": "babel.svg",
+    "DetalleTecnologia": "babel"
+  },
+  {
+    "Nombre": "",
+    "UrlImage": "",
+    "DetalleTecnologia": ""
   }
 ]

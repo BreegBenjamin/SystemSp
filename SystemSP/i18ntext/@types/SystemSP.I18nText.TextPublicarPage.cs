@@ -43,7 +43,7 @@ namespace SystemSP.I18nText
         /// <summary>"Sena branch name"</summary>
         public string BranchName;
 
-        /// <summary>"Enter a description of the project, minimum 100 characters"</summary>
+        /// <summary>"Enter a description of the project and its modules, minimum 100 characters"</summary>
         public string CampDescription;
 
         /// <summary>"Cancel"</summary>
@@ -55,13 +55,16 @@ namespace SystemSP.I18nText
         /// <summary>"Change language"</summary>
         public string ChangedLang;
 
+        /// <summary>"Click here!"</summary>
+        public string ClickHere;
+
         /// <summary>"Confirm password"</summary>
         public string ConfirmPassword;
 
         /// <summary>"Department"</summary>
         public string Department;
 
-        /// <summary>"Database"</summary>
+        /// <summary>"Data Base"</summary>
         public string DivDatabase;
 
         /// <summary>"Email"</summary>
@@ -127,6 +130,21 @@ namespace SystemSP.I18nText
         /// <summary>"Veterinary"</summary>
         public string FormVeterinary;
 
+        /// <summary>"Guide on how to publish"</summary>
+        public string Guide1;
+
+        /// <summary>"a project"</summary>
+        public string Guide2;
+
+        /// <summary>"Help"</summary>
+        public string Help;
+
+        /// <summary>"Project information"</summary>
+        public string InfoProject;
+
+        /// <summary>"Interface Images"</summary>
+        public string InterfaceImage;
+
         /// <summary>"Interface Images"</summary>
         public string InterfaceImagesUpdate;
 
@@ -142,8 +160,17 @@ namespace SystemSP.I18nText
         /// <summary>"The password entered &lt;/br&gt; does not match"</summary>
         public string MensajeAlertaPass;
 
+        /// <summary>"Successfully added"</summary>
+        public string MessageAddAprendice;
+
+        /// <summary>"An error was generated in the publishing process"</summary>
+        public string MessageError;
+
         /// <summary>"Password was updated successfully"</summary>
         public string MessagePassword;
+
+        /// <summary>"The project has been published successfully"</summary>
+        public string MessageSuccess;
 
         /// <summary>"Name"</summary>
         public string Name;
@@ -160,6 +187,9 @@ namespace SystemSP.I18nText
         /// <summary>"News"</summary>
         public string News;
 
+        /// <summary>"About Open Source"</summary>
+        public string OpenSource;
+
         /// <summary>"Option"</summary>
         public string OptionTable;
 
@@ -169,11 +199,20 @@ namespace SystemSP.I18nText
         /// <summary>"Cell phone number"</summary>
         public string PhoneNumber;
 
+        /// <summary>"Post Project"</summary>
+        public string PostProject;
+
+        /// <summary>"Training project data"</summary>
+        public string ProjectDataMessage;
+
         /// <summary>"Project date"</summary>
         public string ProjectDate;
 
         /// <summary>"Project description"</summary>
         public string ProjectDescription;
+
+        /// <summary>"Project FIles"</summary>
+        public string ProjectFile;
 
         /// <summary>"Project files"</summary>
         public string ProjectFilesUpdate;
@@ -190,6 +229,15 @@ namespace SystemSP.I18nText
         /// <summary>"Save"</summary>
         public string Save;
 
+        /// <summary>"Featured and recommended "</summary>
+        public string SeeFeatured1;
+
+        /// <summary>"projects"</summary>
+        public string SeeFeatured2;
+
+        /// <summary>"See more!"</summary>
+        public string SeeMore;
+
         /// <summary>"Select the technologies used in the development of the training project"</summary>
         public string SelecTechnology;
 
@@ -199,7 +247,7 @@ namespace SystemSP.I18nText
         /// <summary>"Attach Images"</summary>
         public string SelectImages;
 
-        /// <summary>"Nombre de la sede Sena"</summary>
+        /// <summary>"Sena headquarters"</summary>
         public string SenaHeadquartes;
 
         /// <summary>"Technologies used for the Back-End of the application"</summary>
@@ -213,6 +261,9 @@ namespace SystemSP.I18nText
 
         /// <summary>"Apprentice Surname"</summary>
         public string SurNameApprentice;
+
+        /// <summary>"Team"</summary>
+        public string Team;
 
         /// <summary>"Team member data"</summary>
         public string TeamMS;

@@ -1,0 +1,161 @@
+﻿@inject IJSRuntime JsRun;
+@inject ProjectsApplication ProjectService;
+
+<section class="@ClassName sizeCardAprendice">
+    <ol class="olElementsAprendices">
+        <li class="elements1">
+            <div>
+                <img src="/images/PageImage/userApp.svg" class="imageUser" />
+            </div>
+            <div>
+                <p class="p-no-margin">Opciones</p>
+                <span style="margin-right:10px">
+                    <button class="deleteAprentice botonOptions" disabled="@DesabilitarBoton" @onclick="@(()=>_habilitaModal = true)"></button>
+                </span>
+                <span style="margin-right:10px">
+                    <button class="editeAprentice botonOptions" @onclick="@changedValuesEdit"></button>
+                </span>
+                <span>
+                    <button class="upDateAprentice botonOptions @_classButon"
+                            @onclick="saveChangedEdit" disabled="@_upDateBoton"></button>
+                </span>
+            </div>
+        </li>
+        <li class="elements2">
+            <div>
+                <p class="p-no-margin">Nombre Integrante</p>
+                <input type="text" placeholder="@ApprenticeName" class="@_inputClass" 
+                       @bind="_aprentice.Nombre" @onfocusout="_validaUpdate" disabled="@_habilitarInput" />
+            </div>
+            <div>
+                <p class="p-no-margin">Apellido Integrante</p>
+                <input type="text" placeholder="@ApprenticeLastName" class="@_inputClass"
+                       @bind="_aprentice.Apellido" @onfocusout="_validaUpdate" disabled="@_habilitarInput" />
+            </div>
+        </li>
+        <li class="elements3">
+            <div>
+                <p class="p-no-margin">Email Integrante</p>
+                <input type="text" placeholder="@Email" class="@_inputClass"
+                       @bind="_aprentice.Email" @onfocusout="_validaUpdate" disabled="@_habilitarInput" />
+            </div>
+            <div>
+                <p class="p-no-margin">Telefono Integrante</p>
+                <input type="text" placeholder="@Telephone" class="@_inputClass"
+                       @bind="_aprentice.Telefono" @onfocusout="_validaUpdate" disabled="@_habilitarInput" />
+            </div>
+        </li>
+    </ol>
+</section>
+@if (_habilitaModal)
+{
+    <ModalOpciones ActionResult="@ValidaResultado"
+                   CancelMessage="Cancelar"
+                   SaveMessage="Eliminar"></ModalOpciones>
+}
+
+@code {
+    [CascadingParameter]
+    public int IdUsuarioAplicacion { get; set; }
+
+    [Parameter]
+    public string ApprenticeName { get; set; }
+    [Parameter]
+    public string ApprenticeLastName { get; set; }
+    [Parameter]
+    public string Email { get; set; }
+    [Parameter]
+    public string Telephone { get; set; }
+    [Parameter]
+    public int IdApprendice { get; set; }
+    [Parameter]
+    public int IdProject { get; set; }
+    [Parameter]
+    public string ClassName { get; set; }
+    [Parameter]
+    public bool DesabilitarBoton { get; set; }
+
+    private bool _habilitaModal = false;
+    private bool _habilitarInput = true;
+    private string _inputClass = "inputAprendiz_sin";
+    private string _classButon = string.Empty;
+    private bool _upDateBoton = true;
+    private AprenticeDetails _aprentice = new AprenticeDetails();
+
+    protected override void OnInitialized()
+    {
+        if (IdApprendice != 0)
+        {
+            _aprentice.Nombre = ApprenticeName;
+            _aprentice.Apellido = ApprenticeLastName;
+            _aprentice.Email = Email;
+            _aprentice.Telefono = Telephone;
+        }
+        base.OnInitialized();
+    }
+    public async Task ValidaResultado(bool salida)
+    {
+        _habilitaModal = false;
+        if (salida)
+        {
+            string msResult = "No se pudo eliminar el aprendiz";
+            var request = new UpdateDataProject()
+            {
+                IdApprentice = IdApprendice,
+                IdUser = IdUsuarioAplicacion,
+                IdProject = IdProject,
+                Estado = "Eliminado"
+            };
+            bool serviceSalida = await ProjectService.DeleteApprentice(request);
+            if (serviceSalida)
+            {
+                msResult = "Usuario Eliminado";
+            }
+            await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", msResult);
+        }
+    }
+    private async Task saveChangedEdit()
+    {
+        if (_validaText(_aprentice.Nombre) && _validaText(_aprentice.Apellido) && _validaText(_aprentice.Email)
+            && _validaText(_aprentice.Telefono))
+        {
+            string msResult = "No se pudo actualizar el aprendiz";
+            var request = new UpdateDataProject()
+            {
+                IdApprentice = IdApprendice,
+                IdUser = IdUsuarioAplicacion,
+                IdProject = IdProject,
+                Estado = "Activo",
+                Aprentice = _aprentice
+            };
+            bool serviceSalida = await ProjectService.UpDateApprentice(request);
+            if (serviceSalida)
+            {
+                msResult = "Usuario actualizado";
+                _upDateBoton = true;
+            }
+            await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", msResult);
+        }
+    }
+    private void changedValuesEdit()
+    {
+        _habilitarInput = !_habilitarInput;
+        _inputClass = (_habilitarInput) ? "inputAprendiz_sin" : "inputAprendiz_con";
+    }
+    private void _validaUpdate()
+    {
+        if (_validaText(_aprentice.Nombre) && _validaText(_aprentice.Apellido) && _validaText(_aprentice.Email)
+            && _validaText(_aprentice.Telefono))
+        {
+            _classButon = "colorCategoriAdmin";
+            _inputClass = "inputAprendiz_sin";
+            _classButon = "";
+            _habilitarInput = false;
+            _upDateBoton = false;
+        }
+        else
+            _classButon = string.Empty;
+    }
+    private bool _validaText(string Text, bool result = false)
+        => result = (string.IsNullOrEmpty(Text)) ? false : true;
+}

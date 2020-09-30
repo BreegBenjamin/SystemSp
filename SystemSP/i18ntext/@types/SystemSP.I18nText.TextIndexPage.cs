@@ -70,6 +70,9 @@ namespace SystemSP.I18nText
         /// <summary>"Password"</summary>
         public string Password;
 
+        /// <summary>"Popular categories on the platform"</summary>
+        public string PopularCategory;
+
         /// <summary>"Featured and popular projects"</summary>
         public string PopularProyect;
 

@@ -1,15 +1,19 @@
-﻿@page "/VistaProyectos";
+﻿@inject ProjectsApplication _seviceProject;
+@page "/VistaProyectos/{IdProject:int}";
     <section style="background-color: #f3f2f1">
         <ListaCategorias></ListaCategorias>
-        <DatosProyecto></DatosProyecto>
-        <CardProyectos TipoMenu="PgVista" OcultarBoton="ocultarElement"></CardProyectos>
+        <CascadingValue Value="ProjectInfo">
+            <DatosProyecto></DatosProyecto>
+        </CascadingValue>
+        <CardProyectos TipoMenu="PgVista"
+                       GetIdProject="_getIdProject"></CardProyectos>
         <section>
             <div class="elementsVista">
                 <div class="tituloMs">
                     <div class="colorDesc">
                     </div>
                     <div style="margin-left: 30px;">
-                        <p>Mira las solicitudes de las empresas</p>
+                        <p>Mira las solicitudes de las empresas @IdProject</p>
                     </div>
                 </div>
             </div>
@@ -20,5 +24,22 @@
         </section>
     </section>
 @code {
+    [Parameter]
+    public int IdProject { get; set; }
+    [CascadingParameter]
+    public ProjectInformation ProjectInfo { get; set; }
+    = new ProjectInformation()
+    {
+        ImagesProject = new List<string>(),
+        ProjectCardInfo = new ProjectCard()
+    };
 
+    private async Task _getIdProject(int idProj)
+    {
+        ProjectInfo = await _seviceProject.GetProject(idProj);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        ProjectInfo = await _seviceProject.GetProject(IdProject);
+    }
 }

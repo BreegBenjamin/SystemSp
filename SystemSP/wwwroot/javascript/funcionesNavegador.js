@@ -140,16 +140,31 @@ class SweetAlertMensajes
 			// imageAlt:
 		});
     }
-    SweetMensajeAprendiz()
+    SweetMensajeAprendiz(ms)
+    {
+        Swal.fire({
+            html: `<div class="DivUsuario">
+                    <p>${ms}</p>
+                    <div class="classAprendiceBoton">x</div>
+                    </div>`,
+            timer: 5000,
+            timerProgressBar: true,
+            toast: true,
+            position: 'bottom-start',
+            showConfirmButton: false,
+        });
+    }
+    SweetMensajeProyecto(ms, imagen)
     {
         Swal.fire({
             html: `<div class="sweetAlertData">
                     <span>
-                        <img src="/images/img_proyect/success.svg" width="50" height="50"/>
+                        <img src="/images/img_proyect/${imagen}.svg" width="50" height="50"/>
                     </span>
-                    <p> El proyecto ha sido publicado Exitosamente</p>
+                    <p>${ms}</p>
                     </div>`,
-        });
+            position: 'center',
+            });
     }
 }
 class CanvasEstadisticas

@@ -1,5 +1,6 @@
 ﻿@inject IJSRuntime JsRun;
 @inject I18nText serviceTranslator;
+@inject SaveIFiles _service;
 <section>
     <div class="elementsButton">
         <div class="CenterdivFlex">
@@ -25,7 +26,7 @@
 
 @code {
     [CascadingParameter]
-    protected EInformacionArchivos ImagesFiles { get; set; }
+    public FormProjectApp ProjectApp { get; set; }
 
     private TextPublicarPage _textPublicar = new TextPublicarPage();
 
@@ -34,14 +35,9 @@
         IFileListEntry file = archivos.FirstOrDefault();
         if (file != null && file.Type.Contains("application/"))
         {
-            var service = new SaveIFiles();
-            var archivo = new EArchivosProjecto();
-            string resultFile = await service.SaveFiles(file);
-            if (ImagesFiles != null && resultFile != "NoK")
+            string resultFile = await _service.SaveFiles(file);
+            if (ProjectApp != null && resultFile != "NoK")
             {
-                archivo.FileName = file.Name;
-                ImagesFiles.ListaArchivos.Add(resultFile);
-                ImagesFiles.NumeroArchivos = ImagesFiles.ListaArchivos.Count();
             }
         }
         else
@@ -54,15 +50,10 @@
         IFileListEntry file = archivos.FirstOrDefault();
         if (file != null && file.Type.Contains("image/"))
         {
-            var service = new SaveIFiles();
-            var archivo = new EArchivosProjecto();
-            string image = await service.GetImages(file);
-            if (ImagesFiles != null && image != "NoK")
+            string image = await _service.GetImages(file);
+            if (ProjectApp != null && image != "NoK")
             {
-                archivo.ImageSrc = image;
-                archivo.FileName = file.Name;
-                ImagesFiles.Archivos.Add(archivo);
-                ImagesFiles.NumeroImagenes = ImagesFiles.Archivos.Count;
+                ProjectApp.ImagesProject.Add(image);
             }
         }
         else

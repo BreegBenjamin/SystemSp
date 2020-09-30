@@ -13,6 +13,14 @@
       "NombreCategoria": "Educacion"
     },
     {
+      "ImageCategoria": "images/IconosCategorias/education.svg",
+      "NombreCategoria": "Transporte"
+    },
+    {
+      "ImageCategoria": "images/IconosCategorias/ecology.svg",
+      "NombreCategoria": "Medio Ambiente"
+    },
+    {
       "ImageCategoria": "images/IconosCategorias/hook.svg",
       "NombreCategoria": "Industria y Comercio"
     },
@@ -51,10 +59,6 @@
     {
       "ImageCategoria": "images/IconosCategorias/art.svg",
       "NombreCategoria": "Arte y Disenio"
-    },
-    {
-      "ImageCategoria": "images/IconosCategorias/ecology.svg",
-      "NombreCategoria": "Medio Ambiente"
     },
     {
       "ImageCategoria": "images/IconosCategorias/work.svg",

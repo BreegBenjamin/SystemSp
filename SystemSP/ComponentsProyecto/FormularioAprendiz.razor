@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime JsRun;
+@inject I18nText ServiceTraductor;
 <section class="info-software estilosBordes">
     <p>@_tituloFormulario</p>
     <div class="indicadorMenu">
@@ -15,11 +16,14 @@
             <FormularioAprendiz2 FormValid="HabilitarContinuar"></FormularioAprendiz2>
             break;
         case 2:
-            <FormularioAprendiz3></FormularioAprendiz3>
+            <FormularioAprendiz3 ProcessSuccess="ProcessSuccess"></FormularioAprendiz3>
             break;
     }
 </section>
 @code {
+    [Parameter]
+    public EventCallback<int> ProcessSuccess { get; set; }
+
     private int Paginador = 0;
     private string _indicado1 = "colorIndicador";
     private string _indicado2 = "FalseColorIndicador";
@@ -38,7 +42,7 @@
                 _indicado1 = "FalseColorIndicador";
                 _indicado2 = "colorIndicador";
                 _indicador3 = "FalseColorIndicador";
-                _tituloFormulario = "Datos del proyecto de formación";
+                _tituloFormulario = "";
                 break;
             case 2:
                 _indicado1 = "FalseColorIndicador";
