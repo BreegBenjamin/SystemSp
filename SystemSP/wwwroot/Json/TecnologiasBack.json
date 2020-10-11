@@ -1,17 +1,227 @@
 [
   {
+    "Nombre": "C ++",
+    "UrlImage": "Back/cpp.svg",
+    "DetalleTecnologia": "cpp"
+  },
+  {
+    "Nombre": "C#",
+    "UrlImage": "Back/csharp.svg",
+    "DetalleTecnologia": "csharp"
+  },
+  {
+    "Nombre": "Clojure",
+    "UrlImage": "Back/clojure.svg",
+    "DetalleTecnologia": "clojure"
+  },
+  {
+    "Nombre": "Dart",
+    "UrlImage": "Back/dart.svg",
+    "DetalleTecnologia": "dart"
+  },
+  {
+    "Nombre": "Deno",
+    "UrlImage": "Back/deno.svg",
+    "DetalleTecnologia": "deno"
+  },
+  {
+    "Nombre": "F#",
+    "UrlImage": "Back/fhsarp.svg",
+    "DetalleTecnologia": "fhsarp"
+  },
+  {
+    "Nombre": "Go Land",
+    "UrlImage": "Back/goLand.svg",
+    "DetalleTecnologia": "goLand"
+  },
+  {
+    "Nombre": "Groovy",
+    "UrlImage": "Back/groovy.svg",
+    "DetalleTecnologia": "groovy"
+  },
+  {
+    "Nombre": "Haskell",
+    "UrlImage": "Back/haskell.svg",
+    "DetalleTecnologia": "haskell"
+  },
+  {
+    "Nombre": "Java",
+    "UrlImage": "Back/java.svg",
+    "DetalleTecnologia": "java"
+  },
+  {
+    "Nombre": "Kotlin",
+    "UrlImage": "Back/kotlin.svg",
+    "DetalleTecnologia": "kotlin"
+  },
+  {
+    "Nombre": "Lua",
+    "UrlImage": "Back/lua.svg",
+    "DetalleTecnologia": "lua"
+  },
+  {
+    "Nombre": "Node.JS",
+    "UrlImage": "Back/nodejs.svg",
+    "DetalleTecnologia": "nodejs"
+  },
+  {
+    "Nombre": "PHP",
+    "UrlImage": "Back/php.svg",
+    "DetalleTecnologia": "php"
+  },
+  {
+    "Nombre": "Python",
+    "UrlImage": "Back/python.svg",
+    "DetalleTecnologia": "python"
+  },
+  {
+    "Nombre": "R Lang",
+    "UrlImage": "Back/rlang.svg",
+    "DetalleTecnologia": "rlang"
+  },
+  {
+    "Nombre": "Ruby",
+    "UrlImage": "Back/ruby.svg",
+    "DetalleTecnologia": "ruby"
+  },
+  {
+    "Nombre": "rust",
+    "UrlImage": "Back/rust.svg",
+    "DetalleTecnologia": "rust"
+  },
+  {
+    "Nombre": "Scala",
+    "UrlImage": "Back/scala.svg",
+    "DetalleTecnologia": "scala"
+  },
+  {
+    "Nombre": "Swift",
+    "UrlImage": "Back/swift.svg",
+    "DetalleTecnologia": "swift"
+  },
+  {
+    "Nombre": "typescript",
+    "UrlImage": "Back/typescript.svg",
+    "DetalleTecnologia": "typescript"
+  },
+  {
+    "Nombre": "V.B .NET",
+    "UrlImage": "Back/VBNET.svg",
+    "DetalleTecnologia": "VBNET"
+  },
+  {
+    "Nombre": "Codeigniter",
+    "UrlImage": "Back/codeigniter.svg",
+    "DetalleTecnologia": "codeigniter"
+  },
+  {
+    "Nombre": "Cycle",
+    "UrlImage": "Back/cycle.svg",
+    "DetalleTecnologia": "cycle"
+  },
+  {
+    "Nombre": "DJango",
+    "UrlImage": "Back/django.svg",
+    "DetalleTecnologia": "django"
+  },
+  {
+    "Nombre": ".Net Core",
+    "UrlImage": "Back/dotNetCore.svg",
+    "DetalleTecnologia": "dotNetCore"
+  },
+  {
+    "Nombre": ".Net Framework",
+    "UrlImage": "Back/dotnetFramework.svg",
+    "DetalleTecnologia": "dotnetFramework"
+  },
+  {
+    "Nombre": "Express.JS",
+    "UrlImage": "Back/expressJS.svg",
+    "DetalleTecnologia": "expressJS"
+  },
+  {
+    "Nombre": "Firebase",
+    "UrlImage": "Back/firebase.svg",
+    "DetalleTecnologia": "firebase"
+  },
+  {
+    "Nombre": "Azure",
+    "UrlImage": "Back/azure.svg",
+    "DetalleTecnologia": "azure"
+  },
+  {
+    "Nombre": "Flask",
+    "UrlImage": "Back/flask.svg",
+    "DetalleTecnologia": "flask"
+  },
+  {
+    "Nombre": "Gatsby.JS",
+    "UrlImage": "Back/gatsbyJS.svg",
+    "DetalleTecnologia": "gatsbyJS"
+  },
+  {
+    "Nombre": "Graphql",
+    "UrlImage": "Back/graphql.svg",
+    "DetalleTecnologia": "graphql"
+  },
+  {
+    "Nombre": "Hapi.JS",
+    "UrlImage": "Back/hapiJS.svg",
+    "DetalleTecnologia": "hapi.svg"
+  },
+  {
     "Nombre": "Laravel",
-    "UrlImage": "laravel.svg",
+    "UrlImage": "Back/laravel.svg",
     "DetalleTecnologia": "laravel"
   },
   {
-    "Nombre": "Spring Framework",
-    "UrlImage": "spring.svg",
-    "DetalleTecnologia": "spring"
+    "Nombre": "Next.JS",
+    "UrlImage": "Back/nextjs.svg",
+    "DetalleTecnologia": "nextjs"
+  },
+  {
+    "Nombre": "Nuxt.JS",
+    "UrlImage": "Back/nuxtjs.svg",
+    "DetalleTecnologia": "nuxtjs"
+  },
+  {
+    "Nombre": "OpenLayers",
+    "UrlImage": "Back/openlayers.svg",
+    "DetalleTecnologia": "openlayers"
+  },
+  {
+    "Nombre": "Pyramid Framework",
+    "UrlImage": "Back/pyramidFramework.svg",
+    "DetalleTecnologia": "pyramidFramework"
+  },
+  {
+    "Nombre": "Restify",
+    "UrlImage": "Back/restify.svg",
+    "DetalleTecnologia": "restify"
   },
   {
     "Nombre": "Ruby on Rails",
-    "UrlImage": "rails.svg",
-    "DetalleTecnologia": "rails"
+    "UrlImage": "Back/rubyRails.svg",
+    "DetalleTecnologia": "rubyRails"
+  },
+  {
+    "Nombre": "Sails",
+    "UrlImage": "Back/sails.svg",
+    "DetalleTecnologia": "sails"
+  },
+  {
+    "Nombre": "Spring Framework",
+    "UrlImage": "Back/springFramework.svg",
+    "DetalleTecnologia": "springFramework"
+  },
+  {
+    "Nombre": "Symfony",
+    "UrlImage": "Back/symfony.svg",
+    "DetalleTecnologia": "symfony"
+  },
+  {
+    "Nombre": "WebAssembly",
+    "UrlImage": "Back/WebAssembly.svg",
+    "DetalleTecnologia": "WebAssembly"
   }
 ]

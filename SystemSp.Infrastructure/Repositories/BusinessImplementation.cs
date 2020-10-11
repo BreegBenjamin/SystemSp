@@ -74,6 +74,16 @@ namespace SystemSp.Infrastructure.Repositories
                 bool result = false;
                 try
                 {
+                    string _categoria = "";
+                    try
+                    {
+                        _categoria = string.Concat(appProject.Category.Where(c => !char.IsWhiteSpace(c)));
+                    }
+                    catch (Exception)
+                    {
+
+                        _categoria = appProject.Category;
+                    }
                     var datePost = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
                     var dateProject = DateTime.Now;
                     DateTime.TryParse(appProject.ProjectDate, out dateProject);
@@ -89,13 +99,12 @@ namespace SystemSp.Infrastructure.Repositories
                             Imagen = Encoding.ASCII.GetBytes(img)
                         });
                     });
-
                     var formativeProject = new Proyecto()
                     {
                         IdUsuario = user.IdUsuario,
                         IdVinculacion = 0,
                         NombreProyecto = appProject.NameProject,
-                        Categoria = appProject.Category,
+                        Categoria = _categoria,
                         DescripcionProyecto = appProject.ProjectDescription,
                         FechaFormacion = dateProject,
                         FechaPublicacion = datePost,
@@ -103,7 +112,7 @@ namespace SystemSp.Infrastructure.Repositories
                         FechaEliminado = null,
                         Departamento = appProject.Departament,
                         Ciudad = appProject.TrainingCity,
-                        EstadoActivo = true,
+                        Estado = "Activo",
                         NumeroDescargas = 0,
                         NumeroVisitas = 0,
                         IntegrantesProyecto = team,
@@ -357,6 +366,30 @@ namespace SystemSp.Infrastructure.Repositories
                 }
                 return result;
             };
+        }
+        public async Task<bool> ChangeProjectState(UpdateDataProject updateData) 
+        {
+            using (_Context) 
+            {
+                bool salida = false;
+                try
+                {
+                    var project = await _Context.Proyecto.FirstOrDefaultAsync(
+                        (x)=> x.IdProyecto == updateData.IdProject && x.IdUsuario == updateData.IdUser
+                        && x.Estado != "Eliminado");
+                    if (project != null) 
+                    {
+                        if (updateData.Estado == "Eliminado")
+                            project.FechaEliminado = DateTime.Now;
+                        else if (updateData.Estado == "Actualizado")
+                            project.FechaActualizacion = DateTime.Now;
+                        project.Estado = updateData.Estado;
+                        _Context.SaveChanges();
+                    }
+                }
+                catch (Exception){}
+                return salida;
+            }
         }
     }
 }

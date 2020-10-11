@@ -28,5 +28,12 @@ namespace SystemSP.WebService.Controllers
             var result = await _context.UpDataPerson(updateData);
             return Ok(result);
         }
+
+        [ActionName("UpDateProject")]
+        public async Task<IActionResult> UpDateProject(UpdateDataProject updateData)
+        {
+            var result = await _context.UpDateProject(updateData);
+            return Ok(result);
+        }
     }
 }

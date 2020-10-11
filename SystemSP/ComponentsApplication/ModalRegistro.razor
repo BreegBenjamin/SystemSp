@@ -22,7 +22,7 @@
                         <option value="2">Tarjeta de Identidad</option>
                         <option value="3">Cédula de Extranjería</option>
                     </InputSelect>
-                    <InputText @bind-Value="_formulario.IdentificationNumber" maxlength="25" placeholder="Número de idemtificación"
+                    <InputText @bind-Value="_formulario.IdentificationNumber" maxlength="25" placeholder="Número de identificación"
                                @onblur="habilitarBoton" class="registro_form">
                     </InputText>
                 </div>
@@ -61,7 +61,7 @@
                     </div>
                     <div>
                         <InputText type="tel" @bind-Value="_formulario.Telephone" placeholder="@_textIndex.Telephone"
-                                   @onblur="habilitarBoton" class="registro_form">
+                                   @onblur="habilitarBoton" maxlength="10" class="registro_form">
                         </InputText>
                     </div>
                 </div>

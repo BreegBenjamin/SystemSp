@@ -45,6 +45,8 @@ namespace SystemSp.Intellengece.WebServiceBusiness
             => await SendDataToService(updateData, "Person/ChangeStatusAprentice");
         public async Task<bool> UpDateApprentice(UpdateDataProject updateData)
                => await SendDataToService(updateData, "Person/UpDatePerson");
+        public async Task<bool> UpDateProject(UpdateDataProject updateData)
+               => await SendDataToService(updateData, "Person/UpDateProject");
     }
 }
 

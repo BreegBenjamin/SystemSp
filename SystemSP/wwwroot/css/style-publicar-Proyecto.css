@@ -783,7 +783,7 @@ select {
     grid-template-columns: 1fr 10px;
     justify-items: flex-start;
     height: 110px;
-    padding: 5px 10px;
+    padding: 5px 20px 10px 5px;
     cursor: pointer;
     width: 90%;
 }

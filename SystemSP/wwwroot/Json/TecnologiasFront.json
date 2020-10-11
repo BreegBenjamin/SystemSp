@@ -1,67 +1,122 @@
 [
   {
     "Nombre": "HTLM 5",
-    "UrlImage": "html5.svg",
+    "UrlImage": "Front/html5.svg",
     "DetalleTecnologia": "html5"
   },
   {
     "Nombre": "CSS 3",
-    "UrlImage": "css.svg",
+    "UrlImage": "Front/css.svg",
     "DetalleTecnologia": "css"
   },
   {
     "Nombre": "Javascript",
-    "UrlImage": "javascript.svg",
+    "UrlImage": "Front/javascript.svg",
     "DetalleTecnologia": "javascript"
   },
   {
     "Nombre": "Jquery",
-    "UrlImage": "jquery.svg",
+    "UrlImage": "Front/jquery.svg",
     "DetalleTecnologia": "jquery"
   },
   {
     "Nombre": "Bootstrap",
-    "UrlImage": "bootstrap.svg",
+    "UrlImage": "Front/bootstrap.svg",
     "DetalleTecnologia": "bootstrap"
   },
   {
+    "Nombre": "Materialize",
+    "UrlImage": "Front/materialize.svg",
+    "DetalleTecnologia": "materialize"
+  },
+  {
     "Nombre": "React",
-    "UrlImage": "react.svg",
+    "UrlImage": "Front/react.svg",
     "DetalleTecnologia": "react"
   },
   {
     "Nombre": "Angular",
-    "UrlImage": "angular.svg",
+    "UrlImage": "Front/angular.svg",
     "DetalleTecnologia": "angular"
   },
   {
     "Nombre": "Vue",
-    "UrlImage": "vue.svg",
+    "UrlImage": "Front/vue.svg",
     "DetalleTecnologia": "vue"
   },
   {
-    "Nombre": "Reactive extensions",
-    "UrlImage": "rxjs.svg",
+    "Nombre": "RxJS",
+    "UrlImage": "Front/rxjs.svg",
     "DetalleTecnologia": "rxjs"
   },
   {
     "Nombre": "Svelte",
-    "UrlImage": "svelte.svg",
+    "UrlImage": "Front/svelte.svg",
     "DetalleTecnologia": "svelte"
   },
   {
     "Nombre": "Backbone",
-    "UrlImage": "sackbone.svg",
-    "DetalleTecnologia": "sackbone"
+    "UrlImage": "Front/backbone.svg",
+    "DetalleTecnologia": "backbone"
   },
   {
     "Nombre": "Babel",
-    "UrlImage": "babel.svg",
+    "UrlImage": "Front/babel.svg",
     "DetalleTecnologia": "babel"
   },
   {
-    "Nombre": "",
-    "UrlImage": "",
-    "DetalleTecnologia": ""
+    "Nombre": "Redux",
+    "UrlImage": "Front/redux.svg",
+    "DetalleTecnologia": "redux"
+  },
+  {
+    "Nombre": "Web Components",
+    "UrlImage": "Front/webComponents.svg",
+    "DetalleTecnologia": "webComponents"
+  },
+  {
+    "Nombre": "Polymer",
+    "UrlImage": "Front/polymer.svg",
+    "DetalleTecnologia": "polymer"
+  },
+  {
+    "Nombre": "Sass",
+    "UrlImage": "Front/sass.svg",
+    "DetalleTecnologia": "sass"
+  },
+  {
+    "Nombre": "Less",
+    "UrlImage": "Front/less.svg",
+    "DetalleTecnologia": "less"
+  },
+  {
+    "Nombre": "Ember",
+    "UrlImage": "Front/ember.svg",
+    "DetalleTecnologia": "ember"
+  },
+  {
+    "Nombre": "Electron",
+    "UrlImage": "Front/electron.svg",
+    "DetalleTecnologia": "electron"
+  },
+  {
+    "Nombre": "Flutter",
+    "UrlImage": "Front/flutter.svg",
+    "DetalleTecnologia": "flutter"
+  },
+  {
+    "Nombre": "Blazor",
+    "UrlImage": "Front/Blazor.svg",
+    "DetalleTecnologia": "Blazor"
+  },
+  {
+    "Nombre": "Material UI",
+    "UrlImage": "Front/materialUI.svg",
+    "DetalleTecnologia": "materialUI"
+  },
+  {
+    "Nombre": "Elements UI",
+    "UrlImage": "Front/elementUI.svg",
+    "DetalleTecnologia": "elementUI"
   }
 ]

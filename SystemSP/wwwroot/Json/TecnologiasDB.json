@@ -1,7 +1,57 @@
 [
   {
-    "Nombre": "SQL Server",
-    "UrlImage": "laravel.svg",
-    "DetalleTecnologia": "Laravel"
+    "Nombre": "MongoDB",
+    "UrlImage": "DB/mongodb.svg",
+    "DetalleTecnologia": "mongodb"
+  },
+  {
+    "Nombre": "Redis",
+    "UrlImage": "DB/redis.svg",
+    "DetalleTecnologia": "redis"
+  },
+  {
+    "Nombre": "MySql",
+    "UrlImage": "DB/mysql.svg",
+    "DetalleTecnologia": "mysql"
+  },
+  {
+    "Nombre": "PostgreSql",
+    "UrlImage": "DB/postgresql.svg",
+    "DetalleTecnologia": "postgresql"
+  },
+  {
+    "Nombre": "Microsoft SQL Server",
+    "UrlImage": "DB/microsoftSqlServer.svg",
+    "DetalleTecnologia": "microsoftSqlServer"
+  },
+  {
+    "Nombre": "SQLite",
+    "UrlImage": "DB/sqlite.svg",
+    "DetalleTecnologia": "sqlite"
+  },
+  {
+    "Nombre": "Cassandra",
+    "UrlImage": "DB/cassandra.svg",
+    "DetalleTecnologia": "cassandra"
+  },
+  {
+    "Nombre": "cosmosDB",
+    "UrlImage": "DB/cosmosDB.svg",
+    "DetalleTecnologia": "cosmosDB"
+  },
+  {
+    "Nombre": "dynamodb",
+    "UrlImage": "DB/dynamodb.svg",
+    "DetalleTecnologia": "dynamodb"
+  },
+  {
+    "Nombre": "mariadb",
+    "UrlImage": "DB/mariadb.svg",
+    "DetalleTecnologia": "mariadb"
+  },
+  {
+    "Nombre": "Microsoft Access",
+    "UrlImage": "DB/microsoftAccess.svg",
+    "DetalleTecnologia": "microsoftAccess"
   }
 ]

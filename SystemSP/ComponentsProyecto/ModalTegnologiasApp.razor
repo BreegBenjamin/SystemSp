@@ -6,9 +6,9 @@
             @foreach (var tech in TecnologiasApp)
             {
                 <div class="classTech" @onclick="@(()=> tech.CheckTecnologia = (!tech.CheckTecnologia)? true : false)">
-                    <div style="display:flex; justify-content:center">
+                    <div style="display: grid; grid-template-columns: max-content 1fr;">
                         <div class="ImgTech">
-                            <img src="/images/Tecnologias/Front/@tech.UrlImage" height="50" width="50" />
+                            <img src="/images/Tecnologias/@tech.UrlImage" height="50" width="50" />
                         </div>
                         <div class="centerTXt">
                             <h2>@tech.Nombre</h2>

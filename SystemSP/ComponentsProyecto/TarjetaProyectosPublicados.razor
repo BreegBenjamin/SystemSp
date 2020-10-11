@@ -1,11 +1,14 @@
 ﻿@inject IJSRuntime JSRun;
+@inject ProjectsApplication ProjectService;
+@inject NavigationManager NavigationManager;
+
 <section class="proyectoDetails @NameClassCategoria" id="divCard">
     <div @onclick="@(()=> OnClick.InvokeAsync(DetalleProyecto))">
         <div class="postionName">
             <div class="circleProyect estadoCircle"></div>
             <div class="divFlexElements">
                 <img src="/images/proyectosPortadas/@($"{Categoria}.jpg")" alt="imgProyect" class="imageProjectPublish" />
-                <p class="textAlign" style="margin:3px" >@NombreProyecto</p>
+                <p class="textAlign" style="margin:3px">@NombreProyecto</p>
             </div>
         </div>
         <div class="postionViews">
@@ -20,11 +23,29 @@
         </div>
     </div>
     <div class="butonEliminar">
-        <button class="btnDelete">Eliminar</button>
+        <button class="btnDelete" @onclick="@(()=> _habilitaModal = true)">Eliminar</button>
     </div>
 </section>
+@if (_habilitaModal)
+{
+    <ModalOpciones ActionResult="@_eJecutarActualizacion"
+                   CancelMessage="Cancelar"
+                   Menssage="¿Está seguro que desea eliminar el usuario?"
+                   SaveMessage="Eliminar"></ModalOpciones>
+}
+@if (_modalFinal)
+{
+    <ModalOpciones ActionResult="@_redireccionar"
+                   CancelMessage="Cancelar"
+                   Menssage="Proyecto Eliminado"
+                   SaveMessage="OK"
+                   visible="false"></ModalOpciones>
+}
 
 @code {
+    [CascadingParameter]
+    public int IdUsuarioAplicacion { get; set; }
+
     [Parameter]
     public string NombreProyecto { get; set; }
     [Parameter]
@@ -37,12 +58,42 @@
     public string NumeroDescargas { get; set; }
     [Parameter]
     public EventCallback<ProjectDetails> OnClick { get; set; }
+    [Parameter]
+    public int IdProyecto { get; set; }
 
+    private bool _habilitaModal = false;
     private bool BotonHabilitado = false;
     private string NameClassCategoria = "colorCategoriAdmin";
     private string opacity = "0.7";
     private string MensajeDescripcion = "";
     private string ColorBoton = "ColorBotonNoHanddler";
+    private bool _modalFinal = false;
+
+    public async Task _eJecutarActualizacion(bool salida)
+    {
+        _habilitaModal = false;
+        if (salida)
+        {
+            string msResult = "No se pudo eliminar el proyecto";
+            var request = new UpdateDataProject()
+            {
+                Estado = "Eliminado",
+                IdUser = IdUsuarioAplicacion,
+                IdProject = IdProyecto
+            };
+            bool serviceSalida = await ProjectService.UpDateProject(request);
+            if (serviceSalida)
+            {
+                msResult = "Proyecto Eliminado";
+            }
+            await JSRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", msResult);
+        }
+    }
+    private void _redireccionar(bool salida)
+    {
+        NavigationManager.NavigateTo("/PublicarProyecto");
+    }
+
     protected override void OnInitialized()
     {
 

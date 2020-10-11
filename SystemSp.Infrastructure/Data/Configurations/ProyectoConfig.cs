@@ -19,6 +19,10 @@ namespace SystemSp.Infrastructure.Data.Configurations
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Estado)
+                .HasMaxLength(25)
+                .IsUnicode(false);
+
             builder.Property(e => e.Departamento)
                 .HasMaxLength(50)
                 .IsUnicode(false);

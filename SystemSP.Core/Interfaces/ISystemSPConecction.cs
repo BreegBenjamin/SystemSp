@@ -17,5 +17,6 @@ namespace SystemSp.Core.Interfaces
         Task<UserInformation> InsertUser(FormRegister formLogin);
         Task<bool> StatusAprentice(UpdateDataProject updateData);
         Task<bool> UpDataPerson(UpdateDataProject updateData);
+        Task<bool> UpDateProject(UpdateDataProject updateData);
     }
 }

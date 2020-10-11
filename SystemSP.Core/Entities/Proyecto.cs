@@ -27,7 +27,7 @@ namespace SystemSp.Core.Entities
         public DateTime? FechaEliminado { get; set; }
         public string Departamento { get; set; }
         public string Ciudad { get; set; }
-        public bool? EstadoActivo { get; set; }
+        public string Estado { get; set; }
         public int? NumeroDescargas { get; set; }
         public int? NumeroVisitas { get; set; }
         public string NombreSena { get; set; }

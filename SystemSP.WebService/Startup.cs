@@ -58,6 +58,8 @@ namespace SystemSP.WebService
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapFallbackToFile("_Host.cshtml");
             });
         }
     }

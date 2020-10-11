@@ -33,7 +33,7 @@ namespace SystemSp.Infrastructure.Repositories
                 try
                 {
                     var formativeProject = await _Context.Proyecto
-                        .FirstOrDefaultAsync(x => x.IdProyecto == id);
+                        .FirstOrDefaultAsync((x) => x.IdProyecto == id && x.Estado != "Eliminado");
                     if (formativeProject != null)
                     {
                         formativeProject.ImagenesProyecto = await _Context.ImagenesProyecto
@@ -60,7 +60,8 @@ namespace SystemSp.Infrastructure.Repositories
                 var popularProject = new FeaturedProjects();
                 try
                 {
-                    List<Proyecto> project = await _Context.Proyecto.Take(6).ToListAsync();
+                    List<Proyecto> project = await _Context.Proyecto.Take(10)
+                        .Where((x)=> x.Estado != "Eliminado").ToListAsync();
                     var cards = new List<ProjectCard>();
                     project.ForEach(item =>
                     {
@@ -79,10 +80,7 @@ namespace SystemSp.Infrastructure.Repositories
             }
         }
         async Task<bool> ISystemSPConecction.InsertProject(FormProjectApp appProject)
-        {
-            bool result = await InsertFormativeProject(appProject);
-            return result;
-        }
+         => await InsertFormativeProject(appProject);
         async Task<UserInformation> ISystemSPConecction.GetUserApp(FormLogin login)
             => await UserResponse(login);
         async Task<List<ProjectDetails>> ISystemSPConecction.GetProjectsUser(int IdUser)
@@ -93,7 +91,7 @@ namespace SystemSp.Infrastructure.Repositories
                 try
                 {
                     var projectSalida = await _Context.Proyecto.Where(
-                        (x) => x.IdUsuario == IdUser).ToListAsync();
+                        (x) => x.IdUsuario == IdUser && x.Estado != "Eliminado").ToListAsync();
                     if (projectSalida != null && projectSalida.Count > 0) 
                     {
                         //Llenando los tedalles del proyecto por cada resultado de la
@@ -154,5 +152,7 @@ namespace SystemSp.Infrastructure.Repositories
             => await ChangeStatusPerson(updateData);
         async Task<bool> ISystemSPConecction.UpDataPerson(UpdateDataProject updateData)
             => await ChangeInformationPerson(updateData);
+        async Task<bool> ISystemSPConecction.UpDateProject(UpdateDataProject updateData)
+                => await ChangeProjectState(updateData);
     }
 }
