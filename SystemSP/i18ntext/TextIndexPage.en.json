@@ -33,6 +33,19 @@
   "MessageAccount": "Do you already have an account?",
   "ForgotPass": "Forgot your password?",
   "CreateAccount": "Create account?",
-  "MessageDataLogin": "Enter the data to login"
+
+  "MessageDataLogin": "Enter the data to login",
+  "TittleApprentice": "Apprentice",
+  "TextProjects": "Projects",
+  "TrainingCenter": "Training center",
+  "TextCompany": "Companies",
+  "TextRequirement": "Requirement",
+  "TextBonding": "Bonding",
+  "TextResources": "Resources",
+  "TextLocation": "Location",
+  "TextAbout": "About",
+  "TextTerms": "Terms",
+  "TextConditions": "Conditions",
+  "TextHelp": "Help"
 }
 

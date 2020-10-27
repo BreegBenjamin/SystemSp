@@ -103,6 +103,39 @@ namespace SystemSP.I18nText
         /// <summary>"Telephone"</summary>
         public string Telephone;
 
+        /// <summary>"About"</summary>
+        public string TextAbout;
+
+        /// <summary>"Bonding"</summary>
+        public string TextBonding;
+
+        /// <summary>"Companies"</summary>
+        public string TextCompany;
+
+        /// <summary>"Conditions"</summary>
+        public string TextConditions;
+
+        /// <summary>"Help"</summary>
+        public string TextHelp;
+
+        /// <summary>"Location"</summary>
+        public string TextLocation;
+
+        /// <summary>"Projects"</summary>
+        public string TextProjects;
+
+        /// <summary>"Requirement"</summary>
+        public string TextRequirement;
+
+        /// <summary>"Resources"</summary>
+        public string TextResources;
+
+        /// <summary>"Terms"</summary>
+        public string TextTerms;
+
+        /// <summary>"Apprentice"</summary>
+        public string TittleApprentice;
+
         /// <summary>"Show your idea"</summary>
         public string TittleCard1;
 
@@ -111,5 +144,8 @@ namespace SystemSP.I18nText
 
         /// <summary>"Download the documentation and code"</summary>
         public string TittleCard3;
+
+        /// <summary>"Training center"</summary>
+        public string TrainingCenter;
     }
 }
