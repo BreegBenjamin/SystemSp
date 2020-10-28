@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SystemSp.Core.Interfaces;
+using SystemSp.Infrastructure.AzureBlob;
 using SystemSp.Infrastructure.Data;
 using SystemSp.Infrastructure.Repositories;
 
@@ -36,6 +37,8 @@ namespace SystemSP.WebService
 
             services.AddControllers();
             services.AddTransient<ISystemSPConecction, SqlServerAppImplementation>();
+            //instancia del azure blob.
+            services.AddTransient<ISystemSpAzureBlob>(opt=> new SetCloudStorageComunication(Configuration.GetConnectionString("azureBlob")));
             services.AddDbContext<SystemSpContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("SystemSP"));

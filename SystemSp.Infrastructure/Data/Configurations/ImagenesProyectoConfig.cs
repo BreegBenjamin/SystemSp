@@ -11,16 +11,23 @@ namespace SystemSp.Infrastructure.Data.Configurations
             builder.HasKey(e => e.NumeroImagen)
                     .HasName("PK__Imagenes__AFF583C2B2CB5CD0");
 
-            builder.Property(e => e.Imagen).IsRequired();
-
             builder.Property(e => e.NombreImagen)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.TipoImagen)
-                .HasMaxLength(5)
+                .HasMaxLength(10)
                 .IsUnicode(false)
                 .IsFixedLength();
+
+            builder.Property(e => e.NombreContenedor)
+                .HasMaxLength(100)
+                .IsRequired()
+                .IsUnicode(false);
+
+            builder.Property(e => e.ImagenOriginal)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.HasOne(d => d.IdProyectoNavigation)
                 .WithMany(p => p.ImagenesProyecto)

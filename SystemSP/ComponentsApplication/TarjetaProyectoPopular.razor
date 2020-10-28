@@ -9,7 +9,17 @@
         <p>@ProjectTitle</p>
         <div>
             <div class="imgAuto">
-                <img src="@ImageUser" class="personImg" alt="img-logoPersom">
+                @if (ImageUser.Length > 3)
+                {
+                    <img src="@ImageUser" class="personImg" alt="img-logoPersom">
+
+                }
+                else
+                {
+                    <div class="personName">
+                        <label>@ImageUser</label>
+                    </div>
+                }
                 <span>@NameUser</span>
             </div>
             <div>

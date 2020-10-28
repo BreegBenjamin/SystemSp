@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace SystemSp.DTOS.EntitisFormsApp
@@ -16,9 +17,16 @@ namespace SystemSp.DTOS.EntitisFormsApp
         public string ProjectDescription { get; set; }
         public string SenaName { get; set; }
         public List<ApprenticeData> ApprenticesData { get; set; }
-        public List<string> ImagesProject { get; set; }
         public string TechFrontEnd { get; set; }
         public string TechBackEnd { get; set; }
         public string TechDataBase { get; set; }
+        public List<ImagesData> ImagesDataStream { get; set; }
+    }
+
+    public class ImagesData 
+    {
+        public string ImageName { get; set; }
+        public string ImageStream { get; set; }
+        public string ImageType { get; set; }
     }
 }

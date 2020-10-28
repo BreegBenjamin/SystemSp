@@ -13,6 +13,20 @@ namespace SystemSp.Infrastructure.Data.Configurations
 
             builder.Property(e => e.DetalleDescripcion).IsUnicode(false);
 
+            builder.Property(e => e.NombreContenedor)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsRequired();
+
+            builder.Property(e => e.NombreDocumento)
+
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.TipoDocumento)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+
             builder.HasOne(d => d.IdSolicitudNavigation)
                 .WithMany(p => p.DetalleSolicitud)
                 .HasForeignKey(d => d.IdSolicitud)

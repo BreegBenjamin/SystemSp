@@ -23,10 +23,15 @@
         else
             _count = 0;
     }
+
     private void _backImage()
     {
-
+        if (_count == 0)
+            _count = Images.Count - 1;
+        else
+            _count--;
     }
+
     protected override void OnInitialized()
     {
         _count = 0;

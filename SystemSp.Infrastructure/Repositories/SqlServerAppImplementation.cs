@@ -17,11 +17,14 @@ namespace SystemSp.Infrastructure.Repositories
     public class SqlServerAppImplementation : BusinessImplementation, ISystemSPConecction
     {
         private readonly SystemSpContext _Context;
-        public SqlServerAppImplementation(SystemSpContext context) : base(context)
+
+        private readonly ISystemSpAzureBlob _azureBlob;
+        public SqlServerAppImplementation(SystemSpContext context, ISystemSpAzureBlob azureBlob) : base(context, azureBlob)
         {
             _Context = context;
+            _azureBlob = azureBlob;
         }
-        async Task<ProjectInformation> ISystemSPConecction.GetFormativeProject(int id)
+        async Task<ProjectInformation> ISystemSPConecction.GetFormativeProject(int idProject)
         {
             using (_Context)
             {
@@ -33,19 +36,11 @@ namespace SystemSp.Infrastructure.Repositories
                 try
                 {
                     var formativeProject = await _Context.Proyecto
-                        .FirstOrDefaultAsync((x) => x.IdProyecto == id && x.Estado != "Eliminado");
+                        .FirstOrDefaultAsync((x) => x.IdProyecto == idProject && x.Estado != "Eliminado");
                     if (formativeProject != null)
                     {
-                        formativeProject.ImagenesProyecto = await _Context.ImagenesProyecto
-                            .Where(x => x.IdProyecto == formativeProject.IdProyecto)
-                            .ToListAsync();
                         ProjectCard card = GetCard(formativeProject);
-                        foreach (var item in formativeProject.ImagenesProyecto)
-                        {
-                            string imageProject = Encoding.UTF8.GetString(
-                                item.Imagen, 0, item.Imagen.Length);
-                            project.ImagesProject.Add(imageProject);
-                        }
+                        project.ImagesProject = await GetImagesAzureBlob(formativeProject.IdProyecto);
                         project.ProjectCardInfo = card;
                     }
                 }
@@ -94,36 +89,30 @@ namespace SystemSp.Infrastructure.Repositories
                         (x) => x.IdUsuario == IdUser && x.Estado != "Eliminado").ToListAsync();
                     if (projectSalida != null && projectSalida.Count > 0) 
                     {
-                        //Llenando los tedalles del proyecto por cada resultado de la
-                        //Consulta
-                        int _contador = 0;
-                        projectSalida.ForEach((iVal) =>
+                        //Llenando los detalles del proyecto por cada resultado de la Consulta
+                        foreach (var iVal in projectSalida)
                         {
-                            var project = new ProjectDetails() 
+                            var project = new ProjectDetails()
                             {
                                 ImagenesProyecto = new List<string>(),
                                 Aprendices = new List<ApprenticeData>()
                             };
-                            var integrantes = _Context.IntegrantesProyecto.Where(
-                                x=> x.IdUsuarioCreador == iVal.IdUsuario && x.Estado == "Activo").ToList();
-                            var imagenes = _Context.ImagenesProyecto.Where(
-                                x => x.IdProyecto == iVal.IdProyecto).ToList();
-
+                            List<IntegrantesProyecto> integrantes = _Context.IntegrantesProyecto
+                                .Where(x => x.IdUsuarioCreador == iVal.IdUsuario && x.Estado == "Activo").ToList();
+                            
                             project.Descripcion = iVal.DescripcionProyecto;
                             project.Categoria = iVal.Categoria;
                             project.IdProyecto = iVal.IdProyecto;
                             project.NombreProyecto = iVal.NombreProyecto;
                             project.NumeroDescargas = iVal.NumeroDescargas.ToString();
                             project.NumeroVistas = iVal.NumeroVisitas.ToString();
-                            imagenes.ForEach(x =>
+
+                            //Obtener Imagenes del proyecto desde azure storege
+                            project.ImagenesProyecto = await GetImagesAzureBlob(iVal.IdProyecto);
+
+                            integrantes.ForEach(x =>
                             {
-                                string imageProject = Encoding.UTF8.GetString(
-                                    x.Imagen, 0, x.Imagen.Length);
-                                project.ImagenesProyecto.Add(imageProject);
-                            });
-                            integrantes.ForEach(x => 
-                            {
-                                project.Aprendices.Add(new ApprenticeData() 
+                                project.Aprendices.Add(new ApprenticeData()
                                 {
                                     Email = x.Correo,
                                     FirstName = x.Nombre,
@@ -135,14 +124,10 @@ namespace SystemSp.Infrastructure.Repositories
                             });
                             project.Process = true;
                             result.Add(project);
-                            _contador++;
-                        });
+                        }
                     }
                 }
-                catch (Exception)
-                {
-
-                }
+                catch (Exception){}
                 return result;
             }
         }

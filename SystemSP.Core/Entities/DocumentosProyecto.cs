@@ -9,7 +9,7 @@ namespace SystemSp.Core.Entities
         public int IdProyecto { get; set; }
         public string NombreDocumento { get; set; }
         public string TipoDocumento { get; set; }
-        public byte[] Documento { get; set; }
+        public string NombreContenedor { get; set; }
 
         public virtual Proyecto IdProyectoNavigation { get; set; }
     }

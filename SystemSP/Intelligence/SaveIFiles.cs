@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BlazorInputFile;
+using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using BlazorInputFile;
 
 namespace SystemSP.Intelligence
 {
@@ -11,18 +9,16 @@ namespace SystemSP.Intelligence
     {
         private async Task<string> _getImage(IFileListEntry file) 
         {
-            string src = string.Empty;
             if (file.Type.Contains("image/"))
             {
                 var msFile = new MemoryStream();
                 await file.Data.CopyToAsync(msFile);
                 byte[] byteFile = msFile.ToArray();
                 string base64 = Convert.ToBase64String(byteFile);
-                src = $"data:{file.Type};base64,{base64}";
+                return base64;
             }
             else
-                src = "NoK";
-            return src;
+                return "NoK";
         }
         private async Task<string> _getFiles(IFileListEntry file) 
         {

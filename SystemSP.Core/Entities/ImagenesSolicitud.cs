@@ -9,7 +9,8 @@ namespace SystemSp.Core.Entities
         public int? IdSolicitud { get; set; }
         public string NombreImagen { get; set; }
         public string TipoImagen { get; set; }
-        public byte[] Imagen { get; set; }
+        public string NombreContenedor { get; set; }
+        public string ImagenOriginal { get; set; }
 
         public virtual SolicitudEmpresa IdSolicitudNavigation { get; set; }
     }

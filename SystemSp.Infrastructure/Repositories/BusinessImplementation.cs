@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SystemSp.Core.Entities;
+using SystemSp.Core.Interfaces;
 using SystemSp.DTOS.EntitisFormsApp;
 using SystemSp.DTOS.EntitisIndexApp;
 using SystemSp.DTOS.EntitisProjectsApp;
@@ -15,9 +17,11 @@ namespace SystemSp.Infrastructure.Repositories
     public abstract class BusinessImplementation
     {
         private readonly SystemSpContext _Context;
-        public BusinessImplementation(SystemSpContext context)
+        private readonly ISystemSpAzureBlob _azureBlob;
+        public BusinessImplementation(SystemSpContext context, ISystemSpAzureBlob azureBlob )
         {
             _Context = context;
+            _azureBlob = azureBlob;
         }
         private async Task<Tuple<bool, bool, bool>> _userExist(string identification, string email) 
         {
@@ -74,36 +78,49 @@ namespace SystemSp.Infrastructure.Repositories
                 bool result = false;
                 try
                 {
-                    string _categoria = "";
-                    try
-                    {
-                        _categoria = string.Concat(appProject.Category.Where(c => !char.IsWhiteSpace(c)));
-                    }
-                    catch (Exception)
-                    {
+                    //remueve los espacios de la categoria
+                    string _categoria = string.Concat(appProject.Category.Where(c => !char.IsWhiteSpace(c)));
+                    string _projectName = string.Concat(appProject.NameProject.Where(c => !char.IsWhiteSpace(c)));
 
-                        _categoria = appProject.Category;
-                    }
                     var datePost = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
                     var dateProject = DateTime.Now;
                     DateTime.TryParse(appProject.ProjectDate, out dateProject);
+                    
                     var images = new List<ImagenesProyecto>();
                     var team = new List<IntegrantesProyecto>();
+                    var imagesData = new Dictionary<string, string>();
 
                     Usuario user = await _Context.Usuario.FirstOrDefaultAsync(
                         x => x.IdUsuario == appProject.UserId);
-                    appProject.ImagesProject.ForEach((img) =>
+
+                    //Nombre del contenedor por proyecto
+                    string container = $"{_projectName.ToLower()}-{Guid.NewGuid()}";
+
+                    //Agrega a la lista que se guarda en la base de datos
+                    int numImg = 1;
+                    appProject.ImagesDataStream.ForEach(img => 
                     {
+                        string nombreImagen = $"{img.ImageType.Replace("/", $"0{numImg}.")}";
                         images.Add(new ImagenesProyecto()
                         {
-                            Imagen = Encoding.ASCII.GetBytes(img)
+                            NombreImagen = nombreImagen,
+                            ImagenOriginal = img.ImageName,
+                            TipoImagen = img.ImageType,
+                            NombreContenedor = container
                         });
+                        imagesData.Add(nombreImagen, img.ImageStream);
+                        numImg++;
                     });
+
+                    //Insertar Imagen azure storage 
+                    await _azureBlob.SaveBlobImage(imagesData, container);
+
+                    //Insertar proyecto de formación
                     var formativeProject = new Proyecto()
                     {
                         IdUsuario = user.IdUsuario,
                         IdVinculacion = 0,
-                        NombreProyecto = appProject.NameProject,
+                        NombreProyecto = _projectName,
                         Categoria = _categoria,
                         DescripcionProyecto = appProject.ProjectDescription,
                         FechaFormacion = dateProject,
@@ -390,6 +407,22 @@ namespace SystemSp.Infrastructure.Repositories
                 catch (Exception){}
                 return salida;
             }
+        }
+
+        public async Task<List<string>> GetImagesAzureBlob(int IdProject) 
+        {
+            List<ImagenesProyecto> images = await _Context.ImagenesProyecto
+                .Where(x => x.IdProyecto == IdProject).ToListAsync();
+            var dicImages = new Dictionary<string,string>();
+
+            images.ForEach(x => dicImages.Add(x.NombreImagen, x.TipoImagen));
+
+            string container = await _Context.ImagenesProyecto
+                .Where(x => x.IdProyecto == IdProject)
+                .Select(x => x.NombreContenedor).FirstOrDefaultAsync();
+
+            List<string> result = await _azureBlob.GetImagenesContainer(dicImages, container);
+            return result;
         }
     }
 }

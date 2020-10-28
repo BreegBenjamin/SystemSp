@@ -50,10 +50,15 @@
         IFileListEntry file = archivos.FirstOrDefault();
         if (file != null && file.Type.Contains("image/"))
         {
-            string image = await _service.GetImages(file);
-            if (ProjectApp != null && image != "NoK")
+            string imageBase64 = await _service.GetImages(file);
+            if (ProjectApp != null && imageBase64 != "NoK")
             {
-                ProjectApp.ImagesProject.Add(image);
+                ProjectApp.ImagesDataStream.Add(new ImagesData()
+                {
+                    ImageName  = file.Name,
+                    ImageStream = imageBase64,
+                    ImageType = file.Type
+                });
             }
         }
         else

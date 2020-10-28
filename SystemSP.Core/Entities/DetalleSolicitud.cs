@@ -8,7 +8,9 @@ namespace SystemSp.Core.Entities
         public int IdDetalle { get; set; }
         public int? IdSolicitud { get; set; }
         public string DetalleDescripcion { get; set; }
-        public byte[] Documento { get; set; }
+        public string NombreDocumento { get; set; }
+        public string TipoDocumento { get; set; }
+        public string NombreContenedor { get; set; }
 
         public virtual SolicitudEmpresa IdSolicitudNavigation { get; set; }
     }

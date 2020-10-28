@@ -5,7 +5,7 @@
     </div>
     <div class="nombreTitulo">
         <p class="NombreDetails">@TituloTarjeta</p>
-        <span class="nameProyect">@ProjectApp.ImagesProject.Count @_subTituloTarjeta</span>
+        <span class="nameProyect">@ProjectApp.ImagesDataStream.Count @_subTituloTarjeta</span>
     </div>
     <div>
         @if (TrailingImage)
@@ -21,12 +21,12 @@
         case "Images":
             <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
                 <div class="ImagenPosition">
-                    @if (ProjectApp.ImagesProject.Count > 0)
+                    @if (ProjectApp.ImagesDataStream.Count > 0)
                     {
-                        foreach (var item in ProjectApp.ImagesProject)
+                        foreach (var item in ProjectApp.ImagesDataStream)
                         {
                             <div>
-                                <img src="@item" class="ImageProject" alt="imgSave" />
+                                <img src="@($"data:{item.ImageType};base64,{item.ImageStream}")" class="ImageProject" alt="imgSave" />
                             </div>
                         }
                     }

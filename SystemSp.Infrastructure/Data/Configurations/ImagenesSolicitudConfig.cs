@@ -8,20 +8,26 @@ namespace SystemSp.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<ImagenesSolicitud> builder)
         {
-
             builder.HasKey(e => e.NumeroImagen)
                 .HasName("PK__Imagenes__AFF583C2E00EF791");
-
-            builder.Property(e => e.Imagen).IsRequired();
 
             builder.Property(e => e.NombreImagen)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.TipoImagen)
-                .HasMaxLength(5)
+                .HasMaxLength(10)
                 .IsUnicode(false)
                 .IsFixedLength();
+
+            builder.Property(e => e.NombreContenedor)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsRequired();
+
+            builder.Property(e => e.ImagenOriginal)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.HasOne(d => d.IdSolicitudNavigation)
                 .WithMany(p => p.ImagenesSolicitud)

@@ -9,7 +9,8 @@ namespace SystemSp.Core.Entities
         public int IdProyecto { get; set; }
         public string NombreImagen { get; set; }
         public string TipoImagen { get; set; }
-        public byte[] Imagen { get; set; }
+        public string NombreContenedor { get; set; }
+        public string ImagenOriginal { get; set; }
 
         public virtual Proyecto IdProyectoNavigation { get; set; }
     }

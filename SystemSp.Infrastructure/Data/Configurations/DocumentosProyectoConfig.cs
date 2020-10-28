@@ -11,14 +11,17 @@ namespace SystemSp.Infrastructure.Data.Configurations
             builder.HasKey(e => e.NumeroDocumento)
                     .HasName("PK__Document__A4202589D7F4A274");
 
-            builder.Property(e => e.Documento).IsRequired();
-
             builder.Property(e => e.NombreDocumento)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.TipoDocumento)
                 .HasMaxLength(10)
+                .IsUnicode(false);
+
+            builder.Property(e => e.NombreContenedor)
+                .HasMaxLength(100)
+                .IsRequired()
                 .IsUnicode(false);
 
             builder.HasOne(d => d.IdProyectoNavigation)
