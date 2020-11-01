@@ -421,7 +421,7 @@ namespace SystemSp.Infrastructure.Repositories
                 .Where(x => x.IdProyecto == IdProject)
                 .Select(x => x.NombreContenedor).FirstOrDefaultAsync();
 
-            List<string> result = await _azureBlob.GetImagenesContainer(dicImages, container);
+            List<string> result = await _azureBlob.GetImagesContainer(dicImages, container);
             return result;
         }
     }
