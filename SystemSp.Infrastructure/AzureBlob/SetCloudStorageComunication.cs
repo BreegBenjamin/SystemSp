@@ -15,7 +15,7 @@ namespace SystemSp.Infrastructure.AzureBlob
         }
         private readonly string _key;
 
-        public async Task<List<string>> GetImagenesContainer(Dictionary<string, string> imageData, string container)
+        public async Task<List<string>> GetImagesContainer(Dictionary<string, string> imageData, string container)
         {
             try
             {
