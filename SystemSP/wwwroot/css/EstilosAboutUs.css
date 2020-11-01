@@ -1,16 +1,31 @@
 ﻿:root {
     --SombrasCaja: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
+
+.contenedorTarjetaAbout {
+    cursor: pointer;
+}
+
+.contenedorNosotros {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
 .cardAbout {
     border-radius: 5px;
     box-sizing: border-box;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr max-content;
-    margin: 30px;
+    margin: 30px 30px 50px 30px;
     padding: 15px;
-    width: 100%;
+    width: 90%;
 }
+
 .imgAyuda {
     border-radius: 2px;
     box-shadow: var(--SombrasCaja);
@@ -18,9 +33,26 @@
     object-fit: fill;
     width: 35em;
 }
+
 .containerPageAbout {
-    margin:5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
 }
+
+.contenedorPersons {
+    margin: 60px 0 0 0;
+    width: 100%;
+}
+
+.persons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
 .imgIntegranteDiv {
     background: url(../images/PageImage/BackUser.svg) no-repeat center;
     display: flex;
@@ -30,14 +62,17 @@
     margin-left: 31.5px;
     width: 150px;
 }
+
 .imgIntegrante {
     height: 100px;
     width: 100px;
 }
+
 .socialNetwork {
     display: flex;
     justify-content: space-between;
 }
+
 .social {
     border: none;
     background-color: #FFF;
@@ -46,22 +81,118 @@
     background-repeat: no-repeat;
     background-size: 100%;
     height: 15px;
-    outline:none;
+    outline: none;
     width: 15px;
 }
+
 .socialTwitter {
     background-image: url(../images/PageImage/twitter.svg);
 }
+
 .socialFacebook {
     background-image: url(../images/PageImage/facebook.svg);
 }
+
 .socialLinkedin {
     background-image: url(../images/PageImage/linkedin.svg);
 }
+
 .socialGitup {
     background-image: url(../images/PageImage/github.svg);
 }
-.persons {
-    display:flex;
-    justify-content:space-between;
+
+.aboutSystem {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    height: 100vh;
+    background-image: url(../images/fondo3.svg);
+    background-size: 59%;
+    background-position: right;
+    background-position-y: initial;
+    background-repeat: no-repeat;
+}
+
+.imgLogo {
+    display: flex;
+    justify-content: center;
+    margin: 120px 0 0 0;
+}
+
+.textSystem, .textVision, .textMision {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+}
+
+.tituloSp, .tituloVision, .tituloMision {
+    font-weight: bold;
+    font-size: 50px;
+    margin: 0 30px;
+}
+
+.tituloVision {
+    margin-top: 60px;
+}
+
+.parrafoSp, .parrafoVision, .parrafoMision {
+    font-weight: 400;
+    padding: 0 280px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.contVacio {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vacio {
+    display: flex;
+    width: 35%;
+    border-bottom: 1px solid rgba(0, 0,0, 0.5);
+}
+
+.misionVision {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    height: 100vh;
+    background-image: url(../images/fondo8.png);
+    background-size: 45%;
+    background-position: left;
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+}
+
+.contQuien {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50vh;
+}
+
+.quienSomos {
+    display: flex;
+    width: 90%;
+    height: auto;
+    font-size: 55px;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0 30px 0;
+}
+
+.parrafoQuien {
+    width: 50%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
 }

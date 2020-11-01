@@ -1,0 +1,44 @@
+﻿@inject NavigationManager NavigationManager;
+@inject I18nText translator;
+
+<footer class="contactanosFooter">
+    <div class="contenedorLinks">
+        <div class="imgLinks">
+            <a><img src="/images/Categorias/facebook.svg" height="20" width="20" /></a>
+            <a><img src="/images/Categorias/logotipo-de-instagram.svg" height="20" width="20" /></a>
+            <a><img src="/images/Categorias/github.svg" height="20" width="20" /></a>
+            <a><img src="/images/Categorias/gorjeo.svg" height="20" width="20" /></a>
+        </div>
+        <div class="bloqueAprendiz">
+            <p class="pequeñoTitulo">@_txtPageFooter.TittleApprentice</p>
+            <a>Sena</a>
+            <a>@_txtPageFooter.TextProjects</a>
+            <a>@_txtPageFooter.TrainingCenter</a>
+        </div>
+        <div class="bloqueEmpresa">
+            <p class="pequeñoTitulo">@_txtPageFooter.TextCompany</p>
+            <a>@_txtPageFooter.TextRequirement</a>
+            <a>@_txtPageFooter.TextBonding</a>
+            <a>@_txtPageFooter.TextResources</a>
+            <a>@_txtPageFooter.TextLocation</a>
+        </div>
+        <div class="bloqueSistema">
+            <p class="pequeñoTitulo">SystemSp</p>
+            <a>@_txtPageFooter.TextAbout</a>
+            <a>@_txtPageFooter.TextTerms</a>
+            <a>@_txtPageFooter.TextConditions</a>
+            <a>@_txtPageFooter.TextHelp</a>
+        </div>
+    </div>
+    <div class="copyright">Copyright © | 2020 SystemSp Colombia</div>
+</footer>
+
+@code {
+    private void _redirectPage() => NavigationManager.NavigateTo("Nosotros");
+
+    TextIndexPage _txtPageFooter = new TextIndexPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtPageFooter = await translator.GetTextTableAsync<TextIndexPage>(this);
+    }
+}

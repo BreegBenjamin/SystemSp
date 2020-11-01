@@ -33,5 +33,18 @@
   "MessageAccount": "¿Ya tienes una Cuenta?",
   "ForgotPass": "¿Olvido su contraseña?",
   "CreateAccount": "¿Crear una Cuenta?",
-  "MessageDataLogin": "Ingrese los datos para iniciar Sesión"
+  "MessageDataLogin": "Ingrese los datos para iniciar Sesión",
+
+  "TittleApprentice": "Aprendices",
+  "TextProjects": "Proyectos",
+  "TrainingCenter": "Centro de formación",
+  "TextCompany": "Empresas",
+  "TextRequirement": "Requerimiento",
+  "TextBonding": "Vinculación",
+  "TextResources": "Rescursos",
+  "TextLocation": "Ubicación",
+  "TextAbout": "Acerca de",
+  "TextTerms": "Terminos",
+  "TextConditions": "Condiciones",
+  "TextHelp": "Ayuda"
 }
