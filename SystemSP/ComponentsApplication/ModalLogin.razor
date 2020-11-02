@@ -3,17 +3,19 @@
 @inject ProjectsApplication serviceConection;
 @inject NavigationManager NavigationManager;
 @inject UserInformationResult UserInfoResult;
+@inject ValidarFormularios validaForm;
 
 <section class="fondo fondo2" id="ModalLogin">
     <section class="popUp">
         <CerrarModal Mensaje="@_textIndex.MessageDataLogin"></CerrarModal>
-        <EditForm Model="_form">
+        <EditForm Model="_form" OnValidSubmit="validaFormulario">
+            <DataAnnotationsValidator/>
             <section class="Form_Login">
                 <input type="email" class="estyleText" maxlength="30" placeholder="@_textIndex.Mail"
-                       @bind="@_form.EmailLogin" @onblur="habilitarBoton">
+                       @bind-value="_form.EmailLogin" @onblur="habilitarBoton">
                 <input type="password" class="estyleText" maxlength="16" placeholder="@_textIndex.Password"
-                       @bind="@_form.PasswordLogin" @onblur="habilitarBoton">
-                <button class="@_classBoton" disabled="@_btnDeshabilitado" @onclick="validaFormulario">@_textIndex.Login</button>
+                       @bind-value="@_form.PasswordLogin" @onblur="habilitarBoton">
+                <button type="submit" class="@_classBoton" disabled="@_btnDeshabilitado">@_textIndex.Login</button>
             </section>
             <div>
                 <hr class="styleHr" />
@@ -61,7 +63,7 @@
             await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
             if (result.UserType == 1)
                 NavigationManager.NavigateTo("Administrador");
-            else if(result.UserType == 2)
+            else if (result.UserType == 2)
                 NavigationManager.NavigateTo($"PublicarProyecto");
         }
     }

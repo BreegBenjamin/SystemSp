@@ -3,6 +3,8 @@
 @inject ProjectsApplication serviceConection;
 @inject NavigationManager NavigationManager;
 @inject UserInformationResult UserInfoResult;
+@inject ValidarFormularios validaForm;
+
 <section class="fondo" id="ModalRegistro">
     <section class="popUp">
         <CerrarModal Mensaje="@_textIndex.MessageRegister"></CerrarModal>
@@ -99,12 +101,12 @@
     private async Task RegistrarUsuario()
     {
         bool _passInvalido = false;
-        bool _mailInvalido = ValidarFormularios.ValidaEmail(_formulario.Email);
-        bool _mailConfirmValido = ValidarFormularios.ValidaEmail(_formulario.EmailConfirm);
-        bool _mailValido = ValidarFormularios.ValidaPassEmail(_formulario.Email, _formulario.EmailConfirm);
+        bool _mailInvalido = validaForm.ValidaEmail(_formulario.Email);
+        bool _mailConfirmValido = validaForm.ValidaEmail(_formulario.EmailConfirm);
+        bool _mailValido = validaForm.ValidaPassEmail(_formulario.Email, _formulario.EmailConfirm);
 
         if (_formulario.Password.Length > 6)
-            _passInvalido = ValidarFormularios.ValidaPassEmail(_formulario.Password, _formulario.PasswordConfirm);
+            _passInvalido = validaForm.ValidaPassEmail(_formulario.Password, _formulario.PasswordConfirm);
         if (!_passInvalido || !_mailInvalido || !_mailConfirmValido || !_mailValido)
         {
             string _msPass = String.Empty;
