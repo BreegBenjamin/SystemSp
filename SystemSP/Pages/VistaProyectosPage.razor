@@ -1,28 +1,29 @@
 ﻿@inject ProjectsApplication _seviceProject;
 @page "/VistaProyectos/{IdProject:int}";
-    <section style="background-color: #f3f2f1">
-        <ListaCategorias></ListaCategorias>
-        <CascadingValue Value="ProjectInfo">
-            <DatosProyecto></DatosProyecto>
-        </CascadingValue>
-        <CardProyectos TipoMenu="PgVista"
-                       GetIdProject="_getIdProject"></CardProyectos>
-        <section>
-            <div class="elementsVista">
-                <div class="tituloMs">
-                    <div class="colorDesc">
-                    </div>
-                    <div style="margin-left: 30px;">
-                        <p>Mira las solicitudes de las empresas @IdProject</p>
-                    </div>
+@page "/VistaProyectos";
+<section style="background-color: #f3f2f1">
+    <ListaCategorias></ListaCategorias>
+    <CascadingValue Value="ProjectInfo">
+        <DatosProyecto></DatosProyecto>
+    </CascadingValue>
+    <CardProyectos TipoMenu="PgVista"
+                   GetIdProject="_getIdProject"></CardProyectos>
+    <section>
+        <div class="elementsVista">
+            <div class="tituloMs">
+                <div class="colorDesc">
+                </div>
+                <div style="margin-left: 30px;">
+                    <p>Mira las solicitudes de las empresas @IdProject</p>
                 </div>
             </div>
-            <div class="divDataProject">
-                <CategoriasSolicitud></CategoriasSolicitud>
-                <VistaSolicitudes></VistaSolicitudes>
-            </div>
-        </section>
+        </div>
+        <div class="divDataProject">
+            <CategoriasSolicitud></CategoriasSolicitud>
+            <VistaSolicitudes></VistaSolicitudes>
+        </div>
     </section>
+</section>
 @code {
     [Parameter]
     public int IdProject { get; set; }
@@ -40,6 +41,7 @@
     }
     protected override async Task OnInitializedAsync()
     {
-        ProjectInfo = await _seviceProject.GetProject(IdProject);
+        if(IdProject != 0)
+            ProjectInfo = await _seviceProject.GetProject(IdProject);
     }
 }

@@ -8,10 +8,10 @@
 <section class="fondo fondo2" id="ModalLogin">
     <section class="popUp">
         <CerrarModal Mensaje="@_textIndex.MessageDataLogin"></CerrarModal>
-        <EditForm Model="_form" OnValidSubmit="validaFormulario">
-            <DataAnnotationsValidator/>
+        <EditForm Model="_form" OnSubmit="validaFormulario">
+            <DataAnnotationsValidator />
             <section class="Form_Login">
-                <input type="email" class="estyleText" maxlength="30" placeholder="@_textIndex.Mail"
+                <input type="text" id="inputEmail" class="estyleText" maxlength="30" placeholder="@_textIndex.Mail"
                        @bind-value="_form.EmailLogin" @onblur="habilitarBoton">
                 <input type="password" class="estyleText" maxlength="16" placeholder="@_textIndex.Password"
                        @bind-value="@_form.PasswordLogin" @onblur="habilitarBoton">
@@ -27,6 +27,7 @@
         </EditForm>
     </section>
 </section>
+
 @code {
     private FormLogin _form = new FormLogin();
     private bool _btnDeshabilitado = true;
@@ -34,20 +35,6 @@
     private bool _datosInvalidos = false;
     private TextIndexPage _textIndex = new TextIndexPage();
     //Metodos
-    private async Task habilitarBoton()
-    {
-        if (!string.IsNullOrEmpty(_form.EmailLogin) && !string.IsNullOrEmpty(_form.PasswordLogin)
-            && _form.PasswordLogin.Length > 6)
-        {
-            _classBoton = "btRegistroForm";
-            _btnDeshabilitado = false;
-        }
-        else
-        {
-            _classBoton = "btRegistroForm-Unlock";
-            _btnDeshabilitado = true;
-        }
-    }
 
     private async Task validaFormulario()
     {
@@ -70,5 +57,31 @@
     protected override async Task OnInitializedAsync()
     {
         _textIndex = await ServiceTranslator.GetTextTableAsync<TextIndexPage>(this);
+    }
+
+    private async Task habilitarBoton()
+    {
+
+        if (!string.IsNullOrEmpty(_form.EmailLogin) && !string.IsNullOrEmpty(_form.PasswordLogin)
+            && _form.PasswordLogin.Length > 6)
+        {
+            bool mailValido = validaForm.ValidaEmail(_form.EmailLogin);
+            if (mailValido)
+            {
+                _classBoton = "btRegistroForm";
+                _btnDeshabilitado = false;
+            }
+            else
+            {
+                _classBoton = "btRegistroForm-Unlock";
+                _btnDeshabilitado = true;
+                await JsRun.MensajesRegistro("", "El correo electrónico ingresado no es valido");
+            }
+        }
+        else
+        {
+            _classBoton = "btRegistroForm-Unlock";
+            _btnDeshabilitado = true;
+        }
     }
 }

@@ -139,5 +139,8 @@ namespace SystemSp.Infrastructure.Repositories
             => await ChangeInformationPerson(updateData);
         async Task<bool> ISystemSPConecction.UpDateProject(UpdateDataProject updateData)
                 => await ChangeProjectState(updateData);
+
+        public async Task<List<string>> GetPopularCategory()
+               => await GetCategorys();
     }
 }

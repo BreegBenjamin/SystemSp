@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -136,12 +135,11 @@ namespace SystemSp.Infrastructure.Repositories
                         NombreSena = appProject.SenaName,
                         ImagenesProyecto = images,
                     };
-                    if (user.TipoUsuario == 2)
-                    {
-                        int apprendiceId = _Context.UsuarioAprendiz.FirstOrDefault(
-                            x => x.IdUsuario == user.IdUsuario).IdAprendiz;
-                        await _updateNumProjec(apprendiceId);
-                    }
+                    if (user.TipoUsuario == 1)
+                       await _updateNumProjectAdmin(user.IdUsuario);
+                    else if (user.TipoUsuario == 2) 
+                        await _updateNumProjecApprentice(user.IdUsuario);
+                    
                     if (appProject.ApprenticesData.Count > 0)
                     {
                         appProject.ApprenticesData.ForEach((stu) =>
@@ -178,16 +176,30 @@ namespace SystemSp.Infrastructure.Repositories
                 return result;
             }
         }
-        private async Task _updateNumProjec(int idApprendice)
+        private async Task _updateNumProjecApprentice(int idUser)
         {
-            try
-            {
-                UsuarioAprendiz aprendice = await _Context.UsuarioAprendiz.FirstOrDefaultAsync((x) =>
-                    x.IdAprendiz == idApprendice);
-                aprendice.CantidadProyectos = (aprendice.CantidadProyectos == 0) ? 1 : aprendice.CantidadProyectos++;
-                _Context.SaveChanges();
-            }
-            catch { }
+            int idApprentice = _Context.UsuarioAprendiz.FirstOrDefault(
+                            x => x.IdUsuario == idUser).IdAprendiz;
+
+            UsuarioAprendiz aprendice = await _Context.UsuarioAprendiz.FirstOrDefaultAsync((x) =>
+                    x.IdAprendiz == idApprentice);
+            if (aprendice.CantidadProyectos == 0)
+                aprendice.CantidadProyectos = 1;
+            else
+                aprendice.CantidadProyectos = aprendice.CantidadProyectos + 1;
+            _Context.SaveChanges();
+        }
+        private async Task _updateNumProjectAdmin(int idUser) 
+        {
+            int idAdmin = _Context.UsuarioAdministrador.FirstOrDefault(
+                            x => x.IdUsuario == idUser).IdAdmin;
+            UsuarioAdministrador admin = await _Context.UsuarioAdministrador.FirstOrDefaultAsync(
+                (x)=> x.IdAdmin == idAdmin);
+            if (admin.ProyectosPublicados == 0)
+                admin.ProyectosPublicados = 1;
+            else
+                admin.ProyectosPublicados = admin.ProyectosPublicados + 1;
+            _Context.SaveChanges();
         }
         public async Task<bool> InsertFormativeProject(FormProjectApp appProject)
             => await _insertProject(appProject);
@@ -408,7 +420,6 @@ namespace SystemSp.Infrastructure.Repositories
                 return salida;
             }
         }
-
         public async Task<List<string>> GetImagesAzureBlob(int IdProject) 
         {
             List<ImagenesProyecto> images = await _Context.ImagenesProyecto
@@ -423,6 +434,23 @@ namespace SystemSp.Infrastructure.Repositories
 
             List<string> result = await _azureBlob.GetImagesContainer(dicImages, container);
             return result;
+        }
+        public async Task<List<string>> GetCategorys() 
+        {
+            var lstSalida = new List<string>();
+            try
+            {
+                using (_Context)
+                {
+                    lstSalida = _Context.Proyecto.FromSqlRaw("spObtenerCategoriasPopulares")
+                        .Select(x=> x.Categoria).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                lstSalida[0] = "NOK";
+            }
+            return lstSalida;
         }
     }
 }

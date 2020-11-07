@@ -26,9 +26,5 @@ namespace SystemSP.Intelligence
             if (pass1 == pass2) return true;
             else return false;
         }
-        public void ValidaInputLogin(string type) {
-        
-            
-        }
     }
 }
