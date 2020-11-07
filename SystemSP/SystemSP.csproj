@@ -9,6 +9,8 @@
     <Content Include="i18ntext\TextCategoriasIndex.es.json" />
     <Content Include="i18ntext\TextIndexPage.en.json" />
     <Content Include="i18ntext\TextIndexPage.es.json" />
+    <Content Include="i18ntext\TextNosotros.en.json" />
+    <Content Include="i18ntext\TextNosotros.es.json" />
   </ItemGroup>
 
   <ItemGroup>
