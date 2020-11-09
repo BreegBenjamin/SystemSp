@@ -1,0 +1,20 @@
+﻿<div class="background-categorias">
+    <div class="divCotegoria">
+        <div class="tajeta_categoriaSolicitud">
+            <span class="centerSpan">
+                <img src="/images/IconosCategorias/@Image" class="IMG_CategoriaInferior" alt="categoria">
+            </span>
+            <div>
+                <p class="estiloText">@TituloCategoria</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Image { get; set; }
+    [Parameter]
+    public string TituloCategoria { get; set; }
+    ///IconosColor/@Image
+}

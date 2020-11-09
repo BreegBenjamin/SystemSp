@@ -1,15 +1,17 @@
-﻿<div class="BorderStyleCategoria @NameClassCategoria">
+﻿@inject IJSRuntime JSRun;
+
+<div @onclick="_clickHandler" class="BorderStyleCategoria @NameClassCategoria" id="categoriaDiv_@IndexCategoria">
     <div class="tituloCheck">
         <p class="contenedorTitulo">@NombreTitulo</p>
         <span>
-            <img src="@ImageSource" style="opacity:0.3" height="20" width="20" />
+            <img src="/images/IconosCategorias/@ImageSource" id="tick_@IndexCategoria" style="opacity:0.3" height="20" width="20" />
         </span>
     </div>
     <div>
         <span>
-            <img class="opacidadImgCategoria" src="@UrlImage" height="35" width="35" />
+            <img class="opacidadImgCategoria" src="/images/IconosCategorias/@UrlImage" height="35" width="35" />
         </span>
-        <div class="@Silueta">
+        <div class="@Silueta" id="silueta_@IndexCategoria">
         </div>
     </div>
 </div>
@@ -20,15 +22,24 @@
     public string UrlImage { get; set; }
     [Parameter]
     public int IndexCategoria { get; set; }
-    private string ImageSource = "/images/IconosCategorias/tick.svg";
+    [Parameter]
+    public EventCallback<int> Onclick { get; set; }
+
+    private string ImageSource = "tick.svg";
     private string NameClassCategoria = "colorCategoriaUnSelect";
     private string Silueta = "siluetaSinColor";
+
+    private async Task _clickHandler()
+    {
+        await JSRun.EjecutarJavaScriptFunc("tarjetasApp.CambiarColorCategoria", IndexCategoria.ToString());
+        await Onclick.InvokeAsync(IndexCategoria);
+    }
 
     protected override void OnInitialized()
     {
         if (IndexCategoria == 1)
         {
-            ImageSource = "/images/IconosCategorias/IconosColor/tick.svg";
+            ImageSource = "IconosColor/tick.svg";
             NameClassCategoria = "colorCategoriaSelect";
             Silueta = "siluetaColor";
         }

@@ -1,38 +1,63 @@
-﻿<section class="sectionSolicitud">
+﻿<section class="sectionCategoriasVista">
     <div>
-        <img src="/images/barCerveza.jpg" class="imgSolicitud">
-    </div>
-    <div class="sectionDetalles">
+        @foreach (var item in solicituds)
+        {
+            <TarjetaCategoriaSolicitud IndexCategoria="@item.IdCategoria"
+                                       NombreTitulo="@item.Nombre"
+                                       Onclick="_categoryHandler"
+                                       UrlImage="@item.UrlImage">
+            </TarjetaCategoriaSolicitud>
+        }
         <div>
-            <h3 class="tituloSolicitud">Titulo de la solicitud</h3>
-            <p class="tituloSolicitud">SubTitulo</p>
-        </div>
-        <div class="disFlexJsutify">
-            <a href="#" class="colorA">Ver descriptción</a>
-            <div>
-                <button class="colorVista">Ver Contacto</button>
+            <div class="infoProject">
+                <h3 class="h6Font">Lista Completa Categorias</h3>
             </div>
+            <CardsSolicitud></CardsSolicitud>
         </div>
     </div>
-    <div class="descripcionOpciones">
-        <div class="letterPerson">
-            <label class="namePerson">GL</label>
-        </div>
-        <p class="colorStyle">Gloria Lopéz</p>
-        <ol style=" padding: 0;">
-            <li>
-                <p class="tituloSolicitud">Vistas</p>
-            </li>
-            <li>
-                <p class="tituloSolicitud">Descargas</p>
-            </li>
-            <li>
-                <p class="tituloSolicitud">Categoría</p>
-            </li>
-        </ol>
+    <div>
+        <TarjetaInformacionSolicitud></TarjetaInformacionSolicitud>
     </div>
 </section>
 
 @code {
+    List<PopularCategory> solicituds = new List<PopularCategory>();
 
+    private void _categoryHandler(int indexSalida) 
+    {
+        
+    }
+    protected override void OnInitialized()
+    {
+        var categoria = new PopularCategory()
+        {
+            Nombre = "Educación",
+            UrlImage = "education.svg",
+            IdCategoria = 1
+        };
+        var categoria2 = new PopularCategory()
+        {
+            Nombre = "Industria y Comercio",
+            UrlImage = "hook.svg",
+            IdCategoria = 2
+        };
+        var categoria3 = new PopularCategory()
+        {
+            Nombre = "Herramientas y Productividad",
+            UrlImage = "work.svg",
+            IdCategoria = 3
+        };
+        var categoria4 = new PopularCategory()
+        {
+            Nombre = "Entretenimiento y Eventos",
+            UrlImage = "stage.svg",
+            IdCategoria = 4
+        };
+        solicituds.Add(categoria);
+        solicituds.Add(categoria2);
+        solicituds.Add(categoria3);
+        solicituds.Add(categoria4);
+
+        base.OnInitialized();
+    }
 }

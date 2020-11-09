@@ -1,0 +1,74 @@
+﻿@inject NavigationManager NavigationManager;
+@inject I18nText trasnlator;
+
+
+<aside class="category-solicitud">
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Shop"
+                      Image="SupermarketsAndStores.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Motorcycle"
+                      Image="VehiclesAndMotorcycles.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Education"
+                      Image="education.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Transport"
+                      Image="Transport.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Environment"
+                      Image="Environment.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Commerce"
+                      Image="IndustryAndCommerce.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Veterinary"
+                      Image="Veterinary.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Farms"
+                      Image="AgricultureAndFarms.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Home"
+                      Image="RealEstateAndHome.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Libraries"
+                      Image="BooksAndLibraries.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Health"
+                      Image="HealthAndWellness.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Travel"
+                      Image="TravelsAndTourism.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Music"
+                      Image="MusicAndAudio.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Photography"
+                      Image="Photography.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="Arte y Diseño"
+                      Image="ArtAndDesign.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="Herramientas y Productividad"
+                      Image="ToolsAndProductivity.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="Complementos Ofimatica"
+                      Image="OfficeComplement.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="@_txtCategoria.Event"
+                      Image="EntertainmentAndEvents.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="Trabajos y Finanzas"
+                      Image="FinanceAndJobs.svg">
+    </TarjetaSolicitud>
+    <TarjetaSolicitud TituloCategoria="Otros"
+                      Image="other.svg">
+    </TarjetaSolicitud>
+</aside>
+
+@code {
+    TextCategoriasIndex _txtCategoria = new TextCategoriasIndex();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtCategoria = await trasnlator.GetTextTableAsync<TextCategoriasIndex>(this);
+    }
+}

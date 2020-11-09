@@ -11,6 +11,7 @@
         <div>
             <EditForm class="formualario_Registro" Model="_formulario" OnSubmit="RegistrarUsuario">
                 <DataAnnotationsValidator />
+                <ValidationSummary />
                 <div class="disForm">
                     <InputText @bind-Value="_formulario.NameUser" maxlength="30" placeholder="Nombre"
                                @onblur="habilitarBoton" class="registro_form">
@@ -30,10 +31,10 @@
                     </InputText>
                 </div>
                 <div class="disForm">
-                    <InputText type="email" @bind-Value="_formulario.Email" placeholder="@_textIndex.Mail"
+                    <InputText type="email" @bind-Value="_formulario.Email" maxlength="100" placeholder="@_textIndex.Mail"
                                @onblur="habilitarBoton" class="registro_form">
                     </InputText>
-                    <InputText type="email" @bind-Value="_formulario.EmailConfirm" placeholder="Repetir Correo"
+                    <InputText type="email" @bind-Value="_formulario.EmailConfirm" maxlength="100" placeholder="Repetir Correo"
                                @onblur="habilitarBoton" class="registro_form">
                     </InputText>
                 </div>
@@ -71,18 +72,18 @@
                 @if (_formulario.UserType == 3)
                 {
                     <div>
-                        <InputText @bind-Value="_formulario.CompanyName" placeholder="Nombre Empresa" class="registro_form_Company">
+                        <InputText @bind-Value="_formulario.CompanyName" maxlength="50" placeholder="Nombre Empresa" class="registro_form_Company">
                         </InputText>
 
-                        <InputText @bind-Value="_formulario.CompanyAddress" placeholder="Dirección Empresa" class="registro_form_Company">
+                        <InputText @bind-Value="_formulario.CompanyAddress" maxlength="100" placeholder="Dirección Empresa" class="registro_form_Company">
                         </InputText>
 
-                        <InputText @bind-Value="_formulario.City" placeholder="Ciudad" class="registro_form_Company">
+                        <InputText @bind-Value="_formulario.City" maxlength="50" placeholder="Ciudad" class="registro_form_Company">
                         </InputText>
                     </div>
                 }
                 <div class="centerBotonText">
-                    <button  type="submit" class="@_classBoton" disabled="@_btnDeshabilitado">@_textIndex.Registry</button>
+                    <button type="submit" class="@_classBoton" disabled="@_btnDeshabilitado">@_textIndex.Registry</button>
                     <p>@_textIndex.MessageAccount <a href="#">@_textIndex.Login</a></p>
                 </div>
             </EditForm>
