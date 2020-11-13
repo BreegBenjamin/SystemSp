@@ -25,6 +25,7 @@ namespace SystemSP
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<Lector>();
+            services.AddSingleton<ValidarFormularios>();
             services.AddSingleton<SaveIFiles>();
             services.AddSingleton<UserInformationResult>();
             services.AddI18nText(opt=> opt.PersistanceLevel 

@@ -15,10 +15,4 @@ namespace SystemSP.Entitys
         [JsonProperty("NombreCategoria")]
         public string NombreCategoria { get; set; }
     }
-    public class CategoriaSolicitud 
-    {
-        public string Nombre { get; set; }
-        public string UrlImage { get; set; }
-        public int IdCategoria { get; set; }
-    }
 }

@@ -3,17 +3,19 @@
 @inject ProjectsApplication serviceConection;
 @inject NavigationManager NavigationManager;
 @inject UserInformationResult UserInfoResult;
+@inject ValidarFormularios validaForm;
 
 <section class="fondo fondo2" id="ModalLogin">
     <section class="popUp">
         <CerrarModal Mensaje="@_textIndex.MessageDataLogin"></CerrarModal>
-        <EditForm Model="_form">
+        <EditForm Model="_form" OnSubmit="validaFormulario">
+            <DataAnnotationsValidator />
             <section class="Form_Login">
-                <input type="email" class="estyleText" maxlength="30" placeholder="@_textIndex.Mail"
-                       @bind="@_form.EmailLogin" @onblur="habilitarBoton">
+                <input type="text" id="inputEmail" class="estyleText" maxlength="30" placeholder="@_textIndex.Mail"
+                       @bind-value="_form.EmailLogin" @onblur="habilitarBoton">
                 <input type="password" class="estyleText" maxlength="16" placeholder="@_textIndex.Password"
-                       @bind="@_form.PasswordLogin" @onblur="habilitarBoton">
-                <button class="@_classBoton" disabled="@_btnDeshabilitado" @onclick="validaFormulario">@_textIndex.Login</button>
+                       @bind-value="@_form.PasswordLogin" @onblur="habilitarBoton">
+                <button type="submit" class="@_classBoton" disabled="@_btnDeshabilitado">@_textIndex.Login</button>
             </section>
             <div>
                 <hr class="styleHr" />
@@ -25,6 +27,7 @@
         </EditForm>
     </section>
 </section>
+
 @code {
     private FormLogin _form = new FormLogin();
     private bool _btnDeshabilitado = true;
@@ -32,20 +35,6 @@
     private bool _datosInvalidos = false;
     private TextIndexPage _textIndex = new TextIndexPage();
     //Metodos
-    private async Task habilitarBoton()
-    {
-        if (!string.IsNullOrEmpty(_form.EmailLogin) && !string.IsNullOrEmpty(_form.PasswordLogin)
-            && _form.PasswordLogin.Length > 6)
-        {
-            _classBoton = "btRegistroForm";
-            _btnDeshabilitado = false;
-        }
-        else
-        {
-            _classBoton = "btRegistroForm-Unlock";
-            _btnDeshabilitado = true;
-        }
-    }
 
     private async Task validaFormulario()
     {
@@ -61,12 +50,38 @@
             await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
             if (result.UserType == 1)
                 NavigationManager.NavigateTo("Administrador");
-            else if(result.UserType == 2)
+            else if (result.UserType == 2)
                 NavigationManager.NavigateTo($"PublicarProyecto");
         }
     }
     protected override async Task OnInitializedAsync()
     {
         _textIndex = await ServiceTranslator.GetTextTableAsync<TextIndexPage>(this);
+    }
+
+    private async Task habilitarBoton()
+    {
+
+        if (!string.IsNullOrEmpty(_form.EmailLogin) && !string.IsNullOrEmpty(_form.PasswordLogin)
+            && _form.PasswordLogin.Length > 6)
+        {
+            bool mailValido = validaForm.ValidaEmail(_form.EmailLogin);
+            if (mailValido)
+            {
+                _classBoton = "btRegistroForm";
+                _btnDeshabilitado = false;
+            }
+            else
+            {
+                _classBoton = "btRegistroForm-Unlock";
+                _btnDeshabilitado = true;
+                await JsRun.MensajesRegistro("", "El correo electrónico ingresado no es valido");
+            }
+        }
+        else
+        {
+            _classBoton = "btRegistroForm-Unlock";
+            _btnDeshabilitado = true;
+        }
     }
 }

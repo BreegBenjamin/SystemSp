@@ -28,12 +28,14 @@
     public EventCallback<int> OnClick { get; set; }
     [Parameter]
     public int NumeroEntrada { get; set; }
+    [Parameter]
+    public string MensajeDescripcion { get; set; }
+
 
     private string UrlImage { get; set; }
     private bool BotonHabilitado = false;
     private string NameClassCategoria = "colorCategoriAdmin";
     private string opacity = "0.7";
-    private string MensajeDescripcion = "";
     private string ColorBoton = "ColorBotonNoHanddler";
     private async Task HabilitarSeccion()
     {
@@ -63,26 +65,22 @@
             case 0:
                 UrlImage = "work.svg";
                 ColorBoton = "ColorBotonHanddler";
-                MensajeDescripcion = "Opciones generales del administrador";
                 opacity = "1.0";
                 break;
             case 1:
                 NameClassCategoria = "colorCategoriaUnAdmin";
                 UrlImage = "team-No.svg";
                 opacity = "1.0";
-                MensajeDescripcion = "Consultar los usuarios registrados en la plataforma";
                 break;
             case 2:
                 NameClassCategoria = "colorCategoriaUnAdmin";
                 UrlImage = "project-No.svg";
                 opacity = "1.0";
-                MensajeDescripcion = "Consultar los proyectos y alojados en la plataforma";
                 break;
             case 3:
                 NameClassCategoria = "colorCategoriaUnAdmin";
                 UrlImage = "work-No.svg";
                 opacity = "1.0";
-                MensajeDescripcion = "Estadisticas de los proyectos y usuarios de la aplicación";
                 break;
         }
         base.OnInitialized();

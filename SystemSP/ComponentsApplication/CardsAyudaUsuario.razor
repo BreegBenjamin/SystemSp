@@ -1,0 +1,41 @@
+﻿@inject I18nText trasnlator;
+<section class="tarjetaAyuda">
+    <TarjetasInformacionAyuda TituloInformacion="@_txtPage.TittleCard1"
+                              DescripcionCard="@_txtPage.MensajeCard1"
+                              ImagePage="innovation.svg"
+                              SubTitulo="@_txtPage.TittleCard1"
+                              TextoLink="@_txtPage.MoreInformation1"
+                              Click="_habilitarModal">
+
+    </TarjetasInformacionAyuda>
+    <TarjetasInformacionAyuda TituloInformacion="@_txtPage.TittleCard2"
+                              ImagePage="framework.svg"
+                              DescripcionCard="@_txtPage.MensajeCard2"
+                              SubTitulo="@_txtPage.TittleCard2"
+                              TextoLink="@_txtPage.MoreInformation2"
+                              Click="_habilitarModal">
+    </TarjetasInformacionAyuda>
+    <TarjetasInformacionAyuda TituloInformacion="@_txtPage.TittleCard3"
+                              ImagePage="download.svg"
+                              DescripcionCard="@_txtPage.MensajeCard3"
+                              SubTitulo="@_txtPage.TittleCard3"
+                              TextoLink="@_txtPage.MoreInformation3"
+                              Click="_habilitarModal">
+    </TarjetasInformacionAyuda>
+</section>
+@if (_habilitado) 
+{
+    <ModalRenderFragment>
+        <p>Hola</p>
+    </ModalRenderFragment>
+}
+
+@code {
+    private bool _habilitado = false;
+    private TextIndexPage _txtPage = new TextIndexPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
+    }
+    private void _habilitarModal(bool salida) => _habilitado = salida;
+}

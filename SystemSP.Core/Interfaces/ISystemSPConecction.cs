@@ -18,5 +18,6 @@ namespace SystemSp.Core.Interfaces
         Task<bool> StatusAprentice(UpdateDataProject updateData);
         Task<bool> UpDataPerson(UpdateDataProject updateData);
         Task<bool> UpDateProject(UpdateDataProject updateData);
+        Task<List<string>> GetPopularCategory();
     }
 }

@@ -52,5 +52,52 @@ class CambiarTarjetas
             image.src = `${urlImage}${imagen}`
         }
     }
+    CambiarColorCategoria(numeroEntrada)
+    {
+        switch (numeroEntrada)
+        {
+            case "1":
+                this.CambiarEstilosCategoria(1, true)
+                this.CambiarEstilosCategoria(2)
+                this.CambiarEstilosCategoria(3)
+                this.CambiarEstilosCategoria(4)
+                break;
+            case "2":
+                this.CambiarEstilosCategoria(1)
+                this.CambiarEstilosCategoria(2, true)
+                this.CambiarEstilosCategoria(3)
+                this.CambiarEstilosCategoria(4)
+                break;
+            case "3":
+                this.CambiarEstilosCategoria(1)
+                this.CambiarEstilosCategoria(2)
+                this.CambiarEstilosCategoria(3, true)
+                this.CambiarEstilosCategoria(4)
+                break;
+            case "4":
+                this.CambiarEstilosCategoria(1)
+                this.CambiarEstilosCategoria(2)
+                this.CambiarEstilosCategoria(3)
+                this.CambiarEstilosCategoria(4, true)
+                break;
+        }
+    }
+    CambiarEstilosCategoria(numeroEntrada, cambiar = false)
+    {
+        const image = document.getElementById("tick_" + numeroEntrada)
+        const silueta = document.getElementById("silueta_" + numeroEntrada)
+        const contenedor = document.getElementById("categoriaDiv_" + numeroEntrada)
+        if (cambiar) {
+            image.src = "/images/IconosCategorias/IconosColor/tick.svg"
+            silueta.classList = "siluetaColor"
+            contenedor.classList = "colorCategoriaSelect BorderStyleCategoria"
+        }
+        else {
+
+            image.src = "/images/IconosCategorias/tick.svg"
+            silueta.classList = "siluetaSinColor"
+            contenedor.classList = "colorCategoriaUnSelect BorderStyleCategoria"
+        }
+    }
 }
 var tarjetasApp = new CambiarTarjetas();

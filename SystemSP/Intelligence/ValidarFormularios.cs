@@ -7,7 +7,7 @@ namespace SystemSP.Intelligence
 {
     public class ValidarFormularios
     {
-        public static bool ValidaEmail(string email)
+        public bool ValidaEmail(string email)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace SystemSP.Intelligence
                 return false;
             }
         }
-        public static bool ValidaPassEmail(string pass1, string pass2) 
+        public bool ValidaPassEmail(string pass1, string pass2) 
         {
             if (pass1 == pass2) return true;
             else return false;

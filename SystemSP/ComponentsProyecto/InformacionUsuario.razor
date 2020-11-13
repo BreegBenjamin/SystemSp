@@ -1,5 +1,6 @@
 ﻿@inject IJSRuntime JsRun;
 @inject I18nText ServiceTraslator;
+@inject ValidarFormularios validaForm;
 
 <section class="info-usuario estilosBordes">
     <div>
@@ -80,7 +81,7 @@
             _letrasInciales = $"{letras[0][0]} {letras[1][0]}";
         if (!String.IsNullOrEmpty(_confirmPass) && !String.IsNullOrEmpty(_nuevoPass))
         {
-            bool pass = ValidarFormularios.ValidaPassEmail(_nuevoPass, _confirmPass);
+            bool pass = validaForm.ValidaPassEmail(_nuevoPass, _confirmPass);
             if (pass)
             {
                 this._displayType = "none";
@@ -104,7 +105,7 @@
     private async Task clickBotonConfiguracion()
     {
         _displayType = "flex";
-        await JsRun.EjecutarJavaScriptFunc("salirMenu.DeshabilitarScrollPage");
+        await JsRun.DeshabilitarScrollApp();
     }
     private void botonNotificaciones() => _modalNotify = "flex";
     private void mauseUpNoti() => _modalNotify = "none";
