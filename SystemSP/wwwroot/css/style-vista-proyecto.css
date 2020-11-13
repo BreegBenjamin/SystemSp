@@ -199,9 +199,8 @@ li {
     box-shadow: var(--boxSombra);
     display: grid;
     grid-template-columns: max-content 1fr max-content;
-    margin: 25px;
     height: 210px;
-    width:65%;
+    width:auto;
 }
 .descripcionOpciones {
     box-sizing: border-box;
@@ -241,7 +240,7 @@ li {
     border-radius: 5px 0 0 5px;
     object-fit: fill;
     height: 100%;
-    width: 100%;
+    width: 250px;
 }
 
 .nav-menu-view {
@@ -268,10 +267,8 @@ li {
     width: 35px;
 }
 .divDataProject {
-    display:flex;
-    justify-content:space-between;
     box-sizing:border-box;
-    padding:0 100px;
+    padding:0 25px;
 }
 .elementsVista {
     margin: 55px 0;
@@ -316,15 +313,45 @@ li {
 }
 .sectionCategoriasVista {
     display:grid;
-    grid-row-gap:10px;
+    grid-column-gap:35px;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows:1fr;
 }
 .opacidadImgCategoria {
     opacity: 0.6;
 }
 .contenedorTitulo {
     font-size: 1em;
-    margin: 0;
+    margin: 0 3px;
     opacity: 0.6;
 }
 .moveCategoria {
+}
+.category-solicitud {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-template-rows: max-content max-content min-content;
+    box-shadow: var(--SombrasCaja);
+    border-radius: 10px;
+    background-color: #fff;
+    width: max-content;
+}
+.tajeta_categoriaSolicitud {
+    display: flex;
+    align-items: center;
+    height: 55px;
+    width: 205px;
+}
+    .tajeta_categoriaSolicitud:hover {
+        box-sizing: border-box;
+        padding: 2px;
+        cursor: pointer;
+        background-color: #ffffff;
+        border-radius: 3px;
+        transform: translateY(-3px);
+        box-shadow: 0 0 10px 0px #cccccc;
+    }
+.divCategorys {
+    display: grid;
+    grid-gap: 10px;
 }

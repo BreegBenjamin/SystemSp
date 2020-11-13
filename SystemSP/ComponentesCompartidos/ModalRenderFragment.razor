@@ -1,0 +1,15 @@
+﻿@inject IJSRuntime JsRun;
+<section class="ModalOpcionesPage">
+    <div class="ModalOpcionesConfiguraciones">
+        @ChildContent
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await JsRun.DeshabilitarScrollApp();
+    }
+}
