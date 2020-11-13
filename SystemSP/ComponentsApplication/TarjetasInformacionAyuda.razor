@@ -11,7 +11,7 @@
     </div>
     <div class="borderDiv">
         <span style="margin-top:10px">
-            <a class="linksEstile" href="#">@TextoLink</a>
+            <label class="linksEstile" @onclick="@(()=>Click.InvokeAsync(true))">@TextoLink</label>
         </span>
     </div>
 </section>
@@ -27,4 +27,6 @@
     public string SubTitulo { get; set; }
     [Parameter]
     public string TextoLink { get; set; }
+    [Parameter]
+    public EventCallback<bool> Click { get; set; }
 }

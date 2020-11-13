@@ -105,7 +105,7 @@
     private async Task clickBotonConfiguracion()
     {
         _displayType = "flex";
-        await JsRun.EjecutarJavaScriptFunc("salirMenu.DeshabilitarScrollPage");
+        await JsRun.DeshabilitarScrollApp();
     }
     private void botonNotificaciones() => _modalNotify = "flex";
     private void mauseUpNoti() => _modalNotify = "none";

@@ -31,6 +31,6 @@
     protected override async Task OnInitializedAsync()
     {
         _textPublicar = await serviceText.GetTextTableAsync<TextPublicarPage>(this);
-        await JsRun.DeshabilitarScroll();
+        await JsRun.DeshabilitarScrollApp();
     }
 }

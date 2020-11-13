@@ -199,9 +199,8 @@ li {
     box-shadow: var(--boxSombra);
     display: grid;
     grid-template-columns: max-content 1fr max-content;
-    margin: 25px;
     height: 210px;
-    width:65%;
+    width:auto;
 }
 .descripcionOpciones {
     box-sizing: border-box;
@@ -241,7 +240,7 @@ li {
     border-radius: 5px 0 0 5px;
     object-fit: fill;
     height: 100%;
-    width: 100%;
+    width: 250px;
 }
 
 .nav-menu-view {
@@ -314,7 +313,7 @@ li {
 }
 .sectionCategoriasVista {
     display:grid;
-    grid-row-gap:10px;
+    grid-column-gap:35px;
     grid-template-columns: max-content 1fr;
     grid-template-rows:1fr;
 }
@@ -352,3 +351,7 @@ li {
         transform: translateY(-3px);
         box-shadow: 0 0 10px 0px #cccccc;
     }
+.divCategorys {
+    display: grid;
+    grid-gap: 10px;
+}

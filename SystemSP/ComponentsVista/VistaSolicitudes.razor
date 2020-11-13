@@ -1,5 +1,5 @@
 ﻿<section class="sectionCategoriasVista">
-    <div>
+    <div class="divCategorys">
         @foreach (var item in solicituds)
         {
             <TarjetaCategoriaSolicitud IndexCategoria="@item.IdCategoria"
@@ -38,19 +38,19 @@
         var categoria2 = new PopularCategory()
         {
             Nombre = "Industria y Comercio",
-            UrlImage = "hook.svg",
+            UrlImage = "IndustryAndCommerce.svg",
             IdCategoria = 2
         };
         var categoria3 = new PopularCategory()
         {
             Nombre = "Herramientas y Productividad",
-            UrlImage = "work.svg",
+            UrlImage = "ToolsAndProductivity.svg",
             IdCategoria = 3
         };
         var categoria4 = new PopularCategory()
         {
             Nombre = "Entretenimiento y Eventos",
-            UrlImage = "stage.svg",
+            UrlImage = "EntertainmentAndEvents.svg",
             IdCategoria = 4
         };
         solicituds.Add(categoria);

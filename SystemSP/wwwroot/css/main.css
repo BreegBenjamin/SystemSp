@@ -637,7 +637,7 @@ body {
     outline-style: none;
     width: 110px;
 }
-.tarjetaAydua {
+.tarjetaAyuda {
     display:flex;
     justify-content:center;
     align-items:center;
@@ -679,7 +679,11 @@ body {
 .linksEstile {
     color: rgb(95, 115, 31);
     text-decoration: none;
+    cursor:pointer;
 }
+    .linksEstile:hover {
+        color: rgba(95, 115, 31,0.4);
+    }
 .sugerencias {
     color: #018192;
     line-height: 21px;
@@ -687,8 +691,11 @@ body {
     font-weight: 400;
     margin: 5px;
 }
+    .sugerencias:hover {
+        color: rgba(1, 129, 146,0.4);
+    }
 .margin0 {
-    margin:0;
+    margin: 0;
 }
 
 .selectType {
