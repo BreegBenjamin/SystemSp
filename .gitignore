@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+#Archivo json llaves
+SystemSP.WebService/appsettings.json/
