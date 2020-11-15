@@ -1,10 +1,6 @@
 ﻿@page  "/Nosotros";
-<<<<<<< HEAD
 @inject NavigationManager NavigationManager;
 @inject I18nText serviceTranslator;
-<HeaderUser></HeaderUser>
-=======
->>>>>>> proyectoGeneral
 <div class="contenedorNosotros">
     <div class="aboutSystem">
         <span>
@@ -14,7 +10,7 @@
             <p class="tituloSp">SystemSp</p>
             <div class="">
                 <p class="parrafoSp">
-                   @_txtPageNosotros.textAboutSystem<br /> @_txtPageNosotros.textAboutSystempTwo
+                    @_txtPageNosotros.textAboutSystem<br /> @_txtPageNosotros.textAboutSystempTwo
                 </p>
                 <div class="contVacio">
                     <div class="vacio"></div>
@@ -71,8 +67,8 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-<FooterContactanosSecond></FooterContactanosSecond>
+
+<FooterContacto></FooterContacto>
 @code {
 
     TextNosotros _txtPageNosotros = new TextNosotros();
@@ -81,7 +77,3 @@
         _txtPageNosotros = await serviceTranslator.GetTextTableAsync<TextNosotros>(this);
     }
 }
-=======
-<FooterContacto></FooterContacto>
-@code { }
->>>>>>> proyectoGeneral
