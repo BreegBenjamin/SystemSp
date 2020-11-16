@@ -1,4 +1,7 @@
 ﻿@page  "/Nosotros";
+@inject NavigationManager NavigationManager;
+@inject I18nText serviceTranslator;
+
 <div class="contenedorNosotros">
     <div class="aboutSystem">
         <span>
@@ -8,9 +11,7 @@
             <p class="tituloSp">SystemSp</p>
             <div class="">
                 <p class="parrafoSp">
-                    ¡Te damos la bienvenida al mejor repositorio del Sena,
-                    haras parte de nuestra gran comunidad, encontrando mas de 100 proyectos a tan solo
-                    un click!<br /> ¿Que esperas para publicar tu proyecto?
+                    @_txtPageNosotros.textAboutSystem<br /> @_txtPageNosotros.textAboutSystempTwo
                 </p>
                 <div class="contVacio">
                     <div class="vacio"></div>
@@ -20,12 +21,10 @@
     </div>
     <div class="misionVision">
         <div class="textMision">
-            <p class="tituloMision">Misión</p>
+            <p class="tituloMision">@_txtPageNosotros.tittleMission</p>
             <div class="">
                 <p class="parrafoMision">
-                    ¡Te damos la bienvenida al mejor repositorio del Sena,
-                    haras parte de nuestra gran comunidad, encontrando mas de 100 proyectos a tan solo
-                    un click!<br /> ¿Que esperas para publicar tu proyecto?
+                    @_txtPageNosotros.textMision
                 </p>
                 <div class="contVacio">
                     <div class="vacio"></div>
@@ -33,12 +32,10 @@
             </div>
         </div>
         <div class="textVision">
-            <p class="tituloVision">Visión</p>
+            <p class="tituloVision">@_txtPageNosotros.tittleVision</p>
             <div class="">
                 <p class="parrafoVision">
-                    ¡Te damos la bienvenida al mejor repositorio del Sena,
-                    haras parte de nuestra gran comunidad, encontrando mas de 100 proyectos a tan solo
-                    un click!<br /> ¿Que esperas para publicar tu proyecto?
+                    @_txtPageNosotros.textVision
                 </p>
                 <div class="contVacio">
                     <div class="vacio"></div>
@@ -47,30 +44,37 @@
         </div>
     </div>
     <div class="contQuien">
-        <h1 class="quienSomos">¿Quienes Somos?</h1>
+        <h1 class="quienSomos">@_txtPageNosotros.tittleAbout</h1>
         <p class="parrafoQuien">
-            SystemSp es un sistema de información que nace a raiz de un proyecto educativo de una sede
-            del sena, para ser especificos en el Centro De Servicios Financieros (ADSI).
-            <br />Conoce a nuestro equipo de trabajo.
+            @_txtPageNosotros.textAboutUs
+            <br />@_txtPageNosotros.textAboutUsTwo
         </p>
     </div>
 
     <div class="contenedorPersons">
         <div class="persons">
             <TarjetaIntegrantes NombrePersona="Ernesto Cajar"
-                                Descripcion="Desarrollador full-stack">
+                                Descripcion="@($"{_txtPageNosotros.cardPerson} full-stack")">
             </TarjetaIntegrantes>
             <TarjetaIntegrantes NombrePersona="Michael Parra"
-                                Descripcion="Desarrollador Front-End Y Back-End">
+                                Descripcion="@($"{_txtPageNosotros.cardPerson} Front-End Y Back-End")">
             </TarjetaIntegrantes>
             <TarjetaIntegrantes NombrePersona="Diego Martinez"
-                                Descripcion="Diseñador web y logica">
+                                Descripcion=@_txtPageNosotros.cardPersonThree>
             </TarjetaIntegrantes>
             <TarjetaIntegrantes NombrePersona="Jhon Murrillo"
-                                Descripcion="Ingeniero de bases de datos">
+                                Descripcion="@_txtPageNosotros.cardPersonTwo">
             </TarjetaIntegrantes>
         </div>
     </div>
 </div>
+
 <FooterContacto></FooterContacto>
-@code { }
+@code {
+
+    TextNosotros _txtPageNosotros = new TextNosotros();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtPageNosotros = await serviceTranslator.GetTextTableAsync<TextNosotros>(this);
+    }
+}
