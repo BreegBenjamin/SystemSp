@@ -28,10 +28,10 @@ namespace SystemSP.I18nText
         /// <summary>"Meet our work team."</summary>
         public string textAboutUsTwo;
 
-        /// <summary>"Llegar a generar una comunidad de aprendices SENA conociendo los proyectos hechos por ellos mismos, haciendo que dichos sistemas puedan ser vistos e implementados por empresas interesadas"</summary>
+        /// <summary>"Generate a community of SENA apprentices, knowing the projects made by themselves, making these systems can be seen and implemented by interested companies."</summary>
         public string textMision;
 
-        /// <summary>"Hacer que los aprendices puedan publicar sus proyectos ayudando a la nueva generación de aprendices a tener una guia en el proceso de aprendizaje."</summary>
+        /// <summary>"Make apprentices able to publish their projects by helping the new generation of apprentices to have a guide in the learning process."</summary>
         public string textVision;
 
         /// <summary>"¿About us?"</summary>
