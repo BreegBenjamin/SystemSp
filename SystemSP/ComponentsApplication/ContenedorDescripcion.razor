@@ -1,0 +1,17 @@
+﻿@inject I18nText translator;
+<div class="contenedor-descripcion">
+    <DescripcionAyudaUsuario Tittle="@_txtPage.licenseTitle"
+                             Image="ar.svg"
+                             Descripcion="@_txtPage.licenseText"
+                             tipoLicencia="@_txtPage.licenseType">                 
+    </DescripcionAyudaUsuario>
+</div>
+@code {
+
+    TextIndexPage _txtPage = new TextIndexPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtPage = await translator.GetTextTableAsync<TextIndexPage>(this);
+
+    }
+}

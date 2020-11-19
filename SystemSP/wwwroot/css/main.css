@@ -825,14 +825,15 @@ body {
 }
 
 .ModalOpcionesConfiguraciones {
+
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px 0px #cccccc;
-    min-width: 25%;
-    max-width: 80%;
     box-sizing: border-box;
     overflow: auto;
     padding: 20px;
+    height: 90%;
+    width: 80%;
 }
 .btEstadoModalOptciones {
     border-radius: 3px;
@@ -1060,4 +1061,30 @@ nav, ul, il {
 .imgUsuario {
     height: 15px;
     width: 15px;
+}
+/*estilos de DescripcionAyudaUsuario*/
+.contenedor-descripcion{
+    display: flex; 
+    flex-direction:column;
+    text-align: center;
+    justify-content: center;
+}
+.img-userHelp {
+    text-align: center;
+    height: 52%;
+    width: 60%;
+    margin: 20px 0;
+}
+.tituloAyudaUsuario{
+    font-size: 42px;
+    padding: 0;
+    margin: 20px 0;
+}
+.textoAyudaUsuario, .tipoLicencia{
+    text-align: initial;
+    font-size: 20px;
+    font-weight:500;
+    color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    margin: 20px 0;
 }
