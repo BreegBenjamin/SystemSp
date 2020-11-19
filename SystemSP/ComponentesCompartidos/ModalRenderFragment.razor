@@ -1,6 +1,9 @@
 ﻿@inject IJSRuntime JsRun;
 <section class="ModalOpcionesPage">
     <div class="ModalOpcionesConfiguraciones">
+        <div>
+            <button class="cancel" @onclick="_habilitarScroll"></button>
+        </div>
         @ChildContent
     </div>
 </section>
@@ -11,5 +14,14 @@
     protected override async Task OnInitializedAsync()
     {
         await JsRun.DeshabilitarScrollApp();
+    }
+
+    [Parameter]
+    public EventCallback<bool> ClickDisable { get; set; }
+
+    private async Task _habilitarScroll()
+    {
+        await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
+        await ClickDisable.InvokeAsync(false);
     }
 }

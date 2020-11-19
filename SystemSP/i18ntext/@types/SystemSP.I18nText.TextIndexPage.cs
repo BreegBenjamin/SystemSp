@@ -25,6 +25,15 @@ namespace SystemSP.I18nText
         /// <summary>"Last name"</summary>
         public string LastName;
 
+        /// <summary>"When your code is free software, you provide the freedom that any user can run your system or program, for any purpose, it can also be studied and improved in some aspects to make it more functional and effective; thus benefiting the apprenticeship community."</summary>
+        public string licenseText;
+
+        /// <summary>"Free software"</summary>
+        public string licenseTitle;
+
+        /// <summary>"License GPL (GNU Public)."</summary>
+        public string licenseType;
+
         /// <summary>"Login"</summary>
         public string Login;
 

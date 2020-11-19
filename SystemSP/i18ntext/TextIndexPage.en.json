@@ -46,6 +46,10 @@
   "TextAbout": "About",
   "TextTerms": "Terms",
   "TextConditions": "Conditions",
-  "TextHelp": "Help"
+  "TextHelp": "Help",
+
+  "licenseTitle": "Free software",
+  "licenseText": "When your code is free software, you provide the freedom that any user can run your system or program, for any purpose, it can also be studied and improved in some aspects to make it more functional and effective; thus benefiting the apprenticeship community.",
+  "licenseType": "License GPL (GNU Public)."
 }
 

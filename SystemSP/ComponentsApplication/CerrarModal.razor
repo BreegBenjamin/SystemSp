@@ -1,7 +1,7 @@
 ﻿@inject IJSRuntime JsRun;
 <section class="displayIformation">
     <div>
-        <button class="cancel" @onclick="HabilitarScroll"></button>
+        <button class="cancel" @onclick="_habilitarScroll"></button>
     </div>
     <div class="centerLogoModal">
         <h4 class="colorWelcom">Bienvenido</h4>
@@ -11,7 +11,7 @@
 @code {
     [Parameter]
     public string Mensaje { get; set; }
-    private async Task HabilitarScroll()
+    private async Task _habilitarScroll()
     {
         await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
     }
