@@ -9,6 +9,7 @@ using SystemSp.Core.Interfaces;
 using SystemSp.DTOS.EntitisFormsApp;
 using SystemSp.DTOS.EntitisIndexApp;
 using SystemSp.DTOS.EntitisProjectsApp;
+using SystemSp.DTOS.EntitisViewApp;
 using SystemSp.Infrastructure.Data;
 
 namespace SystemSp.Infrastructure.Repositories
@@ -17,12 +18,12 @@ namespace SystemSp.Infrastructure.Repositories
     {
         private readonly SystemSpContext _Context;
         private readonly ISystemSpAzureBlob _azureBlob;
-        public BusinessImplementation(SystemSpContext context, ISystemSpAzureBlob azureBlob )
+        public BusinessImplementation(SystemSpContext context, ISystemSpAzureBlob azureBlob)
         {
             _Context = context;
             _azureBlob = azureBlob;
         }
-        private async Task<Tuple<bool, bool, bool>> _userExist(string identification, string email) 
+        private async Task<Tuple<bool, bool, bool>> _userExist(string identification, string email)
         {
             bool exist = true;
             bool mailEx = false;
@@ -32,7 +33,7 @@ namespace SystemSp.Infrastructure.Repositories
                 .FirstOrDefaultAsync();
             if (usu == null)
                 exist = false;
-            else 
+            else
             {
                 if (usu.DireccionEmail == email)
                     mailEx = true;
@@ -84,7 +85,7 @@ namespace SystemSp.Infrastructure.Repositories
                     var datePost = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
                     var dateProject = DateTime.Now;
                     DateTime.TryParse(appProject.ProjectDate, out dateProject);
-                    
+
                     var images = new List<ImagenesProyecto>();
                     var team = new List<IntegrantesProyecto>();
                     var imagesData = new Dictionary<string, string>();
@@ -97,7 +98,7 @@ namespace SystemSp.Infrastructure.Repositories
 
                     //Agrega a la lista que se guarda en la base de datos
                     int numImg = 1;
-                    appProject.ImagesDataStream.ForEach(img => 
+                    appProject.ImagesDataStream.ForEach(img =>
                     {
                         string nombreImagen = $"{img.ImageType.Replace("/", $"0{numImg}.")}";
                         images.Add(new ImagenesProyecto()
@@ -136,10 +137,10 @@ namespace SystemSp.Infrastructure.Repositories
                         ImagenesProyecto = images,
                     };
                     if (user.TipoUsuario == 1)
-                       await _updateNumProjectAdmin(user.IdUsuario);
-                    else if (user.TipoUsuario == 2) 
+                        await _updateNumProjectAdmin(user.IdUsuario);
+                    else if (user.TipoUsuario == 2)
                         await _updateNumProjecApprentice(user.IdUsuario);
-                    
+
                     if (appProject.ApprenticesData.Count > 0)
                     {
                         appProject.ApprenticesData.ForEach((stu) =>
@@ -157,7 +158,7 @@ namespace SystemSp.Infrastructure.Repositories
                         });
                         formativeProject.IntegrantesProyecto = team;
                     }
-                    var credor = new UsuarioCreadorProyecto() 
+                    var credor = new UsuarioCreadorProyecto()
                     {
                         FechaCreacion = datePost,
                         IdCreador = user.IdUsuario,
@@ -189,12 +190,12 @@ namespace SystemSp.Infrastructure.Repositories
                 aprendice.CantidadProyectos = aprendice.CantidadProyectos + 1;
             _Context.SaveChanges();
         }
-        private async Task _updateNumProjectAdmin(int idUser) 
+        private async Task _updateNumProjectAdmin(int idUser)
         {
             int idAdmin = _Context.UsuarioAdministrador.FirstOrDefault(
                             x => x.IdUsuario == idUser).IdAdmin;
             UsuarioAdministrador admin = await _Context.UsuarioAdministrador.FirstOrDefaultAsync(
-                (x)=> x.IdAdmin == idAdmin);
+                (x) => x.IdAdmin == idAdmin);
             if (admin.ProyectosPublicados == 0)
                 admin.ProyectosPublicados = 1;
             else
@@ -205,7 +206,7 @@ namespace SystemSp.Infrastructure.Repositories
             => await _insertProject(appProject);
         public ProjectCard GetCard(Proyecto project)
             => _getCard(project);
-        public async Task<UserInformation> InsertUserRol(FormRegister formLogin) 
+        public async Task<UserInformation> InsertUserRol(FormRegister formLogin)
         {
             using (_Context)
             {
@@ -284,9 +285,9 @@ namespace SystemSp.Infrastructure.Repositories
                 return usuInfo;
             }
         }
-        public async Task<UserInformation> UserResponse(FormLogin login) 
+        public async Task<UserInformation> UserResponse(FormLogin login)
         {
-            using (_Context) 
+            using (_Context)
             {
                 var usuInfo = new UserInformation()
                 {
@@ -295,7 +296,7 @@ namespace SystemSp.Infrastructure.Repositories
                 try
                 {
                     Usuario user = await _Context.Usuario.FirstOrDefaultAsync(
-                        x=> x.DireccionEmail == login.EmailLogin && x.Contrasenia == login.PasswordLogin);
+                        x => x.DireccionEmail == login.EmailLogin && x.Contrasenia == login.PasswordLogin);
                     if (user != null)
                     {
                         usuInfo = _getInfoUser(user);
@@ -314,7 +315,7 @@ namespace SystemSp.Infrastructure.Repositories
                 return usuInfo;
             }
         }
-        private UserInformation _getInfoUser(Usuario usuResult) 
+        private UserInformation _getInfoUser(Usuario usuResult)
         {
             var saldia = new UserInformation()
             {
@@ -328,17 +329,17 @@ namespace SystemSp.Infrastructure.Repositories
             };
             return saldia;
         }
-        public async Task<bool> ChangeStatusPerson(UpdateDataProject updateData) 
+        public async Task<bool> ChangeStatusPerson(UpdateDataProject updateData)
         {
-            using (_Context) 
+            using (_Context)
             {
                 bool result = false;
                 try
                 {
                     var apprentice = await _Context.IntegrantesProyecto.FirstOrDefaultAsync(
-                        x=>x.IdPersona == updateData.IdApprentice && x.IdUsuarioCreador == updateData.IdUser
+                        x => x.IdPersona == updateData.IdApprentice && x.IdUsuarioCreador == updateData.IdUser
                         && x.IdProyecto == updateData.IdProject);
-                    if (apprentice != null) 
+                    if (apprentice != null)
                     {
                         apprentice.Estado = updateData.Estado;
                         apprentice.FechaActualizacion = DateTime.Now;
@@ -346,7 +347,7 @@ namespace SystemSp.Infrastructure.Repositories
                         result = true;
                     }
                 }
-                catch{}
+                catch { }
                 return result;
             };
         }
@@ -371,7 +372,7 @@ namespace SystemSp.Infrastructure.Repositories
                         _Context.SaveChanges();
                         result = true;
                     }
-                    else 
+                    else
                     {
                         var apprenticeVal = new IntegrantesProyecto()
                         {
@@ -396,17 +397,17 @@ namespace SystemSp.Infrastructure.Repositories
                 return result;
             };
         }
-        public async Task<bool> ChangeProjectState(UpdateDataProject updateData) 
+        public async Task<bool> ChangeProjectState(UpdateDataProject updateData)
         {
-            using (_Context) 
+            using (_Context)
             {
                 bool salida = false;
                 try
                 {
                     var project = await _Context.Proyecto.FirstOrDefaultAsync(
-                        (x)=> x.IdProyecto == updateData.IdProject && x.IdUsuario == updateData.IdUser
+                        (x) => x.IdProyecto == updateData.IdProject && x.IdUsuario == updateData.IdUser
                         && x.Estado != "Eliminado");
-                    if (project != null) 
+                    if (project != null)
                     {
                         if (updateData.Estado == "Eliminado")
                             project.FechaEliminado = DateTime.Now;
@@ -416,15 +417,15 @@ namespace SystemSp.Infrastructure.Repositories
                         _Context.SaveChanges();
                     }
                 }
-                catch (Exception){}
+                catch (Exception) { }
                 return salida;
             }
         }
-        public async Task<List<string>> GetImagesAzureBlob(int IdProject) 
+        public async Task<List<string>> GetImagesAzureBlob(int IdProject)
         {
             List<ImagenesProyecto> images = await _Context.ImagenesProyecto
                 .Where(x => x.IdProyecto == IdProject).ToListAsync();
-            var dicImages = new Dictionary<string,string>();
+            var dicImages = new Dictionary<string, string>();
 
             images.ForEach(x => dicImages.Add(x.NombreImagen, x.TipoImagen));
 
@@ -435,15 +436,16 @@ namespace SystemSp.Infrastructure.Repositories
             List<string> result = await _azureBlob.GetImagesContainer(dicImages, container);
             return result;
         }
-        public async Task<List<string>> GetCategorys() 
+        public async Task<List<string>> GetPopularCategory()
         {
             var lstSalida = new List<string>();
             try
             {
                 using (_Context)
                 {
+                    //Ejecutando Procedimiento almacenado
                     lstSalida = _Context.Proyecto.FromSqlRaw("spObtenerCategoriasPopulares")
-                        .Select(x=> x.Categoria).ToList();
+                        .Select(x => x.Categoria).ToList();
                 }
             }
             catch (Exception ex)
@@ -451,6 +453,127 @@ namespace SystemSp.Infrastructure.Repositories
                 lstSalida[0] = "NOK";
             }
             return lstSalida;
+        }
+        public async Task<bool> ValidaEmailUser(string email)
+        {
+            using (_Context) 
+            {
+                try
+                {
+                    Usuario usu = await _Context.Usuario.Where(x=> x.DireccionEmail == email)
+                        .FirstOrDefaultAsync();
+                    if (usu != null)
+                        return true;
+                    else return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+        public async Task<List<ProjectDetails>> GetProjectsUser(int IdUser)
+        {
+            using (_Context)
+            {
+                var result = new List<ProjectDetails>();
+                try
+                {
+                    var projectSalida = await _Context.Proyecto.Where(
+                        (x) => x.IdUsuario == IdUser && x.Estado != "Eliminado").ToListAsync();
+                    if (projectSalida != null && projectSalida.Count > 0)
+                    {
+                        //Llenando los detalles del proyecto por cada resultado de la Consulta
+                        foreach (var iVal in projectSalida)
+                        {
+                            var project = new ProjectDetails()
+                            {
+                                ImagenesProyecto = new List<string>(),
+                                Aprendices = new List<ApprenticeData>()
+                            };
+                            List<IntegrantesProyecto> integrantes = _Context.IntegrantesProyecto
+                                .Where(x => x.IdUsuarioCreador == iVal.IdUsuario && x.Estado == "Activo").ToList();
+
+                            project.Descripcion = iVal.DescripcionProyecto;
+                            project.Categoria = iVal.Categoria;
+                            project.IdProyecto = iVal.IdProyecto;
+                            project.NombreProyecto = iVal.NombreProyecto;
+                            project.NumeroDescargas = iVal.NumeroDescargas.ToString();
+                            project.NumeroVistas = iVal.NumeroVisitas.ToString();
+
+                            //Obtener Imagenes del proyecto desde azure storege
+                            project.ImagenesProyecto = await GetImagesAzureBlob(iVal.IdProyecto);
+
+                            integrantes.ForEach(x =>
+                            {
+                                project.Aprendices.Add(new ApprenticeData()
+                                {
+                                    Email = x.Correo,
+                                    FirstName = x.Nombre,
+                                    LastName = x.Apellido,
+                                    Telephone = x.Telefono,
+                                    IdApprentice = x.IdPersona,
+                                    Status = x.Estado
+                                });
+                            });
+                            project.Process = true;
+                            result.Add(project);
+                        }
+                    }
+                }
+                catch (Exception) { }
+                return result;
+            }
+        }
+        public async Task<FeaturedProjects> GetPopularProjects()
+        {
+            using (_Context)
+            {
+                var popularProject = new FeaturedProjects();
+                try
+                {
+                    List<Proyecto> project = await _Context.Proyecto.Take(10)
+                        .Where((x) => x.Estado != "Eliminado").ToListAsync();
+                    var cards = new List<ProjectCard>();
+                    project.ForEach(item =>
+                    {
+                        var card = GetCard(item);
+                        if (card.Descripcion != "Error")
+                            cards.Add(card);
+                    });
+                    popularProject.ProjectCardList = cards;
+                    return popularProject;
+                }
+                catch (Exception ex)
+                {
+                    string mens = ex.Message;
+                    return popularProject;
+                }
+            }
+        }
+        public async Task<ProjectInformation> GetFormativeProject(int idProject) 
+        {
+            using (_Context)
+            {
+                var project = new ProjectInformation()
+                {
+                    ProjectCardInfo = new ProjectCard(),
+                    ImagesProject = new List<string>()
+                };
+                try
+                {
+                    var formativeProject = await _Context.Proyecto
+                        .FirstOrDefaultAsync((x) => x.IdProyecto == idProject && x.Estado != "Eliminado");
+                    if (formativeProject != null)
+                    {
+                        ProjectCard card = GetCard(formativeProject);
+                        project.ImagesProject = await GetImagesAzureBlob(formativeProject.IdProyecto);
+                        project.ProjectCardInfo = card;
+                    }
+                }
+                catch { }
+                return project;
+            }
         }
     }
 }

@@ -9,31 +9,38 @@ namespace SystemSP.WebService.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private readonly ISystemSPConecction _context;
-        public PersonController(ISystemSPConecction context)
+        private readonly ISystemSPConecction _service;
+        public PersonController(ISystemSPConecction service)
         {
-            _context = context;
+            _service = service;
         }
-
+        [HttpPost]
         [ActionName("ChangeStatusAprentice")]
         public async Task<IActionResult> ChangeStatusAprentice(UpdateDataProject updateData) 
         {
-            var result = await _context.StatusAprentice(updateData); 
+            var result = await _service.StatusAprentice(updateData); 
             return Ok(result);
         }
-
+        [HttpPost]
         [ActionName("UpDatePerson")]
         public async Task<IActionResult> UpDataPerson(UpdateDataProject updateData)
         {
-            var result = await _context.UpDataPerson(updateData);
+            var result = await _service.UpDataPerson(updateData);
             return Ok(result);
         }
-
+        [HttpPost]
         [ActionName("UpDateProject")]
         public async Task<IActionResult> UpDateProject(UpdateDataProject updateData)
         {
-            var result = await _context.UpDateProject(updateData);
+            var result = await _service.UpDateProject(updateData);
             return Ok(result);
+        }
+        [HttpPost]
+        [ActionName("ValidateEmail")]
+        public async Task<IActionResult> ValidateEmail([FromBody] string email) 
+        {
+            bool salida = await _service.ValidaEmailUser(email);
+            return Ok(salida);
         }
     }
 }

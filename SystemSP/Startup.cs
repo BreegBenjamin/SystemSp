@@ -7,8 +7,8 @@ using SystemSp.Intellengece.WebServiceBusiness;
 using SystemSP.Intelligence;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 using System;
-using SystemSp.Intellengece.Interfaces;
 using SystemSp.DTOS.EntitisIndexApp;
+using SystemSp.Intellengece.ApplicationBusiness;
 
 namespace SystemSP
 {
@@ -25,6 +25,7 @@ namespace SystemSP
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<Lector>();
+            services.AddSingleton<SendEMailUser>();
             services.AddSingleton<ValidarFormularios>();
             services.AddSingleton<SaveIFiles>();
             services.AddSingleton<UserInformationResult>();

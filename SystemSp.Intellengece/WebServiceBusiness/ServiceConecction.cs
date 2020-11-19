@@ -48,6 +48,20 @@ namespace SystemSp.Intellengece.WebServiceBusiness
                 return jsonResult;
             }
         }
+        private async Task<bool> _checkEmail(string email)
+        {
+            string json = await _jsonResultService("Person/ValidateEmail", email);
+            try
+            {
+                bool result = (bool)JsonConvert.DeserializeObject(json, typeof(bool));
+                return result;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public async Task<bool> CheckEmail(string email) => await _checkEmail(email);
         public async Task<T> GetDataFromService<T>(T entity, string baseUri)
         {
             try

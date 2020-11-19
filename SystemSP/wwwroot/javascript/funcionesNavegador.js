@@ -70,7 +70,7 @@ class AlertasApp
 }
 class SweetAlertMensajes
 {
-    SweetMensaje(msEmail,msPass)
+    SweetMensaje(msEmail,msPass, msExtra)
     {
 		Swal.fire({
 			//title:
@@ -81,6 +81,7 @@ class SweetAlertMensajes
                     </span>
                     <p>${msEmail}</p>
                     <p>${msPass}</p>
+                    <p>${msExtra}</p>
                     </div>`,
 			//icon:
 			confirmButtonText: 'Aceptar',
