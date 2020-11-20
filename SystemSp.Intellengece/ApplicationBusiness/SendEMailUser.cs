@@ -23,14 +23,15 @@ namespace SystemSp.Intellengece.ApplicationBusiness
                 mailMessage.Body = _createHtmlText();
                 mailMessage.BodyEncoding = Encoding.UTF8;
                 mailMessage.IsBodyHtml = true;
-                mailMessage.From = new MailAddress("");
+                mailMessage.From = new MailAddress("systemSp2020@gmail.com");
 
-                //server host
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
-                smtpClient.Credentials = new NetworkCredential("", "");
-                //puerto de email
-                smtpClient.Port = 587;
-                smtpClient.EnableSsl = true;
+                //server host y puerto
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    UseDefaultCredentials = true,
+                    Credentials = new NetworkCredential("systemSp2020@gmail.com", "1821996Kajar."),
+                    EnableSsl = true
+                };
 
                 //Puerto de salida del servidor de salida
                 await smtpClient.SendMailAsync(mailMessage);

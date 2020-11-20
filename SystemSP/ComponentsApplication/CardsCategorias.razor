@@ -6,59 +6,42 @@
         <section class="categoria-image">
         </section>
         <aside class="category-project">
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Shop"
-                              Image="SupermarketsAndStores.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Motorcycle"
-                              Image="VehiclesAndMotorcycles.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Education"
-                              Image="education.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Transport"
-                              Image="Transport.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Environment"
-                              Image="Environment.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Photography"
-                              Image="Photography.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Commerce"
-                              Image="IndustryAndCommerce.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Veterinary"
-                              Image="Veterinary.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Farms"
-                              Image="AgricultureAndFarms.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Health"
-                              Image="HealthAndWellness.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Music"
-                              Image="MusicAndAudio.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Home"
-                              Image="RealEstateAndHome.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Libraries"
-                              Image="BooksAndLibraries.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Event"
-                              Image="EntertainmentAndEvents.svg">
-            </TarjetaCategoria>
-            <TarjetaCategoria TituloCategoria="@_txtCategoria.Travel"
-                              Image="TravelsAndTourism.svg">
-            </TarjetaCategoria>
+            @foreach (KeyValuePair<string, string> item in _dicCategory)
+            {
+                <TarjetaCategoria TituloCategoria="@item.Key"
+                                  Image="@item.Value">
+                </TarjetaCategoria>
+            }
         </aside>
     </div>
 </section>
 
 @code {
-    TextCategoriasIndex _txtCategoria = new TextCategoriasIndex();
+    private Dictionary<string, string> _dicCategory = new Dictionary<string, string>();
+    private TextCategoriasIndex _txtCategoria = new TextCategoriasIndex();
     protected override async Task OnInitializedAsync()
     {
         _txtCategoria = await trasnlator.GetTextTableAsync<TextCategoriasIndex>(this);
+        _estabelcerCategorias();
+    }
+    private void _estabelcerCategorias()
+    {
+        _dicCategory = new Dictionary<string, string>()
+        {
+            { _txtCategoria.Shop , "SupermarketsAndStores.svg"},
+            {_txtCategoria.Motorcycle,"VehiclesAndMotorcycles.svg"},
+            { _txtCategoria.Education, "education.svg"},
+            { _txtCategoria.Transport, "Transport.svg"},
+            { _txtCategoria.Environment,"Environment.svg"},
+            { _txtCategoria.Photography,"Photography.svg"},
+            { _txtCategoria.Commerce,"IndustryAndCommerce.svg"},
+            { _txtCategoria.Veterinary,"Veterinary.svg"},
+            { _txtCategoria.Farms,"AgricultureAndFarms.svg"},
+            { _txtCategoria.Music,"MusicAndAudio.svg"},
+            { _txtCategoria.Home,"RealEstateAndHome.svg"},
+            {_txtCategoria.Libraries, "BooksAndLibraries.svg"},
+            { _txtCategoria.Event,"EntertainmentAndEvents.svg"},
+            { _txtCategoria.Travel,"TravelsAndTourism.svg"}
+        };
     }
 }

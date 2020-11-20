@@ -1,13 +1,11 @@
-﻿<section>
+﻿<section class="contenedorAyudaUsu">
     <h3 class="tituloAyudaUsuario">@Tittle</h3>
-    <div>
+    <div class="descriptionDiv">
+        <p class="textoAyudaUsuario">@Descripcion</p>
+    </div>
+    <div class="imageDiv">
         <img src="/images/img_helpUser/@Image" alt="img" class="img-userHelp" />
     </div>
-    <p class="textoAyudaUsuario">@Descripcion</p>
-    <!--<div>
-        <img src="/images/img_helpUser/@ImageSecond" alt="img" class="img-userHelp" />
-    </div>-->
-    <p class="tipoLicencia"><strong>@tipoLicencia</strong></p>
 </section>
 
 @code {
@@ -16,14 +14,8 @@
     public string Image { get; set; }
 
     [Parameter]
-    public string ImageSecond { get; set; }
-
-    [Parameter]
     public string Tittle { get; set; }
 
     [Parameter]
     public string Descripcion { get; set; }
-
-    [Parameter]
-    public string tipoLicencia { get; set; }
 }
