@@ -1,4 +1,5 @@
-﻿<section class="ViewProjectFirst">
+﻿@inject I18nText serviceTranslator;
+<section class="ViewProjectFirst">
     <SliderImage
                  Images="@_images"></SliderImage>
     <div class="containerDetails">
@@ -17,8 +18,8 @@
             </div>
         </div>
         <div class="containerLinks">
-            <p><a href="#" class="colorA">Descargar proyecto</a></p>
-            <p><a href="#" class="colorA">Información de contacto</a></p>
+            <p><a href="#" class="colorA">@_txtViewPage.DownloadProject</a></p>
+            <p><a href="#" class="colorA">@_txtViewPage.ContactInformation</a></p>
         </div>
     </div>
 </section>
@@ -34,5 +35,11 @@
     {
         _images = ProjectInfo.ImagesProject;
         _projectCard = ProjectInfo.ProjectCardInfo;
+    }
+
+    TextViewPage _txtViewPage = new TextViewPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtViewPage = await serviceTranslator.GetTextTableAsync<TextViewPage>(this);
     }
 }

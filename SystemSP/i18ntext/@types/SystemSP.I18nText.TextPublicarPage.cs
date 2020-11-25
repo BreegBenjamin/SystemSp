@@ -250,6 +250,9 @@ namespace SystemSP.I18nText
         /// <summary>"Sena headquarters"</summary>
         public string SenaHeadquartes;
 
+        /// <summary>"Sort by"</summary>
+        public string SortBy;
+
         /// <summary>"Technologies used for the Back-End of the application"</summary>
         public string SubTextBack;
 

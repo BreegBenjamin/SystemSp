@@ -93,6 +93,7 @@
   "MessageSuccess": "The project has been published successfully",
   "MessageError": "An error was generated in the publishing process",
   "MessageAddAprendice": "Successfully added",
-  "ProjectDataMessage": "Training project data"
+  "ProjectDataMessage": "Training project data",
+  "SortBy": "Sort by"
 
 }
