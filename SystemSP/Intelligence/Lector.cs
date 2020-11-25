@@ -15,12 +15,12 @@ namespace SystemSP.Intelligence
             var categorias = new ListaCategoriaVista();
             try
             {
-                string jsonResult = _jsonFile(@"Data\vistaCategorias.json");
+                string jsonResult = _jsonFile(@"wwwroot\json\vistaCategorias.json");
                 categorias = (ListaCategoriaVista)JsonConvert.DeserializeObject(
                     jsonResult, typeof(ListaCategoriaVista));
 
             }
-            catch (Exception ex) { }
+            catch{ }
             return categorias;
         }
         public List<ETecnologiasApp> GetTecnologiasApp(string tipo)

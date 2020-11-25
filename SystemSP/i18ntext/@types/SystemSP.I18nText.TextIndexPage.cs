@@ -34,7 +34,7 @@ namespace SystemSP.I18nText
         /// <summary>"License GPL (GNU Public)."</summary>
         public string licenseType;
 
-        /// <summary>"Login"</summary>
+        /// <summary>"Log-in"</summary>
         public string Login;
 
         /// <summary>"Mail"</summary>
@@ -70,7 +70,7 @@ namespace SystemSP.I18nText
         /// <summary>"Find the training projects created by the apprentices of Sena. If you are a student, a company or a private individual, can access the software documentation developed by Sena apprentices."</summary>
         public string MsDescription;
 
-        /// <summary>"Welcome to the proyect repository sofware"</summary>
+        /// <summary>"Welcome to the repository of software projects!"</summary>
         public string MsWelcon;
 
         /// <summary>"Name"</summary>

@@ -9,6 +9,8 @@ using Toolbelt.Blazor.Extensions.DependencyInjection;
 using System;
 using SystemSp.DTOS.EntitisIndexApp;
 using SystemSp.Intellengece.ApplicationBusiness;
+using BlazorDownloadFile;
+using Rotativa.AspNetCore;
 
 namespace SystemSP
 {
@@ -29,6 +31,7 @@ namespace SystemSP
             services.AddSingleton<ValidarFormularios>();
             services.AddSingleton<SaveIFiles>();
             services.AddSingleton<UserInformationResult>();
+            services.AddBlazorDownloadFile();
             services.AddI18nText(opt=> opt.PersistanceLevel 
                                 = Toolbelt.Blazor.I18nText.PersistanceLevel.SessionAndLocal );
             services.AddHttpClient<ProjectsApplication>(client=> 
@@ -55,9 +58,13 @@ namespace SystemSP
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(name: "default",
+                    pattern: "{controller}/{action}");
+                endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+            RotativaConfiguration.Setup(env.WebRootPath.Replace("wwwroot","dlls"));
         }
     }
 }

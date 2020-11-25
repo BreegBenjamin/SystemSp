@@ -3,13 +3,10 @@
     <div>
         <button class="bt-back botonesSlider" @onclick="_moverTarjetaIzquierda"></button>
     </div>
-    @for (; _count < _lsDescription.Count; _count++)
-    {
         <DescripcionAyudaUsuario Descripcion="@_lsDescription[_count].Descripcion"
                                  Image="@_lsDescription[_count].Image"
                                  Tittle="@_lsDescription[_count].Tittle">
         </DescripcionAyudaUsuario>
-     }
     <div>
         <button class="bt-next botonesSlider" @onclick="_moverTarjetasDerecha"></button>
     </div>
