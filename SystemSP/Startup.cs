@@ -7,8 +7,11 @@ using SystemSp.Intellengece.WebServiceBusiness;
 using SystemSP.Intelligence;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 using System;
-using SystemSp.Intellengece.Interfaces;
 using SystemSp.DTOS.EntitisIndexApp;
+using SystemSp.Intellengece.ApplicationBusiness;
+using BlazorDownloadFile;
+using Rotativa.AspNetCore;
+using FluentValidation.AspNetCore;
 
 namespace SystemSP
 {
@@ -25,11 +28,19 @@ namespace SystemSP
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<Lector>();
+            services.AddSingleton<SendEMailUser>();
             services.AddSingleton<ValidarFormularios>();
             services.AddSingleton<SaveIFiles>();
             services.AddSingleton<UserInformationResult>();
+            services.AddSingleton<UserSession>();
+            services.AddSingleton<SetChangeLanguage>();
+            services.AddBlazorDownloadFile();
             services.AddI18nText(opt=> opt.PersistanceLevel 
                                 = Toolbelt.Blazor.I18nText.PersistanceLevel.SessionAndLocal );
+            services.AddMvc().AddFluentValidation(options=> 
+            {
+                options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            });
             services.AddHttpClient<ProjectsApplication>(client=> 
             {
                 client.BaseAddress = new Uri("https://localhost:44395/");
@@ -54,9 +65,13 @@ namespace SystemSP
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(name: "default",
+                    pattern: "{controller}/{action}");
+                endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+            RotativaConfiguration.Setup(env.WebRootPath.Replace("wwwroot","dlls"));
         }
     }
 }

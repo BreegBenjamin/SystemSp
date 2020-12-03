@@ -3,7 +3,7 @@
 @inject ValidarFormularios validaForm;
 
 <section class="info-usuario estilosBordes">
-    <div>
+    <div class="centerImagePerson">
         <div class="img-userProyect">
             <span class="opacidadImage">@_letrasInciales</span>
         </div>
@@ -17,7 +17,18 @@
                 <button class="botonConfiguracion botonUsuario" @onclick="clickBotonConfiguracion"></button>
             </li>
             <li>
-                <button class="botonNotificaciones botonUsuario" @onmouseover="botonNotificaciones"></button>
+                <OpcionesRenderFragment>
+                    <MainContent>
+                        <button class="botonNotificaciones botonUsuario"></button>
+                    </MainContent>
+                    <ChildContent>
+                        <ul class="move">
+                            <li>
+                                <p>Hola</p>
+                            </li>
+                        </ul>
+                    </ChildContent>
+            </OpcionesRenderFragment>
             </li>
         </ol>
     </div>
@@ -46,9 +57,6 @@
             </div>
         </div>
     </div>
-    <div style="display:@_modalNotify" class="modalNotify" @onmouseout="mauseUpNoti">
-
-    </div>
 </section>
 <AlertaApp TipoAlerta="true" Mensaje="@_textPublicar.MessagePassword"></AlertaApp>
 
@@ -60,7 +68,6 @@
     private string _letrasInciales = string.Empty;
     private string _nombreUser = string.Empty;
     private string _displayType = "none";
-    private string _modalNotify = "none";
     // passWord
     private string _confirmPass { get; set; }
     private string _nuevoPass { get; set; }
@@ -107,6 +114,4 @@
         _displayType = "flex";
         await JsRun.DeshabilitarScrollApp();
     }
-    private void botonNotificaciones() => _modalNotify = "flex";
-    private void mauseUpNoti() => _modalNotify = "none";
 }

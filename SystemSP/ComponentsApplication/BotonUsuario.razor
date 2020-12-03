@@ -1,9 +1,9 @@
 ﻿@inject IJSRuntime JsRun;
-<button class="@className bt-styles" @onclick="DeshabilitarScroll">@Texto</button>
+<button class="@className bt-styles" @onclick="_deshabilitarScroll">@Texto</button>
 @if (Login && _panelHabilitado)
 {
 
-    <ModalLogin></ModalLogin>
+    <ModalLogin CerrarModal="_cerrarModal"></ModalLogin>
 
 }
 else if (Login == false && _panelHabilitado)
@@ -16,12 +16,18 @@ else if (Login == false && _panelHabilitado)
     public string Texto { get; set; }
     [Parameter]
     public bool Login { get; set; }
+
     protected override void OnInitialized() => className = (Login) ? "btn-registro" : "btn-login";
     private bool _panelHabilitado = false;
     private string className = string.Empty;
-    private async Task DeshabilitarScroll()
+    private async Task _deshabilitarScroll()
     {
         await JsRun.DeshabilitarScroll(Login);
         _panelHabilitado = true;
+    }
+    private async Task _cerrarModal()
+    {
+        await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
+        _panelHabilitado = false;
     }
 }

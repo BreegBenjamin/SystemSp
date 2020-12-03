@@ -1,6 +1,9 @@
 ﻿@page "/Administrador";
 @inject UserInformationResult UserInfoResult;
 @inject I18nText serviceTranslator;
+<HeaderApp UserImage="@UserInfoResult.UserImage"
+           UserName="@UserInfoResult.UserName">
+</HeaderApp>
 <section class="adminPosition">
     <div class="opcionesAdmin">
         <div class="setEstilos">

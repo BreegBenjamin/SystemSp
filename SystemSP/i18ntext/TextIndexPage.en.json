@@ -1,7 +1,8 @@
 ﻿{
-  "Login": "Login",
+  "Login": "Log in",
   "Registry": "Sign-up",
-  "MsWelcon": "Welcome to the proyect repository sofware",
+  "Welcome": "Welcome",
+  "MsWelcon": "Welcome to the repository of software projects!",
   "MsDescription": "Find the training projects created by the apprentices of Sena. If you are a student, a company or a private individual, can access the software documentation developed by Sena apprentices.",
   "Consult": "Consult",
   "Post": "Post",

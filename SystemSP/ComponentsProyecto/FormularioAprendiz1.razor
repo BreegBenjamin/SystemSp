@@ -1,4 +1,5 @@
-﻿@inject I18nText TraductorService;
+﻿@inject I18nText _traductorService;
+@inject SetChangeLanguage _lenguage;
 <section>
     <EditForm Model="ProjectApp">
         <ol class="formAprendiz1">
@@ -16,8 +17,8 @@
                         <span style="color:#ED0000">*</span>
                     </label>
                     <InputSelect @bind-Value="ProjectApp.Category" class="selectType selectStile">
-                        @foreach (var item in _Category)
-                         {
+                        @foreach (var item in _categorys)
+                        {
                             <option value="@item">@item</option>
                          }
                     </InputSelect>
@@ -137,29 +138,7 @@
     public FormProjectApp ProjectApp { get; set; }
 
     private TextPublicarPage _txtPublicar = new TextPublicarPage();
-    private string[] _Category =
-    {
-        "Supermarkets and Stores",
-        "Vehicles and Motorcycles",
-        "Education",
-        "Transport",
-        "Environment",
-        "Industry and Commerce",
-        "Veterinary",
-        "Agriculture and Farms",
-        "Estate and Home",
-        "Books and Libraries",
-        "Health and Wellness",
-        "Travels and tourism",
-        "Music and Audio",
-        "Photography",
-        "Art and Design",
-        "Tools and Productivity",
-        "Office Complement",
-        "Entertainment and Events",
-        "Finance and Jobs",
-        "Other"
-    };
+    private List<string> _categorys = new List<string>();
     private bool _btnConrinuarDisabled = true;
     private string _classBotones = "PublicarProyecto-Unlock";
     private List<string> _listaAnio = new List<string>();
@@ -210,8 +189,10 @@
     {
         _listaAnio = _getAnio();
         _listDias = _getDias(DateTime.Now.Year, DateTime.Now.Month);
-        _txtPublicar = await TraductorService.GetTextTableAsync<TextPublicarPage>(this);
-        ProjectApp.Category = _Category[0];
+        _txtPublicar = await _traductorService.GetTextTableAsync<TextPublicarPage>(this);
+        var _txtCategorys = await _traductorService.GetTextTableAsync<TextCategoriasIndex>(this);
+        _categorys = _lenguage.GetCategorys(_txtCategorys);
+        ProjectApp.Category = _categorys[0];
         ProjectApp.Departament = _listDepa[0];
         base.OnInitialized();
     }

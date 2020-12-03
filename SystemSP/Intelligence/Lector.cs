@@ -10,19 +10,6 @@ namespace SystemSP.Intelligence
 {
     public class Lector
     {
-        public ListaCategoriaVista ObtenerListaCategorias() 
-        {
-            var categorias = new ListaCategoriaVista();
-            try
-            {
-                string jsonResult = _jsonFile(@"Data\vistaCategorias.json");
-                categorias = (ListaCategoriaVista)JsonConvert.DeserializeObject(
-                    jsonResult, typeof(ListaCategoriaVista));
-
-            }
-            catch (Exception ex) { }
-            return categorias;
-        }
         public List<ETecnologiasApp> GetTecnologiasApp(string tipo)
         {
             var listTech = new List<ETecnologiasApp>();

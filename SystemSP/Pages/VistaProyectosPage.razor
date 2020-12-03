@@ -3,9 +3,7 @@
 @page "/VistaProyectos";
 <section style="background-color: #f3f2f1">
     <ListaCategorias></ListaCategorias>
-    <CascadingValue Value="ProjectInfo">
-        <DatosProyecto></DatosProyecto>
-    </CascadingValue>
+    <DatosProyecto ProjectInfo="_pProjectInfo"></DatosProyecto>
     <CardProyectos TipoMenu="PgVista" GetIdProject="_getIdProject"></CardProyectos>
     <section>
         <div class="elementsVista">
@@ -26,8 +24,8 @@
 @code {
     [Parameter]
     public int IdProject { get; set; }
-    [CascadingParameter]
-    public ProjectInformation ProjectInfo { get; set; }
+
+    private  ProjectInformation _pProjectInfo { get; set; }
     = new ProjectInformation()
     {
         ImagesProject = new List<string>(),
@@ -36,11 +34,12 @@
 
     private async Task _getIdProject(int idProj)
     {
-        ProjectInfo = await _seviceProject.GetProject(idProj);
+        _pProjectInfo = await _seviceProject.GetProject(idProj);
     }
     protected override async Task OnInitializedAsync()
     {
         if (IdProject != 0)
-            ProjectInfo = await _seviceProject.GetProject(IdProject);
+            _pProjectInfo = await _seviceProject.GetProject(IdProject);
+        string ms = "";
     }
 }

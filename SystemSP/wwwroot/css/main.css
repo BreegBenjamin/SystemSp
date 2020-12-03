@@ -1,5 +1,6 @@
 ﻿@import "EstilosAdmin.css";
 @import "EstilosAboutUs.css";
+
 /*Main css*/
 :root {
     --SombrasCaja: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
@@ -23,7 +24,8 @@ body {
 .userBotons {
     display:flex;
     grid-gap:10px;
-    height:100%;
+    align-items:center;
+    margin-right:40px;
 }
 .bt-styles {
     border-radius: 50px;
@@ -198,6 +200,7 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: max-content 1fr;
     cursor: pointer;
+    background-color: #FFF;
     border-radius: 10px;
     height: 280px;
     margin: 11.5px;
@@ -832,8 +835,10 @@ body {
     box-sizing: border-box;
     overflow: auto;
     padding: 20px;
-    height: 90%;
-    width: 80%;
+}
+.sizeModal {
+    height: 85%;
+    width: 70%;
 }
 .btEstadoModalOptciones {
     border-radius: 3px;
@@ -966,9 +971,7 @@ body {
 
 .iconUsers {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    width: 40%;
     height: auto;
     padding: 0 20px 0 20px;
 }
@@ -986,17 +989,13 @@ body {
         padding: 0;
     }
 
-.User {
-    width: 22%;
-    margin-right: 11px;
-}
 
 .perfilUser {
     display: flex;
     height: 60px;
     width: 60px;
     border-radius: 300px;
-    background: rgba(81, 14, 144, 0.8);
+    background: #CDCDCD;
     color: white;
     text-align: center;
     align-items: center;
@@ -1010,23 +1009,6 @@ nav, ul, il {
     padding: 0;
 }
 
-.navegation {
-    width: 100px;
-}
-
-.navigation ul {
-    list-style: none;
-}
-
-.botonUser > li {
-    position: relative;
-    display: inline-block;
-}
-
-    .botonUser > li > a {
-        text-decoration: none;
-    }
-
 .move {
     position: absolute;
     background-color: white;
@@ -1038,24 +1020,27 @@ nav, ul, il {
     box-shadow: var(--SombrasCaja);
 }
 
-    .move li a {
-        display: block;
-        color: black;
-        text-decoration: none;
-        list-style: none;
-        padding: 15px 15px 0 15px;
-        margin-bottom: 10px;
+.itemOption {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 15px 15px 0 15px;
+    margin-bottom: 10px;
+}
+    .itemOption:hover {
+        color: rgba(12, 113, 167, 0.9);
+        cursor:pointer;
+        margin-left: 1.5px;
     }
-
+.botonUser > li {
+    position: relative;
+    display: inline-block;
+}
 .botonUser li:hover .move {
     visibility: visible;
     transform: translateX(-30px);
     opacity: 1;
-}
-
-.move li a:hover {
-    margin-left: 1.5px;
-    color: rgba(12, 113, 167, 0.9);
+    z-index: 100;
 }
 
 .imgUsuario {
@@ -1063,28 +1048,89 @@ nav, ul, il {
     width: 15px;
 }
 /*estilos de DescripcionAyudaUsuario*/
-.contenedor-descripcion{
-    display: flex; 
-    flex-direction:column;
+.contenedor-descripcion {
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    grid-template-rows: 1fr;
     text-align: center;
-    justify-content: center;
+    align-items: center;
+    grid-gap: 10px;
 }
 .img-userHelp {
     text-align: center;
-    height: 52%;
-    width: 60%;
+    height: 100%;
+    width: 330px;
     margin: 20px 0;
 }
-.tituloAyudaUsuario{
-    font-size: 42px;
-    padding: 0;
-    margin: 20px 0;
+.tituloAyudaUsuario {
+    font-size: 1.5em;
+    padding: 10px;
+    margin: 0;
+    grid-column:1/3;
+    grid-row:1/2;
 }
-.textoAyudaUsuario, .tipoLicencia{
+.descriptionDiv {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+.imageDiv {
+    grid-column:2/3;
+    grid-row:2/3;
+}
+.textoAyudaUsuario {
     text-align: initial;
     font-size: 20px;
-    font-weight:500;
+    font-weight: 500;
     color: rgba(0, 0, 0, 0.9);
     padding: 20px;
     margin: 20px 0;
+}
+.contenedorAyudaUsu {
+    display:grid;
+    grid-template-columns:1fr max-content;
+    grid-template-rows:max-content 1fr;
+    grid-gap:5px
+}
+.sizeBotonDiv {
+    height: 60px;
+    width: 60px;
+}
+.bt-back-Modal {
+    background: url(../images/back.png) #ffffff;
+}
+
+.bt-next-Modal {
+    background: url(../images/next.png) #ffffff;
+}
+
+.botonesSlider-Modal {
+    border-radius: 50%;
+    border: none;
+    background-size: 40%;
+    background-position: 15px 15px;
+    background-repeat: no-repeat;
+    box-shadow: 0px 0px 3px 2px #cccccc;
+    color: #000;
+    height: 50px;
+    outline-style: none;
+    cursor: pointer;
+    width: 50px;
+}
+.sizeImageItem {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+.sizeItemApp {
+    display:grid;
+    justify-items:center;
+}
+.centerFlexSection {
+    display: flex;
+    grid-gap: 10px;
+    align-items: center;
+}
+.labelText {
+    font-size:0.7em;
+    cursor:pointer;
 }

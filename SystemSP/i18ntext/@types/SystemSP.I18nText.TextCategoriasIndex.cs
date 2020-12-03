@@ -28,6 +28,9 @@ namespace SystemSP.I18nText
         /// <summary>"Finance and Jobs"</summary>
         public string Finance;
 
+        /// <summary>"Food And Delivery"</summary>
+        public string Food;
+
         /// <summary>"Health and Wellness"</summary>
         public string Health;
 

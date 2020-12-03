@@ -11,8 +11,8 @@ namespace SystemSP.Intelligence
             => await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
         public static async Task DeshabilitarScrollApp(this IJSRuntime JsRun)
             => await JsRun.InvokeVoidAsync(identifier: "salirMenu.DeshabilitarScrollPage");
-        public static async Task MensajesRegistro(this IJSRuntime JsRun, string msPass, string msMail)
-            => await JsRun.InvokeVoidAsync(identifier: "seetAlert.SweetMensaje", msPass, msMail);
+        public static async Task MensajesRegistro(this IJSRuntime JsRun, string msPass, string msMail, string msOtro = "")
+            => await JsRun.InvokeVoidAsync(identifier: "seetAlert.SweetMensaje", msPass, msMail, msOtro);
         public static async Task MoverCategoriaDerecha(this IJSRuntime JsRun)
             => await JsRun.InvokeVoidAsync(identifier : "scroll.MoverCategoriasDerecha");
         public static async Task MoverCategoriasIzquierda(this IJSRuntime JsRun)

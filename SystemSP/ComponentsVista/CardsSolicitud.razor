@@ -1,79 +1,23 @@
-﻿@inject NavigationManager NavigationManager;
+@inject NavigationManager NavigationManager;
 @inject I18nText trasnlator;
-
+@inject SetChangeLanguage _changed;
 
 <aside class="category-solicitud">
-    <CascadingValue Value="Cambiar">
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Shop"
-                          Image="SupermarketsAndStores.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Motorcycle"
-                          Image="VehiclesAndMotorcycles.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Education"
-                          Image="education.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Transport"
-                          Image="Transport.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Environment"
-                          Image="Environment.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Commerce"
-                          Image="IndustryAndCommerce.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Veterinary"
-                          Image="Veterinary.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Farms"
-                          Image="AgricultureAndFarms.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Home"
-                          Image="RealEstateAndHome.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Libraries"
-                          Image="BooksAndLibraries.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Health"
-                          Image="HealthAndWellness.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Travel"
-                          Image="TravelsAndTourism.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Music"
-                          Image="MusicAndAudio.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Photography"
-                          Image="Photography.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Art"
-                          Image="ArtAndDesign.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Tool"
-                          Image="ToolsAndProductivity.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Office"
-                          Image="OfficeComplement.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Event"
-                          Image="EntertainmentAndEvents.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Finance"
-                          Image="FinanceAndJobs.svg">
-        </TarjetaSolicitud>
-        <TarjetaSolicitud TituloCategoria="@_txtCategoria.Other"
-                          Image="other.svg">
-        </TarjetaSolicitud>
-    </CascadingValue>
+  @foreach (var categoriaVista in _categorias)
+  {
+    <TarjetaSolicitud TituloCategoria="@categoriaVista.NombreCategoria"
+                      Image="@categoriaVista.ImageCategoria">
+    </TarjetaSolicitud>
+  }
 </aside>
 
 @code {
-    [CascadingParameter]
-    public bool Cambiar { get; set; }
-    TextCategoriasIndex _txtCategoria = new TextCategoriasIndex();
+
+    List<ListaCategoriaVista> _categorias = new List<ListaCategoriaVista>();
 
     protected override async Task OnInitializedAsync()
     {
-        _txtCategoria = await trasnlator.GetTextTableAsync<TextCategoriasIndex>(this);
+        var txtCategoria = await trasnlator.GetTextTableAsync<TextCategoriasIndex>(this);
+        _categorias = _changed.GetListCategorys(txtCategoria);
     }
 }

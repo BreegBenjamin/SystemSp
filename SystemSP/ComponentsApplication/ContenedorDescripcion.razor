@@ -1,17 +1,64 @@
 ﻿@inject I18nText translator;
 <div class="contenedor-descripcion">
-    <DescripcionAyudaUsuario Tittle="@_txtPage.licenseTitle"
-                             Image="ar.svg"
-                             Descripcion="@_txtPage.licenseText"
-                             tipoLicencia="@_txtPage.licenseType">                 
-    </DescripcionAyudaUsuario>
+    <div class="sizeBotonDiv">
+        <button class="bt-back-Modal botonesSlider-Modal" @onclick="_moverTarjetaIzquierda"></button>
+    </div>
+    <div>
+        <DescripcionAyudaUsuario Descripcion="@_lsDescription[_count].Descripcion"
+                                 Image="@_lsDescription[_count].Image"
+                                 Tittle="@_lsDescription[_count].Tittle">
+        </DescripcionAyudaUsuario>
+        <div>
+
+        </div>
+    </div>
+    <div class="sizeBotonDiv">
+        <button class="bt-next-Modal botonesSlider-Modal" @onclick="_moverTarjetasDerecha"></button>
+    </div>
 </div>
 @code {
-
-    TextIndexPage _txtPage = new TextIndexPage();
+    private List<EDescripcionData> _lsDescription = new List<EDescripcionData>();
+    private int _count = 0;
+    private TextIndexSoftware _txtSoftware = new TextIndexSoftware();
     protected override async Task OnInitializedAsync()
     {
-        _txtPage = await translator.GetTextTableAsync<TextIndexPage>(this);
-
+        _txtSoftware = await translator.GetTextTableAsync<TextIndexSoftware>(this);
+        _count = 0;
+        _setDataListDescription();
+    }
+    private void _moverTarjetaIzquierda()
+    {
+        if (_count < _lsDescription.Count - 1)
+            _count++;
+        else
+            _count = 0;
+    }
+    private void _moverTarjetasDerecha()
+    {
+        if (_count == 0)
+            _count = _lsDescription.Count - 1;
+        else
+            _count--;
+    }
+    private void _setDataListDescription()
+    {
+        _lsDescription.Add(new EDescripcionData()
+        {
+            Tittle = _txtSoftware.OpenSourceTitle,
+            Descripcion = _txtSoftware.OpenSourceDescription,
+            Image = "ar.svg"
+        });
+        _lsDescription.Add(new EDescripcionData()
+        {
+            Tittle = $"{_txtSoftware.License} MIT",
+            Descripcion = _txtSoftware.LicenseMit,
+            Image = "ar.svg"
+        });
+        _lsDescription.Add(new EDescripcionData()
+        {
+            Tittle = $"{_txtSoftware.License} Apache 2.0",
+            Descripcion = _txtSoftware.LicenseApache,
+            Image = "ar.svg"
+        });
     }
 }

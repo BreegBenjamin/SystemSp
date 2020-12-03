@@ -1,6 +1,63 @@
-﻿<section class="positionHeader">
+﻿@inject NavigationManager _navigator;
+@inject UserSession _session;
+@inject I18nText _serviceTranslator;
+<section class="positionHeader">
+    <section class="centerFlexSection">
+        <BotonLogo></BotonLogo>
+        <ol class="centerFlexSection">
+            <li class="sizeItemApp" @onclick="@(()=>_navigator.NavigateTo("/"))">
+                <img src="images/IconosCategorias/AdminIcons/home.svg" class="sizeImageItem" />
+                <label class="labelText">Inicio</label>
+            </li>
+            <li class="sizeItemApp" @onclick="@(()=>_navigator.NavigateTo("/PublicarProyecto"))">
+                <img src="images/IconosCategorias/AdminIcons/landing-page.svg" class="sizeImageItem" />
+                <label class="labelText">Ver Proyectos</label>
+            </li>
+        </ol>
+    </section>
+    <OpcionesRenderFragment>
+        <MainContent>
+            @if (UserImage.Length > 5)
+            {
+                //Insertar Imagane
+            }
+            else
+            {
+                <p class="perfilUser">@UserImage</p>
+            }
+        </MainContent>
+        <ChildContent>
+            <ul class="move">
+                <li>
+                    <label class="itemOption">@UserName</label>
+                </li>
+                <li>
+                    <label class="itemOption">Publicar Proyecto</label>
+                </li>
+                <li>
+                    <label class="itemOption">Configuración</label>
+                </li>
+                <li>
+                    <label class="itemOption" @onclick="_cerrarSesionClick">Cerrar Sesión</label>
+                </li>
+            </ul>
+        </ChildContent>
+    </OpcionesRenderFragment>
 </section>
 
 @code {
 
+    [Parameter]
+    public string UserName { get; set; }
+    [Parameter]
+    public string UserImage { get; set; }
+
+
+    private void _cerrarSesionClick()
+    {
+        _session.IsActive = false;
+        _session.PassChanged = null;
+        _session.LastEntry = DateTime.Now;
+        _navigator.NavigateTo("/");
+    }
 }

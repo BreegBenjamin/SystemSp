@@ -31,7 +31,7 @@ class CambiarTarjetas
                 this.CambiarEstilos(0, 'work-No.svg')
                 this.CambiarEstilos(1, 'team-No.svg')
                 this.CambiarEstilos(2, 'project-No.svg')
-                this.CambiarEstilos(3, 'team.svg', true)
+                this.CambiarEstilos(3, 'work.svg', true)
                 break
         }
     }

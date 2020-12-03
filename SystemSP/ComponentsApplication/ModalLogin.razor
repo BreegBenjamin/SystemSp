@@ -4,49 +4,99 @@
 @inject NavigationManager NavigationManager;
 @inject UserInformationResult UserInfoResult;
 @inject ValidarFormularios validaForm;
+@inject SendEMailUser sendEmail;
+@inject UserSession session;
 
 <section class="fondo fondo2" id="ModalLogin">
-    <section class="popUp">
-        <CerrarModal Mensaje="@_textIndex.MessageDataLogin"></CerrarModal>
-        <EditForm Model="_form" OnSubmit="validaFormulario">
-            <DataAnnotationsValidator />
+        <section class="popUp">
+            <section class="displayIformation">
+                <div>
+                    <button class="cancel" @onclick="CerrarModal.InvokeAsync"></button>
+                </div>
+                <div class="centerLogoModal">
+                    <h4 class="colorWelcom">@_textIndex.Welcome</h4>
+                    <h6 class="estylosMs">@_textIndex.MessageDataLogin</h6>
+                </div>
+            </section>
+        <BotonLogo></BotonLogo>
+        @if (!_formForgotPass)
+        {
+            <EditForm Model="_form" OnSubmit="validaFormulario">
+                <DataAnnotationsValidator />
+                <section class="Form_Login">
+                    <input type="text" id="inputEmail" class="estyleText" maxlength="100" placeholder="@_textIndex.Mail"
+                           @bind-value="_form.EmailLogin" @onblur="habilitarBoton">
+                    <input type="password" class="estyleText" maxlength="16" placeholder="@_textIndex.Password"
+                           @bind-value="@_form.PasswordLogin" @onblur="habilitarBoton">
+                    <button type="submit" class="@_classBoton" disabled="@_btnDeshabilitado">@_textIndex.Login</button>
+                </section>
+                <div>
+                    <hr class="styleHr" />
+                    <div class="div_Password">
+                        <label class="linkContact" @onclick="@(() => _formForgotPass = true )">@_textIndex.ForgotPass</label>
+                        <label class="linkContact">@_textIndex.CreateAccount</label>
+                    </div>
+                </div>
+            </EditForm>
+        }
+        else
+        {
             <section class="Form_Login">
-                <input type="text" id="inputEmail" class="estyleText" maxlength="30" placeholder="@_textIndex.Mail"
-                       @bind-value="_form.EmailLogin" @onblur="habilitarBoton">
-                <input type="password" class="estyleText" maxlength="16" placeholder="@_textIndex.Password"
-                       @bind-value="@_form.PasswordLogin" @onblur="habilitarBoton">
-                <button type="submit" class="@_classBoton" disabled="@_btnDeshabilitado">@_textIndex.Login</button>
+                <h4>Necesitamos comprobar tu identidad</h4>
+                <div>
+                    <span class="flexContext">
+                        <p class="margin0">Ingresa el correo electronico.</p>
+                        <TooltipApp MensajeToolTip="Ingresa el correo electronico registrado en el plataforma"></TooltipApp>
+                    </span>
+                    <input @bind="_emailForgotUser" type="email" placeholder="Email" max="100" class="estyleText" @onfocusout="_validaEmailRecuperarUsuario" />
+                </div>
+                <button class="@_classBotonPass" disabled="@_botonRecuperarPass" @onclick="_sendUserEmail">Recupear Usuario</button>
             </section>
             <div>
                 <hr class="styleHr" />
                 <div class="div_Password">
-                    <a class="linkContact" href="#">@_textIndex.ForgotPass</a>
-                    <a class="linkContact" href="#">@_textIndex.CreateAccount</a>
+                    <label class="linkContact" @onclick="@(() => _formForgotPass = false )">Iniciar Sesión</label>
+                    <label class="linkContact">@_textIndex.CreateAccount</label>
                 </div>
             </div>
-        </EditForm>
+        }
     </section>
 </section>
 
 @code {
+
+    [Parameter]
+    public EventCallback CerrarModal { get; set; }
+
     private FormLogin _form = new FormLogin();
     private bool _btnDeshabilitado = true;
     private string _classBoton = "btRegistroForm-Unlock";
+    private string _classBotonPass = "btRegistroForm-Unlock";
     private bool _datosInvalidos = false;
     private TextIndexPage _textIndex = new TextIndexPage();
+    private bool _formForgotPass = false;
+    private bool _botonRecuperarPass = true;
+    private string _emailForgotUser = string.Empty;
     //Metodos
 
     private async Task validaFormulario()
     {
         UserInformation result = await serviceConection.GetUserApp(_form);
-        UserInfoResult.UserEmail = result.UserEmail;
-        UserInfoResult.UserId = result.UserId;
-        UserInfoResult.UserImage = result.UserImage;
-        UserInfoResult.UserName = result.UserName;
-        UserInfoResult.UserPassword = result.UserPassword;
-        UserInfoResult.UserTelephone = result.UserTelephone;
+
         if (result.MessageStates.UserExist)
         {
+            UserInfoResult.UserEmail = result.UserEmail;
+            UserInfoResult.UserId = result.UserId;
+            UserInfoResult.UserImage = result.UserImage;
+            UserInfoResult.UserName = result.UserName;
+            UserInfoResult.UserPassword = result.UserPassword;
+            UserInfoResult.UserTelephone = result.UserTelephone;
+
+            //Variables de Session
+            session.IsActive = true;
+            session.LastEntry = DateTime.Now;
+            session.PassChanged = null;
+
             await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
             if (result.UserType == 1)
                 NavigationManager.NavigateTo("Administrador");
@@ -58,7 +108,6 @@
     {
         _textIndex = await ServiceTranslator.GetTextTableAsync<TextIndexPage>(this);
     }
-
     private async Task habilitarBoton()
     {
 
@@ -83,5 +132,35 @@
             _classBoton = "btRegistroForm-Unlock";
             _btnDeshabilitado = true;
         }
+    }
+    private void _validaEmailRecuperarUsuario()
+    {
+        if (!string.IsNullOrEmpty(_emailForgotUser))
+        {
+            _classBotonPass = "btRegistroForm";
+            _botonRecuperarPass = false;
+        }
+        else
+        {
+            _classBotonPass = "btRegistroForm-Unlock";
+            _botonRecuperarPass = true;
+        }
+    }
+    private async Task _sendUserEmail()
+    {
+        bool emailValido = validaForm.ValidaEmail(_emailForgotUser);
+        if (emailValido)
+        {
+            bool response = await serviceConection.CheckEmail(_emailForgotUser);
+            if (response)
+            {
+                bool salida = await sendEmail.SendEmail(_emailForgotUser);
+            }
+            else
+                await JsRun.MensajesRegistro("El correo electrónico ingresado", "no se encuentra registrado en el plataforma.", "Por valide la información, he intente nuevamente");
+
+        }
+        else
+            await JsRun.MensajesRegistro("", "El correo electrónico ingresado no es valido");
     }
 }

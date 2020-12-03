@@ -1,4 +1,7 @@
-﻿@inject I18nText serviceTranslator;
+
+@inject I18nText serviceTranslator;
+@inject IBlazorDownloadFileService _downloadFileService;
+@inject NavigationManager Navigator;
 <section class="EstadisticasApp">
     <div class="informacionPosition">
         <div class="infoAdminProyecto">
@@ -20,6 +23,16 @@
             </span>
         </div>
     </div>
+    <section>
+        <div>
+            <h3>Ultimos Usuarios Registrados</h3>
+            <TarjetaUsuario></TarjetaUsuario>
+        </div>
+        <div>
+            <h3></h3>
+        </div>
+        <button class="botonConatcto" @onclick="@(()=>Navigator.NavigateTo("DownloadPdf/index", true))">Descargar</button>
+    </section>
 </section>
 
 @code {

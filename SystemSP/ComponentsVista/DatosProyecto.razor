@@ -1,21 +1,51 @@
 ﻿@inject I18nText serviceTranslator;
 <section class="ViewProjectFirst">
     <SliderImage
-                 Images="@_images"></SliderImage>
+                 Images="@ProjectInfo.ImagesProject">
+    </SliderImage>
     <div class="containerDetails">
         <div class="contenedorDetalles">
             <p class="TituloProyecto">@_projectCard.TituloProyecto</p>
             <label class="descripcionProject">
-                @_projectCard.Descripcion
+                @_descriptionProject
             </label>
         </div>
         <div>
             <div class="letterPerson">
-                <img class="namePerson" src="@_projectCard.ImagenUsuario"/>
+                @if (_projectCard.ImagenUsuario != null)
+                 {
+                    @if (_projectCard.ImagenUsuario.Contains("base64"))
+                    {
+                        <img class="namePerson" src="@_projectCard.ImagenUsuario" />
+                    }
+                    else
+                    {
+                        <label class="lbTextPerson">@_projectCard.ImagenUsuario</label>
+                    }
+                 }
             </div>
             <div>
                 <p>@_projectCard.NombreUsuario</p>
             </div>
+        </div>
+        <div class="ContainerTecnologias">
+            <p>Tecnologias Utilizadas en el proyecto formativo</p>
+
+            @if (ProjectInfo.TechnologiesUsed != null)
+            {
+                @foreach (var item in ProjectInfo.TechnologiesUsed[0])
+                 {
+                    <div class="circleTech">
+                        <img src="/images/Tecnologias/Front/@($"{item}.svg")" class="imageTechSize"/>
+                    </div>
+                 }
+                @foreach (var item in ProjectInfo.TechnologiesUsed[1])
+                 {
+                    <div class="circleTech">
+                        <img src="/images/Tecnologias/Back/@($"{item}.svg")" class="imageTechSize"/>
+                    </div>
+                 }
+            }
         </div>
         <div class="containerLinks">
             <p><a href="#" class="colorA">@_txtViewPage.DownloadProject</a></p>
@@ -25,16 +55,20 @@
 </section>
 
 @code {
-    [CascadingParameter]
+    [Parameter]
     public ProjectInformation ProjectInfo { get; set; }
 
     private ProjectCard _projectCard = new ProjectCard();
-    private List<string> _images = new List<string>();
+    private string _descriptionProject = "";
 
     protected override void OnParametersSet()
     {
-        _images = ProjectInfo.ImagesProject;
         _projectCard = ProjectInfo.ProjectCardInfo;
+        int longitud = (_projectCard.Descripcion != null) ?_projectCard.Descripcion.Length : 0;
+        if (longitud >= 350)
+            _descriptionProject = $"{_projectCard.Descripcion.Remove(349)} .....";
+        else
+            _descriptionProject = _projectCard.Descripcion;
     }
 
     TextViewPage _txtViewPage = new TextViewPage();

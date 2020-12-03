@@ -1,11 +1,10 @@
-﻿@inject ProjectsApplication ProjectService;
-<section>
+﻿<section>
     @if (_proyectosPublicados)
      {
         <div class="novedadPosition">
-            @if (_proyectos != null)
+            @if (Proyectos != null)
             {
-                foreach (var project in _proyectos)
+                foreach (var project in Proyectos)
                 {
                     <TarjetaProyectosPublicados NombreProyecto="@project.NombreProyecto"
                                                 NumeroDescargas="@project.NumeroDescargas"
@@ -70,8 +69,9 @@
 @code {
     [CascadingParameter]
     public int IdUsuarioAplicacion { get; set; }
+    [Parameter]
+    public List<ProjectDetails> Proyectos { get; set; }
 
-    private List<ProjectDetails> _proyectos { get; set; }
     private List<ApprenticeData> _apprentices = new List<ApprenticeData>();
     private List<string> _images = new List<string>();
     private bool _habilitar = false;
@@ -87,12 +87,11 @@
         _images = paramSalida.ImagenesProyecto;
         _description = paramSalida.Descripcion;
     }
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         if (IdUsuarioAplicacion != 0)
         {
-            _proyectos = await ProjectService.GetProjectsUser(IdUsuarioAplicacion);
-            if (_proyectos.Count > 0)
+            if (Proyectos.Count > 0)
                 _proyectosPublicados = true;
         }
     }
