@@ -1,14 +1,14 @@
-﻿@inject NavigationManager NavigationManager;
+@inject NavigationManager NavigationManager;
 @inject I18nText trasnlator;
 @inject SetChangeLanguage _changed;
 
 <aside class="category-solicitud">
-        @foreach (var categoriaVista in _categorias)
-        {
-            <TarjetaSolicitud TituloCategoria="@categoriaVista.NombreCategoria"
-                              Image="@categoriaVista.ImageCategoria">
-            </TarjetaSolicitud>
-        }
+  @foreach (var categoriaVista in _categorias)
+  {
+    <TarjetaSolicitud TituloCategoria="@categoriaVista.NombreCategoria"
+                      Image="@categoriaVista.ImageCategoria">
+    </TarjetaSolicitud>
+  }
 </aside>
 
 @code {

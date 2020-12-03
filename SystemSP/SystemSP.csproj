@@ -5,12 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="i18ntext\TextAdminPage.en.json" />
+    <Content Include="i18ntext\TextAdminPage.es.json" />
     <Content Include="i18ntext\TextCategoriasIndex.en.json" />
     <Content Include="i18ntext\TextCategoriasIndex.es.json" />
     <Content Include="i18ntext\TextIndexPage.en.json" />
     <Content Include="i18ntext\TextIndexPage.es.json" />
     <Content Include="i18ntext\TextNosotros.en.json" />
     <Content Include="i18ntext\TextNosotros.es.json" />
+    <Content Include="i18ntext\TextViewPage.en.json" />
+    <Content Include="i18ntext\TextViewPage.es.json" />
   </ItemGroup>
 
   <ItemGroup>

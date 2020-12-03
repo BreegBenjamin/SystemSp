@@ -1,23 +1,24 @@
-﻿@inject IJSRuntime JsRun;
+﻿@inject I18nText serviceTranslator;
+@inject IJSRuntime JsRun;
 <section class="graficosContenedor">
     <div class="flexContext">
-        <OpcionesEstadisticas Titulo="Visitas"
-                              Subtitulo="Estadisticas visitas"
+        <OpcionesEstadisticas Titulo="@_txtAdmin.visits"
+                              Subtitulo="@_txtAdmin.StatisticsVisits"
                               ColorTarjeta="#26D0D0"
                               UrlImage="libroPack.svg">
         </OpcionesEstadisticas>
-        <OpcionesEstadisticas Titulo="Visitas"
-                              Subtitulo="Estadisticas visitas"
+        <OpcionesEstadisticas Titulo="@_txtAdmin.visits"
+                              Subtitulo="@_txtAdmin.StatisticsVisits"
                               ColorTarjeta="#186CFF"
                               UrlImage="libroPack.svg">
         </OpcionesEstadisticas>
-        <OpcionesEstadisticas Titulo="Visitas"
-                              Subtitulo="Estadisticas visitas"
+        <OpcionesEstadisticas Titulo="@_txtAdmin.visits"
+                              Subtitulo="@_txtAdmin.StatisticsVisits"
                               ColorTarjeta="#FF0046"
                               UrlImage="libroPack.svg">
         </OpcionesEstadisticas>
-        <OpcionesEstadisticas Titulo="Visitas"
-                              Subtitulo="Estadisticas visitas"
+        <OpcionesEstadisticas Titulo="@_txtAdmin.visits"
+                              Subtitulo="@_txtAdmin.StatisticsVisits"
                               ColorTarjeta="#8AA336"
                               UrlImage="libroPack.svg">
         </OpcionesEstadisticas>
@@ -39,5 +40,11 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JsRun.EjecutarJavaScriptFunc("canvas.CrearCanvas");
+    }
+
+    TextAdminPage _txtAdmin = new TextAdminPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtAdmin = await serviceTranslator.GetTextTableAsync<TextAdminPage>(this);
     }
 }
