@@ -88,17 +88,21 @@ namespace SystemSp.Infrastructure.Repositories
 
                     var images = new List<ImagenesProyecto>();
                     var team = new List<IntegrantesProyecto>();
+                    var documentos = new List<DocumentosProyecto>();
+
                     var imagesData = new Dictionary<string, string>();
+                    var fileData = new Dictionary<string, string>();
 
                     Usuario user = await _Context.Usuario.FirstOrDefaultAsync(
                         x => x.IdUsuario == appProject.UserId);
 
                     //Nombre del contenedor por proyecto
-                    string container = $"{_projectName.ToLower()}-{Guid.NewGuid()}";
+                    string containerImage = $"{_projectName.ToLower()}-images";
+                    string containerArchivos = $"{_projectName.ToLower()}-archivos";
 
-                    //Agrega a la lista que se guarda en la base de datos
+                    //Se agrega la lista de imagenes que se guarda en la base de datos
                     int numImg = 1;
-                    appProject.ImagesDataStream.ForEach(img =>
+                    appProject.ImagesData.ForEach(img =>
                     {
                         string nombreImagen = $"{img.FileType.Replace("/", $"0{numImg}.")}";
                         images.Add(new ImagenesProyecto()
@@ -106,14 +110,31 @@ namespace SystemSp.Infrastructure.Repositories
                             NombreImagen = nombreImagen,
                             ImagenOriginal = img.FileName,
                             TipoImagen = img.FileType,
-                            NombreContenedor = container
+                            NombreContenedor = containerImage
                         });
                         imagesData.Add(nombreImagen, img.FileStreamContent);
                         numImg++;
                     });
-
                     //Insertar Imagen azure storage 
-                    await _azureBlob.SaveBlobImage(imagesData, container);
+                    await _azureBlob.SaveBlobImage(imagesData, containerImage);
+
+                    //Se agrega la lista de archivos que se guarda en la base de datos
+                    int numFile = 1;
+                    appProject.FilesData.ForEach(file =>
+                    {
+                        string nombreDocumento = $"{file.FileType.Replace("/", $"0{numFile}.")}";
+                        documentos.Add(new DocumentosProyecto() 
+                        {
+                            NombreDocumento = nombreDocumento,
+                            NumeroDocumento = numFile,
+                            TipoDocumento = file.FileType,
+                            NombreContenedor = containerArchivos
+                        });
+                        fileData.Add(nombreDocumento, file.FileStreamContent);
+                        numFile++;
+                    });
+                    //Insertar archivos azure storage 
+                    await _azureBlob.SaveBlobImage(fileData, containerArchivos);
 
                     //guardar tecnologias usadas;
                     var tetch = getTech(appProject.TechBackEnd, appProject.TechFrontEnd, appProject.TechDataBase);
@@ -138,6 +159,7 @@ namespace SystemSp.Infrastructure.Repositories
                         IntegrantesProyecto = team,
                         NombreSena = appProject.SenaName,
                         ImagenesProyecto = images,
+                        DocumentosProyecto = documentos,
                         TecnologiasUtilizadas = tetch
                     };
                     if (user.TipoUsuario == 1)
@@ -170,7 +192,7 @@ namespace SystemSp.Infrastructure.Repositories
                         Proyecto = new List<Proyecto>() { formativeProject },
                         TipoUsuario = user.TipoUsuario
                     };
-                    await _Context.UsuarioCreadorProyecto.AddAsync(credor);
+                    _Context.UsuarioCreadorProyecto.Add(credor);
                     await _Context.SaveChangesAsync();
                     result = true;
                 }

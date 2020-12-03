@@ -33,17 +33,29 @@
     private async Task GetFileProject(IFileListEntry[] archivos)
     {
         IFileListEntry file = archivos.FirstOrDefault();
-        if (file != null && (file.Type.Contains("image/") || file.Type.Contains("application/")))
+        if (file != null && ProjectApp != null)
         {
-            string imageBase64 = await _service.GetFileBase64(file);
-            if (ProjectApp != null && imageBase64 != "NoK")
+            string dataBase64 = await _service.GetFileBase64(file);
+            if (dataBase64 != "NoK")
             {
-                ProjectApp.ImagesDataStream.Add(new FileStreamData()
+                if (file.Type.Contains("image/"))
                 {
-                    FileName = file.Name,
-                    FileStreamContent = imageBase64,
-                    FileType = file.Type
-                });
+                    ProjectApp.ImagesData.Add(new FileStreamData()
+                    {
+                        FileName = file.Name,
+                        FileStreamContent = dataBase64,
+                        FileType = file.Type
+                    });
+                }
+                else if (file.Type.Contains("application/"))
+                {
+                    ProjectApp.FilesData.Add(new FileStreamData()
+                    {
+                        FileName = file.Name,
+                        FileStreamContent = dataBase64,
+                        FileType = file.Type
+                    });
+                }
             }
             else
                 await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz","Error al obtener el archivo");
