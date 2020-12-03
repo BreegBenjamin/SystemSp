@@ -22,7 +22,7 @@ namespace SystemSP.I18nText
         /// <summary>"What are you waiting for to publish your project?"</summary>
         public string textAboutSystempTwo;
 
-        /// <summary>"SystemSp is an information system that was born as a result of an educational project of a Seine headquarters, to be specific in the Financial Services Center (ADSI)."</summary>
+        /// <summary>"SystemSp is an information system that was born as a result of an educational project of a SENA headquarters, to be specific in the Financial Services Center (ADSI)."</summary>
         public string textAboutUs;
 
         /// <summary>"Meet our work team."</summary>

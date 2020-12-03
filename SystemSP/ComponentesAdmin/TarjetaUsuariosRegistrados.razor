@@ -1,11 +1,12 @@
-﻿@inject IBlazorDownloadFileService _downloadFileService;
-@inject NavigationManager Navigator;
 
+@inject I18nText serviceTranslator;
+@inject IBlazorDownloadFileService _downloadFileService;
+@inject NavigationManager Navigator;
 <section class="EstadisticasApp">
     <div class="informacionPosition">
         <div class="infoAdminProyecto">
             <div class="margin0">
-                <p class="margin0 sizeProject">Usuarios registrado</p>
+                <p class="margin0 sizeProject">@_txtAdmin.RegistereUsers</p>
                 <p class="margin0 sizeProject">10</p>
             </div>
             <span class="margin0">
@@ -14,7 +15,7 @@
         </div>
         <div class="infoAdminProyecto">
             <div class="margin0">
-                <p class="margin0 sizeProject">Proyectos Publicados</p>
+                <p class="margin0 sizeProject">@_txtAdmin.PublishedProjects</p>
                 <p class="margin0 sizeProject">4</p>
             </div>
             <span class="margin0">
@@ -35,5 +36,11 @@
 </section>
 
 @code {
+
+    TextAdminPage _txtAdmin = new TextAdminPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtAdmin = await serviceTranslator.GetTextTableAsync<TextAdminPage>(this);
+    }
 
 }

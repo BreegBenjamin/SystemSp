@@ -92,5 +92,6 @@
   "MessageSuccess": "El proyecto ha sido publicado Exitosamente",
   "MessageError": "Se genero un error en el proceso de publicación",
   "MessageAddAprendice": "Usuario agregado",
-  "ProjectDataMessage": "Datos del proyecto de formación"
+  "ProjectDataMessage": "Datos del proyecto de formación",
+  "SortBy": "Ordenar por"
 }

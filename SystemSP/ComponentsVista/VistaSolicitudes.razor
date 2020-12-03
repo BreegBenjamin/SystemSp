@@ -1,4 +1,5 @@
-﻿<section class="sectionCategoriasVista">
+﻿@inject I18nText serviceTranslator;
+<section class="sectionCategoriasVista">
     <div class="divCategorys">
         @foreach (var item in solicituds)
         {
@@ -10,7 +11,7 @@
         }
         <div>
             <div class="infoProject">
-                <h3 class="h6Font">Lista Completa Categorias</h3>
+                <h3 class="h6Font">@_txtViewPage.TitleList</h3>
             </div>
             <CardsSolicitud></CardsSolicitud>
         </div>
@@ -23,9 +24,9 @@
 @code {
     List<PopularCategory> solicituds = new List<PopularCategory>();
 
-    private void _categoryHandler(int indexSalida) 
+    private void _categoryHandler(int indexSalida)
     {
-        
+
     }
     protected override void OnInitialized()
     {
@@ -59,5 +60,11 @@
         solicituds.Add(categoria4);
 
         base.OnInitialized();
+    }
+
+    TextViewPage _txtViewPage = new TextViewPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtViewPage = await serviceTranslator.GetTextTableAsync<TextViewPage>(this);
     }
 }

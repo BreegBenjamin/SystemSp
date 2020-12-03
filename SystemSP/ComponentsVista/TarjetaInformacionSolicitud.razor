@@ -1,16 +1,17 @@
-﻿<section class="sectionSolicitud">
+﻿@inject I18nText serviceTranslator;
+<section class="sectionSolicitud">
     <div>
         <img src="/images/barCerveza.jpg" class="imgSolicitud">
     </div>
     <div class="sectionDetalles">
         <div>
-            <h3 class="tituloSolicitud">Titulo de la solicitud</h3>
-            <p class="tituloSolicitud">SubTitulo</p>
+            <h3 class="tituloSolicitud">@_txtViewPage.TitleRequest</h3>
+            <p class="tituloSolicitud">@_txtViewPage.TextRequest</p>
         </div>
         <div class="disFlexJsutify">
-            <a href="#" class="colorA">Ver descriptción</a>
+            <a href="#" class="colorA">@_txtViewPage.TextSeeDescription</a>
             <div>
-                <button class="colorVista">Ver Contacto</button>
+                <button class="colorVista">@_txtViewPage.TextSeeContact</button>
             </div>
         </div>
     </div>
@@ -21,18 +22,22 @@
         <p class="colorStyle">Gloria Lopéz</p>
         <ol style=" padding: 0;">
             <li>
-                <p class="tituloSolicitud">Vistas</p>
+                <p class="tituloSolicitud">@_txtViewPage.TitleWatch</p>
             </li>
             <li>
-                <p class="tituloSolicitud">Descargas</p>
+                <p class="tituloSolicitud">@_txtViewPage.TitleDownloads</p>
             </li>
             <li>
-                <p class="tituloSolicitud">Categoría</p>
+                <p class="tituloSolicitud">@_txtViewPage.TitleCategory</p>
             </li>
         </ol>
     </div>
 </section>
 
 @code {
-
+    TextViewPage _txtViewPage = new TextViewPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtViewPage = await serviceTranslator.GetTextTableAsync<TextViewPage>(this);
+    }
 }

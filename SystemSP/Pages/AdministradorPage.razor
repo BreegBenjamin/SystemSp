@@ -1,31 +1,33 @@
 ﻿@page "/Administrador";
 @inject UserInformationResult UserInfoResult;
+@inject I18nText serviceTranslator;
 <HeaderApp UserImage="@UserInfoResult.UserImage"
-           UserName="@UserInfoResult.UserName"></HeaderApp>
+           UserName="@UserInfoResult.UserName">
+</HeaderApp>
 <section class="adminPosition">
     <div class="opcionesAdmin">
         <div class="setEstilos">
-            <TarjetaOpcionesAdmin NombreTitulo="Opciones Administrador"
+            <TarjetaOpcionesAdmin NombreTitulo="@_txtAdmin.OptionsAdmin"
                                   OnClick="ClickHandler"
-                                  MensajeDescripcion = "Opciones generales del administrador"
+                                  MensajeDescripcion = "@_txtAdmin.Options"
                                   NumeroEntrada="0">
             </TarjetaOpcionesAdmin>
 
-            <TarjetaOpcionesAdmin NombreTitulo="Usuarios"
+            <TarjetaOpcionesAdmin NombreTitulo="@_txtAdmin.UserText"
                                   OnClick="ClickHandler"
-                                  MensajeDescripcion = "Consultar los usuarios registrados en la plataforma"
+                                  MensajeDescripcion = "@_txtAdmin.CheckUsers"
                                   NumeroEntrada="1">
             </TarjetaOpcionesAdmin>
 
-            <TarjetaOpcionesAdmin NombreTitulo="Proyectos y Solicitudes"
+            <TarjetaOpcionesAdmin NombreTitulo="@_txtAdmin.ProjectAndRequest"
                                   OnClick="ClickHandler"
-                                  MensajeDescripcion = "Consultar los proyectos y alojados en la plataforma"
+                                  MensajeDescripcion = "@_txtAdmin.CheckProjects"
                                   NumeroEntrada="2">
             </TarjetaOpcionesAdmin>
 
-            <TarjetaOpcionesAdmin NombreTitulo="Estadisticas"
+            <TarjetaOpcionesAdmin NombreTitulo="@_txtAdmin.Statistics"
                                   OnClick="ClickHandler"
-                                  MensajeDescripcion = "Estadisticas de los proyectos y usuarios de la aplicación"
+                                  MensajeDescripcion = "@_txtAdmin.CheckStatistics"
                                   NumeroEntrada="3">
             </TarjetaOpcionesAdmin>
         </div>
@@ -55,11 +57,18 @@
         <InformacionAyuda></InformacionAyuda>
     </div>
 </section>
+<FooterContacto></FooterContacto>
 
 @code {
     private int IndicadorPage = 0;
     private void ClickHandler(int paramSalida)
     {
         IndicadorPage = paramSalida;
+    }
+
+    TextAdminPage _txtAdmin = new TextAdminPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtAdmin = await serviceTranslator.GetTextTableAsync<TextAdminPage>(this);
     }
 }

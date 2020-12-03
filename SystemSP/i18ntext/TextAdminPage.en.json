@@ -1,0 +1,14 @@
+{
+  "OptionsAdmin": "Administrator options",
+  "Options": "General administrator options",
+  "UserText": "Users",
+  "CheckUsers": "Check the users registered on the platform",
+  "ProjectAndRequest": "Projects and requests",
+  "CheckProjects": "Consult the projects and requests hosted on the platform",
+  "Statistics": "Statistics",
+  "CheckStatistics": "Statistics of the projects and users of the application",
+  "RegistereUsers": "registered users",
+  "PublishedProjects": "published projects",
+  "visits": "Visits",
+  "StatisticsVisits": "Statistics the visits"
+}
