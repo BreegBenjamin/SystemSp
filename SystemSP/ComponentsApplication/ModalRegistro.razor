@@ -7,7 +7,15 @@
 
 <section class="fondo" id="ModalRegistro">
     <section class="popUp">
-        <CerrarModal Mensaje="@_textIndex.MessageRegister"></CerrarModal>
+        <section class="displayIformation">
+            <div>
+                <button class="cancel" @onclick="@(()=>JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll"))"></button>
+            </div>
+            <div class="centerLogoModal">
+                <h4 class="colorWelcom">@_textIndex.Welcome</h4>
+                <h6 class="estylosMs">@_textIndex.MessageRegister</h6>
+            </div>
+        </section>
         <div>
             <EditForm class="formualario_Registro" Model="_formulario" OnSubmit="RegistrarUsuario">
                 <DataAnnotationsValidator />

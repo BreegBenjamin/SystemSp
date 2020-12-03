@@ -1,0 +1,18 @@
+﻿<div class="iconUsers">
+    <nav class="navegation">
+        <ul class="botonUser">
+            <li>
+                @MainContent
+                @ChildContent
+            </li>
+        </ul>
+    </nav>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment MainContent { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

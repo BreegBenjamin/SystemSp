@@ -1,14 +1,19 @@
 ﻿@inject I18nText translator;
 <div class="contenedor-descripcion">
-    <div>
-        <button class="bt-back botonesSlider" @onclick="_moverTarjetaIzquierda"></button>
+    <div class="sizeBotonDiv">
+        <button class="bt-back-Modal botonesSlider-Modal" @onclick="_moverTarjetaIzquierda"></button>
     </div>
+    <div>
         <DescripcionAyudaUsuario Descripcion="@_lsDescription[_count].Descripcion"
                                  Image="@_lsDescription[_count].Image"
                                  Tittle="@_lsDescription[_count].Tittle">
         </DescripcionAyudaUsuario>
-    <div>
-        <button class="bt-next botonesSlider" @onclick="_moverTarjetasDerecha"></button>
+        <div>
+
+        </div>
+    </div>
+    <div class="sizeBotonDiv">
+        <button class="bt-next-Modal botonesSlider-Modal" @onclick="_moverTarjetasDerecha"></button>
     </div>
 </div>
 @code {
@@ -45,8 +50,14 @@
         });
         _lsDescription.Add(new EDescripcionData()
         {
-            Tittle = "titulo 2",
-            Descripcion = "texto2",
+            Tittle = $"{_txtSoftware.License} MIT",
+            Descripcion = _txtSoftware.LicenseMit,
+            Image = "ar.svg"
+        });
+        _lsDescription.Add(new EDescripcionData()
+        {
+            Tittle = $"{_txtSoftware.License} Apache 2.0",
+            Descripcion = _txtSoftware.LicenseApache,
             Image = "ar.svg"
         });
     }

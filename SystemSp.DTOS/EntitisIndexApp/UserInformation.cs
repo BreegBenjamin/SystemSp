@@ -119,4 +119,50 @@ namespace SystemSp.DTOS.EntitisIndexApp
         private void NotifyDataChanged() => OnChange?.Invoke();
 
     }
+    public class UserSession 
+    {
+        private bool _isAvtive;
+        public bool IsActive 
+        {
+            get 
+            {
+                return _isAvtive;
+            }
+            set 
+            {
+                _isAvtive = value;
+                NotifyDataChanged();
+            }
+        }
+
+        private DateTime? _lastEntry = DateTime.Now;
+        public DateTime? LastEntry
+        {
+            get
+            {
+                return _lastEntry;
+            }
+            set
+            {
+                _lastEntry = value;
+                NotifyDataChanged();
+            }
+        }
+        private Guid? _passChanged;
+        public Guid? PassChanged
+        {
+            get
+            {
+                return _passChanged;
+            }
+            set
+            {
+                _passChanged = value;
+                NotifyDataChanged();
+            }
+        }
+
+        public event Action OnChange;
+        private void NotifyDataChanged() => OnChange?.Invoke();
+    }
 }

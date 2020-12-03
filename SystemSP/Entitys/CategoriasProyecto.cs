@@ -5,14 +5,12 @@ namespace SystemSP.Entitys
 {
     public class ListaCategoriaVista 
     {
-        [JsonProperty("CategoriasVista")]
-        public List<CategoriasVista> CategoriasVista { get; set; }
-    }
-    public class CategoriasVista 
-    {
-        [JsonProperty("ImageCategoria")]
+        public ListaCategoriaVista(string _image, string _nombre) 
+        {
+            ImageCategoria = _image;
+            NombreCategoria = _nombre;
+        }
         public string ImageCategoria { get; set; }
-        [JsonProperty("NombreCategoria")]
         public string NombreCategoria { get; set; }
     }
 }

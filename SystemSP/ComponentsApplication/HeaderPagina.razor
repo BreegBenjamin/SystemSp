@@ -1,19 +1,67 @@
-﻿@inject I18nText trasnlator;
+﻿@inject I18nText _translator;
+@inject NavigationManager _navigator;
 <section class="info-Head headerPublciacion">
     <div>
         <img src="/images/PageImage/SystemLogo.svg" height="150" width="150" alt="logo" />
         <img src="/images/PageImage/SystemSPTxt.svg" height="200" width="200" alt="txtLogo" />
     </div>
     <div class="userBotons">
-        <BotonUsuario Texto="@_txtPage.Login" Login="true"></BotonUsuario>
-        <BotonUsuario Texto="@_txtPage.Registry" Login="false"></BotonUsuario>
+        @if (!IsValidSession)
+         {
+            <BotonUsuario Texto="@_txtPage.Login" Login="true"></BotonUsuario>
+            <BotonUsuario Texto="@_txtPage.Registry" Login="false"></BotonUsuario>
+         }
         <SelectorIdioma></SelectorIdioma>
+        @if (IsValidSession)
+        {
+            <OpcionesRenderFragment>
+                <MainContent>
+                    @if (UserImage.Length > 5)
+                    {
+                        //Insertar Imagane
+                    }
+                    else
+                    {
+                        <p class="perfilUser">@UserImage</p>
+                    }
+                </MainContent>
+                <ChildContent>
+                    <ul class="move">
+                        <li>
+                            <label class="itemOption">@UserName</label>
+                        </li>
+                        <li>
+                            <label class="itemOption">Publicar Proyecto</label>
+                        </li>
+                        <li>
+                            <label class="itemOption">Consultar Proyectos</label>
+                        </li>
+                        <li>
+                            <label class="itemOption">Configuración</label>
+                        </li>
+                        <li>
+                            <label class="itemOption" @onclick="CerrarSesionClick">Cerrar Sesión</label>
+                        </li>
+                    </ul>
+                </ChildContent>
+            </OpcionesRenderFragment>
+        }
     </div>
 </section>
 @code {
-    TextIndexPage _txtPage = new TextIndexPage();
+    [Parameter]
+    public bool IsValidSession { get; set; }
+    [Parameter]
+    public string UserName { get; set; }
+    [Parameter]
+    public string UserImage { get; set; }
+    [Parameter]
+    public EventCallback CerrarSesionClick { get; set; }
+
+
+    private TextIndexPage _txtPage = new TextIndexPage();
     protected override async Task OnInitializedAsync()
     {
-        _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
+        _txtPage = await _translator.GetTextTableAsync<TextIndexPage>(this);
     }
 }

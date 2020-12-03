@@ -1,7 +1,14 @@
 ﻿@inject I18nText trasnlator;
+@inject UserSession sesion;
+@inject UserInformationResult userInfo;
+@inject NavigationManager _navigator;
 <section class="menu-inicio">
     <div>
-        <HeaderPagina></HeaderPagina>
+        <HeaderPagina 
+                      UserName="@userInfo.UserName"
+                      UserImage="@userInfo.UserImage"
+                      IsValidSession="@sesion.IsActive"
+                      CerrarSesionClick="_cerrarSesionClick"></HeaderPagina>
     </div>
     <div class="divContainerBoton">
         <div class="containerText">
@@ -22,5 +29,12 @@
     protected override async Task OnInitializedAsync()
     {
         _txtPage = await trasnlator.GetTextTableAsync<TextIndexPage>(this);
+    }
+    private void _cerrarSesionClick()
+    {
+        sesion.IsActive = false;
+        sesion.PassChanged = null;
+        sesion.LastEntry = DateTime.Now;
+        _navigator.NavigateTo("/");
     }
 }

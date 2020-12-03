@@ -3,8 +3,11 @@
 @inherits LayoutComponentBase
 @inject I18nText serviceTranslator;
 @inject UserInformationResult UserInfoResult;
+@inject ProjectsApplication ProjectService;
+
 <header>
-    <HeaderApp></HeaderApp>
+    <HeaderApp UserImage="@UserInfoResult.UserImage"
+               UserName="@UserInfoResult.UserName"></HeaderApp>
 </header>
 <section class="elements-body">
     <div class="div-usuario">
@@ -24,7 +27,7 @@
             <CascadingValue Value="IdUsuarioAplicacion">
                 <div class="setPage">
                     @switch (tipoOpcion)
-                     {
+                    {
                         case 0:
                             <div>
                                 <InformacionContacto UserEmail="@UserInfoResult.UserEmail"
@@ -78,9 +81,9 @@
                             </div>
                             break;
                         case 1:
-                            <NovedadesProyecto></NovedadesProyecto>
+                            <NovedadesProyecto Proyectos="_proyectos"></NovedadesProyecto>
                             break;
-                     }
+                    }
                 </div>
             </CascadingValue>
         </CascadingValue>
@@ -92,12 +95,14 @@
 
     [CascadingParameter]
     public FormProjectApp ProjectApp { get; set; }
+
     = new FormProjectApp()
     {
         ApprenticesData = new List<ApprenticeData>(),
         ImagesDataStream = new List<ImagesData>()
     };
 
+    private List<ProjectDetails> _proyectos = new List<ProjectDetails>();
     private string _novedadClassName = "btn-opcion-unluck";
     private string _publicarClassName = "btn-opcion-luck";
     private TextPublicarPage _textPublicar = new TextPublicarPage();
@@ -121,6 +126,8 @@
     {
         UserInfoResult.OnChange += StateHasChanged;
         IdUsuarioAplicacion = UserInfoResult.UserId;
+        _proyectos = await ProjectService.GetProjectsUser(IdUsuarioAplicacion);
+
         _textPublicar = await serviceTranslator.GetTextTableAsync<TextPublicarPage>(this);
     }
 }

@@ -1,4 +1,7 @@
 ﻿{
+  "License": "Licencia",
   "OpenSourceTitle": "Software de código abierto",
-  "OpenSourceDescription": "Cuando tu codigo es Sofware libre proporcionas la libertad de que cualquier usuario pueda ejecutar tu sistema o programa, para cualquier proposito, ademas tambien puede ser estuadiado y mejorado en algunos aspectos para que sea mas funcional y eficaz; beneficiando asi a la comunidad de aprendices."
+  "OpenSourceDescription": "El Sofware libre proporciona la libertad de que cualquier usuario pueda ejecutar tu sistema o programa, para cualquier proposito, ademas tambien puede ser estuadiado y mejorado en algunos aspectos para que sea mas funcional y eficaz; beneficiando asi a la comunidad de aprendices.",
+  "LicenseMit": "Por la presente, se concede permiso, sin cargo, a cualquier persona que obtenga una copia de este software y los archivos de documentación asociados, para utilizar el Software sin restricciones, incluidos, entre otros, los derechos de uso, copia, modificación, fusión , publicar, distribuir, sublicenciar y / o vender copias del Software, y permitir que las personas a las que se les proporcione el Software lo hagan",
+  "LicenseApache": ""
 }

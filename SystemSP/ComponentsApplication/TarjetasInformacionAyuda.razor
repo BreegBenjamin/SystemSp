@@ -1,4 +1,8 @@
-﻿<section class="cardAppInfo">
+﻿@inject UserSession _session;
+@inject NavigationManager _navigator;
+@inject IJSRuntime JsRun;
+
+<section class="cardAppInfo">
     <p class="tituloInfo">@TituloInformacion</p>
     <span>
         <img src="/images/img_proyect/@ImagePage" height="75" width="75" />
@@ -7,7 +11,7 @@
         <p>@DescripcionCard</p>
     </div>
     <div>
-        <p class="sugerencias">@SubTitulo</p>
+        <p class="sugerencias" @onclick="_RedirectUser">@SubTitulo</p>
     </div>
     <div class="borderDiv">
         <span style="margin-top:10px">
@@ -15,6 +19,10 @@
         </span>
     </div>
 </section>
+@if (_inicarSesion)
+{
+    <ModalLogin CerrarModal="_cerrarModal"></ModalLogin>
+}
 
 @code {
     [Parameter]
@@ -29,4 +37,29 @@
     public string TextoLink { get; set; }
     [Parameter]
     public EventCallback<bool> Click { get; set; }
+    [Parameter]
+    public bool Redirect { get; set; }
+
+    private bool _inicarSesion = false;
+
+    private async Task _RedirectUser()
+    {
+        if (_session.IsActive && Redirect)
+            _navigator.NavigateTo("/PublicarProyecto");
+        else
+        {
+            if (!Redirect)
+                _navigator.NavigateTo("/Nosotros");
+            else
+            {
+                await JsRun.DeshabilitarScroll(true);
+                _inicarSesion = true;
+            }
+        }
+    }
+    private async Task _cerrarModal()
+    {
+        await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
+        _inicarSesion = false;
+    }
 }

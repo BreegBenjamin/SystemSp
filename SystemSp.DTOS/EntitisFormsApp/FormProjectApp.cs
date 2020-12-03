@@ -20,13 +20,13 @@ namespace SystemSp.DTOS.EntitisFormsApp
         public string TechFrontEnd { get; set; }
         public string TechBackEnd { get; set; }
         public string TechDataBase { get; set; }
-        public List<ImagesData> ImagesDataStream { get; set; }
+        public List<FileStreamData> ImagesDataStream { get; set; }
     }
 
-    public class ImagesData 
+    public class FileStreamData 
     {
-        public string ImageName { get; set; }
-        public string ImageStream { get; set; }
-        public string ImageType { get; set; }
+        public string FileName { get; set; }
+        public string FileStreamContent { get; set; }
+        public string FileType { get; set; }
     }
 }

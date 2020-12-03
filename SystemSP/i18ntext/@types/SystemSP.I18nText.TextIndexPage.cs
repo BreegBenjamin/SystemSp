@@ -34,7 +34,7 @@ namespace SystemSP.I18nText
         /// <summary>"License GPL (GNU Public)."</summary>
         public string licenseType;
 
-        /// <summary>"Log-in"</summary>
+        /// <summary>"Log in"</summary>
         public string Login;
 
         /// <summary>"Mail"</summary>
@@ -156,5 +156,8 @@ namespace SystemSP.I18nText
 
         /// <summary>"Training center"</summary>
         public string TrainingCenter;
+
+        /// <summary>"Welcome"</summary>
+        public string Welcome;
     }
 }

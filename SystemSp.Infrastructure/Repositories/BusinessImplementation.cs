@@ -100,20 +100,23 @@ namespace SystemSp.Infrastructure.Repositories
                     int numImg = 1;
                     appProject.ImagesDataStream.ForEach(img =>
                     {
-                        string nombreImagen = $"{img.ImageType.Replace("/", $"0{numImg}.")}";
+                        string nombreImagen = $"{img.FileType.Replace("/", $"0{numImg}.")}";
                         images.Add(new ImagenesProyecto()
                         {
                             NombreImagen = nombreImagen,
-                            ImagenOriginal = img.ImageName,
-                            TipoImagen = img.ImageType,
+                            ImagenOriginal = img.FileName,
+                            TipoImagen = img.FileType,
                             NombreContenedor = container
                         });
-                        imagesData.Add(nombreImagen, img.ImageStream);
+                        imagesData.Add(nombreImagen, img.FileStreamContent);
                         numImg++;
                     });
 
                     //Insertar Imagen azure storage 
                     await _azureBlob.SaveBlobImage(imagesData, container);
+
+                    //guardar tecnologias usadas;
+                    var tetch = getTech(appProject.TechBackEnd, appProject.TechFrontEnd, appProject.TechDataBase);
 
                     //Insertar proyecto de formación
                     var formativeProject = new Proyecto()
@@ -135,6 +138,7 @@ namespace SystemSp.Infrastructure.Repositories
                         IntegrantesProyecto = team,
                         NombreSena = appProject.SenaName,
                         ImagenesProyecto = images,
+                        TecnologiasUtilizadas = tetch
                     };
                     if (user.TipoUsuario == 1)
                         await _updateNumProjectAdmin(user.IdUsuario);
@@ -176,6 +180,18 @@ namespace SystemSp.Infrastructure.Repositories
                 }
                 return result;
             }
+        }
+        private List<TecnologiasUtilizadas> getTech(string back, string front, string db) 
+        {
+            return new List<TecnologiasUtilizadas>()
+            {
+                new TecnologiasUtilizadas()
+                {
+                    TecnologiasFront = front,
+                    TecnologiasBack = back,
+                    TecnologiasDb = db
+                }
+            };
         }
         private async Task _updateNumProjecApprentice(int idUser)
         {
@@ -569,11 +585,30 @@ namespace SystemSp.Infrastructure.Repositories
                         ProjectCard card = GetCard(formativeProject);
                         project.ImagesProject = await GetImagesAzureBlob(formativeProject.IdProyecto);
                         project.ProjectCardInfo = card;
+                        project.TechnologiesUsed = _getListTechnology(formativeProject.IdProyecto);
                     }
                 }
                 catch { }
                 return project;
             }
+        }
+        private List<string[]> _getListTechnology(int idProyecto) 
+        {
+            var result = new List<string[]>();
+
+            var frontTech = _Context.TecnologiasUtilizadas
+                .Where(x => x.IdProyecto == idProyecto)
+                .Select(x => x.TecnologiasFront.Replace("none-", ""))
+                .FirstOrDefault().Split('-');
+
+            var backTech = _Context.TecnologiasUtilizadas
+                            .Where(x => x.IdProyecto == idProyecto)
+                            .Select(x => x.TecnologiasBack.Replace("none-", ""))
+                            .FirstOrDefault().Split('-');
+
+            result.Add(frontTech);
+            result.Add(backTech);
+            return result;
         }
     }
 }

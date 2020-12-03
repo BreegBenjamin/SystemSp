@@ -17,7 +17,7 @@
                 <img src="images/img_proyect/image.svg" class="imgFile" />@_textPublicar.SelectImages
             </label>
             <span class="spanOculto" id="spanOcultoImages">
-                <InputFile OnChange="GetImagesProject" />
+                <InputFile OnChange="GetFileProject" />
             </span>
             <TooltipApp MensajeToolTip=@_textPublicar.AddImages></TooltipApp>
         </div>
@@ -33,37 +33,25 @@
     private async Task GetFileProject(IFileListEntry[] archivos)
     {
         IFileListEntry file = archivos.FirstOrDefault();
-        if (file != null && file.Type.Contains("application/"))
+        if (file != null && (file.Type.Contains("image/") || file.Type.Contains("application/")))
         {
-            string resultFile = await _service.SaveFiles(file);
-            if (ProjectApp != null && resultFile != "NoK")
-            {
-            }
-        }
-        else
-        {
-            //MostarMensaje
-        }
-    }
-    private async Task GetImagesProject(IFileListEntry[] archivos)
-    {
-        IFileListEntry file = archivos.FirstOrDefault();
-        if (file != null && file.Type.Contains("image/"))
-        {
-            string imageBase64 = await _service.GetImages(file);
+            string imageBase64 = await _service.GetFileBase64(file);
             if (ProjectApp != null && imageBase64 != "NoK")
             {
-                ProjectApp.ImagesDataStream.Add(new ImagesData()
+                ProjectApp.ImagesDataStream.Add(new FileStreamData()
                 {
-                    ImageName  = file.Name,
-                    ImageStream = imageBase64,
-                    ImageType = file.Type
+                    FileName = file.Name,
+                    FileStreamContent = imageBase64,
+                    FileType = file.Type
                 });
             }
+            else
+                await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz","Error al obtener el archivo");
+
         }
         else
         {
-            //MostarMensaje
+            await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "Tipo de archivo no permitido");
         }
     }
     protected override async Task OnInitializedAsync()

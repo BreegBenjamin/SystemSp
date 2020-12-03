@@ -5,17 +5,26 @@
 @inject UserInformationResult UserInfoResult;
 @inject ValidarFormularios validaForm;
 @inject SendEMailUser sendEmail;
+@inject UserSession session;
 
 <section class="fondo fondo2" id="ModalLogin">
-    <section class="popUp">
-        <CerrarModal Mensaje="@_textIndex.MessageDataLogin"></CerrarModal>
+        <section class="popUp">
+            <section class="displayIformation">
+                <div>
+                    <button class="cancel" @onclick="CerrarModal.InvokeAsync"></button>
+                </div>
+                <div class="centerLogoModal">
+                    <h4 class="colorWelcom">@_textIndex.Welcome</h4>
+                    <h6 class="estylosMs">@_textIndex.MessageDataLogin</h6>
+                </div>
+            </section>
         <BotonLogo></BotonLogo>
         @if (!_formForgotPass)
         {
             <EditForm Model="_form" OnSubmit="validaFormulario">
                 <DataAnnotationsValidator />
                 <section class="Form_Login">
-                    <input type="text" id="inputEmail" class="estyleText" maxlength="30" placeholder="@_textIndex.Mail"
+                    <input type="text" id="inputEmail" class="estyleText" maxlength="100" placeholder="@_textIndex.Mail"
                            @bind-value="_form.EmailLogin" @onblur="habilitarBoton">
                     <input type="password" class="estyleText" maxlength="16" placeholder="@_textIndex.Password"
                            @bind-value="@_form.PasswordLogin" @onblur="habilitarBoton">
@@ -55,6 +64,10 @@
 </section>
 
 @code {
+
+    [Parameter]
+    public EventCallback CerrarModal { get; set; }
+
     private FormLogin _form = new FormLogin();
     private bool _btnDeshabilitado = true;
     private string _classBoton = "btRegistroForm-Unlock";
@@ -69,14 +82,21 @@
     private async Task validaFormulario()
     {
         UserInformation result = await serviceConection.GetUserApp(_form);
-        UserInfoResult.UserEmail = result.UserEmail;
-        UserInfoResult.UserId = result.UserId;
-        UserInfoResult.UserImage = result.UserImage;
-        UserInfoResult.UserName = result.UserName;
-        UserInfoResult.UserPassword = result.UserPassword;
-        UserInfoResult.UserTelephone = result.UserTelephone;
+
         if (result.MessageStates.UserExist)
         {
+            UserInfoResult.UserEmail = result.UserEmail;
+            UserInfoResult.UserId = result.UserId;
+            UserInfoResult.UserImage = result.UserImage;
+            UserInfoResult.UserName = result.UserName;
+            UserInfoResult.UserPassword = result.UserPassword;
+            UserInfoResult.UserTelephone = result.UserTelephone;
+
+            //Variables de Session
+            session.IsActive = true;
+            session.LastEntry = DateTime.Now;
+            session.PassChanged = null;
+
             await JsRun.InvokeVoidAsync(identifier: "salirMenu.HabilitarScroll");
             if (result.UserType == 1)
                 NavigationManager.NavigateTo("Administrador");

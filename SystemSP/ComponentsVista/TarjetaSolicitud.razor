@@ -16,8 +16,8 @@
     public string Image { get; set; }
     [Parameter]
     public string TituloCategoria { get; set; }
-    [CascadingParameter]
-    public bool Cambiar { get; set; }
+
+    private bool _cambiar { get; set; }
 
     private int _entrada = 1;
     private void _handlerImage(bool estado)
@@ -26,7 +26,7 @@
         {
             Image = $"IconosColor/{Image}";
             _entrada = 0;
-            Cambiar = true;
+            _cambiar = true;
         }
     }
 }
