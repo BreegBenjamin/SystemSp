@@ -21,7 +21,7 @@
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                 <div class="disForm">
-                    <InputText @bind-Value="_formulario.NameUser" maxlength="30" placeholder="Nombre"
+                    <InputText @bind-Value="_formulario.NameUser" maxlength="30" placeholder="@_textIndex.Name"
                                @onblur="habilitarBoton" class="registro_form">
                     </InputText>
                     <InputText @bind-Value="_formulario.LastNameUser" maxlength="30" placeholder="@_textIndex.LastName"
@@ -30,11 +30,11 @@
                 </div>
                 <div class="disForm">
                     <InputSelect @bind-Value="_formulario.IdentificacionType" class="selectType selectType-Width selectStile">
-                        <option value="1" selected>Cédula de Ciudadanía</option>
-                        <option value="2">Tarjeta de Identidad</option>
-                        <option value="3">Cédula de Extranjería</option>
+                        <option value="1" selected>@_textIndex.IdentificationId</option>
+                        <option value="2">@_textIndex.IdentityCard</option>
+                        <option value="3">@_textIndex.ForeignCard</option>
                     </InputSelect>
-                    <InputText @bind-Value="_formulario.IdentificationNumber" maxlength="25" placeholder="Número de identificación"
+                    <InputText @bind-Value="_formulario.IdentificationNumber" maxlength="25" placeholder="@_textIndex.IdentificationNum"
                                @onblur="habilitarBoton" class="registro_form">
                     </InputText>
                 </div>
@@ -42,7 +42,7 @@
                     <InputText type="email" @bind-Value="_formulario.Email" maxlength="100" placeholder="@_textIndex.Mail"
                                @onblur="habilitarBoton" class="registro_form">
                     </InputText>
-                    <InputText type="email" @bind-Value="_formulario.EmailConfirm" maxlength="100" placeholder="Repetir Correo"
+                    <InputText type="email" @bind-Value="_formulario.EmailConfirm" maxlength="100" placeholder="@_textIndex.RepeatMail"
                                @onblur="habilitarBoton" class="registro_form">
                     </InputText>
                 </div>
@@ -80,13 +80,13 @@
                 @if (_formulario.UserType == 3)
                 {
                     <div>
-                        <InputText @bind-Value="_formulario.CompanyName" maxlength="50" placeholder="Nombre Empresa" class="registro_form_Company">
+                        <InputText @bind-Value="_formulario.CompanyName" maxlength="50" placeholder="@_textIndex.CompanyName" class="registro_form_Company">
                         </InputText>
 
-                        <InputText @bind-Value="_formulario.CompanyAddress" maxlength="100" placeholder="Dirección Empresa" class="registro_form_Company">
+                        <InputText @bind-Value="_formulario.CompanyAddress" maxlength="100" placeholder="@_textIndex.CompanyAddress" class="registro_form_Company">
                         </InputText>
 
-                        <InputText @bind-Value="_formulario.City" maxlength="50" placeholder="Ciudad" class="registro_form_Company">
+                        <InputText @bind-Value="_formulario.City" maxlength="50" placeholder="@_textIndex.CompanyCity" class="registro_form_Company">
                         </InputText>
                     </div>
                 }

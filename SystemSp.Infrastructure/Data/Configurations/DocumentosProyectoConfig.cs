@@ -16,7 +16,7 @@ namespace SystemSp.Infrastructure.Data.Configurations
                 .IsUnicode(false);
 
             builder.Property(e => e.TipoDocumento)
-                .HasMaxLength(10)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.NombreContenedor)

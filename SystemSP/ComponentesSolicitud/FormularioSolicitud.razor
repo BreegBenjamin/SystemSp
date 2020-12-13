@@ -1,0 +1,122 @@
+﻿@inject I18nText _service;
+@inject ProjectsApplication _serviceConection;
+@inject IJSRuntime JSRun;
+@inject UserInformationResult session;
+<section>
+    <EditForm Model="RequestForm">
+        <div>
+            <BotonLecturaArchivo></BotonLecturaArchivo>
+        </div>
+
+        <div class="displayFlex">
+            <div>
+                <p class="margin0">Nombre Requerimiento <span style="color:#ED0000">*</span></p>
+                <InputText class="inputFormAprendiz" @bind-Value="RequestForm.RequestName" maxlength="300"
+                           placeholder="Nombre Requerimiento" @onfocusout="_validForms">
+                </InputText>
+            </div>
+            <div>
+                <p class="margin0">Categorias <span style="color:#ED0000">*</span></p>
+                <InputSelect @bind-Value="RequestForm.Category" class="selectStile selectType">
+                    <option value="01" selected>@_textCategory.Art</option>
+                    <option value="02">@_textCategory.Commerce</option>
+                    <option value="03">@_textCategory.Education</option>
+                    <option value="04">@_textCategory.Environment</option>
+                    <option value="05">@_textCategory.Event</option>
+                    <option value="06">@_textCategory.Farms</option>
+                    <option value="07">@_textCategory.Finance</option>
+                    <option value="08">@_textCategory.Food</option>
+                    <option value="09">@_textCategory.Health</option>
+                    <option value="10">@_textCategory.Home</option>
+                    <option value="11">@_textCategory.Libraries</option>
+                    <option value="12">@_textCategory.Motorcycle</option>
+                    <option value="13">@_textCategory.Office</option>
+                    <option value="14">@_textCategory.Photography</option>
+                    <option value="15">@_textCategory.Shop</option>
+                    <option value="16">@_textCategory.Tool</option>
+                    <option value="17">@_textCategory.Transport</option>
+                    <option value="18">@_textCategory.Travel</option>
+                    <option value="19">@_textCategory.Veterinary</option>
+                    <option value="20">@_textCategory.Other</option>
+                </InputSelect>
+            </div>
+        </div>
+        <div>
+            <p class="margin0">Descripción Solicitud <span style="color:#ED0000">*</span></p>
+            <InputTextArea @bind-Value="RequestForm.RequestDescription" maxlength="1000" class="textDescripcion"
+                           placeholder="Descripción Solicitud" @onfocusout="_validForms">
+            </InputTextArea>
+        </div>
+        <div class="displayFlex">
+            <div>
+                <p class="margin0">Departamento <span style="color:#ED0000">*</span></p>
+                <InputText @bind-Value="RequestForm.Department" class="inputFormAprendiz" maxlength="100"
+                           placeholder="Departamento" @onfocusout="_validForms">
+                </InputText>
+            </div>
+            <div>
+                <p class="margin0">Ciudad <span style="color:#ED0000">*</span></p>
+                <InputText @bind-Value="RequestForm.City" class="inputFormAprendiz" maxlength="100"
+                           placeholder="Ciudad" @onfocusout="_validForms">
+                </InputText>
+            </div>
+        </div>
+        <div class="displayFlex">
+            <CascadingValue Value="RequestForm">
+                <AdjuntarDocumentos></AdjuntarDocumentos>
+            </CascadingValue>
+        </div>
+        <div class="divButtom">
+            <button class="@_classBoton" @onclick="_insertRequest" disabled="@_disabled">Publicar Solicitud</button>
+        </div>
+    </EditForm>
+</section>
+
+@code {
+    private bool _disabled = true;
+    string _classBoton = "btRegistroForm-Unlock";
+    [CascadingParameter]
+    public FormRequest RequestForm { get; set; } = new FormRequest()
+    {
+        FilesData = new List<FileStreamData>()
+    };
+    private TextCategoriasIndex _textCategory = new TextCategoriasIndex();
+    protected override async Task OnInitializedAsync()
+    {
+        RequestForm.Category = "01";
+        _textCategory = await _service.GetTextTableAsync<TextCategoriasIndex>(this);
+    }
+    private void _validForms()
+    {
+        if (_isValid(RequestForm.RequestName) && _isValid(RequestForm.RequestDescription) && _isValid(RequestForm.Category)
+            && _isValid(RequestForm.City) && _isValid(RequestForm.Department))
+        {
+
+            _disabled = false;
+            _classBoton = "btRegistroForm";
+        }
+        else
+        {
+            _disabled = true;
+            _classBoton = "btRegistroForm-Unlock";
+        }
+    }
+    private async Task _insertRequest()
+    {
+        if (RequestForm.FilesData.Count > 0)
+        {
+            RequestForm.IdUser = session.UserId;
+            RequestForm.UserName = session.UserName;
+            bool salida = await _serviceConection.PostRequest(RequestForm);
+            if(!salida)
+                await JSRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "No se pudo agregar la solicitud");
+        }
+        else
+        {
+            await JSRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "Debe agregar los archivos");
+        }
+    }
+
+    private bool _isValid(string text, bool isValid = false)
+        => isValid = (string.IsNullOrEmpty(text)) ? false : true;
+}

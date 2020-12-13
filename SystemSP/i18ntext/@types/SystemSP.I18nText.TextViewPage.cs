@@ -13,6 +13,9 @@ namespace SystemSP.I18nText
         /// <summary>"Download project"</summary>
         public string DownloadProject;
 
+        /// <summary>"Technologies Used in the training project"</summary>
+        public string TechnologyMessage;
+
         /// <summary>"We are the company (X) and we are interested in your great information system (Name of person)."</summary>
         public string TextRequest;
 

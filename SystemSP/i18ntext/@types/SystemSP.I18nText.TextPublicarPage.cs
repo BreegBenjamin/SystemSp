@@ -10,8 +10,20 @@ namespace SystemSP.I18nText
         /// <summary>"Attach the project documentation"</summary>
         public string AddDocuments;
 
+        /// <summary>"Add Email"</summary>
+        public string AddEmail;
+
         /// <summary>"Attach the images of the project interface"</summary>
         public string AddImages;
+
+        /// <summary>"Add Last Name"</summary>
+        public string AddLast;
+
+        /// <summary>"Add Name"</summary>
+        public string AddName;
+
+        /// <summary>"Add Phone"</summary>
+        public string AddPhone;
 
         /// <summary>"Apprentice Last Name"</summary>
         public string ApprenticeLastName;
@@ -61,11 +73,20 @@ namespace SystemSP.I18nText
         /// <summary>"Confirm password"</summary>
         public string ConfirmPassword;
 
+        /// <summary>"Delete"</summary>
+        public string Delete;
+
+        /// <summary>"Delete Apprentice"</summary>
+        public string DeleteApprentice;
+
         /// <summary>"Department"</summary>
         public string Department;
 
         /// <summary>"Data Base"</summary>
         public string DivDatabase;
+
+        /// <summary>"Downloads"</summary>
+        public string Downloads;
 
         /// <summary>"Email"</summary>
         public string Email;
@@ -154,6 +175,18 @@ namespace SystemSP.I18nText
         /// <summary>"Datos de los integrantes (Opcional)"</summary>
         public string MemberDate;
 
+        /// <summary>"Member Email"</summary>
+        public string MemberEmail;
+
+        /// <summary>"Member Last name"</summary>
+        public string MemberLast;
+
+        /// <summary>"Member Name"</summary>
+        public string MemberName;
+
+        /// <summary>"Member Phone"</summary>
+        public string MemberPhone;
+
         /// <summary>"Members"</summary>
         public string MembersUpdate;
 
@@ -172,6 +205,45 @@ namespace SystemSP.I18nText
         /// <summary>"The project has been published successfully"</summary>
         public string MessageSuccess;
 
+        /// <summary>"Are you sure you want to delete the training project?"</summary>
+        public string MsDeleteProject;
+
+        /// <summary>"Could not delete project"</summary>
+        public string MsErrorDelete;
+
+        /// <summary>"Could not delete User"</summary>
+        public string MsErrorDeleteUser;
+
+        /// <summary>"Publish Training Project"</summary>
+        public string MsNoProjecTooltip1;
+
+        /// <summary>"Consult Training Projects"</summary>
+        public string MsNoProjecTooltip2;
+
+        /// <summary>"Help on how to publish a training project"</summary>
+        public string MsNoProjecTooltip3;
+
+        /// <summary>"Log out"</summary>
+        public string MsOptionClose;
+
+        /// <summary>"View Published Projects"</summary>
+        public string MsOptionProject;
+
+        /// <summary>"Setting"</summary>
+        public string MsOptionSetting;
+
+        /// <summary>"Project Deleted"</summary>
+        public string MsProjectDeleted;
+
+        /// <summary>"Are you sure you want to delete the user?"</summary>
+        public string MsUserDelete;
+
+        /// <summary>"User Deleted"</summary>
+        public string MsUserDeleted;
+
+        /// <summary>"The User has no projects published on the platform"</summary>
+        public string MsUserProject;
+
         /// <summary>"Name"</summary>
         public string Name;
 
@@ -189,6 +261,9 @@ namespace SystemSP.I18nText
 
         /// <summary>"About Open Source"</summary>
         public string OpenSource;
+
+        /// <summary>"Options"</summary>
+        public string Options;
 
         /// <summary>"Option"</summary>
         public string OptionTable;
@@ -228,6 +303,9 @@ namespace SystemSP.I18nText
 
         /// <summary>"Save"</summary>
         public string Save;
+
+        /// <summary>"Save Changes"</summary>
+        public string SaveChanges;
 
         /// <summary>"Featured and recommended "</summary>
         public string SeeFeatured1;
@@ -298,7 +376,13 @@ namespace SystemSP.I18nText
         /// <summary>"Training Type"</summary>
         public string TrainingType;
 
+        /// <summary>"Update Apprentice"</summary>
+        public string UpdateApprentice;
+
         /// <summary>"Update your information"</summary>
         public string UpdateInformacion;
+
+        /// <summary>"View"</summary>
+        public string View;
     }
 }

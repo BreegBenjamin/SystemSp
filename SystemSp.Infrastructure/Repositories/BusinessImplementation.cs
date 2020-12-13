@@ -79,7 +79,7 @@ namespace SystemSp.Infrastructure.Repositories
                 try
                 {
                     //remueve los espacios de la categoria
-                    string _categoria = string.Concat(appProject.Category.Where(c => !char.IsWhiteSpace(c)));
+                    string categoria = _getCategory(appProject.Category);
                     string _projectName = string.Concat(appProject.NameProject.Where(c => !char.IsWhiteSpace(c)));
 
                     var datePost = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
@@ -115,8 +115,7 @@ namespace SystemSp.Infrastructure.Repositories
                         imagesData.Add(nombreImagen, img.FileStreamContent);
                         numImg++;
                     });
-                    //Insertar Imagen azure storage 
-                    await _azureBlob.SaveBlobImage(imagesData, containerImage);
+                   
 
                     //Se agrega la lista de archivos que se guarda en la base de datos
                     int numFile = 1;
@@ -126,15 +125,12 @@ namespace SystemSp.Infrastructure.Repositories
                         documentos.Add(new DocumentosProyecto() 
                         {
                             NombreDocumento = nombreDocumento,
-                            NumeroDocumento = numFile,
                             TipoDocumento = file.FileType,
                             NombreContenedor = containerArchivos
                         });
                         fileData.Add(nombreDocumento, file.FileStreamContent);
                         numFile++;
                     });
-                    //Insertar archivos azure storage 
-                    await _azureBlob.SaveBlobImage(fileData, containerArchivos);
 
                     //guardar tecnologias usadas;
                     var tetch = getTech(appProject.TechBackEnd, appProject.TechFrontEnd, appProject.TechDataBase);
@@ -145,7 +141,7 @@ namespace SystemSp.Infrastructure.Repositories
                         IdUsuario = user.IdUsuario,
                         IdVinculacion = 0,
                         NombreProyecto = _projectName,
-                        Categoria = _categoria,
+                        Categoria = categoria,
                         DescripcionProyecto = appProject.ProjectDescription,
                         FechaFormacion = dateProject,
                         FechaPublicacion = datePost,
@@ -193,7 +189,14 @@ namespace SystemSp.Infrastructure.Repositories
                         TipoUsuario = user.TipoUsuario
                     };
                     _Context.UsuarioCreadorProyecto.Add(credor);
-                    await _Context.SaveChangesAsync();
+                    int resultSave = await _Context.SaveChangesAsync();
+                    if (resultSave > 0)
+                    {
+                        //Insertar Imagen azure storage 
+                        await _azureBlob.SaveBlobImage(imagesData, containerImage);
+                        //Insertar archivos azure storage 
+                        await _azureBlob.SaveBlobImage(fileData, containerArchivos);
+                    }
                     result = true;
                 }
                 catch (Exception ex)
@@ -242,6 +245,26 @@ namespace SystemSp.Infrastructure.Repositories
         }
         public async Task<bool> InsertFormativeProject(FormProjectApp appProject)
             => await _insertProject(appProject);
+        public async Task<List<ReportApp>> GetReports() 
+        {
+            using (_Context) 
+            {
+                var salida = new List<ReportApp>();
+                List<Proyecto> project = await _Context.Proyecto.Take(10).ToListAsync();
+                project.ForEach(x => 
+                {
+                    salida.Add(new ReportApp() 
+                    {
+                        Categoria = x.Categoria,
+                        Ciudad = x.Ciudad,
+                        FechaPublicacion = x.FechaPublicacion,
+                        NombreProyecto = x.NombreProyecto
+                    });
+                });
+                return salida;
+            }
+
+        }
         public ProjectCard GetCard(Proyecto project)
             => _getCard(project);
         public async Task<UserInformation> InsertUserRol(FormRegister formLogin)
@@ -379,13 +402,15 @@ namespace SystemSp.Infrastructure.Repositories
                         && x.IdProyecto == updateData.IdProject);
                     if (apprentice != null)
                     {
-                        apprentice.Estado = updateData.Estado;
-                        apprentice.FechaActualizacion = DateTime.Now;
+                        _Context.IntegrantesProyecto.Remove(apprentice);
                         _Context.SaveChanges();
                         result = true;
                     }
                 }
-                catch { }
+                catch(Exception ex) 
+                {
+                    string ms = ex.Message;
+                }
                 return result;
             };
         }
@@ -439,7 +464,6 @@ namespace SystemSp.Infrastructure.Repositories
         {
             using (_Context)
             {
-                bool salida = false;
                 try
                 {
                     var project = await _Context.Proyecto.FirstOrDefaultAsync(
@@ -453,10 +477,16 @@ namespace SystemSp.Infrastructure.Repositories
                             project.FechaActualizacion = DateTime.Now;
                         project.Estado = updateData.Estado;
                         _Context.SaveChanges();
+                        return true;
                     }
+                    else
+                        return false;
                 }
-                catch (Exception) { }
-                return salida;
+                catch (Exception ex) 
+                {
+                    string ms = ex.Message;
+                    return false;
+                }
             }
         }
         public async Task<List<string>> GetImagesAzureBlob(int IdProject)
@@ -614,6 +644,11 @@ namespace SystemSp.Infrastructure.Repositories
                 return project;
             }
         }
+        public async Task<bool> InsertRequestUser(FormRequest formRequest) 
+            => await _insertRequest(formRequest);
+        public bool InsertListRequest(List<FormRequest> formRequest)
+            => _insertListRequest(formRequest);
+
         private List<string[]> _getListTechnology(int idProyecto) 
         {
             var result = new List<string[]>();
@@ -631,6 +666,151 @@ namespace SystemSp.Infrastructure.Repositories
             result.Add(frontTech);
             result.Add(backTech);
             return result;
+        }
+        private async Task<bool> _insertRequest(FormRequest formRequest) 
+        {
+            using (_Context) 
+            {
+                try
+                {
+                    var datePost = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                    var imagesData = new Dictionary<string, string>();
+                    string requestName = string.Concat(formRequest.RequestName.Where(c => !char.IsWhiteSpace(c)));
+                    string containerName = $"{requestName.ToLower()}-images";
+                    var images = new List<ImagenesSolicitud>();
+
+                    int numFile = 1;
+                    formRequest.FilesData.ForEach((item)=> 
+                    {
+                        string nombreImagen = $"{item.FileType.Replace("/", $"0{numFile}.")}";
+                        images.Add(new ImagenesSolicitud() 
+                        {
+                            ImagenOriginal = item.FileName,
+                            NombreImagen = nombreImagen,
+                            TipoImagen = item.FileType,
+                            NombreContenedor = containerName
+                        });
+                        imagesData.Add(nombreImagen, item.FileStreamContent);
+                        numFile++;
+                    });
+                    int result = _saveRequest(formRequest, images, containerName);
+                    if (result > 0)
+                    {
+                        //Insertar Imagen azure storage 
+                        await _azureBlob.SaveBlobImage(imagesData, containerName);
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                catch (Exception ex)
+                {
+                    string ms = ex.Message;
+                    return false;
+                }
+            }
+        }
+        private bool _insertListRequest(List<FormRequest> formRequest) 
+        {
+            using (_Context) 
+            {
+                try
+                {
+                    int result = 0;
+                    formRequest.ForEach(itemR =>
+                    {
+                        result = _saveRequest(itemR, null,"NoContainer");
+                    });
+                    return result > 0;
+                }
+                catch (Exception ex)
+                {
+                    string ms = ex.Message;
+                    return false;
+                }
+            }
+        }
+        private int _saveRequest(FormRequest formRequest, List<ImagenesSolicitud> images, string containerName) 
+        {
+            string resultCateogry = _getCategory(formRequest.Category);
+            var request = new List<SolicitudEmpresa>()
+                {
+                    new SolicitudEmpresa()
+                    {
+                            CategoriaRequerimiento = resultCateogry,
+                            Ciudad = formRequest.City,
+                            Departamento = formRequest.Department,
+                            DescripcionRequerimiento = formRequest.RequestDescription,
+                            EstadoVinculacion = "NoVinculado",
+                            IdUsuario = formRequest.IdUser,
+                            Estado = "Activo",
+                            FechaPublicacion = DateTime.Now,
+                            NombreRequerimiento = formRequest.RequestName,
+                            ImagenesSolicitud = images,
+                            NombreContenedor = containerName
+                    }
+                };
+
+            var usuarioCreador = new UsuarioCreadorSolicitud()
+            {
+                FechaCreacion = DateTime.Now,
+                IdCreador = formRequest.IdUser,
+                NombreUsuario = formRequest.UserName,
+                TipoUsuario = 1,
+                SolicitudEmpresa = request
+            };
+
+            _Context.UsuarioCreadorSolicitud.Add(usuarioCreador);
+            int result = _Context.SaveChanges();
+            return result;
+        }
+        private string _getCategory(string numCategory) 
+        {
+            switch (numCategory)
+            {
+                case "01":
+                    return "ArtAndDesign";
+                case "02":
+                    return "IndustryAndCommerce";
+                case "03":
+                    return "Education";
+                case "04":
+                    return "Environment";
+                case "05":
+                    return "EntertainmentAndEvents";
+                case "06":
+                    return "AgricultureAndFarms";
+                case "07":
+                    return "FinanceAndJobs";
+                case "08":
+                    return "FoodAndDelivery";
+                case "09":
+                    return "HealthAndWellness";
+                case "10":
+                    return "EstateAndHome";
+                case "11":
+                    return "BooksAndLibraries";
+                case "12":
+                    return "VehiclesAndMotorcycles";
+                case "13":
+                    return "MusicAndAudio";
+                case "14":
+                    return "OfficeComplement";
+                case "15":
+                    return "Photography";
+                case "16":
+                    return "SupermarketsAndStores";
+                case "17":
+                    return "ToolsAndProductivity";
+                case "18":
+                    return "Transport";
+                case "19":
+                    return "TravelsAndTourism";
+                case "20":
+                    return "Other";
+                default:
+                    return "Other";
+            }
         }
     }
 }

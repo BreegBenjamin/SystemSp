@@ -32,13 +32,15 @@
                     <label class="itemOption">@UserName</label>
                 </li>
                 <li>
-                    <label class="itemOption">Publicar Proyecto</label>
+                    <label class="itemOption" @onclick="@(()=>_navigator.NavigateTo("/VistaProyectos"))">
+                        @_textPage.MsOptionProject!
+                    </label>
                 </li>
                 <li>
-                    <label class="itemOption">Configuración</label>
+                    <label class="itemOption">@_textPage.MsOptionSetting</label>
                 </li>
                 <li>
-                    <label class="itemOption" @onclick="_cerrarSesionClick">Cerrar Sesión</label>
+                    <label class="itemOption" @onclick="_cerrarSesionClick">@_textPage.MsOptionClose</label>
                 </li>
             </ul>
         </ChildContent>
@@ -52,12 +54,16 @@
     [Parameter]
     public string UserImage { get; set; }
 
-
+    private TextPublicarPage _textPage = new TextPublicarPage();
     private void _cerrarSesionClick()
     {
         _session.IsActive = false;
         _session.PassChanged = null;
         _session.LastEntry = DateTime.Now;
         _navigator.NavigateTo("/");
+    }
+    protected override async Task OnInitializedAsync() 
+    {
+        _textPage = await _serviceTranslator.GetTextTableAsync<TextPublicarPage>(this);
     }
 }

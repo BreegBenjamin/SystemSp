@@ -34,35 +34,6 @@ namespace SystemSP.Intelligence
             };
             return categorias;
         }
-        private List<string> _getCategoys(TextCategoriasIndex text) 
-        {
-            return new List<string>() 
-            {
-                text.Shop,
-                text.Motorcycle,
-                text.Education,
-                text.Transport,
-                text.Environment,
-                text.Commerce,
-                text.Veterinary,
-                text.Farms,
-                text.Home,
-                text.Libraries,
-                text.Health,
-                text.Travel,
-                text.Music,
-                text.Photography,
-                text.Art,
-                text.Food,
-                text.Tool,
-                text.Office,
-                text.Environment,
-                text.Finance,
-                text.Other
-            };
-        }
-        public List<string> GetCategorys(TextCategoriasIndex text) 
-            => _getCategoys(text);
         public List<ListaCategoriaVista> GetListCategorys(TextCategoriasIndex text) => 
             _getListElements(text);
     }

@@ -13,14 +13,35 @@ namespace SystemSP.I18nText
         /// <summary>"Company"</summary>
         public string Company;
 
+        /// <summary>"Company Address"</summary>
+        public string CompanyAddress;
+
+        /// <summary>"City"</summary>
+        public string CompanyCity;
+
+        /// <summary>"Company Name"</summary>
+        public string CompanyName;
+
         /// <summary>"Consult"</summary>
         public string Consult;
 
         /// <summary>"Create account?"</summary>
         public string CreateAccount;
 
+        /// <summary>"Foreign ID Card"</summary>
+        public string ForeignCard;
+
         /// <summary>"Forgot your password?"</summary>
         public string ForgotPass;
+
+        /// <summary>"Identification Id"</summary>
+        public string IdentificationId;
+
+        /// <summary>"Identification number"</summary>
+        public string IdentificationNum;
+
+        /// <summary>"Identity Card"</summary>
+        public string IdentityCard;
 
         /// <summary>"Last name"</summary>
         public string LastName;
@@ -37,7 +58,7 @@ namespace SystemSP.I18nText
         /// <summary>"Log in"</summary>
         public string Login;
 
-        /// <summary>"Mail"</summary>
+        /// <summary>"Email"</summary>
         public string Mail;
 
         /// <summary>"Publish your training project and allow Sena, companies and apprentices to visualize your idea. Link with a company and access the monitoring of the implementation of the project."</summary>
@@ -97,7 +118,10 @@ namespace SystemSP.I18nText
         /// <summary>"Sign-up"</summary>
         public string Registry;
 
-        /// <summary>"Repeat password"</summary>
+        /// <summary>"Confirm Mail"</summary>
+        public string RepeatMail;
+
+        /// <summary>"Confirm Password"</summary>
         public string RepeatPassword;
 
         /// <summary>"See suggestions"</summary>

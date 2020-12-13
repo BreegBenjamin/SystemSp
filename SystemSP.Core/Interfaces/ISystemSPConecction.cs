@@ -20,5 +20,8 @@ namespace SystemSp.Core.Interfaces
         Task<bool> UpDateProject(UpdateDataProject updateData);
         Task<List<string>> GetPopularCategory();
         Task<bool> ValidaEmailUser(string email);
+        Task<bool> PostRequest(FormRequest request);
+        bool PostListRequest(List<FormRequest> request);
+        Task<List<ReportApp>> GetListReport();
     }
 }

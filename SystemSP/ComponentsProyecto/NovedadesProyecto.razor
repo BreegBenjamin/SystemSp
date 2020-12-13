@@ -1,4 +1,6 @@
-﻿<section>
+﻿@inject I18nText _service;
+
+<section>
     @if (_proyectosPublicados)
      {
         <div class="novedadPosition">
@@ -43,10 +45,10 @@
                     }
                     else 
                     {
-                        <TarjetaAprendices ApprenticeName="Añadir Nombre"
-                                           ApprenticeLastName="Añadir Apellido"
-                                           Email="Añadir Email"
-                                           Telephone="Añadir Teléfono"
+                        <TarjetaAprendices ApprenticeName="@_textPage.AddName"
+                                           ApprenticeLastName="@_textPage.AddLast"
+                                           Email="@_textPage.AddEmail"
+                                           Telephone="@_textPage.AddPhone"
                                            IdApprendice="0"
                                            IdProject="@_idProject"
                                            ClassName="sobrasTarjetas"
@@ -78,6 +80,7 @@
     private bool _proyectosPublicados = false;
     private string _description = string.Empty;
     private int _idProject = 0;
+    private TextPublicarPage _textPage = new TextPublicarPage();
 
     private void ClickHandler(ProjectDetails paramSalida)
     {
@@ -94,5 +97,9 @@
             if (Proyectos.Count > 0)
                 _proyectosPublicados = true;
         }
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        _textPage =  await _service.GetTextTableAsync<TextPublicarPage>(this);
     }
 }

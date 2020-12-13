@@ -23,6 +23,18 @@ namespace SystemSp.Infrastructure.Data.Configurations
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Estado)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.EstadoVinculacion)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.NombreContenedor)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
             builder.Property(e => e.DescripcionRequerimiento).IsUnicode(false);
 
             builder.Property(e => e.FechaActualziacion).HasColumnType("datetime");

@@ -13,15 +13,32 @@
                     </InputText>
                 </div>
                 <div class="containerTexto">
-                    <label class="lbColor">@_txtPublicar.CategoryForm
-                        <span style="color:#ED0000">*</span>
-                    </label>
-                    <InputSelect @bind-Value="ProjectApp.Category" class="selectType selectStile">
-                        @foreach (var item in _categorys)
-                        {
-                            <option value="@item">@item</option>
-                         }
-                    </InputSelect>
+                    <label class="lbColor">
+                        @_txtPublicar.CategoryForm
+                    <span style="color:#ED0000">*</span>
+                </label>
+                <InputSelect @bind-Value="ProjectApp.Category" class="selectStile selectType">
+                    <option value="01" selected>@_textCategory.Art</option>
+                    <option value="02">@_textCategory.Commerce</option>
+                    <option value="03">@_textCategory.Education</option>
+                    <option value="04">@_textCategory.Environment</option>
+                    <option value="05">@_textCategory.Event</option>
+                    <option value="06">@_textCategory.Farms</option>
+                    <option value="07">@_textCategory.Finance</option>
+                    <option value="08">@_textCategory.Food</option>
+                    <option value="09">@_textCategory.Health</option>
+                    <option value="10">@_textCategory.Home</option>
+                    <option value="11">@_textCategory.Libraries</option>
+                    <option value="12">@_textCategory.Motorcycle</option>
+                    <option value="13">@_textCategory.Office</option>
+                    <option value="14">@_textCategory.Photography</option>
+                    <option value="15">@_textCategory.Shop</option>
+                    <option value="16">@_textCategory.Tool</option>
+                    <option value="17">@_textCategory.Transport</option>
+                    <option value="18">@_textCategory.Travel</option>
+                    <option value="19">@_textCategory.Veterinary</option>
+                    <option value="20">@_textCategory.Other</option>
+                </InputSelect>
                 </div>
             </li>
             <li class="liForm">
@@ -137,8 +154,8 @@
     [CascadingParameter]
     public FormProjectApp ProjectApp { get; set; }
 
+    private TextCategoriasIndex _textCategory = new TextCategoriasIndex();
     private TextPublicarPage _txtPublicar = new TextPublicarPage();
-    private List<string> _categorys = new List<string>();
     private bool _btnConrinuarDisabled = true;
     private string _classBotones = "PublicarProyecto-Unlock";
     private List<string> _listaAnio = new List<string>();
@@ -190,9 +207,8 @@
         _listaAnio = _getAnio();
         _listDias = _getDias(DateTime.Now.Year, DateTime.Now.Month);
         _txtPublicar = await _traductorService.GetTextTableAsync<TextPublicarPage>(this);
-        var _txtCategorys = await _traductorService.GetTextTableAsync<TextCategoriasIndex>(this);
-        _categorys = _lenguage.GetCategorys(_txtCategorys);
-        ProjectApp.Category = _categorys[0];
+        _textCategory = await _traductorService.GetTextTableAsync<TextCategoriasIndex>(this);
+        ProjectApp.Category ="01";
         ProjectApp.Departament = _listDepa[0];
         base.OnInitialized();
     }

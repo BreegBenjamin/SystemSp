@@ -1,6 +1,7 @@
 ﻿@inject IJSRuntime JSRun;
 @inject ProjectsApplication ProjectService;
 @inject NavigationManager NavigationManager;
+@inject I18nText _serviceTranslator;
 
 <section class="proyectoDetails @NameClassCategoria" id="divCard">
     <div @onclick="@(()=> OnClick.InvokeAsync(DetalleProyecto))">
@@ -13,31 +14,31 @@
         </div>
         <div class="postionViews">
             <div class="viewDetails">
-                <p class="p-no-margin">Descargas</p>
+                <p class="p-no-margin">@_textPage.Downloads</p>
                 <label>@NumeroDescargas</label>
             </div>
             <div class="viewDetails">
-                <p class="p-no-margin">Visitas</p>
+                <p class="p-no-margin">@_textPage.View</p>
                 <label>@NumeroVistas</label>
             </div>
         </div>
     </div>
     <div class="butonEliminar">
-        <button class="btnDelete" @onclick="@(()=> _habilitaModal = true)">Eliminar</button>
+        <button class="btnDelete" @onclick="@(()=> _habilitaModal = true)">@_textPage.Delete</button>
     </div>
 </section>
 @if (_habilitaModal)
 {
     <ModalOpciones ActionResult="@_eJecutarActualizacion"
-                   CancelMessage="Cancelar"
-                   Menssage="¿Está seguro que desea eliminar el usuario?"
-                   SaveMessage="Eliminar"></ModalOpciones>
+                   CancelMessage="@_textPage.Cancel"
+                   Menssage="@_textPage.MsDeleteProject"
+                   SaveMessage="@_textPage.Delete"></ModalOpciones>
 }
 @if (_modalFinal)
 {
     <ModalOpciones ActionResult="@_redireccionar"
-                   CancelMessage="Cancelar"
-                   Menssage="Proyecto Eliminado"
+                   CancelMessage="@_textPage.Cancel"
+                   Menssage="@_textPage.ProjectDate"
                    SaveMessage="OK"
                    visible="false"></ModalOpciones>
 }
@@ -61,6 +62,8 @@
     [Parameter]
     public int IdProyecto { get; set; }
 
+    private TextPublicarPage _textPage = new TextPublicarPage();
+
     private bool _habilitaModal = false;
     private bool BotonHabilitado = false;
     private string NameClassCategoria = "colorCategoriAdmin";
@@ -74,19 +77,20 @@
         _habilitaModal = false;
         if (salida)
         {
-            string msResult = "No se pudo eliminar el proyecto";
             var request = new UpdateDataProject()
             {
-                Estado = "Eliminado",
+                Estado = "Eliminado", //Estado actualización
                 IdUser = IdUsuarioAplicacion,
                 IdProject = IdProyecto
             };
             bool serviceSalida = await ProjectService.UpDateProject(request);
             if (serviceSalida)
             {
-                msResult = "Proyecto Eliminado";
+                await JSRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", _textPage.MsProjectDeleted);
+                NavigationManager.NavigateTo("/PublicarProyecto/0");
             }
-            await JSRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", msResult);
+            else
+                await JSRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", _textPage.MsErrorDelete);
         }
     }
     private void _redireccionar(bool salida)
@@ -94,8 +98,8 @@
         NavigationManager.NavigateTo("/PublicarProyecto");
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-
+        _textPage = await _serviceTranslator.GetTextTableAsync<TextPublicarPage>(this);
     }
 }

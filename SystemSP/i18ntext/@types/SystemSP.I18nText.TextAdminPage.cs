@@ -34,13 +34,13 @@ namespace SystemSP.I18nText
         /// <summary>"Statistics"</summary>
         public string Statistics;
 
-        /// <summary>"Statistics the visits"</summary>
+        /// <summary>"Statistics the views"</summary>
         public string StatisticsVisits;
 
         /// <summary>"Users"</summary>
         public string UserText;
 
-        /// <summary>"Visits"</summary>
+        /// <summary>"Views"</summary>
         public string visits;
     }
 }

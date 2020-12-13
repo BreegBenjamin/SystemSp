@@ -29,23 +29,24 @@
             </div>
         </div>
         <div class="ContainerTecnologias">
-            <p>Tecnologias Utilizadas en el proyecto formativo</p>
-
-            @if (ProjectInfo.TechnologiesUsed != null)
-            {
-                @foreach (var item in ProjectInfo.TechnologiesUsed[0])
-                 {
-                    <div class="circleTech">
-                        <img src="/images/Tecnologias/Front/@($"{item}.svg")" class="imageTechSize"/>
-                    </div>
-                 }
-                @foreach (var item in ProjectInfo.TechnologiesUsed[1])
-                 {
-                    <div class="circleTech">
-                        <img src="/images/Tecnologias/Back/@($"{item}.svg")" class="imageTechSize"/>
-                    </div>
-                 }
-            }
+            <p>@_txtViewPage.TechnologyMessage</p>
+            <div class="disTech">
+                @if (ProjectInfo.TechnologiesUsed != null)
+                {
+                    @foreach (var item in ProjectInfo.TechnologiesUsed[0])
+                    {
+                        <div class="circleTech">
+                            <img src="/images/Tecnologias/Front/@($"{item}.svg")" class="imageTechSize" />
+                        </div>
+                    }
+                    @foreach (var item in ProjectInfo.TechnologiesUsed[1])
+                    {
+                        <div class="circleTech">
+                            <img src="/images/Tecnologias/Back/@($"{item}.svg")" class="imageTechSize" />
+                        </div>
+                    }
+                }
+            </div>
         </div>
         <div class="containerLinks">
             <p><a href="#" class="colorA">@_txtViewPage.DownloadProject</a></p>
@@ -71,7 +72,7 @@
             _descriptionProject = _projectCard.Descripcion;
     }
 
-    TextViewPage _txtViewPage = new TextViewPage();
+    private TextViewPage _txtViewPage = new TextViewPage();
     protected override async Task OnInitializedAsync()
     {
         _txtViewPage = await serviceTranslator.GetTextTableAsync<TextViewPage>(this);

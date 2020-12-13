@@ -21,9 +21,10 @@ namespace SystemSp.Core.Entities
         public DateTime? FechaPublicacion { get; set; }
         public DateTime? FechaActualziacion { get; set; }
         public DateTime? FechaEliminacion { get; set; }
-        public bool? EstadoVinculacion { get; set; }
-        public bool? EstadoActivo { get; set; }
+        public string EstadoVinculacion { get; set; }
+        public string Estado { get; set; }
         public string CategoriaRequerimiento { get; set; }
+        public string NombreContenedor { get; set; }
 
         public virtual UsuarioCreadorSolicitud IdUsuarioNavigation { get; set; }
         public virtual ICollection<DetalleSolicitud> DetalleSolicitud { get; set; }

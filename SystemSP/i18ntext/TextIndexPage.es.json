@@ -28,6 +28,7 @@
   "Name": "Nombre",
   "Password": "Contraseña",
   "Mail": "Correo",
+  "RepeatMail": "Confirmar Correo",
   "Telephone": "Teléfono",
   "LastName": "Apellido",
   "RepeatPassword": "Repetir Contraseña",
@@ -35,7 +36,10 @@
   "ForgotPass": "¿Olvido su contraseña?",
   "CreateAccount": "¿Crear una Cuenta?",
   "MessageDataLogin": "Ingrese los datos para iniciar Sesión",
-
+  "IdentificationNum": "Número de Identificación",
+  "IdentificationId": "Cédula de Ciudadanía",
+  "IdentityCard": "Tarjeta de Identidad",
+  "ForeignCard": "Cédula de Extranjería",
   "TittleApprentice": "Aprendices",
   "TextProjects": "Proyectos",
   "TrainingCenter": "Centro de formación",
@@ -48,7 +52,9 @@
   "TextTerms": "Terminos",
   "TextConditions": "Condiciones",
   "TextHelp": "Ayuda",
-
+  "CompanyName": "Nombre Empresa",
+  "CompanyAddress": "Dirección Empresa",
+  "CompanyCity": "Ciudad",
   "licenseTitle": "Software Libre",
   "licenseText": "Cuando tu codigo es Sofware libre proporcionas la libertad de que cualquier usuario pueda ejecutar tu sistema o programa, para cualquier proposito, ademas tambien puede ser estuadiado y mejorado en algunos aspectos para que sea mas funcional y eficaz; beneficiando asi a la comunidad de aprendices.",
   "licenseType": "Licencia GPL (GNU Public)."

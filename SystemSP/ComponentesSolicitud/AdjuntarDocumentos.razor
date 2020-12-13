@@ -26,30 +26,21 @@
 
 @code {
     [CascadingParameter]
-    public FormProjectApp ProjectApp { get; set; }
+    public FormRequest RequestForm { get; set; }
 
     private TextPublicarPage _textPublicar = new TextPublicarPage();
 
     private async Task GetFileProject(IFileListEntry[] archivos)
     {
         IFileListEntry file = archivos.FirstOrDefault();
-        if (file != null && ProjectApp != null)
+        if (file != null)
         {
             string dataBase64 = await _service.GetFileBase64(file);
             if (dataBase64 != "NoK")
             {
-                if (file.Type.Contains("image/"))
+                if (file.Type.Contains("image/") || file.Type.Contains("application/"))
                 {
-                    ProjectApp.ImagesData.Add(new FileStreamData()
-                    {
-                        FileName = file.Name,
-                        FileStreamContent = dataBase64,
-                        FileType = file.Type
-                    });
-                }
-                else if (file.Type.Contains("application/"))
-                {
-                    ProjectApp.FilesData.Add(new FileStreamData()
+                    RequestForm.FilesData.Add(new FileStreamData()
                     {
                         FileName = file.Name,
                         FileStreamContent = dataBase64,
@@ -59,12 +50,14 @@
             }
             else
                 await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "Tipo de archivo no permitido");
+
         }
         else
         {
             await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "Error al obtener el archivo");
         }
     }
+
     protected override async Task OnInitializedAsync()
     {
         _textPublicar = await serviceTranslator.GetTextTableAsync<TextPublicarPage>(this);

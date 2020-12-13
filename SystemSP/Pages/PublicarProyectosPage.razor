@@ -1,4 +1,5 @@
 ﻿@page "/PublicarProyecto";
+@page "/PublicarProyecto/{tipoOpcion:int}";
 @inject IJSRuntime JsRun;
 @inherits LayoutComponentBase
 @inject I18nText serviceTranslator;
@@ -90,6 +91,9 @@
     </section>
 </section>
 @code {
+    [Parameter]
+    public int tipoOpcion { get; set; } = 0;
+
     [CascadingParameter]
     public int IdUsuarioAplicacion { get; set; }
 
@@ -107,8 +111,8 @@
     private string _novedadClassName = "btn-opcion-unluck";
     private string _publicarClassName = "btn-opcion-luck";
     private TextPublicarPage _textPublicar = new TextPublicarPage();
-    private int tipoOpcion = 0;
-    private void getProcess(int tipo)
+
+    private async  Task getProcess(int tipo)
     {
         tipoOpcion = tipo;
         if (tipo == 0)
@@ -120,6 +124,7 @@
         {
             _novedadClassName = "btn-opcion-luck";
             _publicarClassName = "btn-opcion-unluck";
+            _proyectos = await ProjectService.GetProjectsUser(IdUsuarioAplicacion);
         }
     }
 

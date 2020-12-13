@@ -1,0 +1,39 @@
+﻿@inject Lector _lector;
+@inject SaveIFiles _service;
+@inject UserInformationResult _session;
+@inject ProjectsApplication _serviceConecction;
+@inject IJSRuntime JsRun;
+<section>
+    <div class="elementsButton">
+        <div class="CenterdivFlex">
+            <label for="archivoDocumentosCarga" class="custom-file-upload" style="margin-right:10px">
+                <img src="images/img_proyect/image.svg" class="imgFile" /> Cargar Archivo
+            </label>
+            <span class="spanOculto" id="spanOcultoCarga">
+                <BlazorInputFile.InputFile OnChange="GetFileProject" />
+            </span>
+            <TooltipApp MensajeToolTip="Cargar archivos para la carga masíva"></TooltipApp>
+        </div>
+    </div>
+</section>
+
+@code {
+    [CascadingParameter]
+    public List<FormRequest> RequestForm { get; set; }
+
+    private async Task GetFileProject(IFileListEntry[] archivos)
+    {
+        RequestForm = _lector.ReadAllStream(null, _session.UserId, _session.UserName);
+        if (RequestForm != null)
+        {
+            bool salida = await _serviceConecction.PostListRequest(RequestForm);
+            if(salida)
+                await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "Se agregaron las solicitudes correctamente");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRun.EjecutarJavaScriptFunc("CambiarIdInputFile");
+    }
+}

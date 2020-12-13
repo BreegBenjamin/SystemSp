@@ -16,13 +16,8 @@ namespace SystemSp.Infrastructure.Repositories
 {
     public class SqlServerAppImplementation : BusinessImplementation, ISystemSPConecction
     {
-        private readonly SystemSpContext _Context;
-
-        private readonly ISystemSpAzureBlob _azureBlob;
         public SqlServerAppImplementation(SystemSpContext context, ISystemSpAzureBlob azureBlob) : base(context, azureBlob)
         {
-            _Context = context;
-            _azureBlob = azureBlob;
         }
         async Task<ProjectInformation> ISystemSPConecction.GetFormativeProject(int idProject)
             => await GetFormativeProject(idProject);
@@ -46,5 +41,11 @@ namespace SystemSp.Infrastructure.Repositories
                => await GetPopularCategory();
         async Task<bool> ISystemSPConecction.ValidaEmailUser(string email)
             => await ValidaEmailUser(email);
+        Task<bool> ISystemSPConecction.PostRequest(FormRequest request)
+            => InsertRequestUser(request);
+        bool ISystemSPConecction.PostListRequest(List<FormRequest> request)
+            => InsertListRequest(request);
+        async Task<List<ReportApp>> ISystemSPConecction.GetListReport()
+            => await GetReports();
     }
 }

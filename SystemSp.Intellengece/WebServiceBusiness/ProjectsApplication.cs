@@ -29,8 +29,6 @@ namespace SystemSp.Intellengece.WebServiceBusiness
             => await _getFeaturedProject();
         public async Task<ProjectInformation> GetProject(int projectId)
             => await _getProject(projectId);
-        public async Task<bool> PostProject(FormProjectApp projectApp)
-            => await SendDataToService(projectApp, "project/PostProjectUser");
         public async Task<List<ProjectDetails>> GetProjectsUser(int userId)
         {
             var salida = await GetDataFromService(
@@ -47,6 +45,18 @@ namespace SystemSp.Intellengece.WebServiceBusiness
                => await SendDataToService(updateData, "Person/UpDatePerson");
         public async Task<bool> UpDateProject(UpdateDataProject updateData)
                => await SendDataToService(updateData, "Person/UpDateProject");
+        public async Task<bool> PostProject(FormProjectApp projectApp)
+            => await SendDataToService(projectApp, "project/PostProjectUser");
+        public async Task<bool> PostRequest(FormRequest RequestForm)
+            => await SendDataToService(RequestForm, "Request/InsertRequest");
+        public async Task<bool> PostListRequest(List<FormRequest> RequestForm)
+           => await SendDataToService(RequestForm, "Request/PostListRequest");
+        public async Task<List<ReportApp>> GetReports()
+        {
+            var salida = await GetDataFromService(
+                new List<ReportApp>(), $"Person/GetConsultaReporte");
+            return salida;
+        }
     }
 }
 

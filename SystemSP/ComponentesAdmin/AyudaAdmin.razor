@@ -1,0 +1,27 @@
+﻿@inject I18nText _service;
+
+<section class="estilosBordes adminOptions">
+    <div class="containerOption" @onclick="@(()=>OnClick.InvokeAsync(4))">
+        <div class="circleTech">
+            <img src="/images/IconosCategorias/AdminIcons/solicitud.svg" class="sizeImage" />
+        </div>
+        <p class="margin0">Agregar Solicitud</p>
+    </div>
+    <div class="containerOption" @onclick="@(()=>OnClick.InvokeAsync(5))">
+        <div class="circleTech">
+            <img src="/images/IconosCategorias/AdminIcons/solicitud.svg" class="sizeImage" />
+        </div>
+        <p class="margin0">Consultar Solicitudes</p>
+    </div>
+</section>
+
+@code {     
+    [Parameter]
+    public EventCallback<int> OnClick { get; set; }
+
+    private TextAdminPage _textAdmin = new TextAdminPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _textAdmin = await _service.GetTextTableAsync<TextAdminPage>(this);
+    }
+}

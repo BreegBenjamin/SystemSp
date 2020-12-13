@@ -9,6 +9,6 @@
   "CheckStatistics": "Statistics of the projects and users of the application",
   "RegistereUsers": "registered users",
   "PublishedProjects": "published projects",
-  "visits": "Visits",
-  "StatisticsVisits": "Statistics the visits"
+  "visits": "Views",
+  "StatisticsVisits": "Statistics the views"
 }

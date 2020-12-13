@@ -42,5 +42,13 @@ namespace SystemSP.WebService.Controllers
             bool salida = await _service.ValidaEmailUser(email);
             return Ok(salida);
         }
+
+        [HttpGet]
+        [ActionName("GetConsultaReporte")]
+        public async Task<IActionResult> GetConsultaReporte()
+        {
+            var salida = await _service.GetListReport();
+            return Ok(salida);
+        }
     }
 }

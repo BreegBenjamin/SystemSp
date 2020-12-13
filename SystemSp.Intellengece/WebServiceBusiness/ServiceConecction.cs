@@ -83,8 +83,9 @@ namespace SystemSp.Intellengece.WebServiceBusiness
                 bool result = (bool)JsonConvert.DeserializeObject(json);
                 return result;
             }
-            catch
+            catch(Exception ex)
             {
+                string ms = ex.Message;
                 return false;
             }
         }

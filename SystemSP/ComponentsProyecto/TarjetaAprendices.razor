@@ -1,5 +1,6 @@
 ﻿@inject IJSRuntime JsRun;
 @inject ProjectsApplication ProjectService;
+@inject I18nText _translateService;
 
 <section class="@ClassName sizeCardAprendice">
     <ol class="olElementsAprendices">
@@ -8,51 +9,60 @@
                 <img src="/images/PageImage/userApp.svg" class="imageUser" />
             </div>
             <div>
-                <p class="p-no-margin">Opciones</p>
-                <span style="margin-right:10px">
-                    <button class="deleteAprentice botonOptions" disabled="@DesabilitarBoton" @onclick="@(()=>_habilitaModal = true)"></button>
-                </span>
-                <span style="margin-right:10px">
-                    <button class="editeAprentice botonOptions" @onclick="@changedValuesEdit"></button>
-                </span>
-                <span>
-                    <button class="upDateAprentice botonOptions @_classButon"
-                            @onclick="saveChangedEdit" disabled="@_upDateBoton"></button>
-                </span>
+                <p class="p-no-margin">@_textPage.Options</p>
+                <div class="sect-flex">
+                    <span style="margin-right:10px">
+                        <TooltipRenderFragment MensajeToolTip="@_textPage.DeleteApprentice">
+                            <button class="deleteAprentice botonOptions" disabled="@DesabilitarBoton"
+                                    @onclick="@(()=>_habilitaModal = true)"></button>
+                        </TooltipRenderFragment>
+                    </span>
+                    <span style="margin-right:10px">
+                        <TooltipRenderFragment MensajeToolTip="@_textPage.UpdateApprentice">
+                            <button class="editeAprentice botonOptions" @onclick="@changedValuesEdit"></button>
+                        </TooltipRenderFragment>
+                    </span>
+                    <span>
+                        <TooltipRenderFragment MensajeToolTip="@_textPage.SaveChanges">
+                            <button class="upDateAprentice botonOptions @_classButon"
+                                    @onclick="saveChangedEdit" disabled="@_upDateBoton"></button>
+                        </TooltipRenderFragment>
+                    </span>
+                </div>
             </div>
         </li>
         <li class="elements2">
             <div>
-                <p class="p-no-margin">Nombre Integrante</p>
-                <input type="text" placeholder="@ApprenticeName" class="@_inputClass" 
-                       @bind="_aprentice.Nombre" @onfocusout="_validaUpdate" disabled="@_habilitarInput" />
+                <p class="p-no-margin">@_textPage.MemberName</p>
+                <input type="text" placeholder="@ApprenticeName" class="@_inputClass"
+                       @bind="_aprentice.Nombre" @onfocusout="_validaUpdate" disabled="@_habilitarInput" maxlength="30" />
             </div>
             <div>
-                <p class="p-no-margin">Apellido Integrante</p>
+                <p class="p-no-margin">@_textPage.MemberLast</p>
                 <input type="text" placeholder="@ApprenticeLastName" class="@_inputClass"
-                       @bind="_aprentice.Apellido" @onfocusout="_validaUpdate" disabled="@_habilitarInput" />
+                       @bind="_aprentice.Apellido" @onfocusout="_validaUpdate" disabled="@_habilitarInput" maxlength="30"/>
             </div>
         </li>
         <li class="elements3">
             <div>
-                <p class="p-no-margin">Email Integrante</p>
+                <p class="p-no-margin">@_textPage.MemberEmail</p>
                 <input type="text" placeholder="@Email" class="@_inputClass"
-                       @bind="_aprentice.Email" @onfocusout="_validaUpdate" disabled="@_habilitarInput" />
+                       @bind="_aprentice.Email" @onfocusout="_validaUpdate" disabled="@_habilitarInput" maxlength="100"/>
             </div>
             <div>
-                <p class="p-no-margin">Telefono Integrante</p>
+                <p class="p-no-margin">@_textPage.MemberPhone</p>
                 <input type="text" placeholder="@Telephone" class="@_inputClass"
-                       @bind="_aprentice.Telefono" @onfocusout="_validaUpdate" disabled="@_habilitarInput" />
+                       @bind="_aprentice.Telefono" @onfocusout="_validaUpdate" disabled="@_habilitarInput" maxlength="10"/>
             </div>
         </li>
     </ol>
 </section>
 @if (_habilitaModal)
 {
-    <ModalOpciones ActionResult="@ValidaResultado"
-                   CancelMessage="Cancelar"
-                   Menssage="¿Está seguro que desea eliminar el aprendiz?"
-                   SaveMessage="Eliminar"></ModalOpciones>
+    <ModalOpciones ActionResult="@_validaResultado"
+                   CancelMessage="@_textPage.Cancel"
+                   Menssage="@_textPage.MsUserDelete"
+                   SaveMessage="@_textPage.Delete"></ModalOpciones>
 }
 
 @code {
@@ -82,6 +92,7 @@
     private string _classButon = string.Empty;
     private bool _upDateBoton = true;
     private AprenticeDetails _aprentice = new AprenticeDetails();
+    private TextPublicarPage _textPage = new TextPublicarPage();
 
     protected override void OnInitialized()
     {
@@ -94,23 +105,27 @@
         }
         base.OnInitialized();
     }
-    public async Task ValidaResultado(bool salida)
+    protected override async Task OnInitializedAsync()
+    {
+        _textPage = await _translateService.GetTextTableAsync<TextPublicarPage>(this);
+    }
+    private async Task _validaResultado(bool salida)
     {
         _habilitaModal = false;
         if (salida)
         {
-            string msResult = "No se pudo eliminar el aprendiz";
+            string msResult = _textPage.MsErrorDeleteUser;
             var request = new UpdateDataProject()
             {
                 IdApprentice = IdApprendice,
                 IdUser = IdUsuarioAplicacion,
-                IdProject = IdProject,
-                Estado = "Eliminado"
+                IdProject = IdProject
             };
             bool serviceSalida = await ProjectService.DeleteApprentice(request);
             if (serviceSalida)
             {
-                msResult = "Usuario Eliminado";
+                _clearField();
+                msResult = _textPage.MsUserDeleted;
             }
             await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", msResult);
         }
@@ -133,6 +148,8 @@
             if (serviceSalida)
             {
                 msResult = "Usuario actualizado";
+                ClassName = "colorCategoriAdmin";
+                _habilitarInput = true;
                 _upDateBoton = true;
             }
             await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", msResult);
@@ -150,7 +167,6 @@
         {
             _classButon = "colorCategoriAdmin";
             _inputClass = "inputAprendiz_sin";
-            _classButon = "";
             _habilitarInput = false;
             _upDateBoton = false;
         }
@@ -159,4 +175,16 @@
     }
     private bool _validaText(string Text, bool result = false)
         => result = (string.IsNullOrEmpty(Text)) ? false : true;
+    private void _clearField()
+    {
+        _aprentice.Nombre = string.Empty;
+        _aprentice.Apellido = string.Empty;
+        _aprentice.Email = string.Empty;
+        _aprentice.Telefono = string.Empty;
+
+        ApprenticeName  = _textPage.AddName;
+        ApprenticeLastName = _textPage.AddLast;
+        Email = _textPage.AddEmail;
+        Telephone = _textPage.AddPhone;
+    }
 }

@@ -1,29 +1,34 @@
-﻿<section class="containerMsHelp">
+﻿@inject I18nText _service;
+<section class="containerMsHelp">
     <div class="divMsHelp">
-        <p>El Usuario no tienes proyectos publicados en la plataforma</p>
+        <p>@_textPage.MsUserProject</p>
     </div>
     <div class="centerImageHelp">
         <img src="/images/PageImage/innovation.svg" class="imgHelp"/>
     </div>
     <div class="disAround">
         <div>
-            <TooltipRenderFragment MensajeToolTip="Publicar Proyecto Formativo">
+            <TooltipRenderFragment MensajeToolTip="@_textPage.MsNoProjecTooltip1">
                 <button class="botonAyudaPublicar">+</button>
             </TooltipRenderFragment>
         </div>
         <div>
-            <TooltipRenderFragment MensajeToolTip="Consultar Proyectos Formativos">
+            <TooltipRenderFragment MensajeToolTip="@_textPage.MsNoProjecTooltip2">
                 <button class="botonAyudaConsulta">+</button>
             </TooltipRenderFragment>
         </div>
         <div>
-            <TooltipRenderFragment MensajeToolTip="Ayuda sobre como publicar un proyecto formativo">
+            <TooltipRenderFragment MensajeToolTip="@_textPage.MsNoProjecTooltip3">
                 <button class="botonAyudaProyecto">+</button>
             </TooltipRenderFragment>
         </div>
     </div>
 </section>
 
-@code {
-
+@code {      
+    private TextPublicarPage _textPage = new TextPublicarPage();
+    protected override async Task OnInitializedAsync()
+    {
+        _textPage = await _service.GetTextTableAsync<TextPublicarPage>(this);
+    }
 }
