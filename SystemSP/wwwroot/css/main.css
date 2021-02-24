@@ -871,6 +871,7 @@ body {
 .contactanosFooter {
     width: 100%;
     height: 240px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1047,91 +1048,4 @@ nav, ul, il {
 .imgUsuario {
     height: 15px;
     width: 15px;
-}
-/*estilos de DescripcionAyudaUsuario*/
-.contenedor-descripcion {
-    display: grid;
-    grid-template-columns: max-content 1fr max-content;
-    grid-template-rows: 1fr;
-    text-align: center;
-    align-items: center;
-    grid-gap: 10px;
-}
-.img-userHelp {
-    text-align: center;
-    height: 100%;
-    width: 330px;
-    margin: 20px 0;
-}
-.tituloAyudaUsuario {
-    font-size: 1.5em;
-    padding: 10px;
-    margin: 0;
-    grid-column:1/3;
-    grid-row:1/2;
-}
-.descriptionDiv {
-    grid-column: 1/2;
-    grid-row: 2/3;
-}
-.imageDiv {
-    grid-column:2/3;
-    grid-row:2/3;
-}
-.textoAyudaUsuario {
-    text-align: initial;
-    font-size: 20px;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.9);
-    padding: 20px;
-    margin: 20px 0;
-}
-.contenedorAyudaUsu {
-    display:grid;
-    grid-template-columns:1fr max-content;
-    grid-template-rows:max-content 1fr;
-    grid-gap:5px
-}
-.sizeBotonDiv {
-    height: 60px;
-    width: 60px;
-}
-.bt-back-Modal {
-    background: url(../images/back.png) #ffffff;
-}
-
-.bt-next-Modal {
-    background: url(../images/next.png) #ffffff;
-}
-
-.botonesSlider-Modal {
-    border-radius: 50%;
-    border: none;
-    background-size: 40%;
-    background-position: 15px 15px;
-    background-repeat: no-repeat;
-    box-shadow: 0px 0px 3px 2px #cccccc;
-    color: #000;
-    height: 50px;
-    outline-style: none;
-    cursor: pointer;
-    width: 50px;
-}
-.sizeImageItem {
-    height: 30px;
-    width: 30px;
-    cursor: pointer;
-}
-.sizeItemApp {
-    display:grid;
-    justify-items:center;
-}
-.centerFlexSection {
-    display: flex;
-    grid-gap: 10px;
-    align-items: center;
-}
-.labelText {
-    font-size:0.7em;
-    cursor:pointer;
 }
