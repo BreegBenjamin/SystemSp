@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>da36a59e-437a-41a3-9390-09231b19347c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,16 +29,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Rotativa.AspNetCore" Version="1.2.0-beta" />
     <PackageReference Include="Toolbelt.Blazor.I18nText" Version="9.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SystemSp.Intellengece\SystemSp.Intellengece.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="dlls\" />
   </ItemGroup>
 
   <ItemGroup>
