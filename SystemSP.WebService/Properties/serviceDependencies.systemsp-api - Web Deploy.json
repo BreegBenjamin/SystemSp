@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "storage1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/systemspfiles",
+      "type": "storage.azure",
+      "connectionId": "azureBlob",
+      "secretStore": "AzureAppSettings"
+    },
+    "mssql2": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/sistemsp-server/databases/SystemSP",
+      "type": "mssql.azure",
+      "connectionId": "SystemSP",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

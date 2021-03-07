@@ -369,9 +369,10 @@ namespace SystemSp.Infrastructure.Repositories
                     else
                         usuInfo.MessageStates.UserExist = false;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     usuInfo.MessageStates.UserExist = false;
+                    string message =  ex.Message;
                 }
                 return usuInfo;
             }
