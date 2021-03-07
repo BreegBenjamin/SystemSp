@@ -72,7 +72,7 @@ namespace SystemSp.Intellengece.WebServiceBusiness
             }
             catch
             {
-                return (T)(object)Convert.ChangeType(entity, typeof(T));
+                return (T)Convert.ChangeType(entity, typeof(T));
             }
         }
         public async Task<bool> SendDataToService<T>(T entity, string baseUri)
@@ -99,7 +99,7 @@ namespace SystemSp.Intellengece.WebServiceBusiness
             }
             catch
             {
-                return (L)(object)Convert.ChangeType(entity, typeof(L));
+                return (L)Convert.ChangeType(entity, typeof(L));
             }
         }
     }

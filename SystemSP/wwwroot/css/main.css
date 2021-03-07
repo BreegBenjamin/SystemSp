@@ -1049,3 +1049,31 @@ nav, ul, il {
     height: 15px;
     width: 15px;
 }
+.img-userHelp {
+    height: 55%;
+    width: 60%;
+}
+.contenedor-descripcion {
+    display: flex;
+    align-items: center;
+    margin: 0 60px 0 30px;
+}
+.imageDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.sizeImageItem {
+    height:45px;
+    width:45px;
+    cursor:pointer;
+}
+
+.centerFlexSection {
+    display:flex;
+}
+.sizeItemApp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -10,7 +10,6 @@ using System;
 using SystemSp.DTOS.EntitisIndexApp;
 using SystemSp.Intellengece.ApplicationBusiness;
 using BlazorDownloadFile;
-using Rotativa.AspNetCore;
 using FluentValidation.AspNetCore;
 
 namespace SystemSP
@@ -43,7 +42,7 @@ namespace SystemSP
             });
             services.AddHttpClient<ProjectsApplication>(client=> 
             {
-                client.BaseAddress = new Uri("https://localhost:44395/");
+                client.BaseAddress = new Uri(Configuration["ApiUrl"]);
             });
             services.AddApplicationInsightsTelemetry();
         }
@@ -72,7 +71,6 @@ namespace SystemSP
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
-            RotativaConfiguration.Setup(env.WebRootPath.Replace("wwwroot","dlls"));
         }
     }
 }
