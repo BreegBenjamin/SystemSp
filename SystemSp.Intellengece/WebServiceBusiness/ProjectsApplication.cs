@@ -29,6 +29,13 @@ namespace SystemSp.Intellengece.WebServiceBusiness
             => await _getFeaturedProject();
         public async Task<ProjectInformation> GetProject(int projectId)
             => await _getProject(projectId);
+        public async Task<List<ProjectInformation>> GetProjects() 
+        {
+            var project = await GetDataFromService(
+                new List<ProjectInformation>(), "project/GetLastProject");
+            return project;
+        }
+
         public async Task<List<ProjectDetails>> GetProjectsUser(int userId)
         {
             var salida = await GetDataFromService(
@@ -39,6 +46,8 @@ namespace SystemSp.Intellengece.WebServiceBusiness
          => await SendDataToServiceParam<FormRegister, UserInformation>(register, "Users/InsertUser");
         public async Task<UserInformation> GetUserApp(FormLogin login)
          => await SendDataToServiceParam<FormLogin, UserInformation>(login, "Users/GetUser");
+        public async Task<List<UserInformation>> GetLastUsers()
+            => await GetDataFromService(new List<UserInformation>(), "Users/GetLastUsers");
         public async Task<bool> DeleteApprentice(UpdateDataProject updateData)
             => await SendDataToService(updateData, "Person/ChangeStatusAprentice");
         public async Task<bool> UpDateApprentice(UpdateDataProject updateData)

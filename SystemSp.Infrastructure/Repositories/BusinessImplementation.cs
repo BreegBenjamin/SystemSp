@@ -199,7 +199,7 @@ namespace SystemSp.Infrastructure.Repositories
                     }
                     result = true;
                 }
-                catch (Exception ex)
+                catch
                 {
                     result = false;
                 }
@@ -375,6 +375,36 @@ namespace SystemSp.Infrastructure.Repositories
                     string message =  ex.Message;
                 }
                 return usuInfo;
+            }
+        }
+        public async Task<IEnumerable<UserInformation>> GetUsers() 
+        {
+            using (_Context) 
+            {
+                var listUsers = new List<UserInformation>();
+                try
+                {
+                    var users = await _Context.Usuario.Take(10).ToListAsync();
+                    users.ForEach(itemUser=> 
+                    {
+                        var usu = _getInfoUser(itemUser);
+                        listUsers.Add(usu);
+                    });
+                }
+                catch
+                {
+                    listUsers.Add(new UserInformation()
+                    {
+                        MessageStates = new UserMessageStates() 
+                        {
+                            UserEmailExist = false,
+                            UserCreateSuccessfull =false,
+                            UserExist = false,
+                            UserIdentificationExist = false
+                        }
+                    }) ;
+                }
+                return listUsers;
             }
         }
         private UserInformation _getInfoUser(Usuario usuResult)
@@ -645,6 +675,39 @@ namespace SystemSp.Infrastructure.Repositories
                 return project;
             }
         }
+        public async Task<IEnumerable<ProjectInformation>> GetProjects()
+        {
+            using (_Context)
+            {
+                var ltsProject = new List<ProjectInformation>();
+                
+                try
+                {
+                    var formativeProject = await _Context.Proyecto.Take(10).ToListAsync();
+                    if (formativeProject.Any())
+                    {
+                        formativeProject.ForEach(projItem=> 
+                        {
+                            var project = new ProjectInformation();
+                            ProjectCard card = GetCard(projItem);
+                            project.ProjectCardInfo = card;
+                            project.TechnologiesUsed = _getListTechnology(projItem.IdProyecto);
+
+                            ltsProject.Add(project);
+                        });
+                    }
+                }
+                catch(Exception ex) 
+                {
+                    ltsProject.Add(new ProjectInformation 
+                    {
+                        Status = ex.Message
+                    });
+                }
+                return ltsProject;
+            }
+        }
+
         public async Task<bool> InsertRequestUser(FormRequest formRequest) 
             => await _insertRequest(formRequest);
         public bool InsertListRequest(List<FormRequest> formRequest)

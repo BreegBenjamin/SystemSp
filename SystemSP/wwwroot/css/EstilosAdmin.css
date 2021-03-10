@@ -40,8 +40,8 @@
     justify-content: space-between;
     align-items: center;
     margin: 0;
+    padding:10px;
     transform: translateY(-4px);
-    padding: 10px;
     height: 245px;
     width: 24%;
 }
@@ -69,10 +69,11 @@
     border: 1px solid #78DBF9;
     color: #78DBF9;
 }
-    .setEstilos {
-        display: flex;
-        justify-content: space-between;
-    }
+.setEstilos {
+    display: flex;
+    justify-content: space-between;
+    height: 270px;
+}
 .infoAdminProyecto {
     box-shadow: var(--SombrasCaja);
     background-image: var(--Degradado);
@@ -155,4 +156,42 @@
 .displayFlex {
     display:flex;
     grid-gap:10px;
+}
+.divUserDetails {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 5px;
+    align-items:center;
+}
+.UserAdminDetail {
+    box-sizing: border-box;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    cursor: pointer;
+    justify-content: space-around;
+    margin: 0;
+    transform: translateY(-4px);
+    padding: 0 10px;
+    height: 160px;
+    width: 150px;
+}
+.elementsItems {
+    display: flex;
+    grid-gap: 10px;
+    height: 300px;
+}
+.sizeImagenProject {
+    background-color: #00c1fa;
+    background-size: cover;
+    display: grid;
+    justify-content: center;
+    align-items: self-end;
+    box-sizing: border-box;
+    padding-bottom: 15px;
+    border-radius: 0 0 5px 5px;
+    height: 100%;
+    width: 100%;
+}
 }

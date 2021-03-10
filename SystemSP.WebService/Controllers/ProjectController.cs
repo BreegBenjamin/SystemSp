@@ -30,6 +30,13 @@ namespace SystemSP.WebService.Controllers
             var result = await _context.GetFormativeProject(IdProject);
             return Ok(result);
         }
+        [HttpGet]
+        [ActionName("GetLastProject")]
+        public async Task<IActionResult> GetLastProject() 
+        {
+            var result = await _context.GetLastProjects();
+            return Ok(result);
+        }
 
         [HttpGet("{IdUser}")]
         [ActionName("GetProjectsUser")]

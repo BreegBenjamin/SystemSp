@@ -22,6 +22,14 @@ namespace SystemSP.WebService.Controllers
             return Ok(salida);
         }
 
+        [HttpGet]
+        [ActionName("GetLastUsers")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var salida = await _context.GetLastUsers();
+            return Ok(salida);
+        }
+
         [HttpPost]
         [ActionName("InsertUser")]
         public async Task<IActionResult> PostProjectUser([FromBody] FormRegister ProjectDate)

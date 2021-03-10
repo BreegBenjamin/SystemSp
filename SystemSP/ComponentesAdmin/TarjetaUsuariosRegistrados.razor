@@ -1,45 +1,37 @@
 @inject I18nText serviceTranslator;
-@inject IBlazorDownloadFileService _downloadFileService;
 @inject NavigationManager Navigator;
+@inject ProjectsApplication serviceConection;
+
 <section class="EstadisticasApp">
     <div class="informacionPosition">
         <div class="infoAdminProyecto">
             <div class="margin0">
                 <p class="margin0 sizeProject">@_txtAdmin.RegistereUsers</p>
-                <p class="margin0 sizeProject">10</p>
+                <p class="margin0 sizeProject">@ltUsers.Count</p>
             </div>
             <span class="margin0">
                 <img src="/images/IconosCategorias/AdminIcons/telescope.svg" height="60" width="60" />
             </span>
         </div>
-        <div class="infoAdminProyecto">
-            <div class="margin0">
-                <p class="margin0 sizeProject">@_txtAdmin.PublishedProjects</p>
-                <p class="margin0 sizeProject">4</p>
-            </div>
-            <span class="margin0">
-                <img src="/images/IconosCategorias/AdminIcons/innovation.svg" height="60" width="60" />
-            </span>
-        </div>
     </div>
     <section>
-        <div>
-            <h3>Ultimos Usuarios Registrados</h3>
-            <TarjetaUsuario></TarjetaUsuario>
+        <h3>Ultimos Usuarios Registrados</h3>
+        <div class="elementsItems">
+            @foreach (var item in ltUsers)
+            {
+                <TarjetaUsuario Imagen="@item.UserImage"
+                                UserName="@item.UserName"></TarjetaUsuario>
+            }
         </div>
-        <div>
-            <h3></h3>
-        </div>
-        <button class="botonConatcto" @onclick="@(()=>Navigator.NavigateTo("DownloadPdf/Reporte", true))">Descargar</button>
     </section>
 </section>
 
 @code {
-
+    List<UserInformation> ltUsers = new List<UserInformation>();
     TextAdminPage _txtAdmin = new TextAdminPage();
     protected override async Task OnInitializedAsync()
     {
         _txtAdmin = await serviceTranslator.GetTextTableAsync<TextAdminPage>(this);
+        ltUsers = await serviceConection.GetLastUsers();
     }
-
 }

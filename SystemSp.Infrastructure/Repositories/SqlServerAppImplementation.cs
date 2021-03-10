@@ -21,12 +21,19 @@ namespace SystemSp.Infrastructure.Repositories
         }
         async Task<ProjectInformation> ISystemSPConecction.GetFormativeProject(int idProject)
             => await GetFormativeProject(idProject);
+
+        async Task<IEnumerable<ProjectInformation>> ISystemSPConecction.GetLastProjects()
+            => await GetProjects();
+
         async Task<FeaturedProjects> ISystemSPConecction.GetPopularProjects()
             => await GetPopularProjects();
         async Task<bool> ISystemSPConecction.InsertProject(FormProjectApp appProject)
          => await InsertFormativeProject(appProject);
         async Task<UserInformation> ISystemSPConecction.GetUserApp(FormLogin login)
             => await UserResponse(login);
+
+        public async Task<IEnumerable<UserInformation>> GetLastUsers()
+            => await GetUsers();
         async Task<List<ProjectDetails>> ISystemSPConecction.GetProjectsUser(int IdUser)
             => await GetProjectsUser(IdUser);
         async Task<UserInformation> ISystemSPConecction.InsertUser(FormRegister formLogin)
