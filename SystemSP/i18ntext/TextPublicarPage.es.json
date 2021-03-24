@@ -121,5 +121,7 @@
   "AddName": "Añadir Nombre",
   "AddLast": "Añadir Apellido",
   "AddEmail": "Añadir Correo",
-  "AddPhone": "Añadir Telefono"
+  "AddPhone": "Añadir Telefono",
+  "FileTypeNotAllowed": "Tipo de archivo no permitido",
+  "ErrorGettingFile": "Error al obtener el archivo"
 }

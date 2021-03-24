@@ -25,5 +25,7 @@ namespace SystemSp.Core.Interfaces
         Task<bool> PostRequest(FormRequest request);
         bool PostListRequest(List<FormRequest> request);
         Task<List<ReportApp>> GetListReport();
+        Task<List<InformationDocuments>> GetUriDocuments(int idProject);
+        Task<IEnumerable<RequestData>> GetListRequest();
     }
 }

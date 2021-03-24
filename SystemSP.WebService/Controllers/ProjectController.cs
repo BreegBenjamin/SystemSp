@@ -25,7 +25,7 @@ namespace SystemSP.WebService.Controllers
 
         [HttpGet("{IdProject}")]
         [ActionName("GetProjectForId")]
-        public async Task<IActionResult> GetProjectForId(int IdProject) 
+        public async Task<IActionResult> GetProjectForId(int IdProject)
         {
             var result = await _context.GetFormativeProject(IdProject);
             return Ok(result);
@@ -51,6 +51,13 @@ namespace SystemSP.WebService.Controllers
         public async Task<IActionResult> PostProjectUser([FromBody] FormProjectApp ProjectDate) 
         {
             bool result = await _context.InsertProject(ProjectDate);
+            return Ok(result);
+        }
+        [HttpGet("{idProject}")]
+        [ActionName("DownloadDocuments")]
+        public async Task<IActionResult> DownloadDocuments(int idProject) 
+        {
+            var result = await _context.GetUriDocuments(idProject);
             return Ok(result);
         }
     }

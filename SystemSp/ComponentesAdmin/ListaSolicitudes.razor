@@ -1,0 +1,17 @@
+﻿@inject ProjectsApplication serviceConection;
+
+<section class="disContainerRequest">
+    @foreach (var item in _listaSolicitud)
+    {
+        <CardSolicitud Titulo="@item.RequestName"
+                       Descripcion="@item.RequestDescription"></CardSolicitud>
+    }
+</section>
+
+@code {
+    private List<RequestData> _listaSolicitud = new List<RequestData>();
+    protected async override Task OnInitializedAsync()
+    {
+        _listaSolicitud = await serviceConection.GetDataFromService<List<RequestData>>(_listaSolicitud, "Request/GetFeaturedRequest");
+    }
+}

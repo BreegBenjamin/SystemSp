@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SystemSp.DTOS.EntitisViewApp;
 using SystemSP.Entitys;
 using SystemSP.I18nText;
 
@@ -33,6 +34,60 @@ namespace SystemSP.Intelligence
                 new ListaCategoriaVista("other.svg",text.Other)
             };
             return categorias;
+        }
+        public List<PopularCategory> GetPopularCategories() 
+        {
+            return new List<PopularCategory> 
+            {
+                new PopularCategory()
+                {
+                    Nombre = "Educación",
+                    UrlImage = "education.svg",
+                    IdCategoria = 1
+                },
+                new PopularCategory()
+                {
+                    Nombre = "Industria y Comercio",
+                    UrlImage = "IndustryAndCommerce.svg",
+                    IdCategoria = 2
+                },
+                new PopularCategory()
+                {
+                    Nombre = "Herramientas y Productividad",
+                    UrlImage = "ToolsAndProductivity.svg",
+                    IdCategoria = 3
+                },
+                new PopularCategory()
+                {
+                    Nombre = "Entretenimiento y Eventos",
+                    UrlImage = "EntertainmentAndEvents.svg",
+                    IdCategoria = 4
+                },
+                new PopularCategory()
+                {
+                    Nombre = "Salud y Bienestar",
+                    UrlImage = "HealthAndWellness.svg",
+                    IdCategoria = 5
+                },
+                new PopularCategory()
+                {
+                    Nombre = "Arte y Diseño",
+                    UrlImage = "ArtAndDesign.svg",
+                    IdCategoria = 6
+                },
+                new PopularCategory()
+                {
+                    Nombre = "Fotografía",
+                    UrlImage = "Photography.svg",
+                    IdCategoria = 7
+                },
+                new PopularCategory()
+                {
+                    Nombre = "Veterinaria",
+                    UrlImage = "Veterinary.svg",
+                    IdCategoria = 7
+                }
+            };
         }
         public List<ListaCategoriaVista> GetListCategorys(TextCategoriasIndex text) => 
             _getListElements(text);

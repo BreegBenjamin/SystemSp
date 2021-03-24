@@ -235,6 +235,10 @@ function CambiarIdInput() {
     spam.firstElementChild.id = "archivoDocumentos";
     spam2.firstElementChild.id = "archivoImage";
 }
+function CambiarIdInputImage() {
+    let spam2 = document.getElementById("spanOcultoImages");
+    spam2.firstElementChild.id = "archivoImage";
+}
 function CambiarIdInputFile() {
     let spam = document.getElementById("spanOcultoCarga");
     spam.firstElementChild.id = "archivoDocumentosCarga";

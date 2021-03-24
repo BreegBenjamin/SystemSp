@@ -1,16 +1,7 @@
 ﻿@inject I18nText serviceTranslator;
 @inject ProjectsApplication serviceConection;
 <section>
-    <div class="infoAdminProyecto">
-        <div class="margin0">
-            <p class="margin0 sizeProject">@_txtAdmin.PublishedProjects</p>
-            <p class="margin0 sizeProject">4</p>
-        </div>
-        <span class="margin0">
-            <img src="/images/IconosCategorias/AdminIcons/innovation.svg" height="60" width="60" />
-        </span>
-    </div>
-    <h3>Ultimos Usuarios Registrados</h3>
+    <h3>Ultimos Proyectos Publicados</h3>
     <div class="elementsItems">
         @foreach (var items in _ltsProject)
         {

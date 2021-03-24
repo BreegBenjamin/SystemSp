@@ -61,24 +61,80 @@ class CambiarTarjetas
                 this.CambiarEstilosCategoria(2)
                 this.CambiarEstilosCategoria(3)
                 this.CambiarEstilosCategoria(4)
+                this.CambiarEstilosCategoria(5)
+                this.CambiarEstilosCategoria(6)
+                this.CambiarEstilosCategoria(7)
+                this.CambiarEstilosCategoria(8)
                 break;
             case "2":
                 this.CambiarEstilosCategoria(1)
                 this.CambiarEstilosCategoria(2, true)
                 this.CambiarEstilosCategoria(3)
                 this.CambiarEstilosCategoria(4)
+                this.CambiarEstilosCategoria(5)
+                this.CambiarEstilosCategoria(6)
+                this.CambiarEstilosCategoria(7)
+                this.CambiarEstilosCategoria(8)
                 break;
             case "3":
                 this.CambiarEstilosCategoria(1)
                 this.CambiarEstilosCategoria(2)
                 this.CambiarEstilosCategoria(3, true)
                 this.CambiarEstilosCategoria(4)
+                this.CambiarEstilosCategoria(5)
+                this.CambiarEstilosCategoria(6)
+                this.CambiarEstilosCategoria(7)
+                this.CambiarEstilosCategoria(8)
                 break;
             case "4":
                 this.CambiarEstilosCategoria(1)
                 this.CambiarEstilosCategoria(2)
                 this.CambiarEstilosCategoria(3)
                 this.CambiarEstilosCategoria(4, true)
+                this.CambiarEstilosCategoria(5)
+                this.CambiarEstilosCategoria(6)
+                this.CambiarEstilosCategoria(7)
+                this.CambiarEstilosCategoria(8)
+                break;
+            case "5":
+                this.CambiarEstilosCategoria(1)
+                this.CambiarEstilosCategoria(2)
+                this.CambiarEstilosCategoria(3)
+                this.CambiarEstilosCategoria(4)
+                this.CambiarEstilosCategoria(5, true)
+                this.CambiarEstilosCategoria(6)
+                this.CambiarEstilosCategoria(7)
+                this.CambiarEstilosCategoria(8)
+                break;
+            case "6":
+                this.CambiarEstilosCategoria(1)
+                this.CambiarEstilosCategoria(2)
+                this.CambiarEstilosCategoria(3)
+                this.CambiarEstilosCategoria(4)
+                this.CambiarEstilosCategoria(5)
+                this.CambiarEstilosCategoria(6, true)
+                this.CambiarEstilosCategoria(7)
+                this.CambiarEstilosCategoria(8)
+                break;
+            case "7":
+                this.CambiarEstilosCategoria(1)
+                this.CambiarEstilosCategoria(2)
+                this.CambiarEstilosCategoria(3)
+                this.CambiarEstilosCategoria(4)
+                this.CambiarEstilosCategoria(5)
+                this.CambiarEstilosCategoria(6)
+                this.CambiarEstilosCategoria(7, true)
+                this.CambiarEstilosCategoria(8)
+                break;
+            case "8":
+                this.CambiarEstilosCategoria(1)
+                this.CambiarEstilosCategoria(2)
+                this.CambiarEstilosCategoria(3)
+                this.CambiarEstilosCategoria(4)
+                this.CambiarEstilosCategoria(5)
+                this.CambiarEstilosCategoria(6)
+                this.CambiarEstilosCategoria(7)
+                this.CambiarEstilosCategoria(8, true)
                 break;
         }
     }

@@ -43,7 +43,7 @@
     padding:10px;
     transform: translateY(-4px);
     height: 245px;
-    width: 24%;
+    width:24%;
 }
 .pDescirpcion {
     margin: 0;
@@ -194,4 +194,57 @@
     height: 100%;
     width: 100%;
 }
+.numCardRequest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 5px 30px;
+    background-color: #78dbf9;
+    Color: #FFF;
+    border-radius: 10px 0 0 10px;
+}
+
+.sizeH4 {
+    font-size: 2em;
+}
+
+.sizeSolicitud {
+    font-size: 1.3em;
+}
+
+.sectionCard {
+    display: flex;
+    width: 95%;
+    border-radius: 10px;
+}
+.disContainerRequest {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap:20px;
+}
+
+.whiteSpaceLabel {
+    white-space: pre-line;
+    color: #969592;
+}
+
+.descriptionCardRequest {
+    display: grid;
+    grid-gap: 10px;
+    padding-left: 50px;
+    grid-template-columns: 1fr max-content;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.circleImage {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.colorBackSolid {
+    width: 30px;
+    background-color: #9B9995;
 }

@@ -54,5 +54,10 @@ namespace SystemSp.Infrastructure.Repositories
             => InsertListRequest(request);
         async Task<List<ReportApp>> ISystemSPConecction.GetListReport()
             => await GetReports();
+        async Task<List<InformationDocuments>> ISystemSPConecction.GetUriDocuments(int idProject)
+            => await GetDocumentUri(idProject);
+
+        public async Task<IEnumerable<RequestData>> GetListRequest()
+            => await GetRequests();
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using SystemSp.Core.Interfaces;
+using SystemSp.DTOS.EntitisProjectsApp;
 
 namespace SystemSp.Infrastructure.AzureBlob
 {
@@ -48,15 +50,35 @@ namespace SystemSp.Infrastructure.AzureBlob
             }
         }
 
-        public async Task SaveBlobImage(Dictionary<string, string> imageData, string container)
+        public List<InformationDocuments> GetDocumentsContainer(List<InformationDocuments> documentsName, string container)
         {
             try
             {
+                var blobClient = new BlobContainerClient(_key, container);
+                documentsName.ForEach(bName =>
+                { 
+                    BlobClient blobResult = blobClient.GetBlobClient(bName.FileName);
+                    bName.FileUrl = blobResult.Uri.ToString();
+                });
+                return documentsName;
+
+            }
+            catch (Exception ex)
+            {
+                return documentsName;
+            }
+        }
+
+        public async Task SaveBlobImage(Dictionary<string, string> imageData, string container, bool accessLevel)
+        {
+            try
+            {
+                PublicAccessType level = (accessLevel) ? PublicAccessType.Blob : PublicAccessType.None;
                 var blobService = new BlobServiceClient(_key);
-                BlobContainerClient blobContainer = await blobService.CreateBlobContainerAsync(container);
+                BlobContainerClient blobContainer = await blobService.CreateBlobContainerAsync(container, level);
                 bool containerExist = await blobContainer.ExistsAsync();
 
-                if (containerExist) 
+                if (containerExist)
                 {
                     foreach (KeyValuePair<string, string> img in imageData)
                     {

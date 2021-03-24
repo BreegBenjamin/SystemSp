@@ -1,4 +1,6 @@
-﻿<div class="background-categorias">
+﻿@inject NavigationManager NavigationManager;
+
+<div class="background-categorias" @onclick="@(()=> NavigationManager.NavigateTo("/VistaProyectos/1"))">
     <div class="divCotegoria">
         <div class="tajeta_categoria">
             <span class="centerSpan">
@@ -16,5 +18,4 @@
     public string Image { get; set; }
     [Parameter]
     public string TituloCategoria { get; set; }
-
 }
