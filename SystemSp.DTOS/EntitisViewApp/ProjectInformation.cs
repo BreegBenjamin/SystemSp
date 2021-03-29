@@ -10,5 +10,6 @@ namespace SystemSp.DTOS.EntitisViewApp
         public ProjectCard ProjectCardInfo { get; set; }
         public virtual List<string> ImagesProject { get; set; }
         public virtual List<string[]> TechnologiesUsed {get;set;}
+        public string Status { get; set; }
     }
 }

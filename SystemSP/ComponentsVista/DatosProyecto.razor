@@ -1,7 +1,7 @@
 ﻿@inject I18nText serviceTranslator;
+@inject ProjectsApplication serviceConection;
 <section class="ViewProjectFirst">
-    <SliderImage
-                 Images="@ProjectInfo.ImagesProject">
+    <SliderImage Images="@ProjectInfo.ImagesProject">
     </SliderImage>
     <div class="containerDetails">
         <div class="contenedorDetalles">
@@ -13,7 +13,7 @@
         <div>
             <div class="letterPerson">
                 @if (_projectCard.ImagenUsuario != null)
-                 {
+                {
                     @if (_projectCard.ImagenUsuario.Contains("base64"))
                     {
                         <img class="namePerson" src="@_projectCard.ImagenUsuario" />
@@ -22,7 +22,7 @@
                     {
                         <label class="lbTextPerson">@_projectCard.ImagenUsuario</label>
                     }
-                 }
+                }
             </div>
             <div>
                 <p>@_projectCard.NombreUsuario</p>
@@ -49,32 +49,68 @@
             </div>
         </div>
         <div class="containerLinks">
-            <p><a href="#" class="colorA">@_txtViewPage.DownloadProject</a></p>
-            <p><a href="#" class="colorA">@_txtViewPage.ContactInformation</a></p>
+            <p @onclick="@(()=> _download = (_download) ? false : true )" class="colorA">@_txtViewPage.DownloadProject</p>
+            <p><a class="colorA">@_txtViewPage.ContactInformation</a></p>
         </div>
     </div>
 </section>
+@if (_download)
+{
+    <ModalRenderFragment ClickDisable="@((bool salida) => _download = salida)"
+                         SizeModal="height: 35%; width: 30%;">
+        @if (_containeDocuments)
+        {
+
+            <div class="gridContainerDocuemnts">
+                @foreach (var item in _listDocuments)
+                {
+                    <DownloadFilesContainer 
+                                        FileName="@item.FileName"
+                                        FileType="@item.FileType"
+                                        UrlDocuments="@item.FileUrl"></DownloadFilesContainer>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No contiene documentos</p>
+        }
+    </ModalRenderFragment>
+}
 
 @code {
     [Parameter]
     public ProjectInformation ProjectInfo { get; set; }
 
+    private List<InformationDocuments> _listDocuments = new List<InformationDocuments>();
     private ProjectCard _projectCard = new ProjectCard();
-    private string _descriptionProject = "";
+    private string _descriptionProject = string.Empty;
+    private bool _download = false;
+    private bool _containeDocuments = false;
+    private TextViewPage _txtViewPage = new TextViewPage();
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         _projectCard = ProjectInfo.ProjectCardInfo;
-        int longitud = (_projectCard.Descripcion != null) ?_projectCard.Descripcion.Length : 0;
+        int longitud = (_projectCard.Descripcion != null) ? _projectCard.Descripcion.Length : 0;
         if (longitud >= 350)
             _descriptionProject = $"{_projectCard.Descripcion.Remove(349)} .....";
         else
             _descriptionProject = _projectCard.Descripcion;
+
+        await _getProjectDocuments(_projectCard.IdProyecto);
     }
 
-    private TextViewPage _txtViewPage = new TextViewPage();
+
     protected override async Task OnInitializedAsync()
     {
         _txtViewPage = await serviceTranslator.GetTextTableAsync<TextViewPage>(this);
+    }
+    private async Task _getProjectDocuments(int idProject)
+    {
+        _listDocuments = await serviceConection.GetDataFromService<List<InformationDocuments>>(
+                                                            _listDocuments, $"Project/DownloadDocuments/{idProject}");
+        if (_listDocuments.Any())
+            _containeDocuments = true;
     }
 }

@@ -1,5 +1,5 @@
 {
-  "DownloadProject": "Descargar proyecto",
+  "DownloadProject": "Descargar documentos",
   "ContactInformation": "Información de contacto",
   "TitleRequest": "Negocio de software",
   "TextRequest": "Somos la empresa (X) y estamos interesados en tu gran sistema de información (Nombre persona).",
@@ -9,5 +9,6 @@
   "TitleDownloads": "Descargas",
   "TitleCategory": "Categoría",
   "TitleList": "Lista completa de categorias",
-  "TechnologyMessage": "Tecnologias Utilizadas en el proyecto formativo"
+  "TechnologyMessage": "Tecnologias Utilizadas en el proyecto formativo",
+  "MessageDownload": "No se pudo descargar el archivo"
 }

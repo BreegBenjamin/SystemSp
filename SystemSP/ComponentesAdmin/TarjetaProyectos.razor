@@ -1,0 +1,30 @@
+﻿<section class="colorCategoriAdmin CategoriaAdminBorder">
+    <div style="padding: 5px;">
+        <p class="margin0">@TituloProyecto</p>
+        <p class="margin0">@NombreUsuario</p>
+    </div>
+    <div class="sizeImagenProject" style="background-image:url(@UriImagen)">
+        <div class="perfilUser">
+            @ImagenUsuario
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public string TituloProyecto { get; set; }
+
+    [Parameter]
+    public string NombreUsuario { get; set; }
+
+    [Parameter]
+    public string ImagenUsuario { get; set; }
+
+    [Parameter]
+    public string UriImagen { get; set; }
+
+    protected override void OnInitialized()
+    {
+        UriImagen = $@"/images/proyectosPortadas/{UriImagen}.jpg";
+    }
+}

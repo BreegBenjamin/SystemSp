@@ -1,0 +1,48 @@
+﻿@inject IJSRuntime JsRun;
+@inject I18nText serviceTranslator;
+@inject NavigationManager NavigationManager;
+
+<section class="downloadSection">
+    <div>
+        <img src="/images/@_image" class="imgDownload" />
+    </div>
+    <div class="documentDetails">
+        <p>@FileName</p>
+        <p>@FileType</p>
+    </div>
+    <div>
+        <button class="downloadButton" @onclick="@_downloadFile"></button>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public string FileName { get; set; }
+
+    [Parameter]
+    public string FileType { get; set; }
+
+    [Parameter]
+    public string UrlDocuments { get; set; }
+
+    private string _image = string.Empty;
+    private TextViewPage _txtViewPage = new TextViewPage();
+
+    private async Task _downloadFile()
+    {
+        if (string.IsNullOrEmpty(UrlDocuments))
+        {
+            await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", _txtViewPage.MessageDownload);
+        }
+        else
+        {
+            NavigationManager.NavigateTo(UrlDocuments);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _txtViewPage = await serviceTranslator.GetTextTableAsync<TextViewPage>(this);
+        _image = (!string.IsNullOrEmpty(FileType))? $"{FileType.Replace("application/", string.Empty)}.svg" : string.Empty;
+    }
+}

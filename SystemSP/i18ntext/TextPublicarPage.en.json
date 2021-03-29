@@ -122,5 +122,7 @@
   "AddName": "Add Name",
   "AddLast": "Add Last Name",
   "AddEmail": "Add Email",
-  "AddPhone": "Add Phone"
+  "AddPhone": "Add Phone",
+  "FileTypeNotAllowed": "File type not allowed",
+  "ErrorGettingFile": "Error Getting File"
 }

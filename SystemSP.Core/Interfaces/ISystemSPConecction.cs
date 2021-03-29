@@ -10,8 +10,10 @@ namespace SystemSp.Core.Interfaces
     public interface ISystemSPConecction
     {
         Task<UserInformation> GetUserApp(FormLogin login);
+        Task<IEnumerable<UserInformation>> GetLastUsers();
         Task<FeaturedProjects> GetPopularProjects();
         Task<ProjectInformation> GetFormativeProject(int id);
+        Task<IEnumerable<ProjectInformation>> GetLastProjects();
         Task<bool> InsertProject(FormProjectApp appProject);
         Task<List<ProjectDetails>> GetProjectsUser(int IdUser);
         Task<UserInformation> InsertUser(FormRegister formLogin);
@@ -23,5 +25,7 @@ namespace SystemSp.Core.Interfaces
         Task<bool> PostRequest(FormRequest request);
         bool PostListRequest(List<FormRequest> request);
         Task<List<ReportApp>> GetListReport();
+        Task<List<InformationDocuments>> GetUriDocuments(int idProject);
+        Task<IEnumerable<RequestData>> GetListRequest();
     }
 }

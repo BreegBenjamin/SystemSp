@@ -1,25 +1,18 @@
-﻿<section class="proyectoDetails colorCategoriAdmin">
-    <div>
-        <div class="postionName">
-            <div class="circleProyect estadoCircle"></div>
-            <div class="divFlexElements">
-                <img src="/images/proyectosPortadas/" alt="imgProyect" class="imageProjectPublish" />
-                <p class="textAlign" style="margin:3px">NombreProyecto</p>
-            </div>
+﻿<section class="UserAdminDetail colorCategoriAdmin">
+    <div class="circleProyect estadoCircle"></div>
+    <div class="divUserDetails">
+        <div class="perfilUser">
+            @Imagen
         </div>
-        <div class="postionViews">
-            <div class="viewDetails">
-                <p class="p-no-margin">Descargas</p>
-                <label>NumeroDescargas</label>
-            </div>
-            <div class="viewDetails">
-                <p class="p-no-margin">Visitas</p>
-                <label>NumeroVistas</label>
-            </div>
+        <div>
+            <p>@UserName</p>
         </div>
     </div>
 </section>
 
 @code {
-
+    [Parameter]
+    public string UserName { get; set; }
+    [Parameter]
+    public string Imagen { get; set; }
 }

@@ -100,6 +100,11 @@
             else if (result.UserType == 2)
                 NavigationManager.NavigateTo($"PublicarProyecto");
         }
+        else
+        {
+
+            await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeProyecto", "El Usuario ingresado no está registrado", "error");
+        }
     }
     protected override async Task OnInitializedAsync()
     {
@@ -148,7 +153,7 @@
         bool emailValido = validaForm.ValidaEmail(_emailForgotUser);
         if (emailValido)
         {
-            bool response = true;//await serviceConection.CheckEmail(_emailForgotUser);
+            bool response = await serviceConection.CheckEmail(_emailForgotUser);
             if (response)
             {
                 bool salida = await sendEmail.SendEmail(_emailForgotUser);

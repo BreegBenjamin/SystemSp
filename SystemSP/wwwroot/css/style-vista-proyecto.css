@@ -160,6 +160,7 @@ li {
 
 .colorA {
     color: rgb(18, 129, 202);
+    cursor:pointer;
 }
 
 .TituloProyecto {
@@ -208,8 +209,8 @@ li {
     box-shadow: var(--boxSombra);
     display: grid;
     grid-template-columns: max-content 1fr max-content;
-    height: 210px;
-    width:auto;
+    box-sizing: border-box;
+    padding: 20px;
 }
 .descripcionOpciones {
     box-sizing: border-box;
@@ -381,4 +382,42 @@ li {
 .imageTechSize {
     height:20px;
     width:20px;
+}
+.downloadButton {
+    border: none;
+    background-image: url(/images/downloadfile.png);
+    background-position: 50% 50%;
+    cursor:pointer;
+    background-repeat: no-repeat;
+    background-color: #FFF;
+    background-size: 65%;
+    box-shadow: var(--SombrasCaja);
+    border-radius: 50%;
+    outline:none;
+    height: 45px;
+    width: 45px;
+}
+.imgDownload {
+    height:30px;
+    width:30px;
+}
+.downloadSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 10px;
+    height: 80px;
+    box-shadow: var(--SombrasCaja);
+    border-radius: var(--boxBorder);
+}
+.gridContainerDocuemnts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+.divFlexSolicitud {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 20px;
 }

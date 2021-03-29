@@ -4,10 +4,6 @@
 @inject UserInformationResult session;
 <section>
     <EditForm Model="RequestForm">
-        <div>
-            <BotonLecturaArchivo></BotonLecturaArchivo>
-        </div>
-
         <div class="displayFlex">
             <div>
                 <p class="margin0">Nombre Requerimiento <span style="color:#ED0000">*</span></p>
@@ -73,13 +69,16 @@
 </section>
 
 @code {
-    private bool _disabled = true;
-    string _classBoton = "btRegistroForm-Unlock";
     [CascadingParameter]
     public FormRequest RequestForm { get; set; } = new FormRequest()
     {
         FilesData = new List<FileStreamData>()
     };
+    [Parameter]
+    public EventCallback<int> SendRequest { get; set; }
+
+    private bool _disabled = true;
+    string _classBoton = "btRegistroForm-Unlock";
     private TextCategoriasIndex _textCategory = new TextCategoriasIndex();
     protected override async Task OnInitializedAsync()
     {
@@ -89,7 +88,7 @@
     private void _validForms()
     {
         if (_isValid(RequestForm.RequestName) && _isValid(RequestForm.RequestDescription) && _isValid(RequestForm.Category)
-            && _isValid(RequestForm.City) && _isValid(RequestForm.Department))
+        && _isValid(RequestForm.City) && _isValid(RequestForm.Department))
         {
 
             _disabled = false;
@@ -103,17 +102,19 @@
     }
     private async Task _insertRequest()
     {
-        if (RequestForm.FilesData.Count > 0)
+        if (RequestForm.FilesData.Count >= 5)
         {
             RequestForm.IdUser = session.UserId;
             RequestForm.UserName = session.UserName;
             bool salida = await _serviceConection.PostRequest(RequestForm);
-            if(!salida)
+            if (salida)
+                await SendRequest.InvokeAsync(5);
+            else
                 await JSRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "No se pudo agregar la solicitud");
         }
         else
         {
-            await JSRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "Debe agregar los archivos");
+            await JSRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "Debe agregar las imagenes");
         }
     }
 

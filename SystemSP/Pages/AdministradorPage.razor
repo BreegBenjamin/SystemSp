@@ -35,22 +35,43 @@
             @switch (IndicadorPage)
             {
                 case 0:
-                    <TarjetaUsuariosRegistrados></TarjetaUsuariosRegistrados>
+                <section>
+                    <div class="informacionPosition">
+                        <div class="infoAdminProyecto">
+                            <div class="margin0">
+                                <p class="margin0 sizeProject">@_txtAdmin.RegistereUsers</p>
+                                <p class="margin0 sizeProject">10</p>
+                            </div>
+                            <span class="margin0">
+                                <img src="/images/IconosCategorias/AdminIcons/telescope.svg" height="60" width="60" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="infoAdminProyecto">
+                        <div class="margin0">
+                            <p class="margin0 sizeProject">@_txtAdmin.PublishedProjects</p>
+                            <p class="margin0 sizeProject">7</p>
+                        </div>
+                        <span class="margin0">
+                            <img src="/images/IconosCategorias/AdminIcons/innovation.svg" height="60" width="60" />
+                        </span>
+                    </div>
+                </section>
                     break;
                 case 1:
-                    <p>Primera pagina: @IndicadorPage</p>
+                    <TarjetaUsuariosRegistrados></TarjetaUsuariosRegistrados>
                     break;
                 case 2:
-                    <p>segunda pagina: @IndicadorPage</p>
+                    <TarjetaProyectosPublicadosAdmin></TarjetaProyectosPublicadosAdmin>
                     break;
                 case 3:
                     <EstadisticasPlataforma></EstadisticasPlataforma>
                     break;
                 case 4:
-                    <FormularioSolicitud></FormularioSolicitud>
+                    <FormularioSolicitud SendRequest="(int result)=> IndicadorPage = result"></FormularioSolicitud>
                     break;
                 case 5:
-                    <p>Segunda opcion</p>
+                    <ListaSolicitudes></ListaSolicitudes>
                     break;
             }
         </section>

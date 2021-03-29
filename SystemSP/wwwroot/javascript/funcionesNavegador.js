@@ -177,7 +177,7 @@ class CanvasEstadisticas
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Aprendices', 'Proyectos', 'Vistas', 'Descargas', 'Usuarios', 'Admin'],
                 datasets: [{
                     label: '# of Votes',
                     data: [12, 19, 3, 5, 2, 3],
@@ -233,6 +233,10 @@ function CambiarIdInput() {
     let spam = document.getElementById("spanOcultoDocumento");
     let spam2 = document.getElementById("spanOcultoImages");
     spam.firstElementChild.id = "archivoDocumentos";
+    spam2.firstElementChild.id = "archivoImage";
+}
+function CambiarIdInputImage() {
+    let spam2 = document.getElementById("spanOcultoImages");
     spam2.firstElementChild.id = "archivoImage";
 }
 function CambiarIdInputFile() {

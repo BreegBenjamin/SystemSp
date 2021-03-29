@@ -10,8 +10,11 @@ namespace SystemSP.I18nText
         /// <summary>"Contact information"</summary>
         public string ContactInformation;
 
-        /// <summary>"Download project"</summary>
+        /// <summary>"Download documents"</summary>
         public string DownloadProject;
+
+        /// <summary>"The file could not be downloaded"</summary>
+        public string MessageDownload;
 
         /// <summary>"Technologies Used in the training project"</summary>
         public string TechnologyMessage;

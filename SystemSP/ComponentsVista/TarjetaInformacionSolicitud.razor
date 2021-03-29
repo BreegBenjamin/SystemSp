@@ -1,15 +1,14 @@
 ﻿@inject I18nText serviceTranslator;
 <section class="sectionSolicitud">
-    <div>
-        <img src="/images/barCerveza.jpg" class="imgSolicitud">
-    </div>
+    <SliderImage Images="@Request.ImagesUrl"></SliderImage>
     <div class="sectionDetalles">
         <div>
-            <h3 class="tituloSolicitud">@_txtViewPage.TitleRequest</h3>
-            <p class="tituloSolicitud">@_txtViewPage.TextRequest</p>
+            <h3 class="tituloSolicitud">@Request.RequestName</h3>
+            <p class="tituloSolicitud">@Request.RequestDescription</p>
+
         </div>
         <div class="disFlexJsutify">
-            <a href="#" class="colorA">@_txtViewPage.TextSeeDescription</a>
+            <a href="#" class="colorA">Ver más!</a>
             <div>
                 <button class="colorVista">@_txtViewPage.TextSeeContact</button>
             </div>
@@ -17,27 +16,43 @@
     </div>
     <div class="descripcionOpciones">
         <div class="letterPerson">
-            <label class="namePerson">GL</label>
+            <label class="namePerson">@_inicialLetter</label>
         </div>
-        <p class="colorStyle">Gloria Lopéz</p>
+        <p class="colorStyle">@Request.UserName</p>
         <ol style=" padding: 0;">
             <li>
-                <p class="tituloSolicitud">@_txtViewPage.TitleWatch</p>
+                <label>Departamento</label>
+                <p class="tituloSolicitud">@Request.Departament</p>
             </li>
             <li>
-                <p class="tituloSolicitud">@_txtViewPage.TitleDownloads</p>
+                <label>Ciudad</label>
+                <p class="tituloSolicitud">@Request.City</p>
             </li>
             <li>
-                <p class="tituloSolicitud">@_txtViewPage.TitleCategory</p>
+                <label>Fecha de publicación</label>
+                <p class="tituloSolicitud">@Request.DatePublish</p>
             </li>
         </ol>
     </div>
 </section>
 
 @code {
+    [Parameter]
+    public RequestData Request { get; set; } = new RequestData
+    {
+        ImagesUrl = new List<string>()
+    };
+
+    private string _inicialLetter = "";
+
     TextViewPage _txtViewPage = new TextViewPage();
     protected override async Task OnInitializedAsync()
     {
         _txtViewPage = await serviceTranslator.GetTextTableAsync<TextViewPage>(this);
+    }
+    protected override void OnParametersSet()
+    {
+        var arrLetter = Request.UserName.Split(' ');
+        _inicialLetter = $"{arrLetter[0][0]} {arrLetter[1][0]}";
     }
 }
