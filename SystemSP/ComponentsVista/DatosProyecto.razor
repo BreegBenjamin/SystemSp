@@ -50,7 +50,7 @@
         </div>
         <div class="containerLinks">
             <p @onclick="@(()=> _download = (_download) ? false : true )" class="colorA">@_txtViewPage.DownloadProject</p>
-            <p><a class="colorA">@_txtViewPage.ContactInformation</a></p>
+            <p @onclick="@(()=> _contactInformation = (_contactInformation) ? false : true )" class="colorA">@_txtViewPage.ContactInformation</p>
         </div>
     </div>
 </section>
@@ -64,10 +64,10 @@
             <div class="gridContainerDocuemnts">
                 @foreach (var item in _listDocuments)
                 {
-                    <DownloadFilesContainer 
-                                        FileName="@item.FileName"
-                                        FileType="@item.FileType"
-                                        UrlDocuments="@item.FileUrl"></DownloadFilesContainer>
+                    <DownloadFilesContainer FileName="@item.FileName"
+                                            FileType="@item.FileType"
+                                            UrlDocuments="@item.FileUrl">
+                    </DownloadFilesContainer>
                 }
             </div>
         }
@@ -75,6 +75,15 @@
         {
             <p>No contiene documentos</p>
         }
+    </ModalRenderFragment>
+}
+@if (_contactInformation)
+{
+    <ModalRenderFragment ClickDisable="@((bool salida) => _contactInformation = salida)"
+                         SizeModal="height: 35%; width: 30%;">
+        <p>Nombre : <label>@ProjectInfo.ProjectCardInfo.NombreUsuario</label></p>
+        <p>Número Celular : <label>@ProjectInfo.ProjectCardInfo.NumeroCelular</label></p>
+        <p>Direccion Email : <label>@ProjectInfo.ProjectCardInfo.DireccionEmail</label></p>
     </ModalRenderFragment>
 }
 
@@ -86,6 +95,7 @@
     private ProjectCard _projectCard = new ProjectCard();
     private string _descriptionProject = string.Empty;
     private bool _download = false;
+    private bool _contactInformation = false;
     private bool _containeDocuments = false;
     private TextViewPage _txtViewPage = new TextViewPage();
 

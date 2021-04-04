@@ -4,11 +4,11 @@
     <div class="sectionDetalles">
         <div>
             <h3 class="tituloSolicitud">@Request.RequestName</h3>
-            <p class="tituloSolicitud">@Request.RequestDescription</p>
+            <p class="tituloSolicitud">@_description</p>
 
         </div>
         <div class="disFlexJsutify">
-            <a href="#" class="colorA">Ver más!</a>
+            <p @onclick="@(()=> _isData = (_isData) ? false : true )" class="colorA">Ver más!</p>
             <div>
                 <button class="colorVista">@_txtViewPage.TextSeeContact</button>
             </div>
@@ -35,6 +35,14 @@
         </ol>
     </div>
 </section>
+@if (_isData) 
+{
+    <ModalRenderFragment ClickDisable="@((bool salida) => _isData = salida)"
+                         SizeModal="height: 50%; width: 40%;">
+        <h2>@Request.RequestName</h2>
+        <p>@Request.RequestDescription</p>
+    </ModalRenderFragment>
+}
 
 @code {
     [Parameter]
@@ -42,7 +50,8 @@
     {
         ImagesUrl = new List<string>()
     };
-
+    private bool _isData = false;
+    private string _description = string.Empty;
     private string _inicialLetter = "";
 
     TextViewPage _txtViewPage = new TextViewPage();
@@ -54,5 +63,13 @@
     {
         var arrLetter = Request.UserName.Split(' ');
         _inicialLetter = $"{arrLetter[0][0]} {arrLetter[1][0]}";
+        if (Request.RequestDescription.Length > 160)
+        {
+            _description = $"{Request.RequestDescription.Remove(159)} ...";
+        }
+        else
+        {
+            _description = Request.RequestDescription;
+        }
     }
 }

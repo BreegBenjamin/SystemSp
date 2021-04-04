@@ -183,8 +183,11 @@ li {
 .namePerson {
     color: rgb(18, 129, 202);
     font-size: 1.4em;
-    height:100%;
-    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 /*Detalles de la descripción de la empresa*/

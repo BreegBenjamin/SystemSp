@@ -61,6 +61,8 @@ namespace SystemSp.Infrastructure.Repositories
                 result.IdProyecto = project.IdProyecto;
                 result.Categoria = project.Categoria;
                 result.NombreUsuario = $"{user.Nombre} {user.Apellido}";
+                result.NumeroCelular = user.NumeroCelular;
+                result.DireccionEmail = user.DireccionEmail;
                 result.TituloProyecto = project.NombreProyecto;
                 result.Descripcion = project.DescripcionProyecto;
                 result.ImagenUsuario = imageUser;
