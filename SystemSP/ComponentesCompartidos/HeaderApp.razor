@@ -3,15 +3,19 @@
 @inject I18nText _serviceTranslator;
 <section class="positionHeader">
     <section class="centerFlexSection">
-        <BotonLogo></BotonLogo>
+        <SecondBottonApp></SecondBottonApp>
         <ol class="centerFlexSection">
             <li class="sizeItemApp" @onclick="@(()=>_navigator.NavigateTo("/"))">
-                <img src="images/IconosCategorias/AdminIcons/home.svg" class="sizeImageItem" />
-                <label class="labelText">Inicio</label>
+                <div class="botonNav">
+                    <img src="images/IconosCategorias/AdminIcons/home.svg" class="sizeImageItem" />
+                    <label class="labelText">Inicio</label>
+                </div>
             </li>
             <li class="sizeItemApp" @onclick="@(()=>_navigator.NavigateTo("/PublicarProyecto"))">
-                <img src="images/IconosCategorias/AdminIcons/landing-page.svg" class="sizeImageItem" />
-                <label class="labelText">Ver Proyectos</label>
+                <div class="botonNav">
+                    <img src="images/IconosCategorias/AdminIcons/landing-page.svg" class="sizeImageItem" />
+                    <label class="labelText">Ver Proyectos</label>
+                </div>
             </li>
         </ol>
     </section>

@@ -176,11 +176,14 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
 }
 
 .namePerson {
+    display: flex;
+    justify-content:center;
+    align-items: center;
     color: rgb(18, 129, 202);
     font-size: 1.4em;
     height:100%;
@@ -230,6 +233,7 @@ li {
 .disFlexJsutify {
     display:flex;
     justify-content:space-between;
+    align-items: center;
 }
 .botonConatcto {
     border: none;
@@ -339,12 +343,13 @@ li {
 }
 .category-solicitud {
     display: grid;
-    grid-template-columns: max-content max-content;
+    grid-template-columns: max-content;
     grid-template-rows: max-content max-content min-content;
     box-shadow: var(--SombrasCaja);
     border-radius: 10px;
     background-color: #fff;
     width: max-content;
+    margin-bottom: 30px;
 }
 .tajeta_categoriaSolicitud {
     display: flex;

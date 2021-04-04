@@ -42,15 +42,15 @@
 }
 
 .contenedorPersons {
-    margin: 60px 0 0 0;
-    width: 100%;
+    width: 98%;
 }
 
 .persons {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     width: 100%;
+    margin-bottom: 60px;
 }
 
 .imgIntegranteDiv {
@@ -195,4 +195,7 @@
     text-align: center;
     font-size: 20px;
     font-weight: 400;
+}
+.tarjeta-creador{
+    margin: 20px 35px;
 }

@@ -20,9 +20,13 @@
     {
         case "Images":
             <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
+                @{
+                    TituloTarjeta = "Imagenes";
+                }
                 <div class="ImagenPosition">
                     @if (ProjectApp.ImagesData.Count > 0)
                     {
+
                         foreach (var item in ProjectApp.ImagesData)
                         {
                             <div>
@@ -35,6 +39,9 @@
             break;
         case "Team":
             <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
+                @{
+                    TituloTarjeta = "Integrantes";
+                }
                 <ol>
                     @foreach (var item in ProjectApp.ApprenticesData)
                     {
@@ -56,6 +63,9 @@
             break;
         case "file":
             <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
+                @{
+                    TituloTarjeta = "Archivos";
+                }
                 <div>
                     <p>Aqui archivos</p>
                 </div>
@@ -63,6 +73,9 @@
             break;
         case "Info":
             <ModalArchivosProjecto CancelarCambio="_deshabilitarModal">
+            @{
+                TituloTarjeta = "Información";
+            }
                 <div>
                     <p>Aqui informacion</p>
                 </div>
@@ -102,7 +115,8 @@
     }
     protected override Task OnInitializedAsync()
     {
-        _subTituloTarjeta = $"Images";
+        _subTituloTarjeta = $"Items";
         return base.OnInitializedAsync();
     }
+
 }

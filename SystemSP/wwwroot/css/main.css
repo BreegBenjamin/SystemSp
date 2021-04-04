@@ -9,6 +9,33 @@ body {
     margin:0;
     padding:0;
 }
+.cont-spinner {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(58deg, rgba(5,102,183,0.09287464985994398) 0%, rgba(1,81,153,0.09287464985994398) 0%, rgba(0,245,255,0.09287464985994398) 0%, rgba(16,230,245,0.09287464985994398) 0%, rgba(65,186,214,0.0844712885154062) 100%, rgba(179,181,185,0.09007352941176472) 100%);
+}
+
+.spinner {
+    border: 4px solid rgba(0,0,0, .1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #09f;
+    animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 .mainPage {
     display: grid;
     grid-template-columns: 1fr;
@@ -55,10 +82,21 @@ body {
         color: #8aa6bd;
     }
 .BotonLogoAPP {
+    display: flex;
+    justify-content: center;
     border:none;
     border-radius:50%;
     height:100px;
-    width:100px;
+    width:100%;
+}
+.BotonLogoSecond {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 50px;
+    border: none;
+    border-radius: 50%;
+    height: 100px;
+    width: 20%;
 }
 .blazor-error-ui {
     display:none;
@@ -412,6 +450,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 20px;
 }
 .estyleText {
     border: 1px solid #9da0a1;
@@ -430,6 +469,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top:20px;
 }
 .linkContact {
     color: #3b9eee;
@@ -446,6 +486,7 @@ body {
     outline-style: none;
     height: 50px;
     width: 230px;
+    margin-top: 20px;
 }
 .btRegistroForm {
     background-color: #fff;
@@ -720,7 +761,12 @@ body {
 .selectStile {
     background-size: 5%;
     background-position-x: 95%;
-    width:100%;
+    width: 100%;
+}
+.selectStile3 {
+    background-size: 5%;
+    background-position-x: 95%;
+    width: 44.7%;
 }
 .selectStile2 {
     background-size: 15%;
@@ -972,9 +1018,11 @@ body {
 
 .iconUsers {
     display: flex;
+    width: 20%;
+    justify-content: flex-end;
     align-items: center;
     height: auto;
-    padding: 0 20px 0 20px;
+    padding: 0 70px 0 20px;
 }
 
 .iconHome {
@@ -1070,13 +1118,49 @@ nav, ul, il {
 
 .centerFlexSection {
     display:flex;
+    width: 100%;
+    height: auto;
+    align-items:center;
 }
 .sizeItemApp {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-@media only screen and (max-width: 920px){
+.contenedor-header {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 3px 10px 0px rgba(202, 202, 202, 0.8);
+}
+.contenido-header{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.opciones-header{
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+}
+.botones-header{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    padding: 5px;
+    cursor: pointer;
+}
+    .botones-header > p {
+        padding: 1px;
+        margin: 0;
+        color: #018192;
+        transition: color .2s ease;
+    }
+    .botones-header > p:hover {
+        color:#3b9eee;
+    }
+@media only screen and (max-width: 920px) {
     .botones_usuario{
         height: 20px;
         width: auto;
