@@ -42,7 +42,7 @@ namespace SystemSP
             });
             services.AddHttpClient<ProjectsApplication>(client=> 
             {
-                client.BaseAddress = new Uri(Configuration.GetConnectionString("SystenspApi"));
+                client.BaseAddress = new Uri(Configuration.GetConnectionString("ApiUrl"));
             });
             services.AddApplicationInsightsTelemetry();
         }

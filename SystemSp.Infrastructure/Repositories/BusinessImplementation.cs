@@ -193,13 +193,13 @@ namespace SystemSp.Infrastructure.Repositories
                     if (resultSave > 0)
                     {
                         //Insertar Imagen azure storage 
-                        await _azureBlob.SaveBlobImage(imagesData, containerImage);
+                        await _azureBlob.SaveBlobImage(imagesData, containerImage, false);
                         //Insertar archivos azure storage 
-                        await _azureBlob.SaveBlobImage(fileData, containerArchivos);
+                        await _azureBlob.SaveBlobImage(fileData, containerArchivos, true);
                     }
                     result = true;
                 }
-                catch (Exception ex)
+                catch
                 {
                     result = false;
                 }
@@ -264,6 +264,35 @@ namespace SystemSp.Infrastructure.Repositories
                 return salida;
             }
 
+        }
+        public async Task<List<InformationDocuments>> GetDocumentUri(int idProject) 
+        {
+            var documentsResult = new List<InformationDocuments>();
+            try
+            {
+                var documents = await _Context.DocumentosProyecto.Where(x => x.IdProyecto == idProject).ToListAsync();
+
+                if (documents.Any()) 
+                {
+                    string container = await _Context.DocumentosProyecto.Where(x=> x.IdProyecto == idProject)
+                        .Select(x=> x.NombreContenedor).FirstOrDefaultAsync();
+                    documents.ForEach(x=> 
+                    {
+                        documentsResult.Add(new InformationDocuments 
+                        {
+                           FileName = x.NombreDocumento,
+                           FileType = x.TipoDocumento
+                        });
+                    
+                    });
+                    return _azureBlob.GetDocumentsContainer(documentsResult, container);
+                }
+            }
+            catch (Exception ex)
+            {
+                string ms = ex.Message;
+            }
+            return documentsResult;
         }
         public ProjectCard GetCard(Proyecto project)
             => _getCard(project);
@@ -348,33 +377,60 @@ namespace SystemSp.Infrastructure.Repositories
         }
         public async Task<UserInformation> UserResponse(FormLogin login)
         {
-            using (_Context)
+            var usuInfo = new UserInformation()
             {
-                var usuInfo = new UserInformation()
+                MessageStates = new UserMessageStates()
+            };
+            try
+            {
+                Usuario user = await _Context.Usuario.FirstOrDefaultAsync(
+                    x => x.DireccionEmail == login.EmailLogin && x.Contrasenia == login.PasswordLogin);
+                if (user != null)
                 {
-                    MessageStates = new UserMessageStates()
-                };
+                    usuInfo = _getInfoUser(user);
+                    usuInfo.MessageStates = new UserMessageStates()
+                    {
+                        UserExist = true
+                    };
+                }
+                else
+                    usuInfo.MessageStates.UserExist = false;
+            }
+            catch (Exception ex)
+            {
+                usuInfo.MessageStates.UserExist = false;
+                string message = ex.Message;
+            }
+            return usuInfo;
+        }
+        public async Task<IEnumerable<UserInformation>> GetUsers() 
+        {
+            using (_Context) 
+            {
+                var listUsers = new List<UserInformation>();
                 try
                 {
-                    Usuario user = await _Context.Usuario.FirstOrDefaultAsync(
-                        x => x.DireccionEmail == login.EmailLogin && x.Contrasenia == login.PasswordLogin);
-                    if (user != null)
+                    var users = await _Context.Usuario.Take(10).ToListAsync();
+                    users.ForEach(itemUser=> 
                     {
-                        usuInfo = _getInfoUser(user);
-                        usuInfo.MessageStates = new UserMessageStates()
-                        {
-                            UserExist = true
-                        };
-                    }
-                    else
-                        usuInfo.MessageStates.UserExist = false;
+                        var usu = _getInfoUser(itemUser);
+                        listUsers.Add(usu);
+                    });
                 }
-                catch (Exception ex)
+                catch
                 {
-                    usuInfo.MessageStates.UserExist = false;
-                    string message =  ex.Message;
+                    listUsers.Add(new UserInformation()
+                    {
+                        MessageStates = new UserMessageStates() 
+                        {
+                            UserEmailExist = false,
+                            UserCreateSuccessfull =false,
+                            UserExist = false,
+                            UserIdentificationExist = false
+                        }
+                    }) ;
                 }
-                return usuInfo;
+                return listUsers;
             }
         }
         private UserInformation _getInfoUser(Usuario usuResult)
@@ -645,11 +701,75 @@ namespace SystemSp.Infrastructure.Repositories
                 return project;
             }
         }
+        public async Task<IEnumerable<ProjectInformation>> GetProjects()
+        {
+            var ltsProject = new List<ProjectInformation>();
+            try
+            {
+                var formativeProject = await _Context.Proyecto.Take(5).ToListAsync();
+                if (formativeProject.Any())
+                {
+                    formativeProject.ForEach(projItem =>
+                    {
+                        var project = new ProjectInformation();
+                        ProjectCard card = GetCard(projItem);
+                        project.ProjectCardInfo = card;
+                        project.TechnologiesUsed = _getListTechnology(projItem.IdProyecto);
+
+                        ltsProject.Add(project);
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                ltsProject.Add(new ProjectInformation
+                {
+                    Status = ex.Message
+                });
+            }
+            return ltsProject;
+        }
+
+        public async Task<IEnumerable<RequestData>> GetRequests()
+        {
+            var ltsRequests = new List<RequestData>();
+            try
+            {
+                var requestCompany = await _Context.SolicitudEmpresa.Take(5).ToListAsync();
+                if (requestCompany.Any())
+                {
+                    foreach (var itemImages in requestCompany)
+                    {
+                        List<string> imagesList = await _getListImages(itemImages.NombreContenedor, itemImages.IdSolicitud);
+                        var user = await _Context.Usuario.Where(x => x.IdUsuario == itemImages.IdUsuario).FirstOrDefaultAsync();
+                        ltsRequests.Add(new RequestData
+                        {
+                            City = itemImages.Ciudad,
+                            DatePublish = itemImages.FechaPublicacion,
+                            Departament = itemImages.Departamento,
+                            RequestName = itemImages.NombreRequerimiento,
+                            RequestDescription = itemImages.DescripcionRequerimiento,
+                            StateRequest = itemImages.Estado,
+                            Status = itemImages.EstadoVinculacion,
+                            UserName = $"{user.Nombre} {user.Apellido}",
+                            ImagesUrl = imagesList
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ltsRequests.Add(new RequestData
+                {
+                    Status = ex.Message
+                });
+            }
+            return ltsRequests;
+        }
         public async Task<bool> InsertRequestUser(FormRequest formRequest) 
             => await _insertRequest(formRequest);
         public bool InsertListRequest(List<FormRequest> formRequest)
             => _insertListRequest(formRequest);
-
         private List<string[]> _getListTechnology(int idProyecto) 
         {
             var result = new List<string[]>();
@@ -670,45 +790,42 @@ namespace SystemSp.Infrastructure.Repositories
         }
         private async Task<bool> _insertRequest(FormRequest formRequest) 
         {
-            using (_Context) 
+            try
             {
-                try
-                {
-                    var datePost = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-                    var imagesData = new Dictionary<string, string>();
-                    string requestName = string.Concat(formRequest.RequestName.Where(c => !char.IsWhiteSpace(c)));
-                    string containerName = $"{requestName.ToLower()}-images";
-                    var images = new List<ImagenesSolicitud>();
+                var datePost = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                var imagesData = new Dictionary<string, string>();
+                string requestName = string.Concat(formRequest.RequestName.Where(c => !char.IsWhiteSpace(c)));
+                string containerName = $"{requestName.ToLower()}-images";
+                var images = new List<ImagenesSolicitud>();
 
-                    int numFile = 1;
-                    formRequest.FilesData.ForEach((item)=> 
-                    {
-                        string nombreImagen = $"{item.FileType.Replace("/", $"0{numFile}.")}";
-                        images.Add(new ImagenesSolicitud() 
-                        {
-                            ImagenOriginal = item.FileName,
-                            NombreImagen = nombreImagen,
-                            TipoImagen = item.FileType,
-                            NombreContenedor = containerName
-                        });
-                        imagesData.Add(nombreImagen, item.FileStreamContent);
-                        numFile++;
-                    });
-                    int result = _saveRequest(formRequest, images, containerName);
-                    if (result > 0)
-                    {
-                        //Insertar Imagen azure storage 
-                        await _azureBlob.SaveBlobImage(imagesData, containerName);
-                        return true;
-                    }
-                    else
-                        return false;
-                }
-                catch (Exception ex)
+                int numFile = 1;
+                formRequest.FilesData.ForEach((item) =>
                 {
-                    string ms = ex.Message;
-                    return false;
+                    string nombreImagen = $"{item.FileType.Replace("/", $"0{numFile}.")}";
+                    images.Add(new ImagenesSolicitud()
+                    {
+                        ImagenOriginal = item.FileName,
+                        NombreImagen = nombreImagen,
+                        TipoImagen = item.FileType,
+                        NombreContenedor = containerName
+                    });
+                    imagesData.Add(nombreImagen, item.FileStreamContent);
+                    numFile++;
+                });
+                int result = _saveRequest(formRequest, images, containerName);
+                if (result > 0)
+                {
+                    //Insertar Imagen azure storage 
+                    await _azureBlob.SaveBlobImage(imagesData, containerName, false);
+                    return true;
                 }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                string ms = ex.Message;
+                return false;
             }
         }
         private bool _insertListRequest(List<FormRequest> formRequest) 
@@ -812,6 +929,14 @@ namespace SystemSp.Infrastructure.Repositories
                 default:
                     return "Other";
             }
+        }
+        private async Task<List<string>> _getListImages(string container, int idSolicitud) 
+        {
+           var diccionary = new Dictionary<string, string>();
+           var images = await _Context.ImagenesSolicitud.Where(x=> x.IdSolicitud == idSolicitud).ToListAsync();
+            images.ForEach(x=> diccionary.Add(x.NombreImagen, x.TipoImagen));
+            return await _azureBlob.GetImagesContainer(diccionary,container);
+
         }
     }
 }

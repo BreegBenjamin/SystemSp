@@ -40,4 +40,6 @@
     <None Include="wwwroot\css\EstilosPDF.css" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/band-manifest" /></VisualStudio></ProjectExtensions>
+
 </Project>

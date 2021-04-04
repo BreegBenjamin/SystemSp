@@ -1,0 +1,25 @@
+﻿@inject I18nText serviceTranslator;
+@inject ProjectsApplication serviceConection;
+<section>
+    <h3>Ultimos Proyectos Publicados</h3>
+    <div class="elementsItems">
+        @foreach (var items in _ltsProject)
+        {
+            <TarjetaProyectos 
+                              TituloProyecto="@items.ProjectCardInfo.TituloProyecto"
+                              NombreUsuario="@items.ProjectCardInfo.NombreUsuario"
+                              ImagenUsuario="@items.ProjectCardInfo.ImagenUsuario"
+                              UriImagen="@items.ProjectCardInfo.Categoria"></TarjetaProyectos>
+        }
+    </div>
+</section>
+
+@code {
+    TextAdminPage _txtAdmin = new TextAdminPage();
+    List<ProjectInformation> _ltsProject = new List<ProjectInformation>();
+    protected override async Task OnInitializedAsync()
+    {
+        _txtAdmin = await serviceTranslator.GetTextTableAsync<TextAdminPage>(this);
+        _ltsProject = await serviceConection.GetProjects();
+    }
+}

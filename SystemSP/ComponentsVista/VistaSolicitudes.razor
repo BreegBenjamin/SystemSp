@@ -1,28 +1,22 @@
-﻿@inject I18nText serviceTranslator;
+﻿@inject ProjectsApplication serviceConection;
+@inject SetChangeLanguage lenguage;
+@inject I18nText serviceTranslator;
 <section class="sectionCategoriasVista">
     <div class="divCategorys">
-        @foreach (var item in solicituds)
-        {
-            <TarjetaCategoriaSolicitud IndexCategoria="@item.IdCategoria"
-                                       NombreTitulo="@item.Nombre"
-                                       Onclick="_categoryHandler"
-                                       UrlImage="@item.UrlImage">
-            </TarjetaCategoriaSolicitud>
-        }
-        <div>
-            <div class="infoProject">
-                <h3 class="h6Font">@_txtViewPage.TitleList</h3>
-            </div>
-            <CardsSolicitud></CardsSolicitud>
-        </div>
+
+        <CardsSolicitud></CardsSolicitud>
     </div>
-    <div>
-        <TarjetaInformacionSolicitud></TarjetaInformacionSolicitud>
+    <div class="divFlexSolicitud">
+        @foreach (var req in _listaSolicitud)
+        {
+            <TarjetaInformacionSolicitud Request="req"></TarjetaInformacionSolicitud>
+        }
     </div>
 </section>
 
 @code {
-    List<PopularCategory> solicituds = new List<PopularCategory>();
+    private List<PopularCategory> solicituds = new List<PopularCategory>();
+    private List<RequestData> _listaSolicitud = new List<RequestData>();
 
     private void _categoryHandler(int indexSalida)
     {
@@ -30,41 +24,13 @@
     }
     protected override void OnInitialized()
     {
-        var categoria = new PopularCategory()
-        {
-            Nombre = "Educación",
-            UrlImage = "education.svg",
-            IdCategoria = 1
-        };
-        var categoria2 = new PopularCategory()
-        {
-            Nombre = "Industria y Comercio",
-            UrlImage = "IndustryAndCommerce.svg",
-            IdCategoria = 2
-        };
-        var categoria3 = new PopularCategory()
-        {
-            Nombre = "Herramientas y Productividad",
-            UrlImage = "ToolsAndProductivity.svg",
-            IdCategoria = 3
-        };
-        var categoria4 = new PopularCategory()
-        {
-            Nombre = "Entretenimiento y Eventos",
-            UrlImage = "EntertainmentAndEvents.svg",
-            IdCategoria = 4
-        };
-        solicituds.Add(categoria);
-        solicituds.Add(categoria2);
-        solicituds.Add(categoria3);
-        solicituds.Add(categoria4);
-
-        base.OnInitialized();
+        solicituds = lenguage.GetPopularCategories();
     }
 
     TextViewPage _txtViewPage = new TextViewPage();
     protected override async Task OnInitializedAsync()
     {
         _txtViewPage = await serviceTranslator.GetTextTableAsync<TextViewPage>(this);
+        _listaSolicitud = await serviceConection.GetDataFromService<List<RequestData>>(_listaSolicitud, "Request/GetFeaturedRequest");
     }
 }

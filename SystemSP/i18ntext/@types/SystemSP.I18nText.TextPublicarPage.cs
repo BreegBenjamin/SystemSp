@@ -91,6 +91,12 @@ namespace SystemSP.I18nText
         /// <summary>"Email"</summary>
         public string Email;
 
+        /// <summary>"Error Getting File"</summary>
+        public string ErrorGettingFile;
+
+        /// <summary>"File type not allowed"</summary>
+        public string FileTypeNotAllowed;
+
         /// <summary>"Agriculture and farms"</summary>
         public string FormAgriculture;
 

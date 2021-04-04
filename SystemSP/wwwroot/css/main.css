@@ -871,7 +871,6 @@ body {
 .contactanosFooter {
     width: 100%;
     height: 240px;
-    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1048,4 +1047,147 @@ nav, ul, il {
 .imgUsuario {
     height: 15px;
     width: 15px;
+}
+.img-userHelp {
+    height: 55%;
+    width: 60%;
+}
+.contenedor-descripcion {
+    display: flex;
+    align-items: center;
+    margin: 0 60px 0 30px;
+}
+.imageDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.sizeImageItem {
+    height:45px;
+    width:45px;
+    cursor:pointer;
+}
+
+.centerFlexSection {
+    display:flex;
+}
+.sizeItemApp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media only screen and (max-width: 920px){
+    .botones_usuario{
+        height: 20px;
+        width: auto;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .userBotons{
+        width:100%;
+        justify-content: center;
+    }
+    .botones_usuario{
+        display: none;
+    }
+    .menu-inicio{
+        height: 520px;
+    }
+    .descripcionSystem{
+        padding: 0 25%;
+    }
+    .tarjetaAyuda{
+        flex-direction: column;
+        margin-top: 50px;
+    }
+    .cardAppInfo{
+        width: 60%;
+        margin-bottom: 20px;
+    }
+    .targetas-populares{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+    .targetas-populares > span {
+        margin: 0;
+        padding: 0;
+    }
+    .targetas-populares > p {
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        margin: 0;
+        margin-bottom: 10%;
+        padding: 0;
+    }
+    .imgTarjeta{
+        border-radius: 10px 10px 0 0;
+        height: 100%;
+        width: 100%;
+    }
+    
+}
+@media only screen and (max-width: 820px){
+    .centerCategorias {
+        grid-template-columns: 1fr;
+        width: 90%;
+    }
+    .categoria-image{
+        background-size: 80%;
+    }
+    .category-project {
+        grid-template-columns: repeat(2,1fr);
+        height: auto;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 520px){
+    .cardAppInfo {
+        width: 80%;
+    }
+    .targetas-populares {
+        width: 20%;
+        height: auto;
+    }
+    .centerCategorias {
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 375px){
+    .category-project {
+        grid-template-columns: repeat(1,1fr);
+        height: auto;
+        width: 100%;
+    }
+    .centerCategorias {
+        width: 100%;
+    }
+    .categoria-image {
+        display: none;
+    }
+    .userBotons {
+        justify-content: center;
+        margin: 0;
+        flex-direction: column-reverse;
+    }
+    .headerPublciacion {
+        flex-direction: column;
+        height: auto;
+    }
+    .menu-inicio{
+        height: 650px;
+    }
+    .descripcionSystem {
+        padding: 0 15%;
+    }
+    .bt-ConsultaCrear{
+        margin: 5px;
+        margin-left: 20%;
+    }
+    .cardAppInfo {
+        width: 95%;
+    }
 }

@@ -1,0 +1,25 @@
+﻿<section class="sectionCard colorCategoriaUnAdmin">
+    <div class="numCardRequest">
+        <p class="sizeSolicitud">Solicitud</p>
+        <h4 class="sizeH4">01</h4>
+    </div>
+    <div class="colorBackSolid">
+
+    </div>
+    <div class="descriptionCardRequest">
+        <div>
+            <p class="sizeSolicitud">@Titulo</p>
+            <label class="whiteSpaceLabel">@Descripcion</label>
+        </div>
+        <div class="circleImage colorCategoriaUnAdmin">
+
+        </div>
+    </div>
+</section>
+@code {      
+
+    [Parameter]
+    public string Titulo { get; set; }
+    [Parameter]
+    public string Descripcion { get; set; }
+}

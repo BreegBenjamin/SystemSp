@@ -17,7 +17,7 @@ namespace SystemSP.WebService.Controllers
         }
 
         [HttpPost]
-        [ActionName("PostRequest")]
+        [ActionName("InsertRequest")]
         public async Task<IActionResult> InsertRequest([FromBody] FormRequest request) 
         {
             bool salida = await _context.PostRequest(request);
@@ -28,7 +28,8 @@ namespace SystemSP.WebService.Controllers
         [ActionName("GetFeaturedRequest")]
         public async Task<IActionResult> GetFeaturedRequest()
         {
-            return Ok(true);
+            var result = await _context.GetListRequest();
+            return Ok(result);
         }
 
         [HttpPost]

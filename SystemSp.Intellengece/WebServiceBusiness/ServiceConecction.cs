@@ -30,23 +30,20 @@ namespace SystemSp.Intellengece.WebServiceBusiness
         }
         private async Task<string> _jsonResultService<T>(string uri, T entity)
         {
-            using (_httpClient)
+            string jsonResult = string.Empty;
+            try
             {
-                string jsonResult = string.Empty;
-                try
-                {
-                    var stringContent = new StringContent(JsonConvert.SerializeObject(entity), 
-                        Encoding.UTF8, "application/json");
-                    HttpResponseMessage result = await _httpClient.PostAsync($"api/{uri}", stringContent);
-                    jsonResult = (result.IsSuccessStatusCode) ? result.Content.ReadAsStringAsync().Result
-                        : result.StatusCode.ToString();
-                }
-                catch (Exception ex)
-                {
-                    jsonResult = ex.Message;
-                }
-                return jsonResult;
+                var stringContent = new StringContent(JsonConvert.SerializeObject(entity),
+                    Encoding.UTF8, "application/json");
+                HttpResponseMessage result = await _httpClient.PostAsync($"api/{uri}", stringContent);
+                jsonResult = (result.IsSuccessStatusCode) ? result.Content.ReadAsStringAsync().Result
+                    : result.StatusCode.ToString();
             }
+            catch (Exception ex)
+            {
+                jsonResult = ex.Message;
+            }
+            return jsonResult;
         }
         private async Task<bool> _checkEmail(string email)
         {
@@ -72,7 +69,7 @@ namespace SystemSp.Intellengece.WebServiceBusiness
             }
             catch
             {
-                return (T)(object)Convert.ChangeType(entity, typeof(T));
+                return (T)Convert.ChangeType(entity, typeof(T));
             }
         }
         public async Task<bool> SendDataToService<T>(T entity, string baseUri)
@@ -99,7 +96,7 @@ namespace SystemSp.Intellengece.WebServiceBusiness
             }
             catch
             {
-                return (L)(object)Convert.ChangeType(entity, typeof(L));
+                return (L)Convert.ChangeType(entity, typeof(L));
             }
         }
     }

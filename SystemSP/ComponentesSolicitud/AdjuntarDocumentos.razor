@@ -4,15 +4,6 @@
 <section>
     <div class="elementsButton">
         <div class="CenterdivFlex">
-            <label for="archivoDocumentos" class="custom-file-upload" style="margin-right:10px">
-                <img src="images/img_proyect/folder.svg" class="imgFile" /> @_textPublicar.SelectFile
-            </label>
-            <span class="spanOculto" id="spanOcultoDocumento">
-                <BlazorInputFile.InputFile OnChange="GetFileProject" />
-            </span>
-            <TooltipApp MensajeToolTip="@_textPublicar.AddDocuments"></TooltipApp>
-        </div>
-        <div class="CenterdivFlex">
             <label for="archivoImage" class="custom-file-upload" style="margin-right:10px">
                 <img src="images/img_proyect/image.svg" class="imgFile" />@_textPublicar.SelectImages
             </label>
@@ -21,12 +12,17 @@
             </span>
             <TooltipApp MensajeToolTip=@_textPublicar.AddImages></TooltipApp>
         </div>
+        <div style="display:flex">
+            <span style="margin-right:20px;">@_counter</span>
+            <TooltipApp MensajeToolTip="Número de Imagenes (Minimo 5 imagenes)"></TooltipApp>
+        </div>
     </div>
 </section>
 
 @code {
     [CascadingParameter]
     public FormRequest RequestForm { get; set; }
+    private int _counter = 0;
 
     private TextPublicarPage _textPublicar = new TextPublicarPage();
 
@@ -38,7 +34,7 @@
             string dataBase64 = await _service.GetFileBase64(file);
             if (dataBase64 != "NoK")
             {
-                if (file.Type.Contains("image/") || file.Type.Contains("application/"))
+                if (file.Type.Contains("image/"))
                 {
                     RequestForm.FilesData.Add(new FileStreamData()
                     {
@@ -47,15 +43,16 @@
                         FileType = file.Type
                     });
                 }
+                else
+                    await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", _textPublicar.FileTypeNotAllowed);
             }
-            else
-                await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "Tipo de archivo no permitido");
 
         }
         else
         {
-            await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", "Error al obtener el archivo");
+            await JsRun.EjecutarJavaScriptFunc("seetAlert.SweetMensajeAprendiz", _textPublicar.ErrorGettingFile);
         }
+        _counter = RequestForm.FilesData.Count;
     }
 
     protected override async Task OnInitializedAsync()
@@ -64,6 +61,6 @@
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JsRun.EjecutarJavaScriptFunc("CambiarIdInput");
+        await JsRun.EjecutarJavaScriptFunc("CambiarIdInputImage");
     }
 }
