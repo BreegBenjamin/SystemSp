@@ -1,0 +1,13 @@
+﻿@inject NavigationManager _navigator;
+
+<div class="BotonLogoSecond" @onclick="@(()=>_navigator.NavigateTo("/"))">
+    <img src="/images/S23.png" style="height:@Height px; width:@Width px; cursor: pointer" />
+</div>
+@code {
+
+    [Parameter]
+    public string Width { get; set; } = "100";
+    [Parameter]
+    public string Height { get; set; } = "55";
+
+}

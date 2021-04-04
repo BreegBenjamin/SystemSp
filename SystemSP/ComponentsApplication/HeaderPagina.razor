@@ -31,10 +31,10 @@
                             <label class="itemOption">@UserName</label>
                         </li>
                         <li>
-                            <label class="itemOption">Publicar Proyecto</label>
+                            <label class="itemOption" @onclick="@(()=>_navigator.NavigateTo("/PublicarProyecto"))">Publicar Proyecto</label>
                         </li>
                         <li>
-                            <label class="itemOption">Consultar Proyectos</label>
+                            <label class="itemOption" @onclick="@(()=>_navigator.NavigateTo("/VistaProyectos"))">Consultar Proyectos</label>
                         </li>
                         <li>
                             <label class="itemOption">Configuración</label>
