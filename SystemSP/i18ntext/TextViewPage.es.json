@@ -1,13 +1,13 @@
-{
+ï»¿{
   "DownloadProject": "Descargar documentos",
-  "ContactInformation": "Información de contacto",
+  "ContactInformation": "InformaciÃ³n de contacto",
   "TitleRequest": "Negocio de software",
-  "TextRequest": "Somos la empresa (X) y estamos interesados en tu gran sistema de información (Nombre persona).",
-  "TextSeeDescription": "Ver la descripción",
+  "TextRequest": "Somos la empresa (X) y estamos interesados en tu gran sistema de informaciÃ³n (Nombre persona).",
+  "TextSeeDescription": "Ver la descripciÃ³n",
   "TextSeeContact": "Ver el contacto",
   "TitleWatch": "Vistas",
   "TitleDownloads": "Descargas",
-  "TitleCategory": "Categoría",
+  "TitleCategory": "CategorÃ­a",
   "TitleList": "Lista completa de categorias",
   "TechnologyMessage": "Tecnologias Utilizadas en el proyecto formativo",
   "MessageDownload": "No se pudo descargar el archivo"

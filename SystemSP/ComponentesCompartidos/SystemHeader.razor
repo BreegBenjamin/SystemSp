@@ -1,0 +1,70 @@
+﻿@inject NavigationManager _navigator;
+@inject UserSession _session;
+@inject I18nText _serviceTranslator;
+
+<div class="contenedor-header">
+    <div class="contenido-header">
+        <SecondBottonApp></SecondBottonApp>
+        <div class="opciones-header">
+            <div class="botones-header" @onclick="@(()=>_navigator.NavigateTo("/"))">
+                <img src="images/IconosCategorias/AdminIcons/home.svg" height="50" width="50"/>
+                <p>Inicio</p>
+            </div>
+            <div class="botones-header" @onclick="@(()=>_navigator.NavigateTo("/VistaProyectos"))">
+                <img src="images/IconosCategorias/AdminIcons/landing-page.svg" height="50" width="50" />
+                <p>Ver proyectos</p>
+            </div>
+        </div>
+        <OpcionesRenderFragment>
+            <MainContent>
+                @if (UserImage.Length > 5)
+                {
+                    //Insertar Imagane
+                }
+                else
+                {
+                    <p class="perfilUser">@UserImage</p>
+                }
+            </MainContent>
+            <ChildContent>
+                <ul class="move">
+                    <li>
+                        <label class="itemOption">@UserName</label>
+                    </li>
+                    <li>
+                        <label class="itemOption" @onclick="@(()=>_navigator.NavigateTo("/VistaProyectos"))">
+                            @_textPage.MsOptionProject!
+                        </label>
+                    </li>
+                    <li>
+                        <label class="itemOption">@_textPage.MsOptionSetting</label>
+                    </li>
+                    <li>
+                        <label class="itemOption" @onclick="_cerrarSesionClick">@_textPage.MsOptionClose</label>
+                    </li>
+                </ul>
+            </ChildContent>
+        </OpcionesRenderFragment>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public string UserName { get; set; }
+    [Parameter]
+    public string UserImage { get; set; }
+
+    private TextPublicarPage _textPage = new TextPublicarPage();
+    private void _cerrarSesionClick()
+    {
+        _session.IsActive = false;
+        _session.PassChanged = null;
+        _session.LastEntry = DateTime.Now;
+        _navigator.NavigateTo("/");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        _textPage = await _serviceTranslator.GetTextTableAsync<TextPublicarPage>(this);
+    }
+}

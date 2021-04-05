@@ -1,4 +1,4 @@
-{
+﻿{
   "OptionsAdmin": "Opciones de administrador",
   "Options": "Opciones generales del administrador",
   "UserText": "Usuarios",
@@ -6,7 +6,7 @@
   "ProjectAndRequest": "Proyectos y solicitudes",
   "CheckProjects": "Consultar los proyectos y solicitudes alojadas en la plataforma",
   "Statistics": "Estadisticas",
-  "CheckStatistics": "Estadisticas de los proyectos y usuarios de la aplicaci�n",
+  "CheckStatistics": "Estadisticas de los proyectos y usuarios de la aplicación",
   "RegistereUsers": "Usuarios registrador",
   "PublishedProjects": "Proyectos publicados",
   "visits": "Visitas",

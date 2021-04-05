@@ -29,7 +29,7 @@
                     </InputText>
                 </div>
                 <div class="disForm">
-                    <InputSelect @bind-Value="_formulario.IdentificacionType" class="selectType selectType-Width selectStile">
+                    <InputSelect @bind-Value="_formulario.IdentificacionType" class="selectType selectType-Width selectStile3">
                         <option value="1" selected>@_textIndex.IdentificationId</option>
                         <option value="2">@_textIndex.IdentityCard</option>
                         <option value="3">@_textIndex.ForeignCard</option>
@@ -64,11 +64,11 @@
                             </label>
                         </span>
                         <span>
-                            <label class="radio" for="checkEmpresa">
+                            <!--<label class="radio" for="checkEmpresa">
                                 <input type="radio" id="checkEmpresa" name="checkUser"
-                                       @onchange="@(()=>_formulario.UserType = 3)">
-                                <span>@_textIndex.Company</span>
-                            </label>
+                                       onchange="(()=>_formulario.UserType = 3)">
+                                <span>_textIndex.Company</span>
+                            </label>-->
                         </span>
                     </div>
                     <div>
@@ -108,6 +108,7 @@
     private bool _btnDeshabilitado = true;
     private string _classBoton = "btRegistroForm-Unlock";
     //Metodo
+
     private async Task RegistrarUsuario()
     {
         bool _passInvalido = false;
