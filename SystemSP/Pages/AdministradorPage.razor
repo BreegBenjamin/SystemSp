@@ -1,33 +1,33 @@
 ﻿@page "/Administrador";
 @inject UserInformationResult UserInfoResult;
 @inject I18nText serviceTranslator;
-<HeaderApp UserImage="@UserInfoResult.UserImage"
-           UserName="@UserInfoResult.UserName">
-</HeaderApp>
+<SystemHeader UserImage="@UserInfoResult.UserImage"
+              UserName="@UserInfoResult.UserName">
+</SystemHeader>
 <section class="adminPosition">
     <div class="opcionesAdmin">
         <div class="setEstilos">
             <TarjetaOpcionesAdmin NombreTitulo="@_txtAdmin.OptionsAdmin"
                                   OnClick="ClickHandler"
-                                  MensajeDescripcion = "@_txtAdmin.Options"
+                                  MensajeDescripcion="@_txtAdmin.Options"
                                   NumeroEntrada="0">
             </TarjetaOpcionesAdmin>
 
             <TarjetaOpcionesAdmin NombreTitulo="@_txtAdmin.UserText"
                                   OnClick="ClickHandler"
-                                  MensajeDescripcion = "@_txtAdmin.CheckUsers"
+                                  MensajeDescripcion="@_txtAdmin.CheckUsers"
                                   NumeroEntrada="1">
             </TarjetaOpcionesAdmin>
 
             <TarjetaOpcionesAdmin NombreTitulo="@_txtAdmin.ProjectAndRequest"
                                   OnClick="ClickHandler"
-                                  MensajeDescripcion = "@_txtAdmin.CheckProjects"
+                                  MensajeDescripcion="@_txtAdmin.CheckProjects"
                                   NumeroEntrada="2">
             </TarjetaOpcionesAdmin>
 
             <TarjetaOpcionesAdmin NombreTitulo="@_txtAdmin.Statistics"
                                   OnClick="ClickHandler"
-                                  MensajeDescripcion = "@_txtAdmin.CheckStatistics"
+                                  MensajeDescripcion="@_txtAdmin.CheckStatistics"
                                   NumeroEntrada="3">
             </TarjetaOpcionesAdmin>
         </div>
@@ -35,28 +35,7 @@
             @switch (IndicadorPage)
             {
                 case 0:
-                <section>
-                    <div class="informacionPosition">
-                        <div class="infoAdminProyecto">
-                            <div class="margin0">
-                                <p class="margin0 sizeProject">@_txtAdmin.RegistereUsers</p>
-                                <p class="margin0 sizeProject">10</p>
-                            </div>
-                            <span class="margin0">
-                                <img src="/images/IconosCategorias/AdminIcons/telescope.svg" height="60" width="60" />
-                            </span>
-                        </div>
-                    </div>
-                    <div class="infoAdminProyecto">
-                        <div class="margin0">
-                            <p class="margin0 sizeProject">@_txtAdmin.PublishedProjects</p>
-                            <p class="margin0 sizeProject">7</p>
-                        </div>
-                        <span class="margin0">
-                            <img src="/images/IconosCategorias/AdminIcons/innovation.svg" height="60" width="60" />
-                        </span>
-                    </div>
-                </section>
+                    <SectionEstadisticas></SectionEstadisticas>
                     break;
                 case 1:
                     <TarjetaUsuariosRegistrados></TarjetaUsuariosRegistrados>
@@ -77,8 +56,7 @@
         </section>
     </div>
     <div class="UsuAdmin">
-        <InformacionUsuario
-                            UserName="@UserInfoResult.UserName"></InformacionUsuario>
+        <InformacionUsuario UserName="@UserInfoResult.UserName"></InformacionUsuario>
     </div>
     <div class="ayudaAdmin">
         <AyudaAdmin OnClick="ClickHandler"></AyudaAdmin>

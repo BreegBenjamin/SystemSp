@@ -1,0 +1,38 @@
+﻿
+@inject I18nText serviceTranslator;
+
+<section class="estylesAdminSpace">
+    <div class="informacionPosition">
+        <div class="infoAdminProyecto">
+            <div class="margin0">
+                <p class="margin0 sizeProject">@_txtAdmin.RegistereUsers</p>
+                <p class="margin0 sizeProject">@_sizeUsers</p>
+            </div>
+            <span class="margin0">
+                <img src="/images/IconosCategorias/AdminIcons/telescope.svg" height="60" width="60" />
+            </span>
+        </div>
+    </div>
+    <div class="infoAdminProyecto">
+        <div class="margin0">
+            <p class="margin0 sizeProject">@_txtAdmin.PublishedProjects</p>
+            <p class="margin0 sizeProject">@_sizeProject</p>
+        </div>
+        <span class="margin0">
+            <img src="/images/IconosCategorias/AdminIcons/innovation.svg" height="60" width="60" />
+        </span>
+    </div>
+</section>
+
+@code {
+    TextAdminPage _txtAdmin = new TextAdminPage();
+    string _sizeProject =  "0";
+    string _sizeUsers =  "0";
+    protected override async Task OnInitializedAsync()
+    {
+        _txtAdmin = await serviceTranslator.GetTextTableAsync<TextAdminPage>(this);
+        var ran = new Random();
+        _sizeProject = $"{ran.Next(15)}";
+        _sizeUsers = $"{ran.Next(15)}";
+    }
+}

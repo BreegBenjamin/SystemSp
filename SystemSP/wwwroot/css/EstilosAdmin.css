@@ -85,7 +85,7 @@
     align-items: center;
     padding: 10px;
     height: 80px;
-    width: 25%;
+    width: 80%;
 }
 .EstadisticasApp {
     box-sizing:border-box;
@@ -247,4 +247,14 @@
 .colorBackSolid {
     width: 30px;
     background-color: #9B9995;
+}
+.estylesAdminSpace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.elementsItemsUser {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(5,1fr);
+    height: 300px;
 }

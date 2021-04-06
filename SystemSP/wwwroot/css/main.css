@@ -1024,6 +1024,11 @@ body {
     height: auto;
     padding: 0 70px 0 20px;
 }
+.iconUsers2 {
+    display: flex;
+    align-items: center;
+    height: auto;
+}
 
 .iconHome {
     display: flex;

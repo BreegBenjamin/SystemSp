@@ -1,4 +1,4 @@
-﻿<div class="iconUsers">
+﻿<div class="@ClassName">
     <nav class="navegation">
         <ul class="botonUser">
             <li>
@@ -14,5 +14,14 @@
     public RenderFragment MainContent { get; set; }
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public string ClassName { get; set; } = string.Empty;
 
+    protected override void OnParametersSet()
+    {
+        if (ClassName.Equals(string.Empty)) 
+        {
+            ClassName = "iconUsers";
+        }
+    }
 }

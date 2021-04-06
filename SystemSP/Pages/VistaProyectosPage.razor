@@ -1,6 +1,33 @@
 ﻿@inject ProjectsApplication _seviceProject;
+@inject UserInformationResult UserInfoResult;
+@inject NavigationManager _navigator;
 @page "/VistaProyectos/{IdProject:int}";
 @page "/VistaProyectos";
+@if (UserInfoResult.UserId > 0)
+{
+    <SystemHeader UserImage="@UserInfoResult.UserImage"
+                  UserName="@UserInfoResult.UserName">
+    </SystemHeader>
+}
+else
+{
+    <div class="contenedor-header">
+
+        <div class="contenido-header">
+            <SecondBottonApp></SecondBottonApp>
+            <div class="opciones-header">
+                <div class="botones-header" @onclick="@(()=>_navigator.NavigateTo("/"))">
+                    <img src="images/IconosCategorias/AdminIcons/home.svg" height="50" width="50" />
+                    <p>Inicio</p>
+                </div>
+                <div class="botones-header" @onclick="@(()=>_navigator.NavigateTo("/VistaProyectos"))">
+                    <img src="images/IconosCategorias/AdminIcons/landing-page.svg" height="50" width="50" />
+                    <p>Ver proyectos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 <section style="background-color: #f3f2f1">
     <ListaCategorias></ListaCategorias>
     <DatosProyecto ProjectInfo="_pProjectInfo"></DatosProyecto>
@@ -26,7 +53,7 @@
     [Parameter]
     public int IdProject { get; set; }
 
-    private  ProjectInformation _pProjectInfo { get; set; }
+    private ProjectInformation _pProjectInfo { get; set; }
     = new ProjectInformation()
     {
         ImagesProject = new List<string>(),
